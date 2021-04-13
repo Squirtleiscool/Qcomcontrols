@@ -1,0 +1,10 @@
+#POST https://test.benjamin.pictures/wp-json/ngg/v1/settings/thumbwidth
+#Content-Type: application/x-www-form-urlencoded
+#
+#value=240
+
+GET https://test.benjamin.pictures/wp-json/ngg/v1/display_types/photocrati-nextgen_basic_thumbnails
+
+#POST https://test.benjamin.pictures/wp-json/ngg/v1/display_types/photocrati-nextgen_basic_thumbnails/images_per_page
+#Content-Type: application/x-www-form-urlencoded
+#value=40

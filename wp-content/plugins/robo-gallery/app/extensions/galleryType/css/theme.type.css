@@ -1,0 +1,44 @@
+#robo-gallery-type-select .type-grid {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+}
+
+#robo-gallery-type-select .type-grid-item {
+    max-width: 161px;
+    padding: 8px;
+    cursor: pointer;
+}
+
+#robo-gallery-type-select .type-grid-item img {
+    width: 100%;
+    max-width: 145px;
+    border: 8px solid white;
+}
+
+#robo-gallery-type-select .type-grid-item.active img{
+	border: 8px solid #2198e8;
+}
+
+#robo-gallery-type-select .type-grid-item-link,
+#robo-gallery-type-select .type-grid-item-link:hover,
+#robo-gallery-type-select .type-grid-item-link:focus,
+#robo-gallery-type-select .type-grid-item-link:active {
+    display: block;
+    margin: 0;
+    padding: 0;
+    box-shadow: none;
+}
+
+#robo-gallery-type-select .type-grid-item-title {
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: -8px;
+    padding: 4px 0;
+    text-align: center;
+    color: black;
+}
+.type-grid-button-left{
+	position: absolute;
+	left: 8px;
+}

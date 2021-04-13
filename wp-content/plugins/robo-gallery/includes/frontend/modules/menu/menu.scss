@@ -1,0 +1,8 @@
+$paddingLeft: 0 !default;
+$paddingBottom: 0 !default;
+
+
+.robo-gallery-wrap-id#{$galleryid}:not(#no-robo-galery) .rbs_gallery_button .button {
+    margin-right: #{$paddingLeft}px;
+    margin-bottom: #{$paddingBottom}px;
+}

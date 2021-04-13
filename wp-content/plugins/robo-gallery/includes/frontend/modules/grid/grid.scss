@@ -1,0 +1,19 @@
+$thumbRadius: 0px !default;
+
+$backgroundHover: rgba(7, 7, 7, 0.5) !default;
+
+$backgroundLoading: #ffffff !default;
+
+.robo-gallery-wrap-id#{$galleryid}:not(#no-robo-galery) .image-with-dimensions{
+	background-color: $backgroundLoading;
+}
+
+.robo-gallery-wrap-id#{$galleryid}:not(#no-robo-galery) .rbs-img-container {
+    -moz-border-radius: 	$thumbRadius;
+    -webkit-border-radius: 	$thumbRadius;
+    border-radius: 			$thumbRadius;
+}
+
+.robo-gallery-wrap-id#{$galleryid}:not(#no-robo-galery) .thumbnail-overlay {
+    background: $backgroundHover;
+}

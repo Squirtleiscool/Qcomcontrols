@@ -1,0 +1,21 @@
+/* Demo custom css file */
+
+/* menu div  */
+.rbs_gallery_button{
+}
+
+/* menu button  */
+.rbs_gallery_button a.button{}
+.rbs_gallery_button a.button:hover{}
+
+/* search div  */
+.rbs_gallery_button .rbs_search_wrap{
+}
+
+/* search input field */
+.rbs_gallery_button .rbs_search_wrap .rbs-search{
+}
+
+/* gallery div */
+.robo_gallery{
+}

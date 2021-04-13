@@ -1,0 +1,107 @@
+msgid ""
+msgstr ""
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n"
+"%100<12 || n%100>14) ? 1 : 2);\n"
+"Project-Id-Version: Image Widget - gallery & lightbox by rb\n"
+"POT-Creation-Date: 2018-08-27 13:21+0200\n"
+"PO-Revision-Date: 2018-08-27 13:23+0200\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 2.1.1\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-Flags-xgettext: --add-comments=translators:\n"
+"X-Poedit-WPHeader: image-widget-rb.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
+"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Last-Translator: \n"
+"Language: pl\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: class.plugin.php:72
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: class.plugin.php:84 options.php:20 widget.php:14
+msgid "RB Image Widget"
+msgstr ""
+
+#: options.php:26
+#, php-format
+msgid ""
+"You can create manage image widget in WordPress admin widgets management "
+"section. Please <a href=\"%s\">open this section</a> to configure RB Image "
+"Widget."
+msgstr ""
+
+#: options.php:34
+msgid "Configure your Image Widget in admin widget management tool."
+msgstr ""
+
+#: options.php:42
+msgid "Show dialog"
+msgstr "Pokaż okno dialogowe"
+
+#: options.php:51
+msgid "Disable"
+msgstr "Wyłącz"
+
+#: options.php:59
+msgid "Enable"
+msgstr "Włącz"
+
+#: options.php:70
+msgid "Save Changes"
+msgstr "Zapisz zmiany"
+
+#: widget.php:15
+msgid "Publish RB Image Widget on your website."
+msgstr "Publikuj widget RB na swojej stronie."
+
+#: widget.php:64
+msgid "Images"
+msgstr "Obrazy"
+
+#: widget.php:86
+msgid "Title"
+msgstr "Nazwa"
+
+#: widget.php:92
+msgid "Use manage images button to select pictures for your photo gallery"
+msgstr ""
+
+#: widget.php:97
+msgid "Manage Images"
+msgstr "Zarządzaj obrazami"
+
+#: widget.php:102
+msgid "Columns"
+msgstr "Kolumny"
+
+#: widget.php:108
+msgid "Disable Caption"
+msgstr "Wyłącz podpis"
+
+#. Plugin Name of the plugin/theme
+msgid "Image Widget - gallery & lightbox by rb"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/support/plugin/image-widget-rb"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "Most simple and fast way to create image widget to your sidebar"
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "rbPlugins"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://www.facebook.com/rb.plugins.5"
+msgstr ""

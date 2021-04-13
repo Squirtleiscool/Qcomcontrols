@@ -1,0 +1,30 @@
+
+/*Metabox Fields Style*/
+.optimizer_meta_control .description{ display:none; }
+.optimizer_meta_control label{ display: inline-block; font-weight:bold; margin-bottom: 8px; margin-top:12px; min-width: 300px;}
+.optimizer_meta_control label span{ display:inline; font-weight:normal; }
+.optimizer_meta_control span{ color:#999; display:block; }
+.optimizer_meta_control textarea, .optimizer_meta_control input[type='text']{ margin-bottom:3px; width:99%; }
+.optimizer_meta_control .media-picker-preview{max-width: 300px; height: auto; padding: 5px;border: 1px solid #eee; border-radius: 3px;}
+.optimizer_meta_control i.fa.fa-times.media-picker-remove {cursor: pointer;width: 20px;height: 16px;text-align: center;padding-top: 3px;border-radius: 50%;color: #FFF;top: -7px;margin-left: -15px;position: absolute;background-color: #EAC3C3;}
+.optimizer_meta_control .media-picker-wrap {  position: relative;display: inline-block;}
+.optimizer_meta_control .wp-picker-container{top: 12px; position: relative;}
+ 
+ /*Metabox BOX Style*/
+#optimizer_custom_meta_metabox .inside {margin: 0;padding: 0;}
+#metatabs-container {background-color: #f5f5f5;}
+.meta_nav {width: 200px;float: left; margin:0; border-right: 1px solid #eee}
+.optimizer_meta_control {display: none;width: auto;margin-left: 200px;  padding:25px;  background-color: #fff;border-left: 1px solid #eee;}
+.meta_nav li {height: 100%;margin: 0;}
+.meta_nav li a {text-decoration: none;font-weight: bold;color: #999;padding: 10px;display: block;border-bottom: 1px solid #eee;}
+.optimizer_meta_control h4 {color: #333;font-size: 14px;border-bottom: 1px solid #eee;padding-bottom: 12px; margin-top:0;}
+.meta_nav li.tabcurrent a {background-color: #ffffff; color: #555; border-left: 3px solid #4791F4; outline: 0;}
+#meta_pageheader {display: block;   }
+
+.meta_nav li a:hover{background-color: #E3E3E4;}
+
+
+/*Sidebar Metabox*/
+.optimizer_sidebar_meta label {font-weight: bold;margin-bottom: 5px;display: block;width: 200px;}
+.optimizer_sidebar_meta p {border-bottom: 1px solid #eee;padding-bottom: 20px;}
+.optimizer_sidebar_meta p:last-child{ border:none; padding:0;}

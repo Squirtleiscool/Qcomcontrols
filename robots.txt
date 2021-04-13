@@ -1,0 +1,4 @@
+User-agent: *
+Allow: *
+
+Sitemap: http://qcomcontrols.com/Garbage/freebook/sitemap.xml

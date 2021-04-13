@@ -1,0 +1,2782 @@
+body.roboGalleryFields #wpcontent div.roboGalleryFields {
+  /**
+ * Foundation for Sites by ZURB
+ * Version 6.2.1
+ * foundation.zurb.com
+ * Licensed under MIT Open Source
+ */
+  /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+  /**
+   * 1. Set default font family to sans-serif.
+   * 2. Prevent iOS and IE text size adjust after device orientation change,
+   *    without disabling user zoom.
+   */
+  /**
+   * Remove default margin.
+   */
+  /* HTML5 display definitions
+     ========================================================================== */
+  /**
+   * Correct `block` display not defined for any HTML5 element in IE 8/9.
+   * Correct `block` display not defined for `details` or `summary` in IE 10/11
+   * and Firefox.
+   * Correct `block` display not defined for `main` in IE 11.
+   */
+  /**
+   * 1. Correct `inline-block` display not defined in IE 8/9.
+   * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+   */
+  /**
+   * Prevent modern browsers from displaying `audio` without controls.
+   * Remove excess height in iOS 5 devices.
+   */
+  /**
+   * Address `[hidden]` styling not present in IE 8/9/10.
+   * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+   */
+  /* Links
+     ========================================================================== */
+  /**
+   * Remove the gray background color from active links in IE 10.
+   */
+  /**
+   * Improve readability of focused elements when they are also in an
+   * active/hover state.
+   */
+  /* Text-level semantics
+     ========================================================================== */
+  /**
+   * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+   */
+  /**
+   * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+   */
+  /**
+   * Address styling not present in Safari and Chrome.
+   */
+  /**
+   * Address variable `h1` font-size and margin within `section` and `article`
+   * contexts in Firefox 4+, Safari, and Chrome.
+   */
+  /**
+   * Address styling not present in IE 8/9.
+   */
+  /**
+   * Address inconsistent and variable font size in all browsers.
+   */
+  /**
+   * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+   */
+  /* Embedded content
+     ========================================================================== */
+  /**
+   * Remove border when inside `a` element in IE 8/9/10.
+   */
+  /**
+   * Correct overflow not hidden in IE 9/10/11.
+   */
+  /* Grouping content
+     ========================================================================== */
+  /**
+   * Address margin not present in IE 8/9 and Safari.
+   */
+  /**
+   * Address differences between Firefox and other browsers.
+   */
+  /**
+   * Contain overflow in all browsers.
+   */
+  /**
+   * Address odd `em`-unit font size rendering in all browsers.
+   */
+  /* Forms
+     ========================================================================== */
+  /**
+   * Known limitation: by default, Chrome and Safari on OS X allow very limited
+   * styling of `select`, unless a `border` property is set.
+   */
+  /**
+   * 1. Correct color not being inherited.
+   *    Known issue: affects color of disabled elements.
+   * 2. Correct font properties not being inherited.
+   * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+   */
+  /**
+   * Address `overflow` set to `hidden` in IE 8/9/10/11.
+   */
+  /**
+   * Address inconsistent `text-transform` inheritance for `button` and `select`.
+   * All other form control elements do not inherit `text-transform` values.
+   * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+   * Correct `select` style inheritance in Firefox.
+   */
+  /**
+   * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+   *    and `video` controls.
+   * 2. Correct inability to style clickable `input` types in iOS.
+   * 3. Improve usability and consistency of cursor style between image-type
+   *    `input` and others.
+   */
+  /**
+   * Re-set default cursor for disabled elements.
+   */
+  /**
+   * Remove inner padding and border in Firefox 4+.
+   */
+  /**
+   * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+   * the UA stylesheet.
+   */
+  /**
+   * It's recommended that you don't attempt to style these elements.
+   * Firefox's implementation doesn't respect box-sizing, padding, or width.
+   *
+   * 1. Address box sizing set to `content-box` in IE 8/9/10.
+   * 2. Remove excess padding in IE 8/9/10.
+   */
+  /**
+   * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+   * `font-size` values of the `input`, it causes the cursor style of the
+   * decrement button to change from `default` to `text`.
+   */
+  /**
+   * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+   * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+   */
+  /**
+   * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+   * Safari (but not Chrome) clips the cancel button when the search input has
+   * padding (and `textfield` appearance).
+   */
+  /**
+   * Define consistent border, margin, and padding.
+   * [NOTE] We don't enable this ruleset in Foundation, because we want the <fieldset> element to have plain styling.
+   */
+  /* fieldset {
+    border: 1px solid #c0c0c0;
+    margin: 0 2px;
+    padding: 0.35em 0.625em 0.75em;
+  } */
+  /**
+   * 1. Correct `color` not being inherited in IE 8/9/10/11.
+   * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+   */
+  /**
+   * Remove default vertical scrollbar in IE 8/9/10/11.
+   */
+  /**
+   * Don't inherit the `font-weight` (applied by a rule above).
+   * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+   */
+  /* Tables
+     ========================================================================== */
+  /**
+   * Remove most spacing between table cells.
+   */ }
+  html body.roboGalleryFields #wpcontent div.roboGalleryFields  {
+    font-family: sans-serif;
+    /* 1 */
+    -ms-text-size-adjust: 100%;
+    /* 2 */
+    -webkit-text-size-adjust: 100%;
+    /* 2 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields{
+    margin: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields article,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields aside,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields details,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields figcaption,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields figure,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields footer,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields header,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields hgroup,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields main,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields menu,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields nav,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields section,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields summary {
+    display: block; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields audio,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields canvas,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields progress,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields video {
+    display: inline-block;
+    /* 1 */
+    vertical-align: baseline;
+    /* 2 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields audio:not([controls]) {
+    display: none;
+    height: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [hidden],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields template {
+    display: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields a {
+    background-color: transparent; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields a:active,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields a:hover {
+    outline: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields abbr[title] {
+    border-bottom: 1px dotted; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields b,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields strong {
+    font-weight: bold; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dfn {
+    font-style: italic; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h1 {
+    font-size: 2em;
+    margin: 0.67em 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields mark {
+    background: #ff0;
+    color: #000; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields small {
+    font-size: 80%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields sub,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields sup {
+    top: -0.5em; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields sub {
+    bottom: -0.25em; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields img {
+    border: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields svg:not(:root) {
+    overflow: hidden; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields figure {
+    margin: 1em 40px; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields hr {
+    box-sizing: content-box;
+    height: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields pre {
+    overflow: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields code,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields kbd,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields pre,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields samp {
+    font-family: monospace, monospace;
+    font-size: 1em; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields optgroup,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields select,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea {
+    color: inherit;
+    /* 1 */
+    font: inherit;
+    /* 2 */
+    margin: 0;
+    /* 3 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button {
+    overflow: visible; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields select {
+    text-transform: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button,
+  html body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="button"],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="reset"],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="submit"] {
+    -webkit-appearance: button;
+    /* 2 */
+    cursor: pointer;
+    /* 3 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button[disabled],
+  html body.roboGalleryFields #wpcontent div.roboGalleryFields  input[disabled] {
+    cursor: not-allowed; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button::-moz-focus-inner,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input::-moz-focus-inner {
+    border: 0;
+    padding: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input {
+    line-height: normal; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="checkbox"],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="radio"] {
+    box-sizing: border-box;
+    /* 1 */
+    padding: 0;
+    /* 2 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="number"]::-webkit-inner-spin-button,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="number"]::-webkit-outer-spin-button {
+    height: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="search"] {
+    -webkit-appearance: textfield;
+    /* 1 */
+    box-sizing: content-box;
+    /* 2 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="search"]::-webkit-search-cancel-button,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields legend {
+    border: 0;
+    /* 1 */
+    padding: 0;
+    /* 2 */ }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea {
+    overflow: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields optgroup {
+    font-weight: bold; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields table {
+    border-collapse: collapse;
+    border-spacing: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields td,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields th {
+    padding: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .foundation-mq {
+    font-family: "small=0em&medium=40em&large=64em&xlarge=75em&xxlarge=90em"; }
+  html body.roboGalleryFields #wpcontent div.roboGalleryFields{
+    font-size: 100%;
+    box-sizing: border-box; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields *,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields *::before,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields *::after {
+    box-sizing: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields {
+    padding: 0;
+    margin: 0;
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #0a0a0a;
+   /*  background: #fefefe; */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields img {
+    max-width: 100%;
+    height: auto;
+    -ms-interpolation-mode: bicubic;
+    display: inline-block;
+    vertical-align: middle; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea {
+    height: auto;
+    min-height: 50px;
+    border-radius: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields select {
+    width: 100%;
+    border-radius: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields #map_canvas img,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields #map_canvas embed,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields #map_canvas object,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .map_canvas img,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .map_canvas embed,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .map_canvas object,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .mqa-display img,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .mqa-display embed,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .mqa-display object {
+    max-width: none !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background: transparent;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    line-height: 1; }
+    [data-whatinput='mouse'] body.roboGalleryFields #wpcontent div.roboGalleryFields button {
+      outline: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .is-visible {
+    display: block !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .is-hidden {
+    display: none !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row::before, body.roboGalleryFields #wpcontent div.roboGalleryFields .row::after {
+      content: ' ';
+      display: table; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row::after {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row.collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+      max-width: none;
+      margin-left: -0.625rem;
+      margin-right: -0.625rem;
+      max-width: none; }
+      @media screen and (min-width: 40em) {
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+          margin-left: -0.9375rem;
+          margin-right: -0.9375rem; } }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row.collapse {
+        margin-left: 0;
+        margin-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row.expanded {
+      max-width: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .row.expanded .row {
+        margin-left: auto;
+        margin-right: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .columns {
+    width: 100%;
+    float: left;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem; }
+    @media screen and (min-width: 40em) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .columns {
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem; } }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .column:last-child:not(:first-child), body.roboGalleryFields #wpcontent div.roboGalleryFields .columns:last-child:not(:first-child) {
+      float: right; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .column.end:last-child:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .end.columns:last-child:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.row.row, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.row.columns {
+    float: none; }
+    .row body.roboGalleryFields #wpcontent div.roboGalleryFields .column.row.row, .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row.row.columns {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-1 {
+    width: 8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-1 {
+    position: relative;
+    left: 8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-1 {
+    position: relative;
+    left: -8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-0 {
+    margin-left: 0%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-2 {
+    width: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-2 {
+    position: relative;
+    left: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-2 {
+    position: relative;
+    left: -16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-1 {
+    margin-left: 8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-3 {
+    width: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-3 {
+    position: relative;
+    left: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-3 {
+    position: relative;
+    left: -25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-2 {
+    margin-left: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-4 {
+    width: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-4 {
+    position: relative;
+    left: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-4 {
+    position: relative;
+    left: -33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-3 {
+    margin-left: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-5 {
+    width: 41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-5 {
+    position: relative;
+    left: 41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-5 {
+    position: relative;
+    left: -41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-4 {
+    margin-left: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-6 {
+    width: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-6 {
+    position: relative;
+    left: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-6 {
+    position: relative;
+    left: -50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-5 {
+    margin-left: 41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-7 {
+    width: 58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-7 {
+    position: relative;
+    left: 58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-7 {
+    position: relative;
+    left: -58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-6 {
+    margin-left: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-8 {
+    width: 66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-8 {
+    position: relative;
+    left: 66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-8 {
+    position: relative;
+    left: -66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-7 {
+    margin-left: 58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-9 {
+    width: 75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-9 {
+    position: relative;
+    left: 75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-9 {
+    position: relative;
+    left: -75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-8 {
+    margin-left: 66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-10 {
+    width: 83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-10 {
+    position: relative;
+    left: 83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-10 {
+    position: relative;
+    left: -83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-9 {
+    margin-left: 75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-11 {
+    width: 91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-11 {
+    position: relative;
+    left: 91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-11 {
+    position: relative;
+    left: -91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-10 {
+    margin-left: 83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-12 {
+    width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-11 {
+    margin-left: 91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .columns {
+    width: 100%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .column:nth-of-type(1n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .columns:nth-of-type(1n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .columns {
+    width: 50%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .column:nth-of-type(2n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .columns:nth-of-type(2n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .columns {
+    width: 33.33333%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .column:nth-of-type(3n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .columns:nth-of-type(3n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .columns {
+    width: 25%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .column:nth-of-type(4n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .columns:nth-of-type(4n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .columns {
+    width: 20%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .column:nth-of-type(5n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .columns:nth-of-type(5n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .columns {
+    width: 16.66667%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .column:nth-of-type(6n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .columns:nth-of-type(6n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .columns {
+    width: 14.28571%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .column:nth-of-type(7n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .columns:nth-of-type(7n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .columns {
+    width: 12.5%;
+    float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .columns:nth-of-type(1n) {
+      clear: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .column:nth-of-type(8n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .columns:nth-of-type(8n+1) {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .columns:last-child {
+      float: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-collapse > .columns {
+    padding-left: 0;
+    padding-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-collapse .row {
+    margin-left: 0;
+    margin-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-uncollapse > .columns {
+    padding-left: 0.625rem;
+    padding-right: 0.625rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-centered {
+    float: none;
+    margin-left: auto;
+    margin-right: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-uncentered,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-push-0,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-pull-0 {
+    position: static;
+    margin-left: 0;
+    margin-right: 0;
+    float: left; }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-1 {
+      width: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-1 {
+      position: relative;
+      left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-1 {
+      position: relative;
+      left: -8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-0 {
+      margin-left: 0%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-2 {
+      width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-2 {
+      position: relative;
+      left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-2 {
+      position: relative;
+      left: -16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-1 {
+      margin-left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-3 {
+      width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-3 {
+      position: relative;
+      left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-3 {
+      position: relative;
+      left: -25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-2 {
+      margin-left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-4 {
+      width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-4 {
+      position: relative;
+      left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-4 {
+      position: relative;
+      left: -33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-3 {
+      margin-left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-5 {
+      width: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-5 {
+      position: relative;
+      left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-5 {
+      position: relative;
+      left: -41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-4 {
+      margin-left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-6 {
+      width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-6 {
+      position: relative;
+      left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-6 {
+      position: relative;
+      left: -50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-5 {
+      margin-left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-7 {
+      width: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-7 {
+      position: relative;
+      left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-7 {
+      position: relative;
+      left: -58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-6 {
+      margin-left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-8 {
+      width: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-8 {
+      position: relative;
+      left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-8 {
+      position: relative;
+      left: -66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-7 {
+      margin-left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-9 {
+      width: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-9 {
+      position: relative;
+      left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-9 {
+      position: relative;
+      left: -75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-8 {
+      margin-left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-10 {
+      width: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-10 {
+      position: relative;
+      left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-10 {
+      position: relative;
+      left: -83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-9 {
+      margin-left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-11 {
+      width: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-11 {
+      position: relative;
+      left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-11 {
+      position: relative;
+      left: -91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-10 {
+      margin-left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-12 {
+      width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-11 {
+      margin-left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .columns {
+      width: 100%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .column:nth-of-type(1n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .columns:nth-of-type(1n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .columns {
+      width: 50%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .column:nth-of-type(2n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .columns:nth-of-type(2n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .columns {
+      width: 33.33333%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .column:nth-of-type(3n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .columns:nth-of-type(3n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .columns {
+      width: 25%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .column:nth-of-type(4n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .columns:nth-of-type(4n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .columns {
+      width: 20%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .column:nth-of-type(5n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .columns:nth-of-type(5n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .columns {
+      width: 16.66667%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .column:nth-of-type(6n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .columns:nth-of-type(6n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .columns {
+      width: 14.28571%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .column:nth-of-type(7n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .columns:nth-of-type(7n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .columns {
+      width: 12.5%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .column:nth-of-type(8n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .columns:nth-of-type(8n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-collapse .row {
+      margin-left: 0;
+      margin-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-uncollapse > .columns {
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-centered {
+      float: none;
+      margin-left: auto;
+      margin-right: auto; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-uncentered,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-push-0,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-pull-0 {
+      position: static;
+      margin-left: 0;
+      margin-right: 0;
+      float: left; } }
+  @media screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-1 {
+      width: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-1 {
+      position: relative;
+      left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-1 {
+      position: relative;
+      left: -8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-0 {
+      margin-left: 0%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-2 {
+      width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-2 {
+      position: relative;
+      left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-2 {
+      position: relative;
+      left: -16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-1 {
+      margin-left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-3 {
+      width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-3 {
+      position: relative;
+      left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-3 {
+      position: relative;
+      left: -25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-2 {
+      margin-left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-4 {
+      width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-4 {
+      position: relative;
+      left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-4 {
+      position: relative;
+      left: -33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-3 {
+      margin-left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-5 {
+      width: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-5 {
+      position: relative;
+      left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-5 {
+      position: relative;
+      left: -41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-4 {
+      margin-left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-6 {
+      width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-6 {
+      position: relative;
+      left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-6 {
+      position: relative;
+      left: -50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-5 {
+      margin-left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-7 {
+      width: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-7 {
+      position: relative;
+      left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-7 {
+      position: relative;
+      left: -58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-6 {
+      margin-left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-8 {
+      width: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-8 {
+      position: relative;
+      left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-8 {
+      position: relative;
+      left: -66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-7 {
+      margin-left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-9 {
+      width: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-9 {
+      position: relative;
+      left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-9 {
+      position: relative;
+      left: -75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-8 {
+      margin-left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-10 {
+      width: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-10 {
+      position: relative;
+      left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-10 {
+      position: relative;
+      left: -83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-9 {
+      margin-left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-11 {
+      width: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-11 {
+      position: relative;
+      left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-11 {
+      position: relative;
+      left: -91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-10 {
+      margin-left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-12 {
+      width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-11 {
+      margin-left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .columns {
+      width: 100%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .column:nth-of-type(1n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .columns:nth-of-type(1n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .columns {
+      width: 50%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .column:nth-of-type(2n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .columns:nth-of-type(2n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .columns {
+      width: 33.33333%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .column:nth-of-type(3n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .columns:nth-of-type(3n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .columns {
+      width: 25%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .column:nth-of-type(4n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .columns:nth-of-type(4n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .columns {
+      width: 20%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .column:nth-of-type(5n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .columns:nth-of-type(5n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .columns {
+      width: 16.66667%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .column:nth-of-type(6n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .columns:nth-of-type(6n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .columns {
+      width: 14.28571%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .column:nth-of-type(7n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .columns:nth-of-type(7n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .columns {
+      width: 12.5%;
+      float: left; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .column:nth-of-type(1n), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .columns:nth-of-type(1n) {
+        clear: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .column:nth-of-type(8n+1), body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .columns:nth-of-type(8n+1) {
+        clear: both; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .column:last-child, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .columns:last-child {
+        float: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-collapse .row {
+      margin-left: 0;
+      margin-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-uncollapse > .columns {
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-centered {
+      float: none;
+      margin-left: auto;
+      margin-right: auto; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-uncentered,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-push-0,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-pull-0 {
+      position: static;
+      margin-left: 0;
+      margin-right: 0;
+      float: left; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+    max-width: 75rem;
+    margin-left: auto;
+    margin-right: auto;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+        flex-flow: row wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+      max-width: none;
+      margin-left: -0.625rem;
+      margin-right: -0.625rem;
+      max-width: none; }
+      @media screen and (min-width: 40em) {
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row {
+          margin-left: -0.9375rem;
+          margin-right: -0.9375rem; } }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row.expanded {
+      max-width: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .row.collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .columns {
+    -ms-flex: 1 1 0px;
+        flex: 1 1 0px;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    min-width: 0; }
+    @media screen and (min-width: 40em) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .columns {
+        padding-left: 0.9375rem;
+        padding-right: 0.9375rem; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.row.row, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.row.columns {
+    float: none;
+    display: block; }
+    .row body.roboGalleryFields #wpcontent div.roboGalleryFields .column.row.row, .row body.roboGalleryFields #wpcontent div.roboGalleryFields .row.row.columns {
+      padding-left: 0;
+      padding-right: 0;
+      margin-left: 0;
+      margin-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-1 {
+    -ms-flex: 0 0 8.33333%;
+        flex: 0 0 8.33333%;
+    max-width: 8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-0 {
+    margin-left: 0%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-2 {
+    -ms-flex: 0 0 16.66667%;
+        flex: 0 0 16.66667%;
+    max-width: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-1 {
+    margin-left: 8.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-3 {
+    -ms-flex: 0 0 25%;
+        flex: 0 0 25%;
+    max-width: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-2 {
+    margin-left: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-4 {
+    -ms-flex: 0 0 33.33333%;
+        flex: 0 0 33.33333%;
+    max-width: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-3 {
+    margin-left: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-5 {
+    -ms-flex: 0 0 41.66667%;
+        flex: 0 0 41.66667%;
+    max-width: 41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-4 {
+    margin-left: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-6 {
+    -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+    max-width: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-5 {
+    margin-left: 41.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-7 {
+    -ms-flex: 0 0 58.33333%;
+        flex: 0 0 58.33333%;
+    max-width: 58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-6 {
+    margin-left: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-8 {
+    -ms-flex: 0 0 66.66667%;
+        flex: 0 0 66.66667%;
+    max-width: 66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-7 {
+    margin-left: 58.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-9 {
+    -ms-flex: 0 0 75%;
+        flex: 0 0 75%;
+    max-width: 75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-8 {
+    margin-left: 66.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-10 {
+    -ms-flex: 0 0 83.33333%;
+        flex: 0 0 83.33333%;
+    max-width: 83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-9 {
+    margin-left: 75%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-11 {
+    -ms-flex: 0 0 91.66667%;
+        flex: 0 0 91.66667%;
+    max-width: 91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-10 {
+    margin-left: 83.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-12 {
+    -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+    max-width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-offset-11 {
+    margin-left: 91.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-1 {
+    -ms-flex-order: 1;
+        order: 1; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-2 {
+    -ms-flex-order: 2;
+        order: 2; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-3 {
+    -ms-flex-order: 3;
+        order: 3; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-4 {
+    -ms-flex-order: 4;
+        order: 4; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-5 {
+    -ms-flex-order: 5;
+        order: 5; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-order-6 {
+    -ms-flex-order: 6;
+        order: 6; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-1 > .columns {
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+      max-width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-2 > .columns {
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+      max-width: 50%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-3 > .columns {
+      -ms-flex: 0 0 33.33333%;
+          flex: 0 0 33.33333%;
+      max-width: 33.33333%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-4 > .columns {
+      -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+      max-width: 25%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-5 > .columns {
+      -ms-flex: 0 0 20%;
+          flex: 0 0 20%;
+      max-width: 20%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-6 > .columns {
+      -ms-flex: 0 0 16.66667%;
+          flex: 0 0 16.66667%;
+      max-width: 16.66667%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-7 > .columns {
+      -ms-flex: 0 0 14.28571%;
+          flex: 0 0 14.28571%;
+      max-width: 14.28571%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 {
+    -ms-flex-wrap: wrap;
+        flex-wrap: wrap; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-up-8 > .columns {
+      -ms-flex: 0 0 12.5%;
+          flex: 0 0 12.5%;
+      max-width: 12.5%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-collapse > .columns {
+    padding-left: 0;
+    padding-right: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .small-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .small-uncollapse > .columns {
+    padding-left: 0.625rem;
+    padding-right: 0.625rem; }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-1 {
+      -ms-flex: 0 0 8.33333%;
+          flex: 0 0 8.33333%;
+      max-width: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-0 {
+      margin-left: 0%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-2 {
+      -ms-flex: 0 0 16.66667%;
+          flex: 0 0 16.66667%;
+      max-width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-1 {
+      margin-left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-3 {
+      -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+      max-width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-2 {
+      margin-left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-4 {
+      -ms-flex: 0 0 33.33333%;
+          flex: 0 0 33.33333%;
+      max-width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-3 {
+      margin-left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-5 {
+      -ms-flex: 0 0 41.66667%;
+          flex: 0 0 41.66667%;
+      max-width: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-4 {
+      margin-left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-6 {
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+      max-width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-5 {
+      margin-left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-7 {
+      -ms-flex: 0 0 58.33333%;
+          flex: 0 0 58.33333%;
+      max-width: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-6 {
+      margin-left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-8 {
+      -ms-flex: 0 0 66.66667%;
+          flex: 0 0 66.66667%;
+      max-width: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-7 {
+      margin-left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-9 {
+      -ms-flex: 0 0 75%;
+          flex: 0 0 75%;
+      max-width: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-8 {
+      margin-left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-10 {
+      -ms-flex: 0 0 83.33333%;
+          flex: 0 0 83.33333%;
+      max-width: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-9 {
+      margin-left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-11 {
+      -ms-flex: 0 0 91.66667%;
+          flex: 0 0 91.66667%;
+      max-width: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-10 {
+      margin-left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-12 {
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+      max-width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-offset-11 {
+      margin-left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-1 {
+      -ms-flex-order: 1;
+          order: 1; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-2 {
+      -ms-flex-order: 2;
+          order: 2; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-3 {
+      -ms-flex-order: 3;
+          order: 3; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-4 {
+      -ms-flex-order: 4;
+          order: 4; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-5 {
+      -ms-flex-order: 5;
+          order: 5; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-order-6 {
+      -ms-flex-order: 6;
+          order: 6; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-1 > .columns {
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+        max-width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-2 > .columns {
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+        max-width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-3 > .columns {
+        -ms-flex: 0 0 33.33333%;
+            flex: 0 0 33.33333%;
+        max-width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-4 > .columns {
+        -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+        max-width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-5 > .columns {
+        -ms-flex: 0 0 20%;
+            flex: 0 0 20%;
+        max-width: 20%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-6 > .columns {
+        -ms-flex: 0 0 16.66667%;
+            flex: 0 0 16.66667%;
+        max-width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-7 > .columns {
+        -ms-flex: 0 0 14.28571%;
+            flex: 0 0 14.28571%;
+        max-width: 14.28571%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-up-8 > .columns {
+        -ms-flex: 0 0 12.5%;
+            flex: 0 0 12.5%;
+        max-width: 12.5%; } }
+
+@media screen and (min-width: 40em) and (min-width: 40em) {
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-expand {
+    -ms-flex: 1 1 0px;
+        flex: 1 1 0px; } }
+
+.row.medium-unstack > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.medium-unstack > .columns {
+  -ms-flex: 0 0 100%;
+      flex: 0 0 100%; }
+  @media screen and (min-width: 40em) {
+    .row.medium-unstack > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.medium-unstack > .columns {
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px; } }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-uncollapse > .columns {
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; } }
+  @media screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-1 {
+      -ms-flex: 0 0 8.33333%;
+          flex: 0 0 8.33333%;
+      max-width: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-0 {
+      margin-left: 0%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-2 {
+      -ms-flex: 0 0 16.66667%;
+          flex: 0 0 16.66667%;
+      max-width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-1 {
+      margin-left: 8.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-3 {
+      -ms-flex: 0 0 25%;
+          flex: 0 0 25%;
+      max-width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-2 {
+      margin-left: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-4 {
+      -ms-flex: 0 0 33.33333%;
+          flex: 0 0 33.33333%;
+      max-width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-3 {
+      margin-left: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-5 {
+      -ms-flex: 0 0 41.66667%;
+          flex: 0 0 41.66667%;
+      max-width: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-4 {
+      margin-left: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-6 {
+      -ms-flex: 0 0 50%;
+          flex: 0 0 50%;
+      max-width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-5 {
+      margin-left: 41.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-7 {
+      -ms-flex: 0 0 58.33333%;
+          flex: 0 0 58.33333%;
+      max-width: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-6 {
+      margin-left: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-8 {
+      -ms-flex: 0 0 66.66667%;
+          flex: 0 0 66.66667%;
+      max-width: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-7 {
+      margin-left: 58.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-9 {
+      -ms-flex: 0 0 75%;
+          flex: 0 0 75%;
+      max-width: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-8 {
+      margin-left: 66.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-10 {
+      -ms-flex: 0 0 83.33333%;
+          flex: 0 0 83.33333%;
+      max-width: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-9 {
+      margin-left: 75%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-11 {
+      -ms-flex: 0 0 91.66667%;
+          flex: 0 0 91.66667%;
+      max-width: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-10 {
+      margin-left: 83.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-12 {
+      -ms-flex: 0 0 100%;
+          flex: 0 0 100%;
+      max-width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-offset-11 {
+      margin-left: 91.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-1 {
+      -ms-flex-order: 1;
+          order: 1; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-2 {
+      -ms-flex-order: 2;
+          order: 2; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-3 {
+      -ms-flex-order: 3;
+          order: 3; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-4 {
+      -ms-flex-order: 4;
+          order: 4; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-5 {
+      -ms-flex-order: 5;
+          order: 5; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-order-6 {
+      -ms-flex-order: 6;
+          order: 6; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-1 > .columns {
+        -ms-flex: 0 0 100%;
+            flex: 0 0 100%;
+        max-width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-2 > .columns {
+        -ms-flex: 0 0 50%;
+            flex: 0 0 50%;
+        max-width: 50%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-3 > .columns {
+        -ms-flex: 0 0 33.33333%;
+            flex: 0 0 33.33333%;
+        max-width: 33.33333%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-4 > .columns {
+        -ms-flex: 0 0 25%;
+            flex: 0 0 25%;
+        max-width: 25%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-5 > .columns {
+        -ms-flex: 0 0 20%;
+            flex: 0 0 20%;
+        max-width: 20%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-6 > .columns {
+        -ms-flex: 0 0 16.66667%;
+            flex: 0 0 16.66667%;
+        max-width: 16.66667%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-7 > .columns {
+        -ms-flex: 0 0 14.28571%;
+            flex: 0 0 14.28571%;
+        max-width: 14.28571%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 {
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-up-8 > .columns {
+        -ms-flex: 0 0 12.5%;
+            flex: 0 0 12.5%;
+        max-width: 12.5%; } }
+
+@media screen and (min-width: 64em) and (min-width: 64em) {
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .large-expand {
+    -ms-flex: 1 1 0px;
+        flex: 1 1 0px; } }
+
+.row.large-unstack > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.large-unstack > .columns {
+  -ms-flex: 0 0 100%;
+      flex: 0 0 100%; }
+  @media screen and (min-width: 64em) {
+    .row.large-unstack > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .row.large-unstack > .columns {
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0px; } }
+  @media screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-collapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-collapse > .columns {
+      padding-left: 0;
+      padding-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-uncollapse > .column, body.roboGalleryFields #wpcontent div.roboGalleryFields .large-uncollapse > .columns {
+      padding-left: 0.9375rem;
+      padding-right: 0.9375rem; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .shrink {
+    -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+    max-width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.align-top, body.roboGalleryFields #wpcontent div.roboGalleryFields .align-top.columns {
+    -ms-flex-item-align: start;
+        align-self: flex-start; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.align-bottom, body.roboGalleryFields #wpcontent div.roboGalleryFields .align-bottom.columns {
+    -ms-flex-item-align: end;
+        align-self: flex-end; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.align-middle, body.roboGalleryFields #wpcontent div.roboGalleryFields .align-middle.columns {
+    -ms-flex-item-align: center;
+        align-self: center; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .column.align-stretch, body.roboGalleryFields #wpcontent div.roboGalleryFields .align-stretch.columns {
+    -ms-flex-item-align: stretch;
+        align-self: stretch; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields div,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dl,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dt,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dd,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ul,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ol,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields li,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h1,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h2,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h3,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h4,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h5,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h6,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields pre,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields form,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields p,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields blockquote,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields th,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields td {
+    margin: 0;
+    padding: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields p {
+    font-size: inherit;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    text-rendering: optimizeLegibility; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields em,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields i {
+    font-style: italic;
+    line-height: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields strong,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields b {
+    font-weight: bold;
+    line-height: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields small {
+    font-size: 80%;
+    line-height: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h1,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h2,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h3,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h4,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h5,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h6 {
+    font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+    font-weight: normal;
+    font-style: normal;
+    color: inherit;
+    text-rendering: optimizeLegibility;
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    line-height: 1.4; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h1 small,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h2 small,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h3 small,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h4 small,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h5 small,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h6 small {
+      color: #cacaca;
+      line-height: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h1 {
+    font-size: 1.5rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h2 {
+    font-size: 1.25rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h3 {
+    font-size: 1.1875rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h4 {
+    font-size: 1.125rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h5 {
+    font-size: 1.0625rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields h6 {
+    font-size: 1rem; }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h1 {
+      font-size: 3rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h2 {
+      font-size: 2.5rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h3 {
+      font-size: 1.9375rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h4 {
+      font-size: 1.5625rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h5 {
+      font-size: 1.25rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h6 {
+      font-size: 1rem; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields a {
+    color: #2199e8;
+    text-decoration: none;
+    line-height: inherit;
+    cursor: pointer; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields a:focus {
+      color: #1585cf; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a img {
+      border: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields hr {
+    max-width: 75rem;
+    height: 0;
+    border-right: 0;
+    border-top: 0;
+    border-bottom: 1px solid #cacaca;
+    border-left: 0;
+    margin: 1.25rem auto;
+    clear: both; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ul,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ol,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dl {
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    list-style-position: outside; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields li {
+    font-size: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ul {
+    list-style-type: disc;
+    margin-left: 1.25rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ol {
+    margin-left: 1.25rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields ul body.roboGalleryFields #wpcontent div.roboGalleryFields ul, body.roboGalleryFields #wpcontent div.roboGalleryFields ol body.roboGalleryFields #wpcontent div.roboGalleryFields ul, body.roboGalleryFields #wpcontent div.roboGalleryFields ul body.roboGalleryFields #wpcontent div.roboGalleryFields ol, body.roboGalleryFields #wpcontent div.roboGalleryFields ol body.roboGalleryFields #wpcontent div.roboGalleryFields ol {
+    margin-left: 1.25rem;
+    margin-bottom: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields dl {
+    margin-bottom: 1rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields dl dt {
+      margin-bottom: 0.3rem;
+      font-weight: bold; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields blockquote {
+    margin: 0 0 1rem;
+    padding: 0.5625rem 1.25rem 0 1.1875rem;
+    border-left: 1px solid #cacaca; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields blockquote, body.roboGalleryFields #wpcontent div.roboGalleryFields blockquote p {
+      line-height: 1.6;
+      color: #8a8a8a; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields cite {
+    display: block;
+    font-size: 0.8125rem;
+    color: #8a8a8a; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields cite:before {
+      content: '\2014 \0020'; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields abbr {
+    color: #0a0a0a;
+    cursor: help;
+    border-bottom: 1px dotted #0a0a0a; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields code {
+    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-weight: normal;
+    color: #0a0a0a;
+    background-color: #e6e6e6;
+    border: 1px solid #cacaca;
+    padding: 0.125rem 0.3125rem 0.0625rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields kbd {
+    padding: 0.125rem 0.25rem 0;
+    margin: 0;
+    background-color: #e6e6e6;
+    color: #0a0a0a;
+    font-family: Consolas, "Liberation Mono", Courier, monospace; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .subheader {
+    margin-top: 0.2rem;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+    line-height: 1.4;
+    color: #8a8a8a; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .lead {
+    font-size: 125%;
+    line-height: 1.6; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .stat {
+    font-size: 2.5rem;
+    line-height: 1; }
+    p + body.roboGalleryFields #wpcontent div.roboGalleryFields .stat {
+      margin-top: -1rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .no-bullet {
+    margin-left: 0;
+    list-style: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .text-left {
+    text-align: left; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .text-right {
+    text-align: right; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .text-center {
+    text-align: center; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .text-justify {
+    text-align: justify; }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-text-left {
+      text-align: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-text-right {
+      text-align: right; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-text-center {
+      text-align: center; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .medium-text-justify {
+      text-align: justify; } }
+  @media screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-text-left {
+      text-align: left; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-text-right {
+      text-align: right; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-text-center {
+      text-align: center; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .large-text-justify {
+      text-align: justify; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-print {
+    display: none !important; }
+  @media print {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields * {
+      background: transparent !important;
+      color: black !important;
+      box-shadow: none !important;
+      text-shadow: none !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-print {
+      display: block !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-print {
+      display: none !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields table.show-for-print {
+      display: table !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields thead.show-for-print {
+      display: table-header-group !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields tbody.show-for-print {
+      display: table-row-group !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields tr.show-for-print {
+      display: table-row !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields td.show-for-print {
+      display: table-cell !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields th.show-for-print {
+      display: table-cell !important; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a:visited {
+      text-decoration: underline; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a[href]:after {
+      content: " (" attr(href) ")"; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .ir a:after,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a[href^='javascript:']:after,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields a[href^='#']:after {
+      content: ''; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields abbr[title]:after {
+      content: " (" attr(title) ")"; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields pre,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields blockquote {
+      border: 1px solid #8a8a8a;
+      page-break-inside: avoid; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields thead {
+      display: table-header-group; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields tr,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields img {
+      page-break-inside: avoid; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields img {
+      max-width: 100% !important; }
+    @page {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields {
+        margin: 0.5cm; } }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields p,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h2,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h3 {
+      orphans: 3;
+      widows: 3; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h2,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields h3 {
+      page-break-after: avoid; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .button {
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    cursor: pointer;
+    -webkit-appearance: none;
+    transition: background-color 0.25s ease-out, color 0.25s ease-out;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    border-radius: 0;
+    padding: 0.85em 1em;
+    margin: 0 0 1rem 0;
+    font-size: 0.9rem;
+    background-color: #2199e8;
+    color: #fefefe; }
+    [data-whatinput='mouse'] body.roboGalleryFields #wpcontent div.roboGalleryFields .button {
+      outline: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button:focus {
+      background-color: #1583cc;
+      color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.tiny {
+      font-size: 0.6rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.small {
+      font-size: 0.75rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.large {
+      font-size: 1.25rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.expanded {
+      display: block;
+      width: 100%;
+      margin-left: 0;
+      margin-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.primary {
+      background-color: #2199e8;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.primary:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.primary:focus {
+        background-color: #147cc0;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.secondary {
+      background-color: #777;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.secondary:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.secondary:focus {
+        background-color: #5f5f5f;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.success {
+      background-color: #3adb76;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.success:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.success:focus {
+        background-color: #22bb5b;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.warning {
+      background-color: #ffae00;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.warning:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.warning:focus {
+        background-color: #cc8b00;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.alert {
+      background-color: #ec5840;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.alert:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.alert:focus {
+        background-color: #da3116;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow {
+      border: 1px solid #2199e8;
+      color: #2199e8; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow:focus {
+        background-color: transparent; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow:focus {
+        border-color: #0c4d78;
+        color: #0c4d78; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.primary {
+        border: 1px solid #2199e8;
+        color: #2199e8; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.primary:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.primary:focus {
+          border-color: #0c4d78;
+          color: #0c4d78; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.secondary {
+        border: 1px solid #777;
+        color: #777; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.secondary:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.secondary:focus {
+          border-color: #3c3c3c;
+          color: #3c3c3c; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.success {
+        border: 1px solid #3adb76;
+        color: #3adb76; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.success:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.success:focus {
+          border-color: #157539;
+          color: #157539; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.warning {
+        border: 1px solid #ffae00;
+        color: #ffae00; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.warning:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.warning:focus {
+          border-color: #805700;
+          color: #805700; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.alert {
+        border: 1px solid #ec5840;
+        color: #ec5840; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.alert:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button.hollow.alert:focus {
+          border-color: #881f0e;
+          color: #881f0e; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.disabled, body.roboGalleryFields #wpcontent div.roboGalleryFields .button[disabled] {
+      opacity: 0.25;
+      cursor: not-allowed; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.dropdown::after {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: inset 0.4em;
+      border-color: #fefefe transparent transparent;
+      border-top-style: solid;
+      border-bottom-width: 0;
+      position: relative;
+      top: 0.4em;
+      float: right;
+      margin-left: 1em;
+      display: inline-block; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button.arrow-only::after {
+      margin-left: 0;
+      float: none;
+      top: -0.1em; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='text'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='password'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='date'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='datetime'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='datetime-local'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='month'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='week'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='email'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='number'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='search'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='tel'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='time'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='url'], body.roboGalleryFields #wpcontent div.roboGalleryFields [type='color'],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    height: 2.4375rem;
+    padding: 0.5rem;
+    border: 1px solid #cacaca;
+    margin: 0 0 1rem;
+    font-family: inherit;
+    font-size: 1rem;
+    color: #0a0a0a;
+    background-color: #fefefe;
+    box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+    border-radius: 0;
+    transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields [type='text']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='password']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='date']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='datetime']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='datetime-local']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='month']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='week']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='email']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='number']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='search']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='tel']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='time']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='url']:focus, body.roboGalleryFields #wpcontent div.roboGalleryFields [type='color']:focus,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields textarea:focus {
+      border: 1px solid #8a8a8a;
+      background-color: #fefefe;
+      outline: none;
+      box-shadow: 0 0 5px #cacaca;
+      transition: box-shadow 0.5s, border-color 0.25s ease-in-out; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea {
+    max-width: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields textarea[rows] {
+      height: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input::-webkit-input-placeholder,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea::-webkit-input-placeholder {
+    color: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input::-moz-placeholder,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea::-moz-placeholder {
+    color: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input:-ms-input-placeholder,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea:-ms-input-placeholder {
+    color: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input::placeholder,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea::placeholder {
+    color: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input:disabled, body.roboGalleryFields #wpcontent div.roboGalleryFields input[readonly],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea:disabled,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields textarea[readonly] {
+    background-color: #e6e6e6;
+    cursor: default; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='submit'],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='button'] {
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type='search'] {
+    box-sizing: border-box; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='file'],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='checkbox'],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='radio'] {
+    margin: 0 0 1rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='checkbox'] + label,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='radio'] + label {
+    display: inline-block;
+    margin-left: 0.5rem;
+    margin-right: 1rem;
+    margin-bottom: 0;
+    vertical-align: baseline; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields [type='checkbox'] + label[for],
+    body.roboGalleryFields #wpcontent div.roboGalleryFields [type='radio'] + label[for] {
+      cursor: pointer; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields label > [type='checkbox'],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields label > [type='radio'] {
+    margin-right: 0.5rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields [type='file'] {
+    width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields label {
+    display: block;
+    margin: 0;
+    font-size: 0.875rem;
+    font-weight: normal;
+    line-height: 1.8;
+    color: #0a0a0a; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields label.middle {
+      margin: 0 0 1rem;
+      padding: 0.5625rem 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .help-text {
+    margin-top: -0.5rem;
+    font-size: 0.8125rem;
+    font-style: italic;
+    color: #0a0a0a; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group {
+    display: table;
+    width: 100%;
+    margin-bottom: 1rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group > :first-child {
+      border-radius: 0 0 0 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group > :last-child > * {
+      border-radius: 0 0 0 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-label, body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-field, body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-button {
+    margin: 0;
+    display: table-cell;
+    vertical-align: middle; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-label {
+    text-align: center;
+    padding: 0 1rem;
+    background: #e6e6e6;
+    color: #0a0a0a;
+    border: 1px solid #cacaca;
+    white-space: nowrap;
+    width: 1%;
+    height: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-label:first-child {
+      border-right: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-label:last-child {
+      border-left: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-field {
+    border-radius: 0;
+    height: 2.5rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-button {
+    padding-top: 0;
+    padding-bottom: 0;
+    text-align: center;
+    height: 100%;
+    width: 1%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-button a,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-button input,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group-button button {
+      margin: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .input-group .input-group-button {
+    display: table-cell; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields legend {
+    margin-bottom: 0.5rem;
+    max-width: 100%; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .fieldset {
+    border: 1px solid #cacaca;
+    padding: 1.25rem;
+    margin: 1.125rem 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .fieldset legend {
+      background: #fefefe;
+      padding: 0 0.1875rem;
+      margin: 0;
+      margin-left: -0.1875rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields select {
+    height: 2.4375rem;
+    padding: 0.5rem;
+    border: 1px solid #cacaca;
+    margin: 0 0 1rem;
+    font-size: 1rem;
+    font-family: inherit;
+    line-height: normal;
+    color: #0a0a0a;
+    background-color: #fefefe;
+    border-radius: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: rgb%28138, 138, 138%29"></polygon></svg>');
+    background-size: 9px 6px;
+    background-position: right center;
+    background-origin: content-box;
+    background-repeat: no-repeat; }
+    @media screen and (min-width: 0\0) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields select {
+        background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIpJREFUeNrEkckNgDAMBBfRkEt0ObRBBdsGXUDgmQfK4XhH2m8czQAAy27R3tsw4Qfe2x8uOO6oYLb6GlOor3GF+swURAOmUJ+RwtEJs9WvTGEYxBXqI1MQAZhCfUQKRzDMVj+TwrAIV6jvSUEkYAr1LSkcyTBb/V+KYfX7xAeusq3sLDtGH3kEGACPWIflNZfhRQAAAABJRU5ErkJggg=="); } }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields select:disabled {
+      background-color: #e6e6e6;
+      cursor: default; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields select::-ms-expand {
+      display: none; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields select[multiple] {
+      height: auto;
+      background-image: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .is-invalid-input:not(:focus) {
+    background-color: rgba(236, 88, 64, 0.1);
+    border-color: #ec5840; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .is-invalid-label {
+    color: #ec5840; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .form-error {
+    display: none;
+    margin-top: -0.5rem;
+    margin-bottom: 1rem;
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #ec5840; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .form-error.is-visible {
+      display: block; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: block;
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    margin-top: 0.45rem;
+    margin-bottom: 0.45rem;
+    border: 0;
+    line-height: 1; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]:focus {
+      outline: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"][disabled] {
+      opacity: 0.25; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-webkit-slider-runnable-track {
+      height: 0.5rem;
+      background: #e6e6e6; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-webkit-slider-handle {
+      -webkit-appearance: none;
+      background: #2199e8;
+      width: 1.4rem;
+      height: 1.4rem;
+      margin-top: -0.45rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-moz-range-track {
+      -moz-appearance: none;
+      height: 0.5rem;
+      background: #e6e6e6; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-moz-range-thumb {
+      -moz-appearance: none;
+      background: #2199e8;
+      width: 1.4rem;
+      height: 1.4rem;
+      margin-top: -0.45rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-ms-track {
+      height: 0.5rem;
+      background: #e6e6e6;
+      color: transparent;
+      border: 0;
+      overflow: visible;
+      border-top: 0.45rem solid #fefefe;
+      border-bottom: 0.45rem solid #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-ms-thumb {
+      background: #2199e8;
+      width: 1.4rem;
+      height: 1.4rem;
+      border: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-ms-fill-lower {
+      background: #cacaca; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields input[type="range"]::-ms-fill-upper {
+      background: #e6e6e6; }
+    output {
+      line-height: 1.4rem;
+      vertical-align: middle;
+      margin-left: 0.5em; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group {
+    margin-bottom: 1rem;
+    font-size: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group::before, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group::after {
+      content: ' ';
+      display: table; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group::after {
+      clear: both; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group .button {
+      margin: 0;
+      font-size: 0.9rem; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group .button:not(:last-child) {
+        margin-right: 1px; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.tiny .button {
+      font-size: 0.6rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.small .button {
+      font-size: 0.75rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.large .button {
+      font-size: 1.25rem; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded {
+      margin-right: -1px; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded::before, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded::after {
+        display: none; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(2), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(2):first-child:nth-last-child(2) ~ .button {
+        display: inline-block;
+        width: 50%;
+        margin-right: 1px; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(3), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(3):first-child:nth-last-child(3) ~ .button {
+        display: inline-block;
+        width: 33.33333%;
+        margin-right: 1px; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(4), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(4):first-child:nth-last-child(4) ~ .button {
+        display: inline-block;
+        width: 25%;
+        margin-right: 1px; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(5), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(5):first-child:nth-last-child(5) ~ .button {
+        display: inline-block;
+        width: 20%;
+        margin-right: 1px; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(6), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.expanded .button:first-child:nth-last-child(6):first-child:nth-last-child(6) ~ .button {
+        display: inline-block;
+        width: 16.66667%;
+        margin-right: 1px; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.primary .button {
+      background-color: #2199e8;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.primary .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.primary .button:focus {
+        background-color: #147cc0;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.secondary .button {
+      background-color: #777;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.secondary .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.secondary .button:focus {
+        background-color: #5f5f5f;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.success .button {
+      background-color: #3adb76;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.success .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.success .button:focus {
+        background-color: #22bb5b;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.warning .button {
+      background-color: #ffae00;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.warning .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.warning .button:focus {
+        background-color: #cc8b00;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.alert .button {
+      background-color: #ec5840;
+      color: #fefefe; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.alert .button:hover, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.alert .button:focus {
+        background-color: #da3116;
+        color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked .button, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small .button, body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-medium .button {
+      width: 100%;
+      border-right: 1px solid transparent; }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked .button:not(:last-child), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small .button:not(:last-child), body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-medium .button:not(:last-child) {
+        border-bottom: 1px solid #fefefe; }
+    @media screen and (min-width: 40em) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small .button {
+        width: auto; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small .button:not(:last-child) {
+          margin-right: 1px; } }
+    @media screen and (min-width: 64em) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-medium .button {
+        width: auto; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-medium .button:not(:last-child) {
+          margin-right: 1px; } }
+    @media screen and (max-width: 39.9375em) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small.expanded {
+        display: block; }
+        body.roboGalleryFields #wpcontent div.roboGalleryFields .button-group.stacked-for-small.expanded .button {
+          display: block;
+          margin-right: 0; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .label {
+    display: inline-block;
+    padding: 0.33333rem 0.5rem;
+    font-size: 0.8rem;
+    line-height: 1;
+    white-space: nowrap;
+    cursor: default;
+    border-radius: 0;
+    background: #2199e8;
+    color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .label.secondary {
+      background: #777;
+      color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .label.success {
+      background: #3adb76;
+      color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .label.warning {
+      background: #ffae00;
+      color: #fefefe; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .label.alert {
+      background: #ec5840;
+      color: #fefefe; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider {
+    position: relative;
+    height: 0.5rem;
+    margin-top: 1.25rem;
+    margin-bottom: 2.25rem;
+    background-color: #e6e6e6;
+    cursor: pointer;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    -ms-touch-action: none;
+        touch-action: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    max-width: 100%;
+    height: 0.5rem;
+    background-color: #cacaca;
+    transition: all 0.2s ease-in-out; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-fill.is-dragging {
+      transition: all 0s linear; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-handle {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    display: inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+    background-color: #2199e8;
+    transition: all 0.2s ease-in-out;
+    -ms-touch-action: manipulation;
+        touch-action: manipulation;
+    border-radius: 0; }
+    [data-whatinput='mouse'] body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-handle {
+      outline: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-handle:hover {
+      background-color: #1583cc; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .slider-handle.is-dragging {
+      transition: all 0s linear; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider.disabled,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider[disabled] {
+    opacity: 0.25;
+    cursor: not-allowed; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .slider.vertical {
+    display: inline-block;
+    width: 0.5rem;
+    height: 12.5rem;
+    margin: 0 1.25rem;
+    -ms-transform: scale(1, -1);
+        transform: scale(1, -1); }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .slider.vertical .slider-fill {
+      top: 0;
+      width: 0.5rem;
+      max-height: 100%; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .slider.vertical .slider-handle {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      width: 1.4rem;
+      height: 1.4rem;
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch {
+    margin-bottom: 1rem;
+    outline: 0;
+    position: relative;
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+    color: #fefefe;
+    font-weight: bold;
+    font-size: 0.875rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-input {
+    opacity: 0;
+    position: absolute; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle {
+    background: #cacaca;
+    cursor: pointer;
+    display: block;
+    position: relative;
+    width: 4rem;
+    height: 2rem;
+    transition: all 0.25s ease-out;
+    border-radius: 0;
+    color: inherit;
+    font-weight: inherit; }
+    input + body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle {
+      margin: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle::after {
+      background: #fefefe;
+      content: '';
+      display: block;
+      position: absolute;
+      height: 1.5rem;
+      left: 0.25rem;
+      top: 0.25rem;
+      width: 1.5rem;
+      transition: all 0.25s ease-out;
+      transform: translate3d(0, 0, 0);
+      border-radius: 0; }
+    input:checked ~ body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle {
+      background: #2199e8; }
+      input:checked ~ body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle::after {
+        left: 2.25rem; }
+    [data-whatinput='mouse'] input:focus ~ body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-paddle {
+      outline: 0; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-active, body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-inactive {
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+        transform: translateY(-50%); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-active {
+    left: 8%;
+    display: none; }
+    input:checked + label > body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-active {
+      display: block; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-inactive {
+    right: 15%; }
+    input:checked + label > body.roboGalleryFields #wpcontent div.roboGalleryFields .switch-inactive {
+      display: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.tiny .switch-paddle {
+    width: 3rem;
+    height: 1.5rem;
+    font-size: 0.625rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.tiny .switch-paddle::after {
+    width: 1rem;
+    height: 1rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.tiny input:checked ~ .switch-paddle::after {
+    left: 1.75rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.small .switch-paddle {
+    width: 3.5rem;
+    height: 1.75rem;
+    font-size: 0.75rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.small .switch-paddle::after {
+    width: 1.25rem;
+    height: 1.25rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.small input:checked ~ .switch-paddle::after {
+    left: 2rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.large .switch-paddle {
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.large .switch-paddle::after {
+    width: 2rem;
+    height: 2rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .switch.large input:checked ~ .switch-paddle::after {
+    left: 2.75rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .has-tip {
+    border-bottom: dotted 1px #8a8a8a;
+    font-weight: bold;
+    position: relative;
+    display: inline-block;
+    cursor: help; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .tooltip {
+    background-color: #0a0a0a;
+    color: #fefefe;
+    font-size: 80%;
+    padding: 0.75rem;
+    position: absolute;
+    z-index: 10;
+    top: calc(100% + 0.6495rem);
+    max-width: 10rem !important;
+    border-radius: 0; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .tooltip::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: inset 0.75rem;
+      border-color: transparent transparent #0a0a0a;
+      border-bottom-style: solid;
+      border-top-width: 0;
+      bottom: 100%;
+      position: absolute;
+      left: 50%;
+      -ms-transform: translateX(-50%);
+          transform: translateX(-50%); }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .tooltip.top::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: inset 0.75rem;
+      border-color: #0a0a0a transparent transparent;
+      border-top-style: solid;
+      border-bottom-width: 0;
+      top: 100%;
+      bottom: auto; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .tooltip.left::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: inset 0.75rem;
+      border-color: transparent transparent transparent #0a0a0a;
+      border-left-style: solid;
+      border-right-width: 0;
+      bottom: auto;
+      left: 100%;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%); }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .tooltip.right::before {
+      content: '';
+      display: block;
+      width: 0;
+      height: 0;
+      border: inset 0.75rem;
+      border-color: transparent #0a0a0a transparent transparent;
+      border-right-style: solid;
+      border-left-width: 0;
+      bottom: auto;
+      left: auto;
+      right: 100%;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .hide {
+    display: none !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .invisible {
+    visibility: hidden; }
+  @media screen and (max-width: 39.9375em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-small-only {
+      display: none !important; } }
+  @media screen and (max-width: 0em), screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-small-only {
+      display: none !important; } }
+  @media screen and (min-width: 40em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-medium {
+      display: none !important; } }
+  @media screen and (max-width: 39.9375em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-medium {
+      display: none !important; } }
+  @media screen and (min-width: 40em) and (max-width: 63.9375em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-medium-only {
+      display: none !important; } }
+  @media screen and (max-width: 39.9375em), screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-medium-only {
+      display: none !important; } }
+  @media screen and (min-width: 64em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-large {
+      display: none !important; } }
+  @media screen and (max-width: 63.9375em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-large {
+      display: none !important; } }
+  @media screen and (min-width: 64em) and (max-width: 74.9375em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-large-only {
+      display: none !important; } }
+  @media screen and (max-width: 63.9375em), screen and (min-width: 75em) {
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-large-only {
+      display: none !important; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-sr,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-on-focus {
+    position: absolute !important;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-on-focus:active, body.roboGalleryFields #wpcontent div.roboGalleryFields .show-on-focus:focus {
+    position: static !important;
+    height: auto;
+    width: auto;
+    overflow: visible;
+    clip: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-landscape,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-portrait {
+    display: block !important; }
+    @media screen and (orientation: landscape) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-landscape,
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-portrait {
+        display: block !important; } }
+    @media screen and (orientation: portrait) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-landscape,
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-portrait {
+        display: none !important; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-landscape,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-portrait {
+    display: none !important; }
+    @media screen and (orientation: landscape) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-landscape,
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-portrait {
+        display: none !important; } }
+    @media screen and (orientation: portrait) {
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .hide-for-landscape,
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .show-for-portrait {
+        display: block !important; } }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .float-left {
+    float: left !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .float-right {
+    float: right !important; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .float-center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .clearfix::before, body.roboGalleryFields #wpcontent div.roboGalleryFields .clearfix::after {
+    content: ' ';
+    display: table; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .clearfix::after {
+    clear: both; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields * {
+    box-sizing: border-box; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields input[type=radio], body.roboGalleryFields #wpcontent div.roboGalleryFields input[type=checkbox] {
+    vertical-align: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .button {
+    height: auto; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .button:first-child,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .button:last-child {
+    border-radius: inherit; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .row .row {
+    margin-left: -0.9375rem;
+    margin-right: -0.9375rem;
+    max-width: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.content-before,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.content,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.content-after,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.wrap-field {
+    margin-bottom: 20px; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field {
+    position: relative; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .lock-overlay {
+      position: absolute;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5); }
+      body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .lock-overlay .lock-message {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        -webkit-transform: translate(-50%, -50%);
+        -o-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        font-size: 2rem;
+        color: #e6e6e6; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .field .text-before,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .field .text-after,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .field.text-before,
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .field.text-after {
+      padding-top: 0.5rem; }
+	body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .switch-element input + label{
+		margin-left: 0;
+	}
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .switch-element {
+    float: left;
+    margin-right: 20px; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .switch-element input:checked ~ .switch-paddle {
+      background-color: #2199e8; }
+    body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field .switch-element input:checked + label > .switch-active {
+      display: block; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-button .button-element,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-group-button .button-element {
+    display: inline-block;
+    margin-bottom: 20px; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-button input[type=checkbox],
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-group-button input[type=checkbox] {
+    display: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-button input + label,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-group-button input + label {
+    margin: 0;
+    background: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-button input + label:active,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-group-button input + label:active {
+    -ms-transform: translateY(0px);
+        transform: translateY(0px); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-button input:checked + label,
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.checkbox-group-button input:checked + label {
+    background: #2199e8; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.radio-buttons-group .field .button-group input[type=radio] {
+    display: none; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.radio-buttons-group .field .button-group input + label {
+    background: #cacaca; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.radio-buttons-group .field .button-group input + label:active {
+    -ms-transform: translateY(0px);
+        transform: translateY(0px); }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.radio-buttons-group .field .button-group input:checked + label {
+    background: #2199e8; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .wrap-field.composite-default .switch-element .switch.small label {
+    margin-top: 0.33rem; }
+  body.roboGalleryFields #wpcontent div.roboGalleryFields .twoj-gallery-option-new{
+  	position: absolute;
+  	top: 30px;
+	right: -37px;
+	font-size: 0.65rem;
+
+	transform: rotate(-90deg);
+	-webkit-transform: rotate(-90deg);
+	-moz-transform: rotate(-90deg);
+	-ms-transform: rotate(-90deg);
+	-o-transform: rotate(-90deg);
+	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+
+
+
+body.roboGalleryFields #wpcontent .apeLoading {
+	background-image: url( 'loading_clear.gif' );
+	background-repeat: no-repeat;
+	background-position: center;
+	width: auto;
+	height: 20px;
+	margin:0 auto;
+}
+
+ .inline-block{
+	display: inline-block;
+}
+
+ body.roboGalleryFields #wpcontent div.roboGalleryFields .hidden-default{
+	display: none;
+}
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.wrap-field:nth-child(1){
+	padding-top: 10px;
+}
+body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.wrap-field:nth-last-child(2){
+	/*padding-bottom: 0;
+	 margin-bottom: 0; */
+} 
+
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .metabox.content:nth-last-child(2){
+	padding-bottom: 0;
+	margin-bottom: 0;
+} 
+
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields #robo_gallery_fields_themes_default_message.big{
+	text-align: center;
+	font-size: 1.5em;
+}
+
+
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .checkIcon{}
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .checkIcon .dashicons{
+	font-size: 80px;
+	width: auto;
+	height: auto;
+	color: green;
+}
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .checkIcon.ape-gallery-field-theme-default-current .dashicons{
+ 	float:left;
+ 	margin-left: -33px;
+ 	margin-bottom: -12px;
+ 	margin-top: -10px;
+}
+body.roboGalleryFields #wpcontent div.roboGalleryFields .ape-gallery-field-theme-default-current .desc{
+	padding-top: 10px;
+	font-weight: bold;
+}

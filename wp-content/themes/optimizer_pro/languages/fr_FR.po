@@ -1,0 +1,2595 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Optimizer\n"
+"POT-Creation-Date: 2016-08-03 17:56+0600\n"
+"PO-Revision-Date: 2016-08-03 17:56+0600\n"
+"Last-Translator: \n"
+"Language-Team: OptimizerWP\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.8\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: .git\n"
+"X-Poedit-SearchPathExcluded-1: customizer\n"
+"X-Poedit-SearchPathExcluded-2: updater\n"
+"X-Poedit-SearchPathExcluded-3: plugins\n"
+"X-Poedit-SearchPathExcluded-4: lib/presets\n"
+"X-Poedit-SearchPathExcluded-5: lib/metabox\n"
+"X-Poedit-SearchPathExcluded-6: assets\n"
+"X-Poedit-SearchPathExcluded-7: wpml-config.xml\n"
+"X-Poedit-SearchPathExcluded-8: lib/functions/converter.php\n"
+"X-Poedit-SearchPathExcluded-9: lib/functions/portfolio.php\n"
+"X-Poedit-SearchPathExcluded-10: lib/functions/preset_importer.php\n"
+"X-Poedit-SearchPathExcluded-11: lib/functions/widget_backup.php\n"
+"X-Poedit-SearchPathExcluded-12: lib/functions/yoast.php\n"
+"X-Poedit-SearchPathExcluded-13: lib/includes/category-image.php\n"
+"X-Poedit-SearchPathExcluded-14: lib/includes/custom_walker.php\n"
+"X-Poedit-SearchPathExcluded-15: lib/includes/custom-menu-fields.php\n"
+"X-Poedit-SearchPathExcluded-16: lib/includes/google_fonts.php\n"
+"X-Poedit-SearchPathExcluded-17: frontpage/content-about.php\n"
+"X-Poedit-SearchPathExcluded-18: frontpage/content-blocks.php\n"
+"X-Poedit-SearchPathExcluded-19: frontpage/content-call-to-action.php\n"
+"X-Poedit-SearchPathExcluded-20: frontpage/content-clients.php\n"
+"X-Poedit-SearchPathExcluded-21: frontpage/content-frontpage-widgets-area."
+"php\n"
+"X-Poedit-SearchPathExcluded-22: frontpage/content-location-map.php\n"
+"X-Poedit-SearchPathExcluded-23: frontpage/content-newsletter.php\n"
+"X-Poedit-SearchPathExcluded-24: frontpage/content-testimonials.php\n"
+"X-Poedit-SearchPathExcluded-25: frontpage/content-welcome-text.php\n"
+"X-Poedit-SearchPathExcluded-26: frontpage/slider-posts.php\n"
+"X-Poedit-SearchPathExcluded-27: frontpage/slider-woo.php\n"
+
+#: 404.php:29
+msgid "Page Not Found"
+msgstr "Page Non Trouvée"
+
+#: 404.php:42
+msgid ""
+"Server cannot find the file you requested. The Page has either been moved or "
+"deleted, or you entered the wrong URL or document name. Look at the URL. If "
+"a word looks misspelled, then correct it and try it again. If that doesnt "
+"work You can try our search option to find what you are looking for."
+msgstr ""
+"Le serveur ne peut pas trouver le fichier que vous avez demandé. La page a "
+"été déplacé ou supprimé, ou le nom de l'URL ou du document que vous avez "
+"saisi est incorrect. Regardez l'URL. Si un mot semble mal orthographié, "
+"corrigez-le et essayez à nouveau. Si cela ne fonctionne pas, vous pouvez "
+"essayer notre fonction de recherche pour trouver ce que vous cherchez."
+
+#: author.php:32
+msgid "Posts by "
+msgstr "Article par"
+
+#: comments.php:16
+msgid "This post is password protected. Enter the password to view comments."
+msgstr ""
+"Cet article est protégé par mot de passe. Entrez le mot de passe pour voir "
+"les commentaires."
+
+#: comments.php:28
+msgid "No Responses to"
+msgstr "Aucune réponse à"
+
+#: comments.php:28
+msgid "One Response to"
+msgstr "Une réponse à"
+
+#: comments.php:28
+msgid "% Responses to"
+msgstr "% Réponses à"
+
+#: comments.php:52
+msgid "Trackbacks &amp; Pings"
+msgstr "Trackbacks &amp; Pings"
+
+#: comments.php:76
+msgid "Comments are closed."
+msgstr "Les commentaires sont fermés."
+
+#: footer.php:28 lib/functions/core.php:133
+msgid "Footer Widgets"
+msgstr "Widgets Pied de page"
+
+#: framework/core-functions.php:127
+#, php-format
+msgid "Page %s"
+msgstr "Page %s"
+
+#: framework/core-functions.php:260
+msgid "Facebook"
+msgstr "Facebook"
+
+#: framework/core-functions.php:261
+msgid "Twitter"
+msgstr "Twitter"
+
+#: framework/core-functions.php:262
+msgid "Google+"
+msgstr "Google+"
+
+#: framework/core-functions.php:263
+msgid "Linked In"
+msgstr "Linked In"
+
+#: framework/core-functions.php:264 lib/includes/widgets.php:1375
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: framework/core-functions.php:265 lib/includes/widgets.php:1226
+msgid "Instagram"
+msgstr "Instagram"
+
+#: framework/core-functions.php:266
+msgid "Dribble"
+msgstr "Dribble"
+
+#: framework/core-functions.php:267
+msgid "Behance"
+msgstr "Behance"
+
+#: framework/core-nextprev.php:20
+msgid "Previous Post"
+msgstr "Article Précédent"
+
+#: framework/core-nextprev.php:29
+msgid "Next Post"
+msgstr "Article Suivant"
+
+#: framework/core-pageheader.php:34 framework/core-pageheader.php:60
+#: framework/core-pageheader.php:88 lib/includes/shortcodes.php:1499
+msgid "Home"
+msgstr "Accueil"
+
+#: framework/core-pagination.php:55 framework/core-pagination.php:57
+msgid "+ More"
+msgstr "+ Plus"
+
+#: framework/core-portfolio.php:51
+msgid "All"
+msgstr "Tout"
+
+#: framework/core-portfolio.php:62
+msgid "Details"
+msgstr "Détails"
+
+#: framework/core-portfolio.php:74 framework/core-portfolio.php:96
+#: framework/core-portfolio.php:113 framework/core-posts.php:96
+#: framework/core-posts.php:110 framework/core-posts.php:123
+#: framework/core-posts.php:198 framework/core-posts.php:212
+#: framework/core-posts.php:226 framework/core-posts.php:302
+#: framework/core-posts.php:317 framework/core-posts.php:332
+#: template_parts/post-layout1.php:46 template_parts/post-layout1.php:60
+#: template_parts/post-layout1.php:73 template_parts/post-layout2.php:40
+#: template_parts/post-layout2.php:54 template_parts/post-layout2.php:68
+#: template_parts/post-layout3.php:41 template_parts/post-layout3.php:56
+#: template_parts/post-layout3.php:71
+msgid "Preview"
+msgstr "Prévisualisation"
+
+#: framework/core-portfolio.php:77 framework/core-portfolio.php:99
+#: framework/core-portfolio.php:116 framework/core-portfolio.php:130
+#: framework/core-posts.php:99 framework/core-posts.php:113
+#: framework/core-posts.php:126 framework/core-posts.php:136
+#: framework/core-posts.php:201 framework/core-posts.php:215
+#: framework/core-posts.php:229 framework/core-posts.php:240
+#: framework/core-posts.php:305 framework/core-posts.php:320
+#: framework/core-posts.php:335 framework/core-posts.php:346
+#: framework/core-posts.php:464 template_parts/page-blog_template.php:160
+#: template_parts/post-layout1.php:49 template_parts/post-layout1.php:63
+#: template_parts/post-layout1.php:76 template_parts/post-layout1.php:86
+#: template_parts/post-layout2.php:43 template_parts/post-layout2.php:57
+#: template_parts/post-layout2.php:71 template_parts/post-layout2.php:82
+#: template_parts/post-layout3.php:44 template_parts/post-layout3.php:59
+#: template_parts/post-layout3.php:74 template_parts/post-layout3.php:85
+#: template_parts/post-layout4.php:75
+msgid "Read More"
+msgstr "Lire Plus"
+
+#: framework/core-posts.php:444 framework/core-posts.php:549 single.php:60
+#: template_parts/page-blog_template.php:144 template_parts/post-layout4.php:63
+#: template_parts/post-layout5.php:56
+msgid "0 Comment"
+msgstr "0 Commentaire"
+
+#: framework/core-posts.php:444 framework/core-posts.php:549 single.php:60
+#: template_parts/page-blog_template.php:144 template_parts/post-layout4.php:63
+#: template_parts/post-layout5.php:56
+msgid "1 Comment"
+msgstr "1 Commentaire"
+
+#: framework/core-posts.php:444 framework/core-posts.php:549 single.php:60
+#: template_parts/page-blog_template.php:144 template_parts/post-layout4.php:63
+#: template_parts/post-layout5.php:56
+msgid "% Comments"
+msgstr "% Commentaires"
+
+#: framework/core-posts.php:444 framework/core-posts.php:549 single.php:60
+#: template_parts/page-blog_template.php:144 template_parts/post-layout4.php:63
+#: template_parts/post-layout5.php:56
+msgid "Off"
+msgstr "Arrêter"
+
+#: framework/core-posts.php:510 lib/functions/core.php:266
+#: lib/functions/core.php:300 optimizer-single-portfolio.php:20 page.php:54
+#: single.php:24 template_parts/page-contact_template.php:93
+#: template_parts/page-fullwidth_template.php:30
+#: template_parts/page-leftsidebar_template.php:51
+#: template_parts/post-layout5.php:38
+msgid "Edit"
+msgstr "Éditer"
+
+#: framework/core-posts.php:562 optimizer-single-portfolio.php:73 page.php:84
+#: single.php:85 template_parts/page-fullwidth_template.php:60
+#: template_parts/page-leftsidebar_template.php:81
+#: template_parts/post-layout5.php:71
+msgid "Pages:"
+msgstr "Pages :"
+
+#: framework/core-related.php:15
+msgid "Related Posts"
+msgstr "Articles Liés"
+
+#: framework/core-share_this.php:19
+msgid "Share this on Facebook"
+msgstr "Partager sur Facebook"
+
+#: framework/core-share_this.php:23
+msgid "Tweet This"
+msgstr ""
+
+#: framework/core-share_this.php:27
+msgid "Plus One This"
+msgstr ""
+
+#: framework/core-share_this.php:31
+msgid "Pin This"
+msgstr ""
+
+#: framework/core-share_this.php:35
+msgid "Share this on Linkedin"
+msgstr "Partager sur Linkedin"
+
+#: framework/core-share_this.php:39
+msgid "Stumble This"
+msgstr ""
+
+#: framework/core-share_this.php:43
+msgid "Submit to Delicious"
+msgstr ""
+
+#: framework/core-share_this.php:47
+msgid "Digg This"
+msgstr ""
+
+#: framework/core-share_this.php:51
+msgid "Email This"
+msgstr "Envoyer par Email"
+
+#: framework/core-share_this.php:55
+msgid "Print This Page"
+msgstr "Imprimer Cette Page"
+
+#: frontpage/widgets/front-about.php:25
+msgid "About"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:25
+msgid "&diams; About Widget"
+msgstr "&diams; Widget A Propos De"
+
+#: frontpage/widgets/front-about.php:28
+msgid "Optimizer About Section widget"
+msgstr "Widget Section A Propos D'Optimizer"
+
+#: frontpage/widgets/front-about.php:42 frontpage/widgets/front-about.php:138
+msgid "THE OPTIMIZER"
+msgstr "L'OPTIMISATEUR"
+
+#: frontpage/widgets/front-about.php:43 frontpage/widgets/front-about.php:139
+msgid "a little about.."
+msgstr "un peu d'infos concernant.."
+
+#: frontpage/widgets/front-about.php:44 frontpage/widgets/front-about.php:140
+#: frontpage/widgets/front-text.php:133 lib/includes/widgets.php:483
+#: lib/includes/widgets.php:567
+msgid ""
+"Collaboratively administrate empowered markets via plug-and-play networks. "
+"Dynamically procrastinate B2C users after installed base benefits. "
+"Dramatically visualize customer directed convergence without revolutionary "
+"ROI."
+msgstr ""
+"Administrer en collaboration des marchés habilités via les réseaux plug-and-"
+"play. Tergiversez dynamiquement les utilisateurs B2C après l'installations "
+"des bienfaits de base. Visualisez dramatiquement la convergence dirigé par "
+"le client sans ROI révolutionnaire."
+
+#: frontpage/widgets/front-about.php:152
+msgid "Pre Heading:"
+msgstr "Pré-Entête"
+
+#: frontpage/widgets/front-about.php:158
+msgid "Heading:"
+msgstr "Entête :"
+
+#: frontpage/widgets/front-about.php:164 frontpage/widgets/front-blocks.php:431
+#: frontpage/widgets/front-carousel.php:389
+#: frontpage/widgets/front-clients.php:201 frontpage/widgets/front-map.php:301
+#: frontpage/widgets/front-portfolio.php:234
+#: frontpage/widgets/front-posts.php:219
+#: frontpage/widgets/front-testimonials.php:255
+msgid "Title Divider:"
+msgstr "Diviseur Titre :"
+
+#: frontpage/widgets/front-about.php:166 frontpage/widgets/front-blocks.php:433
+#: frontpage/widgets/front-carousel.php:391
+#: frontpage/widgets/front-clients.php:203 frontpage/widgets/front-map.php:303
+#: frontpage/widgets/front-portfolio.php:237
+#: frontpage/widgets/front-posts.php:221
+#: frontpage/widgets/front-testimonials.php:257
+msgid "Underline"
+msgstr "Souligner"
+
+#: frontpage/widgets/front-about.php:167 frontpage/widgets/front-blocks.php:434
+#: frontpage/widgets/front-carousel.php:392
+#: frontpage/widgets/front-clients.php:204 frontpage/widgets/front-map.php:304
+#: frontpage/widgets/front-posts.php:222
+#: frontpage/widgets/front-testimonials.php:258
+msgid "Bordered (Center)"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:168 frontpage/widgets/front-blocks.php:435
+#: frontpage/widgets/front-carousel.php:393
+#: frontpage/widgets/front-clients.php:205 frontpage/widgets/front-map.php:305
+#: frontpage/widgets/front-posts.php:223
+#: frontpage/widgets/front-testimonials.php:259
+msgid "Bordered (Left)"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:169 frontpage/widgets/front-blocks.php:436
+#: frontpage/widgets/front-carousel.php:394
+#: frontpage/widgets/front-clients.php:206 frontpage/widgets/front-map.php:306
+#: frontpage/widgets/front-posts.php:224
+#: frontpage/widgets/front-testimonials.php:260
+msgid "Bordered (Right)"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:170 frontpage/widgets/front-blocks.php:437
+#: frontpage/widgets/front-carousel.php:395
+#: frontpage/widgets/front-clients.php:207 frontpage/widgets/front-map.php:307
+#: frontpage/widgets/front-portfolio.php:236
+#: frontpage/widgets/front-posts.php:225
+#: frontpage/widgets/front-testimonials.php:261
+msgid "Rhombus"
+msgstr "Rhombe"
+
+#: frontpage/widgets/front-about.php:171 frontpage/widgets/front-blocks.php:438
+#: frontpage/widgets/front-carousel.php:396
+#: frontpage/widgets/front-clients.php:208 frontpage/widgets/front-map.php:308
+#: frontpage/widgets/front-portfolio.php:238
+#: frontpage/widgets/front-posts.php:226
+#: frontpage/widgets/front-testimonials.php:262
+msgid "Star"
+msgstr "Etoile"
+
+#: frontpage/widgets/front-about.php:172 frontpage/widgets/front-blocks.php:439
+#: frontpage/widgets/front-carousel.php:397
+#: frontpage/widgets/front-clients.php:209 frontpage/widgets/front-map.php:309
+#: frontpage/widgets/front-portfolio.php:239
+#: frontpage/widgets/front-posts.php:227
+#: frontpage/widgets/front-testimonials.php:263
+msgid "Cross"
+msgstr "Croix"
+
+#: frontpage/widgets/front-about.php:173 frontpage/widgets/front-blocks.php:440
+#: frontpage/widgets/front-carousel.php:398
+#: frontpage/widgets/front-clients.php:210 frontpage/widgets/front-map.php:310
+#: frontpage/widgets/front-portfolio.php:240
+#: frontpage/widgets/front-posts.php:228
+#: frontpage/widgets/front-testimonials.php:264
+msgid "Bolt"
+msgstr "Verrou"
+
+#: frontpage/widgets/front-about.php:174 frontpage/widgets/front-blocks.php:441
+#: frontpage/widgets/front-carousel.php:399
+#: frontpage/widgets/front-clients.php:211 frontpage/widgets/front-map.php:311
+#: frontpage/widgets/front-portfolio.php:241
+#: frontpage/widgets/front-posts.php:229
+#: frontpage/widgets/front-testimonials.php:265
+msgid "Asterisk"
+msgstr "Astérisque"
+
+#: frontpage/widgets/front-about.php:175 frontpage/widgets/front-blocks.php:442
+#: frontpage/widgets/front-carousel.php:400
+#: frontpage/widgets/front-clients.php:212 frontpage/widgets/front-map.php:312
+#: frontpage/widgets/front-portfolio.php:242
+#: frontpage/widgets/front-posts.php:230
+#: frontpage/widgets/front-testimonials.php:266
+msgid "Chevron"
+msgstr "Chevron"
+
+#: frontpage/widgets/front-about.php:176 frontpage/widgets/front-blocks.php:443
+#: frontpage/widgets/front-carousel.php:401
+#: frontpage/widgets/front-clients.php:213 frontpage/widgets/front-map.php:313
+#: frontpage/widgets/front-portfolio.php:243
+#: frontpage/widgets/front-posts.php:231
+#: frontpage/widgets/front-testimonials.php:267
+msgid "Heart"
+msgstr "Coeur"
+
+#: frontpage/widgets/front-about.php:177 frontpage/widgets/front-blocks.php:444
+#: frontpage/widgets/front-carousel.php:402
+#: frontpage/widgets/front-clients.php:214 frontpage/widgets/front-map.php:314
+#: frontpage/widgets/front-portfolio.php:244
+#: frontpage/widgets/front-posts.php:232
+#: frontpage/widgets/front-testimonials.php:268
+msgid "Plus"
+msgstr "Plus"
+
+#: frontpage/widgets/front-about.php:178 frontpage/widgets/front-blocks.php:445
+#: frontpage/widgets/front-carousel.php:403
+#: frontpage/widgets/front-clients.php:215 frontpage/widgets/front-map.php:315
+#: frontpage/widgets/front-portfolio.php:245
+#: frontpage/widgets/front-posts.php:233
+#: frontpage/widgets/front-testimonials.php:269
+msgid "Bookmark"
+msgstr "Marque Page"
+
+#: frontpage/widgets/front-about.php:179 frontpage/widgets/front-blocks.php:446
+#: frontpage/widgets/front-carousel.php:404
+#: frontpage/widgets/front-clients.php:216 frontpage/widgets/front-map.php:316
+#: frontpage/widgets/front-portfolio.php:246
+#: frontpage/widgets/front-posts.php:234
+#: frontpage/widgets/front-testimonials.php:270
+msgid "Circle"
+msgstr "Cercle"
+
+#: frontpage/widgets/front-about.php:180 frontpage/widgets/front-blocks.php:25
+#: frontpage/widgets/front-blocks.php:447
+#: frontpage/widgets/front-carousel.php:405
+#: frontpage/widgets/front-clients.php:217 frontpage/widgets/front-map.php:317
+#: frontpage/widgets/front-portfolio.php:247
+#: frontpage/widgets/front-posts.php:235
+#: frontpage/widgets/front-testimonials.php:271
+msgid "Blocks"
+msgstr "Blocs"
+
+#: frontpage/widgets/front-about.php:181 frontpage/widgets/front-blocks.php:448
+#: frontpage/widgets/front-carousel.php:406
+#: frontpage/widgets/front-clients.php:218 frontpage/widgets/front-map.php:318
+#: frontpage/widgets/front-portfolio.php:248
+#: frontpage/widgets/front-posts.php:236
+#: frontpage/widgets/front-testimonials.php:272
+msgid "Sides"
+msgstr "Côtés"
+
+#: frontpage/widgets/front-about.php:182 frontpage/widgets/front-blocks.php:449
+#: frontpage/widgets/front-carousel.php:407
+#: frontpage/widgets/front-clients.php:219 frontpage/widgets/front-map.php:319
+#: frontpage/widgets/front-portfolio.php:249
+#: frontpage/widgets/front-posts.php:237
+#: frontpage/widgets/front-testimonials.php:273
+msgid "Cog"
+msgstr "Rouage"
+
+#: frontpage/widgets/front-about.php:183 frontpage/widgets/front-blocks.php:450
+#: frontpage/widgets/front-carousel.php:408
+#: frontpage/widgets/front-clients.php:220 frontpage/widgets/front-map.php:320
+#: frontpage/widgets/front-portfolio.php:250
+#: frontpage/widgets/front-posts.php:238
+#: frontpage/widgets/front-testimonials.php:274
+msgid "Blinds"
+msgstr "Stores"
+
+#: frontpage/widgets/front-about.php:184 frontpage/widgets/front-blocks.php:451
+#: frontpage/widgets/front-carousel.php:409
+#: frontpage/widgets/front-clients.php:221 frontpage/widgets/front-map.php:321
+#: frontpage/widgets/front-posts.php:239
+#: frontpage/widgets/front-testimonials.php:275
+msgid "Diamond"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:185 frontpage/widgets/front-blocks.php:452
+#: frontpage/widgets/front-carousel.php:410
+#: frontpage/widgets/front-clients.php:222 frontpage/widgets/front-map.php:322
+#: frontpage/widgets/front-posts.php:240
+#: frontpage/widgets/front-testimonials.php:276
+msgid "Tetris"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:186 frontpage/widgets/front-blocks.php:453
+#: frontpage/widgets/front-carousel.php:411
+#: frontpage/widgets/front-clients.php:223 frontpage/widgets/front-map.php:323
+#: frontpage/widgets/front-posts.php:241
+#: frontpage/widgets/front-testimonials.php:277
+msgid "Digital"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:187 frontpage/widgets/front-blocks.php:454
+#: frontpage/widgets/front-carousel.php:412
+#: frontpage/widgets/front-clients.php:224 frontpage/widgets/front-map.php:324
+#: frontpage/widgets/front-posts.php:242
+#: frontpage/widgets/front-testimonials.php:278
+msgid "Rocket"
+msgstr ""
+
+#: frontpage/widgets/front-about.php:188 frontpage/widgets/front-blocks.php:455
+#: frontpage/widgets/front-carousel.php:413
+#: frontpage/widgets/front-clients.php:225 frontpage/widgets/front-map.php:325
+#: frontpage/widgets/front-portfolio.php:251
+#: frontpage/widgets/front-posts.php:243
+#: frontpage/widgets/front-testimonials.php:279
+msgid "Hide Divider"
+msgstr "Cacher Diviseur"
+
+#: frontpage/widgets/front-about.php:194
+#: frontpage/widgets/front-newsletter.php:151
+#: frontpage/widgets/front-slider.php:291 frontpage/widgets/front-text.php:146
+#: frontpage/widgets/front-video.php:287
+msgid "Content:"
+msgstr "Contenu :"
+
+#: frontpage/widgets/front-about.php:196 frontpage/widgets/front-blocks.php:489
+#: frontpage/widgets/front-blocks.php:528
+#: frontpage/widgets/front-blocks.php:567
+#: frontpage/widgets/front-blocks.php:607
+#: frontpage/widgets/front-blocks.php:648
+#: frontpage/widgets/front-blocks.php:689 frontpage/widgets/front-cta.php:161
+#: frontpage/widgets/front-map.php:294
+#: frontpage/widgets/front-newsletter.php:153
+#: frontpage/widgets/front-slider.php:293 frontpage/widgets/front-text.php:148
+#: frontpage/widgets/front-video.php:289
+msgid "Edit content"
+msgstr "Editer contenu"
+
+#: frontpage/widgets/front-about.php:202
+msgid "Content Side Padding"
+msgstr "Rembourrage Latéral Contenu "
+
+#: frontpage/widgets/front-about.php:209
+msgid "Heading Color"
+msgstr "Couleur Entête"
+
+#: frontpage/widgets/front-about.php:216
+#: frontpage/widgets/front-carousel.php:444
+#: frontpage/widgets/front-newsletter.php:192
+#: frontpage/widgets/front-testimonials.php:436
+#: frontpage/widgets/front-text.php:167 frontpage/widgets/front-video.php:306
+#: lib/functions/inlinedit.php:108 lib/includes/widgets.php:619
+#: lib/includes/widgets.php:880
+msgid "Text Color"
+msgstr "Couleur Texte"
+
+#: frontpage/widgets/front-about.php:222
+#: frontpage/widgets/front-carousel.php:451
+#: frontpage/widgets/front-clients.php:321 frontpage/widgets/front-map.php:480
+#: frontpage/widgets/front-newsletter.php:214
+#: frontpage/widgets/front-testimonials.php:443
+#: frontpage/widgets/front-text.php:173 frontpage/widgets/front-video.php:312
+#: lib/includes/widgets.php:613 lib/includes/widgets.php:886
+msgid "Background Color"
+msgstr "Couleur de Fond"
+
+#: frontpage/widgets/front-about.php:228
+#: frontpage/widgets/front-carousel.php:459 frontpage/widgets/front-map.php:486
+#: frontpage/widgets/front-newsletter.php:220
+#: frontpage/widgets/front-testimonials.php:451
+#: frontpage/widgets/front-text.php:179 lib/includes/widgets.php:892
+msgid "Background Image"
+msgstr "Image de Fond"
+
+#: frontpage/widgets/front-about.php:235 frontpage/widgets/front-blocks.php:481
+#: frontpage/widgets/front-blocks.php:520
+#: frontpage/widgets/front-blocks.php:559
+#: frontpage/widgets/front-blocks.php:599
+#: frontpage/widgets/front-blocks.php:640
+#: frontpage/widgets/front-blocks.php:681
+#: frontpage/widgets/front-blocks.php:779
+#: frontpage/widgets/front-carousel.php:349
+#: frontpage/widgets/front-carousel.php:374
+#: frontpage/widgets/front-carousel.php:466
+#: frontpage/widgets/front-clients.php:262
+#: frontpage/widgets/front-clients.php:284 frontpage/widgets/front-cta.php:232
+#: frontpage/widgets/front-map.php:493
+#: frontpage/widgets/front-newsletter.php:227
+#: frontpage/widgets/front-testimonials.php:330
+#: frontpage/widgets/front-testimonials.php:355
+#: frontpage/widgets/front-testimonials.php:458
+#: frontpage/widgets/front-text.php:186 frontpage/widgets/front-video.php:281
+#: lib/includes/widgets.php:591 lib/includes/widgets.php:899
+msgid "Select Image"
+msgstr "Sélectionner Image"
+
+#: frontpage/widgets/front-blocks.php:25
+msgid "&diams; Blocks Widget"
+msgstr "&diams; Widget Blocs"
+
+#: frontpage/widgets/front-blocks.php:29
+msgid "Optimizer Blocks Section widget"
+msgstr "Widget Section Blocs Optimizer"
+
+#: frontpage/widgets/front-blocks.php:47 frontpage/widgets/front-blocks.php:52
+#: frontpage/widgets/front-blocks.php:57 frontpage/widgets/front-blocks.php:384
+#: frontpage/widgets/front-blocks.php:388
+#: frontpage/widgets/front-blocks.php:392
+msgid "Lorem Ipsum"
+msgstr "Lorem Ipsum"
+
+#: frontpage/widgets/front-blocks.php:49 frontpage/widgets/front-blocks.php:54
+#: frontpage/widgets/front-blocks.php:59 frontpage/widgets/front-blocks.php:386
+#: frontpage/widgets/front-blocks.php:390
+#: frontpage/widgets/front-blocks.php:394 frontpage/widgets/front-text.php:43
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur dol adipiscing elit. Nam nec rhoncus "
+"risus. In ultrices lacinia ipsum, posuere faucibus velit bibe."
+msgstr ""
+"Lorem ipsum dolor sit amet, consectetur dol adipiscing elit. Nam nec rhoncus "
+"risus. In ultrices lacinia ipsum, posuere faucibus velit bibe."
+
+#: frontpage/widgets/front-blocks.php:425
+#: frontpage/widgets/front-carousel.php:291
+#: frontpage/widgets/front-clients.php:188 frontpage/widgets/front-map.php:286
+#: frontpage/widgets/front-portfolio.php:222
+#: frontpage/widgets/front-posts.php:207
+#: frontpage/widgets/front-testimonials.php:241 lib/includes/widgets.php:117
+#: lib/includes/widgets.php:282 lib/includes/widgets.php:416
+#: lib/includes/widgets.php:1094 lib/includes/widgets.php:1477
+msgid "Title:"
+msgstr "Titre :"
+
+#: frontpage/widgets/front-blocks.php:464
+msgid "Block 1"
+msgstr "Bloc 1"
+
+#: frontpage/widgets/front-blocks.php:468
+msgid "Block 1 Title"
+msgstr "Bloc 1 Titre"
+
+#: frontpage/widgets/front-blocks.php:474
+msgid "Block 1 Image"
+msgstr "Bloc 1 Image"
+
+#: frontpage/widgets/front-blocks.php:487
+msgid "Block 1 Content:"
+msgstr "Bloc 1 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:494
+msgid "Block 1 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:503
+msgid "Block 2"
+msgstr "Bloc 2"
+
+#: frontpage/widgets/front-blocks.php:507
+msgid "Block 2 Title"
+msgstr "Bloc 2 Titre"
+
+#: frontpage/widgets/front-blocks.php:513
+msgid "Block 2 Image"
+msgstr "Bloc 2 Image"
+
+#: frontpage/widgets/front-blocks.php:526
+msgid "Block 2 Content:"
+msgstr "Bloc 2 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:533
+msgid "Block 2 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:542
+msgid "Block 3"
+msgstr "Bloc 3"
+
+#: frontpage/widgets/front-blocks.php:546
+msgid "Block 3 Title"
+msgstr "Bloc 3 Titre"
+
+#: frontpage/widgets/front-blocks.php:552
+msgid "Block 3 Image"
+msgstr "Bloc 3 Image"
+
+#: frontpage/widgets/front-blocks.php:565
+msgid "Block 3 Content:"
+msgstr "Bloc 3 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:572
+msgid "Block 3 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:582
+msgid "Block 4"
+msgstr "Bloc 4"
+
+#: frontpage/widgets/front-blocks.php:586
+msgid "Block 4 Title"
+msgstr "Bloc 4 Titre"
+
+#: frontpage/widgets/front-blocks.php:592
+msgid "Block 4 Image"
+msgstr "Bloc 4 Image"
+
+#: frontpage/widgets/front-blocks.php:605
+msgid "Block 4 Content:"
+msgstr "Bloc 4 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:612
+msgid "Block 4 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:623
+msgid "Block 5"
+msgstr "Bloc 5"
+
+#: frontpage/widgets/front-blocks.php:627
+msgid "Block 5 Title"
+msgstr "Bloc 5 Titre"
+
+#: frontpage/widgets/front-blocks.php:633
+msgid "Block 5 Image"
+msgstr "Bloc 5 Image"
+
+#: frontpage/widgets/front-blocks.php:646
+msgid "Block 5 Content:"
+msgstr "Bloc 5 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:653
+msgid "Block 5 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:664
+msgid "Block 6"
+msgstr "Bloc 6"
+
+#: frontpage/widgets/front-blocks.php:668
+msgid "Block 6 Title"
+msgstr "Bloc 6 Titre"
+
+#: frontpage/widgets/front-blocks.php:674
+msgid "Block 6 Image"
+msgstr "Bloc 6 Image"
+
+#: frontpage/widgets/front-blocks.php:687
+msgid "Block 6 Content:"
+msgstr "Bloc 6 Contenu :"
+
+#: frontpage/widgets/front-blocks.php:694
+msgid "Block 6 Image Link"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:702
+msgid "Align Text to Center "
+msgstr "Aligner le Texte au Centre"
+
+#: frontpage/widgets/front-blocks.php:709
+msgid "Make Blocks Full Width"
+msgstr "Rendre Blocs Pleine Largeur"
+
+#: frontpage/widgets/front-blocks.php:716
+msgid "Extra Space Around Blocks"
+msgstr "Plus d'Espace Autour des Blocs"
+
+#: frontpage/widgets/front-blocks.php:722
+msgid "Block Image as Background"
+msgstr "Image Bloc en Fond"
+
+#: frontpage/widgets/front-blocks.php:729
+msgid "Blocks Hover Effect:"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:731
+msgid "None"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:732
+msgid "Zoom In"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:733
+msgid "Zoom Out"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:734
+msgid "Fade"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:735
+msgid "Top Border"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:736
+msgid "Background: Grayscale"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:737
+msgid "Background: Darkened"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:738
+msgid "Background: Lightened"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:739
+msgid "Background: Colored"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:740
+msgid "Content: Fade In"
+msgstr ""
+
+#: frontpage/widgets/front-blocks.php:747
+msgid "Blocks Title Color"
+msgstr "Couleur Titre Blocs"
+
+#: frontpage/widgets/front-blocks.php:754
+msgid "Blocks Text Color"
+msgstr "Couleur Texte Blocs"
+
+#: frontpage/widgets/front-blocks.php:760
+msgid "Widget Title Color"
+msgstr "Couleur Widget Titre"
+
+#: frontpage/widgets/front-blocks.php:766
+msgid "Blocks Background Color"
+msgstr "Couleur Fond Blocs"
+
+#: frontpage/widgets/front-blocks.php:772
+msgid "Blocks Background Image"
+msgstr "Image Fond Blocs"
+
+#: frontpage/widgets/front-carousel.php:26
+msgid "Dynamic Content"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:26
+msgid "&diams; Dynamic Content Widget"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:30
+#: frontpage/widgets/front-testimonials.php:30
+msgid "Optimizer Testimonial Section widget"
+msgstr "Widget Section Témoignages Optimizer"
+
+#: frontpage/widgets/front-carousel.php:45
+#: frontpage/widgets/front-carousel.php:275
+#: frontpage/widgets/front-testimonials.php:45
+#: frontpage/widgets/front-testimonials.php:225
+msgid "What are people saying?"
+msgstr "Que disent les gens ?"
+
+#: frontpage/widgets/front-carousel.php:46
+#: frontpage/widgets/front-testimonials.php:46
+msgid "Testimonial Subtitle"
+msgstr "Sous-titre Témoignage"
+
+#: frontpage/widgets/front-carousel.php:65 frontpage/widgets/front-map.php:69
+#: frontpage/widgets/front-testimonials.php:65
+msgid "Edit "
+msgstr "Editer"
+
+#: frontpage/widgets/front-carousel.php:85
+msgid "Please Click the \"+ Add New\" button to create new Carousel"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:276
+#: frontpage/widgets/front-testimonials.php:226
+msgid "Real words from real customers!"
+msgstr "De vrais mots de la part de vrais clients !"
+
+#: frontpage/widgets/front-carousel.php:297
+#: frontpage/widgets/front-clients.php:194 frontpage/widgets/front-map.php:292
+#: frontpage/widgets/front-portfolio.php:228
+#: frontpage/widgets/front-posts.php:213
+#: frontpage/widgets/front-testimonials.php:247
+msgid "Subtitle:"
+msgstr "Sous-titre :"
+
+#: frontpage/widgets/front-carousel.php:304
+msgid "Display As:"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:306
+#: frontpage/widgets/front-slider.php:349
+msgid "Carousel"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:307
+msgid "Tabs"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:308
+msgid "Toggle"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:345
+#: frontpage/widgets/front-carousel.php:374
+msgid "Title (Required)"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:355
+#: frontpage/widgets/front-carousel.php:374
+msgid "Edit Content"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:363
+msgid "Content"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:381
+msgid "No Carousel / Tabs Added!"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:383
+#: frontpage/widgets/front-clients.php:301 frontpage/widgets/front-map.php:429
+#: frontpage/widgets/front-testimonials.php:364
+#: frontpage/widgets/front-testimonials.php:426
+msgid "+ Add New"
+msgstr "+ Ajouter Nouveau"
+
+#: frontpage/widgets/front-carousel.php:419
+msgid "Style:"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:421 frontpage/widgets/front-map.php:349
+#: frontpage/widgets/front-portfolio.php:271
+msgid "Style 1"
+msgstr "Style 1"
+
+#: frontpage/widgets/front-carousel.php:422 frontpage/widgets/front-map.php:350
+#: frontpage/widgets/front-portfolio.php:272
+msgid "Style 2"
+msgstr "Style 2"
+
+#: frontpage/widgets/front-carousel.php:423 frontpage/widgets/front-map.php:351
+#: frontpage/widgets/front-portfolio.php:273
+msgid "Style 3"
+msgstr "Style 3"
+
+#: frontpage/widgets/front-carousel.php:429
+msgid "Image Alignment"
+msgstr ""
+
+#: frontpage/widgets/front-carousel.php:431
+#: frontpage/widgets/front-video.php:299
+msgid "Top"
+msgstr "Haut"
+
+#: frontpage/widgets/front-carousel.php:432 frontpage/widgets/front-cta.php:181
+#: frontpage/widgets/front-map.php:363 frontpage/widgets/front-video.php:298
+msgid "Left"
+msgstr "Gauche"
+
+#: frontpage/widgets/front-carousel.php:433 frontpage/widgets/front-cta.php:182
+#: frontpage/widgets/front-map.php:365 frontpage/widgets/front-video.php:297
+msgid "Right"
+msgstr "Droite"
+
+#: frontpage/widgets/front-clients.php:26
+msgid "Clients Logo"
+msgstr ""
+
+#: frontpage/widgets/front-clients.php:26
+msgid "&diams; Clients Logo Widget"
+msgstr "&diams; Widget Logo Clients"
+
+#: frontpage/widgets/front-clients.php:30
+msgid "Optimizer Frontpage Clients Logo Section widget"
+msgstr "Widget de la Section du Logo Clients de la Page d'Accueil Optimizer"
+
+#: frontpage/widgets/front-clients.php:45
+#: frontpage/widgets/front-clients.php:175
+msgid "OUR CLIENTS"
+msgstr "NOS CLIENTS"
+
+#: frontpage/widgets/front-clients.php:46
+#: frontpage/widgets/front-clients.php:176
+msgid "Companies Who Worked With Us"
+msgstr "Les Entrpreprises Qui Ont Travaillées Avec Nous"
+
+#: frontpage/widgets/front-clients.php:77
+msgid "Please Click the \"+ Add New\" button from left to Add Client logos."
+msgstr ""
+"Veuillez Cliquer sur le bouton \"+Ajouter Nouveau\" à gauche pour Ajouter "
+"des Logos Client."
+
+#: frontpage/widgets/front-clients.php:260
+#: frontpage/widgets/front-clients.php:284
+#: frontpage/widgets/front-testimonials.php:328
+msgid "Client's Name (Required)"
+msgstr "Nom du Client (Requis)"
+
+#: frontpage/widgets/front-clients.php:261
+#: frontpage/widgets/front-clients.php:284
+#: frontpage/widgets/front-testimonials.php:329
+msgid "Client's Website"
+msgstr "Site du Client"
+
+#: frontpage/widgets/front-clients.php:273
+msgid "Clients"
+msgstr "Clients"
+
+#: frontpage/widgets/front-clients.php:299
+msgid "No Logos Added"
+msgstr "Aucun Logo Ajouté"
+
+#: frontpage/widgets/front-clients.php:307
+msgid "Enable Navigation"
+msgstr ""
+
+#: frontpage/widgets/front-clients.php:314 frontpage/widgets/front-map.php:473
+msgid "Title &amp; Subtitle Color"
+msgstr "Couleur Titre &amp; Sous-titre"
+
+#: frontpage/widgets/front-cta.php:26
+msgid "CTA"
+msgstr ""
+
+#: frontpage/widgets/front-cta.php:26
+msgid "&diams; CTA Widget"
+msgstr "&diams; Widget CTA"
+
+#: frontpage/widgets/front-cta.php:30
+msgid "Optimizer Frontpage Call to Action Section widget"
+msgstr "Widget Section Appel à Action de la Page d'Accueil Optimizer"
+
+#: frontpage/widgets/front-cta.php:46 frontpage/widgets/front-cta.php:143
+msgid ""
+"Collaboratively administrate empowered markets via plug-and-play networks."
+msgstr ""
+"Administrez en collaboration les marchés habilités via les réseaux plug-and-"
+"play."
+
+#: frontpage/widgets/front-cta.php:47 frontpage/widgets/front-cta.php:144
+msgid "DOWNLOAD NOW"
+msgstr "TELECHARGER MAINTENANT"
+
+#: frontpage/widgets/front-cta.php:159
+msgid "CTA Content:"
+msgstr "Contenu CTA :"
+
+#: frontpage/widgets/front-cta.php:166
+msgid "Button Text:"
+msgstr "Texte Bouton :"
+
+#: frontpage/widgets/front-cta.php:173
+msgid "Button Link:"
+msgstr "Lien Bouton :"
+
+#: frontpage/widgets/front-cta.php:179
+msgid "Button Alignment:"
+msgstr "Alignement Bouton :"
+
+#: frontpage/widgets/front-cta.php:183 frontpage/widgets/front-map.php:364
+#: frontpage/widgets/front-newsletter.php:172
+msgid "Center"
+msgstr "Centré"
+
+#: frontpage/widgets/front-cta.php:189
+msgid "Button Style:"
+msgstr "Style Bouton :"
+
+#: frontpage/widgets/front-cta.php:191
+msgid "Flat"
+msgstr "Plat"
+
+#: frontpage/widgets/front-cta.php:192
+msgid "Hollow"
+msgstr "Creux"
+
+#: frontpage/widgets/front-cta.php:193
+msgid "Rounded"
+msgstr "Arrondi"
+
+#: frontpage/widgets/front-cta.php:200
+#: frontpage/widgets/front-newsletter.php:200
+msgid "Button Text Color"
+msgstr "Couleur du Texte du Bouton"
+
+#: frontpage/widgets/front-cta.php:206
+msgid "Button Background Color"
+msgstr "Couleur Fond Bouton"
+
+#: frontpage/widgets/front-cta.php:213
+msgid "CTA Section Text Color"
+msgstr "Couleur Texte Section CTA"
+
+#: frontpage/widgets/front-cta.php:219
+msgid "CTA Section Background Color"
+msgstr "Couleur Fond Section CTA"
+
+#: frontpage/widgets/front-cta.php:225
+msgid "CTA Section Background Image"
+msgstr "Image Fond Section CTA"
+
+#: frontpage/widgets/front-map.php:26
+msgid "Contact"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:26
+msgid "&diams; Contact Widget"
+msgstr "&diams; Widget Contact"
+
+#: frontpage/widgets/front-map.php:30
+msgid "Optimizer Frontpage Contact lets you display Conact Form and Live Map."
+msgstr ""
+"Contact Page d'Accueil Optimizer vous laisse afficher le Formulaire de "
+"Contact et la Carte Live."
+
+#: frontpage/widgets/front-map.php:47
+msgid "GET IN TOUCH"
+msgstr "ENTRER EN CONTACT"
+
+#: frontpage/widgets/front-map.php:48
+msgid "Come have a cup of coffee with us"
+msgstr "Venez prendre une tasse de café avec nous"
+
+#: frontpage/widgets/front-map.php:108
+#: template_parts/page-contact_template.php:120
+msgid "Name*"
+msgstr "Nom*"
+
+#: frontpage/widgets/front-map.php:109
+#: template_parts/page-contact_template.php:121
+msgid "Email*"
+msgstr "Email*"
+
+#: frontpage/widgets/front-map.php:111
+#, php-format
+msgid "%1$s"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:113
+#: template_parts/page-contact_template.php:122
+msgid "Subject*"
+msgstr "Sujet*"
+
+#: frontpage/widgets/front-map.php:114
+#: template_parts/page-contact_template.php:123
+msgid "Your Message"
+msgstr "Votre Message"
+
+#: frontpage/widgets/front-map.php:115
+#: template_parts/page-contact_template.php:126
+msgid "Send"
+msgstr "Envoyer"
+
+#: frontpage/widgets/front-map.php:266
+msgid "OUR LOCATION"
+msgstr "NOUS TROUVER"
+
+#: frontpage/widgets/front-map.php:267
+msgid "Come Have coffee with us"
+msgstr "Venez Prendre un café avec nous"
+
+#: frontpage/widgets/front-map.php:330
+msgid "Contact Form"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:330
+msgid "Map"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:333
+msgid "Display Contact Form"
+msgstr "Afficher Formulaire de Contact"
+
+#: frontpage/widgets/front-map.php:336
+msgid "Emails will be sent to your WordPress Admin Email Address."
+msgstr "Les e-mails seront envoyés à votre Adresse Email Wordpress Admin."
+
+#: frontpage/widgets/front-map.php:341
+msgid "Contact Form Additional Field"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:342
+msgid "Field Name (e.g: Phone Number)"
+msgstr ""
+
+#: frontpage/widgets/front-map.php:347
+msgid "Contact Form Style:"
+msgstr "Style Formulaire de Contact :"
+
+#: frontpage/widgets/front-map.php:352
+#: frontpage/widgets/front-portfolio.php:274
+msgid "Style 4"
+msgstr "Style 4"
+
+#: frontpage/widgets/front-map.php:353
+msgid "Style 5"
+msgstr "Style 5"
+
+#: frontpage/widgets/front-map.php:361
+msgid "Contact Form Alignment:"
+msgstr "Alignement Formulaire de Contact :"
+
+#: frontpage/widgets/front-map.php:390 frontpage/widgets/front-map.php:412
+msgid "Location Title (Required)"
+msgstr "Titre Emplacement (Requis)"
+
+#: frontpage/widgets/front-map.php:391 frontpage/widgets/front-map.php:412
+msgid "Latitude , Longitude (Required)"
+msgstr "Latitude , Longitude (Requis)"
+
+#: frontpage/widgets/front-map.php:392 frontpage/widgets/front-map.php:412
+msgid "Location Description"
+msgstr "Description Emplacement"
+
+#: frontpage/widgets/front-map.php:400
+msgid "Locations"
+msgstr "Emplacements"
+
+#: frontpage/widgets/front-map.php:412
+msgid "Location Name (Required)"
+msgstr "Nom Emplacements (Requis)"
+
+#: frontpage/widgets/front-map.php:427
+msgid "No Map Location Added"
+msgstr "Aucun Emplacement de la Carte Ajouté"
+
+#: frontpage/widgets/front-map.php:435
+msgid ""
+"If your Maps are not working you will have to <a href=\"https://optimizerwp."
+"com/documentation/get-google-map-api-key/\" target=\"_blank\">Get a Map Api "
+"Key</a> and then insert the key in Customize > Miscellaneous > Other > "
+"Google Map Api Key."
+msgstr ""
+
+#: frontpage/widgets/front-map.php:440
+msgid "Map Height:"
+msgstr "Hauteur Carte :"
+
+#: frontpage/widgets/front-map.php:447
+msgid "Map Style:"
+msgstr "Style de Carte :"
+
+#: frontpage/widgets/front-map.php:449 lib/functions/enqueue.php:61
+#: lib/functions/inlinedit.php:102
+msgid "Default"
+msgstr "Défaut"
+
+#: frontpage/widgets/front-map.php:450
+msgid "Bluish"
+msgstr "Bleuâtre"
+
+#: frontpage/widgets/front-map.php:451
+msgid "Angel"
+msgstr "Ange"
+
+#: frontpage/widgets/front-map.php:452
+msgid "Pale"
+msgstr "Pâle"
+
+#: frontpage/widgets/front-map.php:453
+msgid "Gowalla"
+msgstr "Gowalla"
+
+#: frontpage/widgets/front-map.php:454
+msgid "Pastel"
+msgstr "Pastel"
+
+#: frontpage/widgets/front-map.php:455
+msgid "Old"
+msgstr "Vieux"
+
+#: frontpage/widgets/front-map.php:456
+msgid "Light"
+msgstr "Clair"
+
+#: frontpage/widgets/front-map.php:457
+msgid "Dark"
+msgstr "Sombre"
+
+#: frontpage/widgets/front-map.php:458
+msgid "Greyscale"
+msgstr "Niveaux de Gris"
+
+#: frontpage/widgets/front-map.php:465
+msgid "Map Zoom"
+msgstr "Zoom Carte"
+
+#: frontpage/widgets/front-newsletter.php:24
+msgid "Newsletter"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:24
+msgid "&diams; Newsletter Widget"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:27
+msgid "Optimizer Newsletter widget"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:159
+msgid "Newsletter Form HTML or Shortcode"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:166
+#: frontpage/widgets/front-video.php:295
+msgid "Content Position:"
+msgstr "Position du Contenu :"
+
+#: frontpage/widgets/front-newsletter.php:168
+msgid "Content Left | Form Right"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:169
+msgid "Content Right | Form Left"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:170
+msgid "Content Left | Form Left"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:171
+msgid "Content Right | Form Right"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:179
+msgid "Form Style:"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:181
+msgid "Simple"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:182
+msgid "Bordered (White)"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:183
+msgid "Bordered (Black)"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:184
+msgid "Stylish"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:185
+msgid "Modern"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:186
+msgid "Envelope"
+msgstr ""
+
+#: frontpage/widgets/front-newsletter.php:207
+msgid "Button background Color"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:31
+msgid "Portfolio"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:31
+msgid "&diams; Portfolio Widget"
+msgstr "&diams; Widget Portfolio"
+
+#: frontpage/widgets/front-portfolio.php:35
+msgid "This Widget lets you display Portfolio items."
+msgstr "Ce Widget vous permet d'afficher les éléments du Portfolio."
+
+#: frontpage/widgets/front-portfolio.php:52
+#: frontpage/widgets/front-portfolio.php:198
+#: frontpage/widgets/front-posts.php:52 frontpage/widgets/front-posts.php:186
+msgid "Our Work"
+msgstr "Notre Travail"
+
+#: frontpage/widgets/front-portfolio.php:53
+#: frontpage/widgets/front-portfolio.php:199
+#: frontpage/widgets/front-posts.php:53 frontpage/widgets/front-posts.php:187
+msgid "Check Out Our Portfolio"
+msgstr "Jetez un Coup d'Oeil sur notre Portfolio"
+
+#: frontpage/widgets/front-portfolio.php:257
+msgid "Portfolio Layout:"
+msgstr "Mise en Page du Portfolio"
+
+#: frontpage/widgets/front-portfolio.php:259 lib/includes/widgets.php:1107
+msgid "Square"
+msgstr "Carré"
+
+#: frontpage/widgets/front-portfolio.php:260
+msgid "Square (Spaced)"
+msgstr "Carré (Espacé)"
+
+#: frontpage/widgets/front-portfolio.php:261
+msgid "Masonry"
+msgstr "Maçonnerie"
+
+#: frontpage/widgets/front-portfolio.php:262
+msgid "Masonry (Spaced)"
+msgstr "Maçonnerie (Espacé)"
+
+#: frontpage/widgets/front-portfolio.php:263
+#: frontpage/widgets/front-slider.php:25
+msgid "Slider"
+msgstr "Curseur"
+
+#: frontpage/widgets/front-portfolio.php:269
+msgid "Hover Style:"
+msgstr "Style Survol :"
+
+#: frontpage/widgets/front-portfolio.php:275
+msgid "Disable Hover: Always Show Title"
+msgstr "Désactiver Survol : Toujours Montrer le Titre"
+
+#: frontpage/widgets/front-portfolio.php:282
+#: frontpage/widgets/front-posts.php:287
+msgid "Categories"
+msgstr "Catégories"
+
+#: frontpage/widgets/front-portfolio.php:304
+#: frontpage/widgets/front-posts.php:322
+msgid "Number of Posts:"
+msgstr "Nombre d'Articles :"
+
+#: frontpage/widgets/front-portfolio.php:311
+#: frontpage/widgets/front-posts.php:329
+msgid "Display Preview Button"
+msgstr "Afficher Bouton Aperçu"
+
+#: frontpage/widgets/front-portfolio.php:317
+#: frontpage/widgets/front-posts.php:335
+msgid "Display Link Button"
+msgstr "Afficher Bouton Lien"
+
+#: frontpage/widgets/front-portfolio.php:323
+msgid "Make the Widget Full Width"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:330
+#: frontpage/widgets/front-posts.php:357
+msgid "Post Background Color"
+msgstr "Couleur Fond de l'Article"
+
+#: frontpage/widgets/front-portfolio.php:337
+msgid "Portfolio Section Title Color"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:343
+msgid "Portfolio Section Background"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:348
+msgid "Please Install "
+msgstr "Veuillez Installer"
+
+#: frontpage/widgets/front-portfolio.php:348
+msgid "this portfolio plugin"
+msgstr "ce plugin portfolio"
+
+#: frontpage/widgets/front-portfolio.php:348
+msgid "to activate this widget."
+msgstr "pour activer le widget."
+
+#: frontpage/widgets/front-portfolio.php:349
+msgid "OR"
+msgstr ""
+
+#: frontpage/widgets/front-portfolio.php:350
+msgid ""
+"If you are using Jetpack, You can activate the Jetpack Custom Post Type "
+"Module. Then Go to Settings > Writing to enable \"Portfolio Projects\"."
+msgstr ""
+"Si vous utilisez Jetpack, Vous pouvez activer le Module Personnalisé de Type "
+"de Poste de Jetpack. Ensuite, allez dans Paramètres> Rédaction pour activer "
+"\"Projets Portfolio\"."
+
+#: frontpage/widgets/front-posts.php:31 frontpage/widgets/front-posts.php:263
+msgid "Posts"
+msgstr "Articles"
+
+#: frontpage/widgets/front-posts.php:31
+msgid "&diams; Posts Widget"
+msgstr "&diams; Widget Articles"
+
+#: frontpage/widgets/front-posts.php:35
+msgid ""
+"This Widget lets you display WordPress Posts, Pages and Woocommerce Products."
+msgstr ""
+"Ce Widget vous permet d'afficher les Articles, Pages et Produits WooCommerce "
+"de WordPress."
+
+#: frontpage/widgets/front-posts.php:249
+msgid "Posts Layout:"
+msgstr "Mise en Page des Articles :"
+
+#: frontpage/widgets/front-posts.php:251
+msgid "Layout 1"
+msgstr "Mise en Page 1"
+
+#: frontpage/widgets/front-posts.php:252
+msgid "Layout 2"
+msgstr "Mise en Page 2"
+
+#: frontpage/widgets/front-posts.php:253
+msgid "Layout 3"
+msgstr "Mise en Page 3"
+
+#: frontpage/widgets/front-posts.php:254
+msgid "Layout 4"
+msgstr "Mise en Page 4"
+
+#: frontpage/widgets/front-posts.php:255
+msgid "Layout 5"
+msgstr "Mise en Page 5"
+
+#: frontpage/widgets/front-posts.php:261
+msgid "Posts Type:"
+msgstr "Type d'Articles :"
+
+#: frontpage/widgets/front-posts.php:264
+msgid "Pages"
+msgstr "Pages"
+
+#: frontpage/widgets/front-posts.php:265
+msgid "Products (Woocommerce)"
+msgstr "Produits (Woocommerce)"
+
+#: frontpage/widgets/front-posts.php:271
+msgid "Display These Pages"
+msgstr "Afficher Ces Pages"
+
+#: frontpage/widgets/front-posts.php:304
+msgid "Product Categories"
+msgstr ""
+
+#: frontpage/widgets/front-posts.php:345
+msgid "Posts Navigation:"
+msgstr "Navigation des Articles :"
+
+#: frontpage/widgets/front-posts.php:347
+msgid "Numbered"
+msgstr "Numérotés"
+
+#: frontpage/widgets/front-posts.php:348
+msgid "Next/Previous Entries"
+msgstr "Entrées Suivants / Précédents"
+
+#: frontpage/widgets/front-posts.php:349
+msgid "Infinite Scroll (Manual)"
+msgstr "Défilement Infini (Manuel)"
+
+#: frontpage/widgets/front-posts.php:350
+msgid "Infinite Scroll (Auto)"
+msgstr "Défilement Infini (Auto)"
+
+#: frontpage/widgets/front-posts.php:351 frontpage/widgets/front-slider.php:375
+msgid "Disabled"
+msgstr "Désactiver"
+
+#: frontpage/widgets/front-posts.php:364
+msgid "Posts Section Title Color"
+msgstr "Couleur de la Section Titre des Articles"
+
+#: frontpage/widgets/front-posts.php:370
+msgid "Posts Section Background"
+msgstr "Fond de la Section Titre des Articles"
+
+#: frontpage/widgets/front-slider.php:25
+msgid "&diams; Slider Widget"
+msgstr "&diams; Widget Curseur"
+
+#: frontpage/widgets/front-slider.php:29
+msgid "Optimizer Slider Widget"
+msgstr "&diams; Widget Curseur Optimizer"
+
+#: frontpage/widgets/front-slider.php:299
+msgid "Slider Images:"
+msgstr "Images Curseur :"
+
+#: frontpage/widgets/front-slider.php:325
+msgid "No Images Added"
+msgstr "Aucune Image Ajoutée"
+
+#: frontpage/widgets/front-slider.php:330
+msgid "Select Images"
+msgstr "Sélectionner Images"
+
+#: frontpage/widgets/front-slider.php:338
+msgid "Display Image Caption as Content"
+msgstr "Afficher Légende Image comme Contenu"
+
+#: frontpage/widgets/front-slider.php:345
+msgid "Slider Type:"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:347
+msgid "Nivo"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:348
+msgid "Accordion"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:350
+msgid "Gallery"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:357
+msgid "Slider Height (in px)"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:363
+msgid "Slider Pause Time"
+msgstr ""
+
+#: frontpage/widgets/front-slider.php:369
+msgid "Slider Navigation:"
+msgstr "Navigation Curseur :"
+
+#: frontpage/widgets/front-slider.php:371
+msgid "Buttons + Navigation"
+msgstr "Boutons + Navigation"
+
+#: frontpage/widgets/front-slider.php:372
+msgid "Only Buttons"
+msgstr "Boutons Seuls"
+
+#: frontpage/widgets/front-slider.php:373
+msgid "Only Navigation"
+msgstr "Navigation Seule"
+
+#: frontpage/widgets/front-slider.php:382
+msgid "Slider Text Color"
+msgstr "Couleur Texte Navigation"
+
+#: frontpage/widgets/front-testimonials.php:26
+msgid "Testimonial"
+msgstr ""
+
+#: frontpage/widgets/front-testimonials.php:26
+msgid "&diams; Testimonial Widget"
+msgstr "&diams; Widget Témoignage"
+
+#: frontpage/widgets/front-testimonials.php:83
+msgid "Please Click the \"+ Add New\" button to create new testimonials"
+msgstr ""
+"Veuillez cliquer sur le bouton \" + Ajouter Nouveau\" pour créer de nouveaux "
+"témoignages"
+
+#: frontpage/widgets/front-testimonials.php:287
+msgid "Testimonials Layout:"
+msgstr "Mise en Page Témoignages :"
+
+#: frontpage/widgets/front-testimonials.php:289
+msgid "1 Column"
+msgstr "1 Colonne"
+
+#: frontpage/widgets/front-testimonials.php:290
+msgid "2 Column"
+msgstr "2 Colonne"
+
+#: frontpage/widgets/front-testimonials.php:291
+msgid "3 Column"
+msgstr "3 Colonne"
+
+#: frontpage/widgets/front-testimonials.php:337
+msgid "Client's Occupation"
+msgstr ""
+
+#: frontpage/widgets/front-testimonials.php:344
+msgid "Custom Testimonials"
+msgstr "Témoignages Personnalisés"
+
+#: frontpage/widgets/front-testimonials.php:355
+msgid "Clients Name (Required)"
+msgstr "Nom du Client (Requis)"
+
+#: frontpage/widgets/front-testimonials.php:355
+msgid "Clients Website"
+msgstr "Site du Client"
+
+#: frontpage/widgets/front-testimonials.php:355
+msgid "Clients Occupation"
+msgstr ""
+
+#: frontpage/widgets/front-testimonials.php:355
+msgid "Clients Testimony"
+msgstr "Témoignage du Client"
+
+#: frontpage/widgets/front-testimonials.php:362
+msgid "No Custom Testimonials Added"
+msgstr "Aucun Témoignage Personnalisé n'a été Ajouté"
+
+#: frontpage/widgets/front-testimonials.php:371
+msgid "Display Twitter Testimonial"
+msgstr "Afficher Témoignage Twitter"
+
+#: frontpage/widgets/front-testimonials.php:397
+#: frontpage/widgets/front-testimonials.php:415
+msgid "Twitter Status link"
+msgstr "Lien Status Twitter"
+
+#: frontpage/widgets/front-testimonials.php:405
+msgid "Twitter Testimonials"
+msgstr "Témoignages Twitter"
+
+#: frontpage/widgets/front-testimonials.php:424
+msgid "No Twitter Testimonials Added"
+msgstr "Aucun Témoignage Twitter n'a été Ajouté"
+
+#: frontpage/widgets/front-text.php:25
+msgid "Advanced Text"
+msgstr ""
+
+#: frontpage/widgets/front-text.php:25
+msgid "&diams; Advanced Text Widget"
+msgstr "&diams; Widget Texte Advancé"
+
+#: frontpage/widgets/front-text.php:28
+msgid "Optimizer Advanced Text Section widget"
+msgstr "Widget Section Texte Advancé Optimizer"
+
+#: frontpage/widgets/front-text.php:154
+msgid "Top &amp; Bottom Padding"
+msgstr "Rembourrage en Haut &amp; en Bas"
+
+#: frontpage/widgets/front-text.php:160
+msgid "Side Padding"
+msgstr "Rembourrage sur le Côté"
+
+#: frontpage/widgets/front-text.php:193
+msgid "Parallax Effect"
+msgstr "Effect Parallaxe"
+
+#: frontpage/widgets/front-video.php:28
+msgid "Video"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:28
+msgid "&diams; Video Widget"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:32
+msgid ""
+"A Responsive Video widget that let's you display your Youtube, Vimeo and "
+"Custom videos."
+msgstr ""
+"Un widget Vidéo Réagissant qui vous permet d'afficher vos vidéos Youtube, "
+"Vimeo et vos Vidéos Personnalisées."
+
+#: frontpage/widgets/front-video.php:46 frontpage/widgets/front-video.php:219
+msgid "Check Out This Video"
+msgstr "Regarder cette Vidéo"
+
+#: frontpage/widgets/front-video.php:53 frontpage/widgets/front-video.php:225
+msgid ""
+"Sustainable messenger bag Thundercats mixtape typewriter, locavore synth "
+"Marfa Intelligentsia try-hard biodiesel four loko distillery. "
+msgstr ""
+"Sac Messager Durable vole machine à écrire pour mixtape Thundercats, "
+"locavore synthé Marfa Intelligentsia essayer dur biodiesel quatre Loko "
+"distillerie."
+
+#: frontpage/widgets/front-video.php:235 lib/includes/widgets.php:577
+#: lib/includes/widgets.php:829 lib/includes/widgets.php:1313
+msgid "Title"
+msgstr "Titre"
+
+#: frontpage/widgets/front-video.php:242
+msgid "Youtube or Vimeo Video url"
+msgstr "url Vidéo Youtube ou Vimeo"
+
+#: frontpage/widgets/front-video.php:249
+msgid "Custom Video (.mp4)"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:252
+msgid "Select"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:259
+msgid "Autoplay Video"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:266
+msgid "Display Border Around Video"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:274
+msgid "Video Thumbnail"
+msgstr ""
+
+#: frontpage/widgets/front-video.php:300
+msgid "On Video"
+msgstr "Sur Vidéo"
+
+#: frontpage/widgets/init.php:33
+msgid "Advanced"
+msgstr "Avancé"
+
+#: frontpage/widgets/init.php:35
+msgid "Width:"
+msgstr "Largeur :"
+
+#: frontpage/widgets/init.php:37 lib/includes/widgets.php:1110
+msgid "Full"
+msgstr "Entier"
+
+#: frontpage/widgets/init.php:38
+msgid "Half"
+msgstr "Demi"
+
+#: frontpage/widgets/init.php:39
+msgid "One Third"
+msgstr "Un Tiers"
+
+#: frontpage/widgets/init.php:40
+msgid "Three Quarter"
+msgstr ""
+
+#: frontpage/widgets/init.php:84
+msgid "Add/Edit Widgets"
+msgstr ""
+
+#: frontpage/widgets/init.php:85
+msgid "Remove Widgets & Switch Back to Editor"
+msgstr ""
+
+#: frontpage/widgets/init.php:90
+msgid "Customize This Page with Widgets like Optimizer Frontpage."
+msgstr ""
+
+#: frontpage/widgets/init.php:91
+msgid "Activate"
+msgstr ""
+
+#: frontpage/widgets/init.php:197
+msgid "Customize"
+msgstr "Personnaliser"
+
+#: functions.php:77
+msgid "Header Navigation"
+msgstr "Navigation Entête"
+
+#: functions.php:78
+msgid "Topbar Navigation"
+msgstr "Navigation Barre de Navigation Supérieure"
+
+#: functions.php:79
+msgid "Footer Navigation"
+msgstr "Navigation Pied de page"
+
+#: index.php:36
+msgid "You can Replace this Posts Section with Optimizer Widgets."
+msgstr ""
+"Vous pouvez remplacer cette Section d'Articles avec des Widgets Optimizer."
+
+#: index.php:36
+msgid "Add Widgets"
+msgstr "Ajouter des Widgets"
+
+#: lib/functions/core.php:123
+msgid "Right Sidebar"
+msgstr "Encadré de Droite"
+
+#: lib/functions/core.php:125
+msgid ""
+"When you assign widgets to this area, it will be displayed on the right side "
+"of all pages and posts"
+msgstr ""
+"Lorsque vous attribuez des widgets dans cette zone, il seront affichés sur "
+"le côté droit de toutes les pages et articles"
+
+#: lib/functions/core.php:135
+msgid "This Widget Area is displayed in the footer section of your site."
+msgstr ""
+"La Zone Widget est Affichée dans la Section Pied de Page de votre site."
+
+#: lib/functions/core.php:143
+msgid "Frontpage Widgets"
+msgstr "Widgets de la Page d'Accueil"
+
+#: lib/functions/core.php:145
+msgid "This Widget Area is displayed on the Frontpage"
+msgstr "La Zone Widget est Affichée sur la Page d'Accueil."
+
+#: lib/functions/core.php:179
+msgid "Custom Sidebar created by you"
+msgstr "Encadré Personnalisé créé par vous"
+
+#: lib/functions/core.php:233 lib/functions/core.php:242
+#: lib/includes/shortcodes.php:1430
+msgid "+ Read More"
+msgstr "+ Lire Plus"
+
+#: lib/functions/core.php:249
+msgid "Search &hellip;"
+msgstr "Recherche &hellip;"
+
+#: lib/functions/core.php:250
+msgid "Search"
+msgstr "Recherche"
+
+#: lib/functions/core.php:271
+#, php-format
+msgid "%s"
+msgstr "%s"
+
+#: lib/functions/core.php:272
+msgid " ago"
+msgstr "passé"
+
+#: lib/functions/core.php:282 lib/functions/core.php:302
+msgid "Your comment is awaiting moderation."
+msgstr "Votre commentaire est en attente de modération."
+
+#: lib/functions/core.php:307
+#, php-format
+msgid "<cite class=\"citeping\">%s</cite> <span class=\"says\">:</span>"
+msgstr "<cite class=\"citeping\">%s</cite> <span class=\"says\">:</span>"
+
+#: lib/functions/core.php:330
+msgid "Credit :"
+msgstr "Crédit :"
+
+#: lib/functions/core.php:331
+msgid "Camera :"
+msgstr "Caméra :"
+
+#: lib/functions/core.php:332
+msgid "Focal Length :"
+msgstr "Distance focale :"
+
+#: lib/functions/core.php:333
+msgid "Aperture :"
+msgstr "Ouverture :"
+
+#: lib/functions/core.php:334
+msgid "ISO :"
+msgstr "ISO :"
+
+#: lib/functions/core.php:335
+msgid "Shutter Speed :"
+msgstr "Vitesse d'obturation :"
+
+#: lib/functions/core.php:336
+msgid "Created :"
+msgstr "Créé :"
+
+#: lib/functions/core.php:337
+msgid "Copyright :"
+msgstr "Droits d'Auteur :"
+
+#: lib/functions/core.php:339
+msgid "EXIF Data Not Available"
+msgstr "Données EXIF Non Disponible"
+
+#: lib/functions/core.php:352 lib/includes/widgets.php:596
+msgid "Name"
+msgstr "Nom"
+
+#: lib/functions/core.php:354
+msgid "Email"
+msgstr "Email"
+
+#: lib/functions/core.php:356
+msgid "Website"
+msgstr "Site"
+
+#: lib/functions/core.php:417
+msgid "Style"
+msgstr "Style"
+
+#: lib/functions/core.php:485
+msgid "Once Weekly"
+msgstr ""
+
+#: lib/functions/defaults.php:59
+msgid "Leave a Reply Text"
+msgstr "Laisser un Texte de Réponse"
+
+#: lib/functions/enqueue.php:20
+msgid "Message Sent Successfully!"
+msgstr "Message Envoyé avec Succès !"
+
+#: lib/functions/enqueue.php:21 lib/includes/widgets.php:752
+msgid "Days"
+msgstr "Journées"
+
+#: lib/functions/enqueue.php:21 lib/includes/widgets.php:753
+msgid "Hours"
+msgstr "Heures"
+
+#: lib/functions/enqueue.php:21 lib/includes/widgets.php:754
+msgid "Min"
+msgstr "Minute"
+
+#: lib/functions/enqueue.php:21 lib/includes/widgets.php:755
+msgid "Sec"
+msgstr "Sec"
+
+#: lib/functions/enqueue.php:61
+msgid "Clear"
+msgstr "Supprimer"
+
+#: lib/functions/enqueue.php:61
+msgid "Select Color"
+msgstr ""
+
+#: lib/functions/inlinedit.php:88
+msgid "Button Text"
+msgstr ""
+
+#: lib/functions/inlinedit.php:89
+msgid "Button Link"
+msgstr ""
+
+#: lib/functions/inlinedit.php:91
+msgid "Button Style"
+msgstr ""
+
+#: lib/functions/inlinedit.php:93
+msgid "Square (Flat)"
+msgstr ""
+
+#: lib/functions/inlinedit.php:94
+msgid "Square (Hollow)"
+msgstr ""
+
+#: lib/functions/inlinedit.php:95
+msgid "Circular (Flat)"
+msgstr ""
+
+#: lib/functions/inlinedit.php:96
+msgid "Circular (Hollow)"
+msgstr ""
+
+#: lib/functions/inlinedit.php:100
+msgid "Button Size"
+msgstr ""
+
+#: lib/functions/inlinedit.php:103
+msgid "Small"
+msgstr ""
+
+#: lib/functions/inlinedit.php:104 lib/includes/widgets.php:1336
+#: lib/includes/widgets.php:1491
+msgid "Large"
+msgstr ""
+
+#: lib/functions/inlinedit.php:107
+msgid "Background"
+msgstr ""
+
+#: lib/functions/inlinedit.php:109
+msgid "Open in New Window"
+msgstr ""
+
+#: lib/functions/inlinedit.php:110
+msgid "Rounded Corner"
+msgstr ""
+
+#: lib/functions/inlinedit.php:111
+msgid "Align to Center"
+msgstr ""
+
+#: lib/functions/inlinedit.php:112
+msgid "Cancel"
+msgstr ""
+
+#: lib/functions/inlinedit.php:112
+msgid "Update"
+msgstr ""
+
+#: lib/functions/inlinedit.php:119 lib/functions/inlinedit.php:125
+#: lib/functions/inlinedit.php:130
+msgid "Remove Columns"
+msgstr ""
+
+#: lib/functions/mini-cart.php:38 lib/functions/woocommerce.php:168
+msgid "No Item found on your cart."
+msgstr ""
+
+#: lib/functions/mini-cart.php:44
+msgid "Subtotal"
+msgstr ""
+
+#: lib/functions/mini-cart.php:48
+msgid "View Cart"
+msgstr ""
+
+#: lib/functions/mini-cart.php:49
+msgid "Checkout"
+msgstr ""
+
+#: lib/functions/woocommerce.php:131 lib/functions/woocommerce.php:163
+msgid "View your shopping cart"
+msgstr ""
+
+#: lib/functions/woocommerce.php:132
+msgid "Start shopping"
+msgstr ""
+
+#: lib/functions/woocommerce.php:137
+msgid " items"
+msgstr ""
+
+#: lib/functions/woocommerce.php:139
+msgid " item"
+msgstr ""
+
+#: lib/functions/woocommerce.php:163
+#, php-format
+msgid "%d item"
+msgstr ""
+
+#: lib/functions/woocommerce.php:347
+msgid "SKU:"
+msgstr ""
+
+#: lib/functions/woocommerce.php:347
+msgid "N/A"
+msgstr ""
+
+#: lib/functions/woocommerce.php:349
+msgid "Tags: "
+msgstr ""
+
+#: lib/includes/widgets.php:27
+msgid "Flickr Photo"
+msgstr ""
+
+#: lib/includes/widgets.php:29
+msgid ""
+"An Optimizer Widget that displays Flickr image stream from your Flickr "
+"account"
+msgstr ""
+"Un Widget Optimizer qui affiche un flux d'images Flickr à partir de votre "
+"compte Flickr"
+
+#: lib/includes/widgets.php:123
+msgid "Flickr ID:"
+msgstr "ID Flickr :"
+
+#: lib/includes/widgets.php:129
+msgid "Number of Photos:"
+msgstr "Nombre de Photos :"
+
+#: lib/includes/widgets.php:144
+msgid "Type (user or group):"
+msgstr "Type (utilisateur ou groupe) :"
+
+#: lib/includes/widgets.php:153 lib/includes/widgets.php:1332
+#: lib/includes/widgets.php:1487
+msgid "Image Size"
+msgstr ""
+
+#: lib/includes/widgets.php:155 lib/includes/widgets.php:1334
+#: lib/includes/widgets.php:1489
+msgid "Thumbnail"
+msgstr ""
+
+#: lib/includes/widgets.php:156 lib/includes/widgets.php:1335
+#: lib/includes/widgets.php:1490
+msgid "Medium"
+msgstr ""
+
+#: lib/includes/widgets.php:162
+msgid "Display (random or latest):"
+msgstr "Affichage (aléatoire ou dernière) :"
+
+#: lib/includes/widgets.php:198
+msgid "Facebook Likebox"
+msgstr ""
+
+#: lib/includes/widgets.php:200
+msgid ""
+"An Optimizer Widget that displays Facebook Likebox of your Facebook Page."
+msgstr "Un Widget Optimizer qui affiche le Likebox de votre page Facebook."
+
+#: lib/includes/widgets.php:214
+msgid "Follow Us on Facebook"
+msgstr "Suivez-nous sur Facebook"
+
+#: lib/includes/widgets.php:288
+msgid "Facebook Page url:"
+msgstr "URL Page Facebook :"
+
+#: lib/includes/widgets.php:294
+msgid "Height of the like Box"
+msgstr "Hauteur du Likebox"
+
+#: lib/includes/widgets.php:327
+msgid "Google + Followers"
+msgstr ""
+
+#: lib/includes/widgets.php:329
+msgid "An Optimizer widget that displays your Google Plus Followers."
+msgstr "Un Widget Optimizer qui affiche vos Abonnés Google Plus."
+
+#: lib/includes/widgets.php:342 lib/includes/widgets.php:407
+msgid "Follow on Google Plus"
+msgstr "Suivez-nous sur Google Plus"
+
+#: lib/includes/widgets.php:422
+msgid "Google Plus Url:"
+msgstr "URL Google Plus :"
+
+#: lib/includes/widgets.php:428
+msgid "Box Width:"
+msgstr "Largeur Boîte :"
+
+#: lib/includes/widgets.php:463
+msgid "Biography"
+msgstr ""
+
+#: lib/includes/widgets.php:465
+msgid "An Optimizer Biography widget to display your biography."
+msgstr "Un Widget Optimizer pour afficher votre biographie."
+
+#: lib/includes/widgets.php:482 lib/includes/widgets.php:566
+msgid "Blogger"
+msgstr "Blogger"
+
+#: lib/includes/widgets.php:584
+msgid "Image"
+msgstr "Image"
+
+#: lib/includes/widgets.php:601
+msgid "Occupation"
+msgstr "Occupation"
+
+#: lib/includes/widgets.php:606 lib/includes/widgets.php:834
+msgid "Description"
+msgstr "Description"
+
+#: lib/includes/widgets.php:625
+msgid "Title Color"
+msgstr ""
+
+#: lib/includes/widgets.php:696
+msgid "Countdown"
+msgstr ""
+
+#: lib/includes/widgets.php:698
+msgid "An Optimizer widget to display a Countdown."
+msgstr "Un Widget Optimizer pour afficher un Compte à Rebours"
+
+#: lib/includes/widgets.php:712 lib/includes/widgets.php:813
+msgid "Minutes to Midnight"
+msgstr "Minutes avant Minuit"
+
+#: lib/includes/widgets.php:713 lib/includes/widgets.php:814
+msgid ""
+"Collaboratively administrate empowered markets via plug-and-play networks. "
+"Dynamically procrastinate B2C users after installed base benefits. "
+"Dramatically visualize customer directed convergence."
+msgstr ""
+
+#: lib/includes/widgets.php:840
+msgid "Set Countdown Date"
+msgstr "Définir Date Compte à Rebours"
+
+#: lib/includes/widgets.php:846
+msgid "Set Countdown Time"
+msgstr "Définir Temps Compte à Rebours"
+
+#: lib/includes/widgets.php:860
+msgid "Coundtown Style:"
+msgstr ""
+
+#: lib/includes/widgets.php:862
+msgid "Circle (Transparent)"
+msgstr ""
+
+#: lib/includes/widgets.php:863
+msgid "Circle (White)"
+msgstr ""
+
+#: lib/includes/widgets.php:864
+msgid "Circle (Black)"
+msgstr ""
+
+#: lib/includes/widgets.php:865
+msgid "Square (Transparent)"
+msgstr ""
+
+#: lib/includes/widgets.php:866
+msgid "Square (White)"
+msgstr ""
+
+#: lib/includes/widgets.php:867
+msgid "Square (Black)"
+msgstr ""
+
+#: lib/includes/widgets.php:868
+msgid "Skewed (Transparent)"
+msgstr ""
+
+#: lib/includes/widgets.php:869
+msgid "Skewed (White)"
+msgstr ""
+
+#: lib/includes/widgets.php:870
+msgid "Skewed (Black)"
+msgstr ""
+
+#: lib/includes/widgets.php:871
+msgid "Diamond (Transparent)"
+msgstr ""
+
+#: lib/includes/widgets.php:872
+msgid "Diamond (White)"
+msgstr ""
+
+#: lib/includes/widgets.php:873
+msgid "Diamond (Black)"
+msgstr ""
+
+#: lib/includes/widgets.php:962
+msgid "Social Bookmark"
+msgstr ""
+
+#: lib/includes/widgets.php:964
+msgid "An Optimizer Social widget to display your Social Follow Buttons."
+msgstr "Un Widget Sociaux Optimizer pour afficher vos Boutons Sociaux Abonnés."
+
+#: lib/includes/widgets.php:979
+msgid "Follow Us On"
+msgstr "Suivez-nous sur"
+
+#: lib/includes/widgets.php:1099
+msgid "Follow Text"
+msgstr "Texte Suivre"
+
+#: lib/includes/widgets.php:1104
+msgid "Icon Style:"
+msgstr "Style Icone :"
+
+#: lib/includes/widgets.php:1106
+msgid "Round"
+msgstr "Rond"
+
+#: lib/includes/widgets.php:1108
+msgid "Round (With Text)"
+msgstr "Rond (Avec Texte)"
+
+#: lib/includes/widgets.php:1109
+msgid "Square (With Text)"
+msgstr "Carré (Avec Texte)"
+
+#: lib/includes/widgets.php:1111
+msgid "Full (With Text)"
+msgstr ""
+
+#: lib/includes/widgets.php:1116
+msgid "Override Default Icons Color"
+msgstr "Outrepasser Couleurs Icones par Défaut"
+
+#: lib/includes/widgets.php:1120
+msgid ""
+"Pleace Your Social Links in the fields below and they will be auto detected:"
+msgstr ""
+
+#: lib/includes/widgets.php:1123
+msgid "Link 1 "
+msgstr ""
+
+#: lib/includes/widgets.php:1128
+msgid "Link 2 "
+msgstr ""
+
+#: lib/includes/widgets.php:1133
+msgid "Link 3 "
+msgstr ""
+
+#: lib/includes/widgets.php:1138
+msgid "Link 4 "
+msgstr ""
+
+#: lib/includes/widgets.php:1143
+msgid "Link 5 "
+msgstr ""
+
+#: lib/includes/widgets.php:1148
+msgid "Link 6 "
+msgstr ""
+
+#: lib/includes/widgets.php:1154
+msgid "Link 7 "
+msgstr ""
+
+#: lib/includes/widgets.php:1159
+msgid "Link 8 "
+msgstr ""
+
+#: lib/includes/widgets.php:1164
+msgid "Link 9 "
+msgstr ""
+
+#: lib/includes/widgets.php:1228
+msgid "An Instagram widget that let's you display your Instagram photos."
+msgstr "Un widget Instagram qui vous permet de montrer vos photos Instagram."
+
+#: lib/includes/widgets.php:1318
+msgid "Instagram user id number"
+msgstr "Numéro id utilisateur Instagram"
+
+#: lib/includes/widgets.php:1321
+msgid "Instagram Access Token"
+msgstr "Jeton d'Accès Instagram "
+
+#: lib/includes/widgets.php:1326
+msgid "Number of Photos"
+msgstr "Nombre de Photos"
+
+#: lib/includes/widgets.php:1344
+msgid "To Retrive your user id number and Access token, Please follow "
+msgstr ""
+
+#: lib/includes/widgets.php:1344
+msgid "This Instruction"
+msgstr ""
+
+#: lib/includes/widgets.php:1377
+msgid "This Widget lets you add Pinterest Pinboards"
+msgstr "Ce Widget vous permet d'ajouter des Pinboards Pinterest"
+
+#: lib/includes/widgets.php:1446
+msgid "Follow Me on Pinterest"
+msgstr "Suivez-moi sur Pinterest"
+
+#: lib/includes/widgets.php:1448
+msgid "More Pins"
+msgstr "Plus de Pins"
+
+#: lib/includes/widgets.php:1481
+msgid "Username:"
+msgstr "Nom d'utilisateur :"
+
+#: lib/includes/widgets.php:1496
+msgid "Number of Pins"
+msgstr "Nombre de Pins"
+
+#: lib/includes/widgets.php:1498
+msgid " (Max 25)"
+msgstr "(Max 25)"
+
+#: lib/includes/widgets.php:1503
+msgid "Open links in a new window?"
+msgstr "Ouvrir les liens dans une nouvelle fenêtre ?"
+
+#: optimizer-single-portfolio.php:128
+msgid "Previous"
+msgstr ""
+
+#: optimizer-single-portfolio.php:129
+msgid "Next"
+msgstr "Suivant"
+
+#: search.php:22
+#, php-format
+msgid "Search Results for: %s"
+msgstr "Résultats de la recherche pour : %s"
+
+#: search.php:25
+msgid "Total posts found - "
+msgstr "Nombre de postes trouvés -"
+
+#: template_parts/custom-javascript.php:188
+msgid "Name is Required!"
+msgstr "Nom Requis !"
+
+#: template_parts/custom-javascript.php:189
+msgid "Email is Required!"
+msgstr "Email Requis !"
+
+#: template_parts/custom-javascript.php:190
+msgid "Subject is Required!"
+msgstr "Sujet Requis !"
+
+#: template_parts/custom-javascript.php:191
+msgid "Your Message is Required!"
+msgstr "Votre Message est Requis !"
+
+#: template_parts/custom-javascript.php:192
+msgid "Please solve the math!"
+msgstr "Veuillez résoudre le calcul !"
+
+#: template_parts/head-type1.php:62
+msgid "Search..."
+msgstr "Recherche ..."
+
+#: template_parts/head-type1.php:111
+msgid "Menu"
+msgstr "Menu"
+
+#: template_parts/page-contact_template.php:25
+msgid "Human verification incorrect."
+msgstr "Vérification humaine incorrecte."
+
+#: template_parts/page-contact_template.php:26
+msgid "Please supply all information."
+msgstr "Veuillez fournir toutes les informations."
+
+#: template_parts/page-contact_template.php:27
+msgid "Email Address Invalid."
+msgstr "Adresse Email Invalide."
+
+#: template_parts/page-contact_template.php:28
+msgid "Message was not sent. Try Again."
+msgstr "Le message n'a pas été envoyé. Essayez encore."
+
+#: template_parts/page-contact_template.php:29
+msgid "Thanks! Your message has been sent."
+msgstr "Merci ! Votre message a été envoyé."
+
+#: template_parts/page-contact_template.php:37
+msgid "Someone Sent a Message From"
+msgstr "Quelqu'un a envoyé un message de"
+
+#: template_parts/page-contact_template.php:124
+msgid "Human Verification"
+msgstr "Vérification Humaine"
+
+#~ msgid "Autoplay"
+#~ msgstr "Lecture Automatique"
+
+#~ msgid "To Retrive your user id number and Access token"
+#~ msgstr "Afin de trouver votre numéro d'utilisateur et le jeton d'Accès"
+
+#~ msgid "Visit This Page"
+#~ msgstr "Visitez Cette Page"
+
+#~ msgid ""
+#~ " and click the <strong>Retrieve my details bro!</strong> button. You will "
+#~ "be directed to Instagram's authentication page where you will be required "
+#~ "to login. Once logged in, you will be redirected back. Your User ID/"
+#~ "Access Token will be shown there. "
+#~ msgstr ""
+#~ "et cliquez sur le bouton </ strong>Récupère mes détails, mec !<strong>. "
+#~ "Vous serez redirigé vers la page d'authentification d'Instagram où vous "
+#~ "devrez vous identifier. Une fois connecté, vous serez redirigé. Votre ID "
+#~ "Utilisateur / Jeton d'Accès vous y sera montré."
+
+#~ msgid "Submit to"
+#~ msgstr "Soumettre à"
+
+#~ msgid "&diams; Video Section"
+#~ msgstr "&diams; Section Vidéo"
+
+#~ msgid "Flickr Photo Widget*"
+#~ msgstr "Widget Photo Flickr*"
+
+#~ msgid "Facebook Likebox Widget*"
+#~ msgstr "Widget Likebox Facebook*"
+
+#~ msgid "Google + Followers Widget*"
+#~ msgstr "Widget Abonnés Google +*"
+
+#~ msgid "Biography Widget*"
+#~ msgstr "Widget Biographie*"
+
+#~ msgid "Countdown Widget*"
+#~ msgstr "Widget Compte à Rebours"
+
+#~ msgid "Social Bookmark Widget*"
+#~ msgstr "Widget Marque Page Sociaux*"
+
+#~ msgid "Instagram Widget*"
+#~ msgstr "Widget Instagram*"
+
+#~ msgid "Pinterest Widget *"
+#~ msgstr "Widget Pinterest*"
+
+#~ msgid "Google Plus"
+#~ msgstr "Google Plus"
+
+#~ msgid "Youtube"
+#~ msgstr "Youtube"
+
+#~ msgid "Flickr"
+#~ msgstr "Flickr"
+
+#~ msgid "Linkedin"
+#~ msgstr "Linkedin"
+
+#~ msgid "Tumblr"
+#~ msgstr "Tumblr"
