@@ -902,6 +902,7 @@ background-size: cover;
 .robo_gallery .rbs-img-container div a:focus,
 .robo_gallery .rbs-img-container div a:hover{
 	border-bottom: none;
+	background-color: none;
 }
 	
 .rbs_gallery_button_bottom .rbs-imges-no-more-entries{

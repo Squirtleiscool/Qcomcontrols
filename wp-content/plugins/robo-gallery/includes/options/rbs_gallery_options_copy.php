@@ -1,7 +1,7 @@
 <?php
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 
@@ -24,7 +24,7 @@ if( get_option( ROBO_GALLERY_PREFIX.'cloneBlock', 0 ) && !get_post_meta( $id,  R
 
 
 $type = rbsGalleryUtils::getTypeGallery();
-if($type!='grid') return ;
+//if($type!='grid') return ;
 
 $copy_group = new_cmb2_box( array(
     'id' 			=> ROBO_GALLERY_PREFIX . 'copy_metabox',
@@ -42,7 +42,7 @@ $copy_group->add_field(array(
     'id'   => ROBO_GALLERY_PREFIX . 'options', 
     'type' => 'rbsgallery',
 	'bootstrap_style'=> 1,
-	'default'		=> -1,
+	'default'		=> 0,
     'before_row' 	=> '
 <div class="rbs_block"><br/>',
 	'after_row'		=> '

@@ -1,7 +1,7 @@
 <?php
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 
@@ -113,20 +113,19 @@ function create_post_type_robo_gallery() {
           'show_in_menu'	=> true,
           'menu_position'	=> 10,
 
+          'show_in_rest'       => true,
+    	'rest_base'          => 'robogallery',
+
     /*'publicly_queryable' => true,
     'show_ui'            => true,
     
     'query_var'          => true,    
     'capability_type'    => 'post',
       
-    'show_in_rest'       => true,
-    'rest_base'          => 'robogallery',
+    
     'rest_controller_class' => 'WP_REST_Posts_Controller',*/
     );
     
-    
-    
-
 
     register_post_type( ROBO_GALLERY_TYPE_POST, $args);
 
@@ -170,7 +169,11 @@ rbs_gallery_include('cache.php', ROBO_GALLERY_INCLUDES_PATH);
 if(!function_exists('rbs_gallery_main_init')){
     function rbs_gallery_main_init() {
 
-		if( rbs_gallery_get_current_post_type() == ROBO_GALLERY_TYPE_POST && ( rbs_gallery_is_edit_page('new') || rbs_gallery_is_edit_page('edit') ) ){
+		if( 
+			rbs_gallery_get_current_post_type() == ROBO_GALLERY_TYPE_POST && 
+			( rbs_gallery_is_edit_page('new') || rbs_gallery_is_edit_page('edit') ) &&
+			rbsGalleryUtils::getTypeGallery() != 'slider'
+		){
 
 		    // Adding the Metabox class
 		    rbs_gallery_include('init.php', ROBO_GALLERY_CMB_PATH);

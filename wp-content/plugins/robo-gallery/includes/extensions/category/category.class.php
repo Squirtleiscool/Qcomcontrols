@@ -52,7 +52,7 @@ class ROBO_GALLERY_CATEGORY{
     public function addMetaBox(){
         add_meta_box(
             'hierarchy-post-attributes-metabox',
-            '<span class="dashicons dashicons-feedback"></span> '.__('Categories'),
+            __('Categories'),
             array($this, 'metaBoxAttributes'),
             $this->postType,
             'side',
@@ -65,7 +65,6 @@ class ROBO_GALLERY_CATEGORY{
 
         $screen = get_current_screen();
         if ($this->postType !== $screen->post_type) {
-
             return;
         }
 

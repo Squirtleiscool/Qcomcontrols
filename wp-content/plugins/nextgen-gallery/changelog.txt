@@ -1,6 +1,12 @@
 NextGEN Gallery
 by Imagely
 
+= V3.9.3 - 04.20.2021
+* Changed: Updated uppy.js
+* Fixed:   Conflict with Avada builder
+* Fixed:   ACG fields cannot be toggled
+* Fixed:   Activation issues with NextGEN Starter
+
 = V3.9.2 - 04.07.2021
 * Fixed:   call_user_func() warning when rendering shortcodes in widgets (1168)
 * Fixed:   do_shortcode and legacy shortcodes (1170)
@@ -8,7 +14,7 @@ by Imagely
 * Fixed:   Tooltips are illegible (1172)
 * Fixed:   PHP foreach warning (1173)
 
-= V3.9.1 - 03.29.2020 = 
+= V3.9.1 - 03.29.2021 = 
 * Fixed:   C_Dynamic_Stylesheet_Controller error
 * Fixed:   Galleries not displaying
 

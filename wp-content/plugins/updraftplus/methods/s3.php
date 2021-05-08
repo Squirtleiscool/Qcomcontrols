@@ -1015,12 +1015,11 @@ class UpdraftPlus_BackupModule_s3 extends UpdraftPlus_BackupModule {
 	 * Look at the config, and decide whether or not to call self::use_dns_bucket_name()
 	 *
 	 * @param Object $storage S3 Name
-	 * @param Array	 $config
+	 * @param Array	 $config  an array of specific options for particular S3 remote storage module
 	 *
 	 * @return Boolean - looking use_dns_bucket_name(), this should apparently always be true
 	 */
 	protected function maybe_use_dns_bucket_name($storage, $config) {
-	
 		if ('s3' === $config['key']) return $this->use_dns_bucket_name($storage, '');
 		return true;
 	}
@@ -1080,9 +1079,8 @@ class UpdraftPlus_BackupModule_s3 extends UpdraftPlus_BackupModule {
 				// We want to distinguish between an empty region (null), and an exception or missing bucket (false)
 				if (empty($region) && false !== $region) $region = null;
 			} catch (Exception $e) {
-			
 				$region = false;
-			
+		
 				// On this 'first try', we trap this particular condition. So, whatever S3 network call it happens on, we'll eventually get it here on the resumption.
 				if (false !== strpos($e->getMessage(), 'The provided token has expired')) {
 				
@@ -1119,9 +1117,7 @@ class UpdraftPlus_BackupModule_s3 extends UpdraftPlus_BackupModule {
 							}
 						}
 					}
-				
 				}
-			
 				
 			}
 			$storage->setExceptions(false);
@@ -1176,7 +1172,7 @@ class UpdraftPlus_BackupModule_s3 extends UpdraftPlus_BackupModule {
 		
 		// For a region-less S3 system, we set this to true so that we can carry on trying anyway, since the behaviour of different S3-compatible systems can vary. e.g. DigitalOcean spaces API keys allow you to create a bucket.
 		if ('n/a' == $region) $bucket_exists = true;
-		
+
 		if ($bucket_exists) {
 			if ('s3' != $config['key'] && 'updraftvault' != $config['key']) {
 				if (!$endpoint || 's3generic' != $config['key']) $this->set_region($storage, $endpoint, $bucket);
@@ -1237,6 +1233,19 @@ class UpdraftPlus_BackupModule_s3 extends UpdraftPlus_BackupModule {
 				echo $msg."\n";
 			}
 			return;
+		}
+
+		if (method_exists($storage, 'useDNSBucketName')) {
+			if (!empty($posted_settings['bucket_access_style']) && 'virtual_host_style' === $posted_settings['bucket_access_style']) {
+				// due to the merge of S3-generic bucket access style MR on March 2021, if virtual-host bucket access style is selected, connecting to an amazonaws bucket location where the user doesn't have an access to it will throw an S3 InvalidRequest exception. It requires the signature to be set to version 4
+				if (!is_a($storage, 'UpdraftPlus_S3_Compat') && preg_match('/\.amazonaws\.com$/i', $endpoint)) {
+					$this->use_v4 = true;
+					$storage->setSignatureVersion('v4');
+				}
+				$storage->useDNSBucketName(true, $bucket);
+			} else {
+				$storage->useDNSBucketName(false, $bucket);
+			}
 		}
 
 		list($storage, $config, $bucket_exists, $region) = $this->get_bucket_access($storage, $config, $bucket, $path, $endpoint);

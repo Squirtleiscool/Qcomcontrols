@@ -1,7 +1,7 @@
 <?php 
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 

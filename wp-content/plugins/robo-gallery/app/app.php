@@ -2,7 +2,7 @@
 
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 
@@ -12,8 +12,8 @@
  */
 
 
-
 /* classes */
+include_once ROBO_GALLERY_APP_PATH.'class.restapi.php';
 /*include_once ROBO_GALLERY_APP_PATH.'class.helper.php';*/
 include_once ROBO_GALLERY_APP_PATH.'class.view.php';
 include_once ROBO_GALLERY_APP_PATH.'class.brand.php';

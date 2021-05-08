@@ -2399,3 +2399,4 @@ body .lay4 .post_image, .lay4 .post_content{ width:100%;}
 .boximage {width: 48%; float: left;}
 .boxtext {padding: 70px 0;}
 .menu-mainmenu-container {text-align: center;}
+#footer .widgets .widget { width: 100%!important; )

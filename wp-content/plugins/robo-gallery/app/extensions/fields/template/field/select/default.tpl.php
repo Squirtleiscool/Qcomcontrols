@@ -18,10 +18,10 @@
 		    name="<?php echo $name; ?>"
 		    data-dependents='<?php echo $dependents; ?>' >
 		<?php foreach ($options['values'] as $optionValue => $optionLabel) : ?>
-			<option 
+			<option 			
 				value="<?php echo $optionValue; ?>" 
 				<?php if ($optionValue == $value) { echo 'selected'; } ?>
-				 <?php if (is_array($options['disabled']) && in_array($optionValue, $options['disabled']) ) { echo 'disabled'; } ?>
+				 <?php if (!empty($options['disabled']) && is_array($options['disabled']) && in_array($optionValue, $options['disabled']) ) { echo 'disabled'; } ?>
 			>
 				<?php echo $optionLabel; ?>
 			</option>

@@ -123,7 +123,7 @@ class M_NextGen_AddGallery_Page extends C_Base_Module
                 'uppy',
                 $router->get_static_url($add_gallery_page_id . '#uppy/uppy.min.js'),
                 [],
-                '1.21.1'
+                '1.27.0'
             );
             wp_register_style(
                 'uppy',

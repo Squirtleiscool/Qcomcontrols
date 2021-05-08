@@ -231,13 +231,18 @@ abstract class UpdraftPlus_BackupModule {
 			{{/if}}
 			<?php
 			do_action('updraftplus_config_print_before_storage', $this->get_id(), $this);
-			do_action('updraftplus_config_print_add_conditional_logic', $this->get_id(), $this);
+			if ('updraftvault' !== $this->get_id()) do_action('updraftplus_config_print_add_conditional_logic', $this->get_id(), $this);
 			if ($this->supports_feature('multi_storage')) {
 				do_action('updraftplus_config_print_add_instance_label', $this->get_id(), $this);
 			}
 
 			$template = ob_get_clean();
 			$template .= $this->get_configuration_template();
+			if ('updraftvault' === $this->get_id()) {
+				ob_start();
+				do_action('updraftplus_config_print_add_conditional_logic', $this->get_id(), $this);
+				$template .= ob_get_clean();
+			}
 		} else {
 			do_action('updraftplus_config_print_before_storage', $this->get_id(), $this);
 			do_action('updraftplus_config_print_add_conditional_logic', $this->get_id(), $this);

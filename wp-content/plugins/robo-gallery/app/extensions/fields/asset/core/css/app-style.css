@@ -2770,41 +2770,37 @@ body.roboGalleryFields #wpcontent div.roboGalleryFields .checkIcon .dashicons{
 	color: green;
 }
 
-body.roboGalleryFields #wpcontent div.roboGalleryFields .checkIcon.ape-gallery-field-theme-default-current .dashicons{
- 	float:left;
- 	margin-left: -33px;
- 	margin-bottom: -12px;
- 	margin-top: -10px;
-}
-body.roboGalleryFields #wpcontent div.roboGalleryFields .ape-gallery-field-theme-default-current .desc{
-	padding-top: 10px;
-	font-weight: bold;
+
+/*  ShortCode */
+
+body.roboGalleryFields #wpcontent div.roboGalleryFields .robo-gallery-shortcode {
+ text-align: center;
+ font-weight: bolder;
+ font-style: normal;
+ color: black;
+ padding: 10px;
+ border: 2px solid  silver;
+ margin-top: 15px;
+ margin-left: -10px;
+ margin-right: -10px;
+ font-weight: bold;
+ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
-/* Theme Available Block  */
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable{
-	text-align: center;
-}
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable .desc{
-	font-weight: bold;
-	font-size: 14px;
-	padding: 10px 20px 10px 10px;
-}
-
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable .theme_images img{
-	max-width: 100px;
-	padding-right: 15px;
-}
-
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable .theme_images a:hover,
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable .theme_images a:focus,
-body.roboGalleryFields #wpcontent div.roboGalleryFields #wroboGalleryThemeAvailable .theme_images a:active{
-	box-shadow: none; 
+body.roboGalleryFields #wpcontent div.roboGalleryFields .robo-gallery-shortcode-desc {
+ text-align: center;
+ padding-bottom: 5px !important;
+ padding-top: 5px !important;
+ color: #3c434a;
+ font-size: 13px;
+ margin-left: -10px;
+ margin-right: -10px;
+ font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
 }
 
 
 
-/* theme type block */
+/* Gallery   type block */
 body.roboGalleryFields #wpcontent div.roboGalleryFields #roboGalleryThemeTypeDiv:parent{	}
 body.roboGalleryFields #wpcontent div.roboGalleryFields #roboGalleryThemeTypeDiv{
 	text-align: justify;

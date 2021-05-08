@@ -126,6 +126,9 @@
             const uppy = Uppy.Core(uppyCoreSettings)
                 .use(Uppy.Dashboard, NggUppyDashboardSettings)
                 .use(Uppy.XHRUpload, uppyXHRSettings)
+                .use(Uppy.DropTarget, {
+                    target: document.body
+                })
                 .on('file-added', (file) => {
                         // If this is run right away the upload button won't yet exist and can't be found to disable it
                         setTimeout(() => {

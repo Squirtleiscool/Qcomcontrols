@@ -44,7 +44,7 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 	 */
 	public function get_supported_features() {
 		// This options format is handled via only accessing options via $this->get_options()
-		return array('multi_options', 'config_templates');
+		return array('multi_options', 'config_templates', 'conditional_logic');
 	}
 	
 	/**
@@ -651,7 +651,11 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 	 */
 	public function ajax_vault_disconnect($echo_results = true) {
 		$vault_settings = $this->get_options();
-		$this->set_options(array(), true);
+		$frontend_settings_keys = array_flip($this->filter_frontend_settings_keys());
+		foreach ((array) $frontend_settings_keys as $key => $val) {
+			$frontend_settings_keys[$key] = ($key === 'last_config') ? array() : '';
+		}
+		$this->set_options(array_merge($frontend_settings_keys, $this->get_default_options()), true);
 		global $updraftplus;
 
 		delete_transient('udvault_last_config');
@@ -812,5 +816,38 @@ class UpdraftPlus_BackupModule_updraftvault extends UpdraftPlus_BackupModule_s3 
 
 		return true;
 
+	}
+
+	/**
+	 * Acts as a WordPress options filter
+	 *
+	 * @param  Array $updraftvault - An array of UpdraftVault options
+	 * @return Array - the set of updated UpdraftVault settings
+	 */
+	public function options_filter($updraftvault) {
+		// Get the current options (and possibly update them to the new format)
+		$opts = UpdraftPlus_Storage_Methods_Interface::update_remote_storage_options_format('updraftvault');
+		
+		if (is_wp_error($opts)) {
+			if ('recursion' !== $opts->get_error_code()) {
+				$msg = "(".$opts->get_error_code()."): ".$opts->get_error_message();
+				$this->log($msg);
+				error_log("UpdraftPlus: $msg");
+			}
+			// The saved options had a problem; so, return the new ones
+			return $updraftvault;
+		}
+		
+		// If the input is either empty or not as expected, then return the current options
+		if (!isset($updraftvault['settings']) || !is_array($updraftvault['settings']) || empty($updraftvault['settings'])) return $opts;
+		
+		foreach ($updraftvault['settings'] as $instance_id => $storage_options) {
+			if (!isset($opts['settings'][$instance_id])) continue;
+			foreach ($storage_options as $storage_key => $storage_value) {
+				$opts['settings'][$instance_id][$storage_key] = $storage_value;
+			}
+		}
+
+		return $opts;
 	}
 }

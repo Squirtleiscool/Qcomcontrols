@@ -3,7 +3,7 @@
 Plugin Name: Robo Gallery
 Plugin URI: https://robosoft.co/gallery
 Description: Gallery modes photo gallery, images gallery, video gallery, Polaroid gallery, gallery lighbox, portfolio gallery, responsive gallery
-Version: 3.0.5
+Version: 3.0.7
 Author: RoboSoft
 Author URI: https://robosoft.co/gallery
 License: GPLv3 or later
@@ -14,7 +14,7 @@ Domain Path: /languages
 if( !defined('WPINC') ) die;
 if( !defined("ABSPATH") ) exit;
 
-define("ROBO_GALLERY_VERSION", 				'3.0.5' ); 
+define("ROBO_GALLERY_VERSION", 				'3.0.7' ); 
 
 
 define("ROBO_GALLERY", 						1 );

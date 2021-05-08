@@ -528,8 +528,6 @@ class Updraft_Restorer {
 		$backup_set = $this->ud_backup_set;
 		
 		$services = isset($backup_set['service']) ? $updraftplus->get_canonical_service_list($backup_set['service']) : array();
-
-		$entities_to_download = $this->get_entities_to_download($entities_to_restore);
 		
 		$backupable_entities = $updraftplus->get_backupable_file_entities(true, true);
 		
@@ -547,7 +545,7 @@ class Updraft_Restorer {
 		
 		// Get an ordered list of things to restore
 		// This requires the global $updraft_restorer to be set up
-		$second_loop = $this->ensure_restore_files_present($entities_to_download, $backupable_entities, $services);
+		$second_loop = $this->ensure_restore_files_present($entities_to_restore, $backupable_entities, $services);
 		
 		if (!is_array($second_loop)) return $second_loop;
 		
@@ -2224,11 +2222,11 @@ class Updraft_Restorer {
 					if (!empty($updraftplus_addons_migrator->new_blogid)) switch_to_blog($updraftplus_addons_migrator->new_blogid);
 
 					if ('' == $this->old_siteurl) {
-						$this->old_siteurl = untrailingslashit($wpdb->get_row("SELECT option_value FROM $wpdb->options WHERE option_name='siteurl'")->option_value);
+						$this->old_siteurl = untrailingslashit($wpdb->get_row("SELECT option_value FROM ".$import_table_prefix.'options'." WHERE option_name='siteurl'")->option_value);
 						do_action('updraftplus_restore_db_record_old_siteurl', $this->old_siteurl);
 					}
 					if ('' == $this->old_home) {
-						$this->old_home = untrailingslashit($wpdb->get_row("SELECT option_value FROM $wpdb->options WHERE option_name='home'")->option_value);
+						$this->old_home = untrailingslashit($wpdb->get_row("SELECT option_value FROM ".$import_table_prefix.'options'." WHERE option_name='home'")->option_value);
 						do_action('updraftplus_restore_db_record_old_home', $this->old_home);
 					}
 					if ('' == $this->old_content) {
@@ -2465,7 +2463,12 @@ class Updraft_Restorer {
 
 		$updraftplus->log($logline);
 		$updraftplus->log($print_line, 'notice-restore');
-		$this->original_table_name = UpdraftPlus_Manipulation_Functions::str_replace_once($this->import_table_prefix, $this->final_import_table_prefix, $this->new_table_name);
+		// If this is a non wp table we don't want to replace our temp prefix with the final prefix, we need to drop our prefix
+		if ($non_wp_table) {
+			$this->original_table_name = UpdraftPlus_Manipulation_Functions::str_replace_once($this->import_table_prefix, '', $this->new_table_name);
+		} else {
+			$this->original_table_name = UpdraftPlus_Manipulation_Functions::str_replace_once($this->import_table_prefix, $this->final_import_table_prefix, $this->new_table_name);
+		}
 		$this->restoring_table = $this->new_table_name;
 		if ($charset_change_message) $updraftplus->log($charset_change_message, 'notice-restore');
 		if ($constraint_change_message) $updraftplus->log($constraint_change_message, 'notice-restore');
@@ -2727,7 +2730,7 @@ class Updraft_Restorer {
 		}
 
 		// If this is not a dummy restore or not importing a single site into a multisite and we can rename and drop tables then change the import prefix and proceed with atomic restore
-		if (!$this->rename_forbidden && !$this->is_dummy_db_restore && !isset($this->restore_options['updraftplus_migrate_blogname'])) {
+		if (!$this->rename_forbidden && !$this->is_dummy_db_restore && !isset($this->restore_options['updraftplus_migrate_blogname']) && empty($this->ud_foreign)) {
 			add_filter('updraftplus_restore_table_prefix', array($this, 'updraftplus_random_restore_table_prefix'));
 			$import_table_prefix = isset($this->continuation_data['temp_import_table_prefix']) ? $this->continuation_data['temp_import_table_prefix'] : apply_filters('updraftplus_restore_table_prefix', $this->final_import_table_prefix);
 			$this->import_table_prefix = $import_table_prefix;

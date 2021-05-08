@@ -109,11 +109,11 @@ class M_Gallery_Display extends C_Base_Module
                 if ((defined('NGG_SKIP_LOAD_SCRIPTS') && NGG_SKIP_LOAD_SCRIPTS) || $this->is_rest_request() || empty($post->post_content))
                     continue;
 
-                preg_match_all('/' . get_shortcode_regex() . '/', $post->post_content, $matches, PREG_SET_ORDER);
-
                 $manager = C_NextGen_Shortcode_Manager::get_instance();
                 $ngg_shortcodes = $manager->get_shortcodes();
                 $shortcode_keys = array_keys($ngg_shortcodes);
+
+                preg_match_all('/' . get_shortcode_regex($shortcode_keys) . '/', $post->post_content, $matches, PREG_SET_ORDER);
 
                 foreach ($matches as $shortcode) {
                     // Only process our 'ngg' shortcodes

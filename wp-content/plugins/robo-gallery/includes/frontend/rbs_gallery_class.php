@@ -1,7 +1,7 @@
 <?php
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 
@@ -17,7 +17,8 @@ require_once ROBO_GALLERY_FRONTEND_MODULES_PATH.'core.php';
 class roboGallery{
 
  	public $id = 0;
- 	public $options_id = 0; 	
+ 	public $options_id = 0;
+ 	public $gallery_type = 'grid';
  	public $galleryId = '';	
 
  	public $returnHtml = '';
@@ -32,19 +33,29 @@ class roboGallery{
  
  		if (defined('DOING_AJAX') && DOING_AJAX) $this->isAjaxCall = true;
  		
- 		if( !is_array($attr) || !isset($attr['id']) ) return ;
- 			
+ 		if( !is_array($attr) || !isset($attr['id']) ) return ; 		
+
  		$this->attr = $attr;
- 		$this->galleryId 	= 'rbs_gallery_'.uniqid();	
+ 		$this->galleryId = 'rbs_gallery_'.uniqid();	
 		$this->id = $attr['id'];
+		$this->initTypeGallery();
 		$this->initOptionId();
 		$this->core = new roboGalleryModuleCore( $this );
 		$this->core->runEvent('gallery.init');
  	}
 
- 	private function initOptionId(){ 		
-		$this->options_id = (int) get_post_meta( $this->id, ROBO_GALLERY_PREFIX.'options', true );
-		if( !$this->options_id ) $this->options_id = $this->id;		
+ 	private function initTypeGallery(){ 		
+ 		if( $gallery_type = get_post_meta( $this->id, ROBO_GALLERY_PREFIX.'gallery_type', true ) ){
+ 			$this->gallery_type = $gallery_type;
+ 		} else {
+ 			echo 'empty type gallery ';
+ 		}
+ 	}
+
+ 	private function initOptionId(){ 
+ 		$this->options_id = $this->id;
+ 		$option_id = (int) get_post_meta( $this->id, ROBO_GALLERY_PREFIX.'options', true );
+  		if( $option_id > 0  ) $this->options_id = $option_id;		
  	}
 
  	public function getGallery( ){
@@ -52,11 +63,10 @@ class roboGallery{
  		if( !$this->id ) return '';
  		$this->returnHtml = '';
  
- 		if( $this->returnHtml = $this->core->renderBlock('gallery.render.begin.before') ) return $this->returnHtml;
- 		
+ 		if( $this->returnHtml = $this->core->renderBlock('gallery.render.begin.before') ) return $this->returnHtml; 		
 
- 		$this->core->runEvent('gallery.render.begin');		
- 		 		
+ 		$this->core->runEvent('gallery.render.begin');
+ 		
  		$this->core->jsOptions->setValue( 'mainContainer', '#robo_gallery_main_block_'.$this->galleryId );
  		$this->core->jsOptions->setValue( 'wrapContainer', '#robo-gallery-wrap-'.$this->galleryId );
 
@@ -68,7 +78,7 @@ class roboGallery{
 
 		$this->core->runEvent('gallery.block.after');
 
-		$this->core->runEvent('gallery.render.end');		
+		$this->core->runEvent('gallery.render.end');
 		
 		return $this->returnHtml;
  	}
@@ -80,7 +90,7 @@ class roboGallery{
 
 
  	private function showEmptyMessage(){
- 		switch ( $this->core->getMeta('gallery_type')  ) {
+ 		switch ( $this->gallery_type ) {
 			case 'youtubepro':
 			case 'youtube':
 				return $this->showEmptyMessageVideo();

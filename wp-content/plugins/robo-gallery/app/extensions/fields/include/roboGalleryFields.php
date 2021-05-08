@@ -1,7 +1,7 @@
 <?php
 /* 
 *      Robo Gallery     
-*      Version: 3.0.5 - 66649
+*      Version: 3.0.7 - 90614
 *      By Robosoft
 *
 *      Contact: https://robosoft.co/robogallery/ 
@@ -74,7 +74,8 @@ class roboGalleryFields{
 		wp_localize_script( ROBO_GALLERY_ASSETS_PREFIX.'help', ROBO_GALLERY_PREFIX.'fields_help_i18', $translation_array );
 */
 		//fields
-			// youtube
+
+		// youtube
 		wp_enqueue_script( ROBO_GALLERY_ASSETS_PREFIX.'-field-type-youtube', ROBO_GALLERY_FIELDS_URL.'asset/fields/youtube/script.js', array(), ROBO_GALLERY_VERSION, false);
 		wp_enqueue_style ( ROBO_GALLERY_ASSETS_PREFIX.'-field-type-youtube', ROBO_GALLERY_FIELDS_URL.'asset/fields/youtube/style.css', array( ), '' );
 

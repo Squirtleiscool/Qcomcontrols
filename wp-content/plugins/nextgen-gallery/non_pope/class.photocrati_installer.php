@@ -89,9 +89,9 @@ if (!class_exists('C_Photocrati_Installer'))
 		static function uninstall($product, $hard=FALSE)
 		{
 			$handler = self::get_handler_instance($product);
-			if (method_exists($handler, 'uninstall')) return $handler->uninstall($hard);
+			if ($handler && method_exists($handler, 'uninstall')) return $handler->uninstall($hard);
 
-			if ($hard) {
+			if ($handler && $hard) {
 				C_NextGen_Settings::get_instance()->destroy();
                 C_NextGen_Global_Settings::get_instance()->destroy();
 			}

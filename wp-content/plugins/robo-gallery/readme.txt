@@ -4,7 +4,7 @@ Donate link: https://robosoft.co/robogallery
 Tags: gallery, photo gallery, image gallery, wordpress gallery plugin, responsive gallery
 Requires at least: 3.3
 Tested up to: 5.7
-Stable tag: 3.0.5
+Stable tag: 3.0.7
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -104,6 +104,7 @@ This interface button have wide range of the front end interface customization o
 *   **Cache** - incredible new super cache option make your page load ten time faster. This function use absolutely new model of the images load. When you enable cache for big size gallery it's gonna be much faster and effective to use our plugin. Your visitors will be really surprised by the speed of the page load.
 *   **Support Videos** - every image have option where possible to define video link for every particular picture.
 *   **Elementor Block** - in Elementor page bulder you can use build-in Elementor block in our plugin.
+*   **Slider** - possible to create image slider with mobile friendly interface and support of the touch screen devices. In slideshow mode you can upload photos to the image slideshow and configure differnet interface elements to navigate between slided. Possible to create unlimited amount photos sliders with different text on description panel. You can use title, caption or photo description as text source for every slide of the image slider.
 
 
 
@@ -234,6 +235,18 @@ Plugin implemented in native Wordpress style. All code implemented based on Word
 If any problem occurs, please contact us.
 
 == Changelog ==
+
+= 3.0.7 =
+*  Fix gallery version
+
+= 3.0.6 =
+*  New free image slider theme
+*  Added clone function to masonry, mosaic, youtube, polaroid types
+*  Fix of the link and buttons in masonry
+*  Fix of the aligment 
+*  Fix of the new dialog interface
+*  Fix menu and categories
+*  Fix of the search text management
 
 = 3.0.5 =
 *  Tested up to Wordpress 5.7 version
@@ -611,6 +624,5 @@ If any problem occurs, please contact us.
 
 == Upgrade Notice ==
 
-= 3.0.5 =
-Tested up to Wordpress 5.7 version
-Fixed few mosaic and wall style themes
+= 3.0.7 =
+*  Fix gallery version

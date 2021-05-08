@@ -1,9 +1,9 @@
 === WordPress Gallery Plugin - NextGEN Gallery ===
 Contributors: photocrati, imagely
 Tags: wordpress gallery plugin, gallery, nextgen, nextgen gallery, photo gallery, image gallery, photography, slideshow, images, photo, photo album, watermark
-Requires at least: 5.5.0
-Stable tag: 3.9.2
-Tested up to: 5.7.0
+Requires at least: 5.5.4
+Stable tag: 3.9.3
+Tested up to: 5.7.1
 License: GPLv3
 Requires PHP: 5.6
 
@@ -179,6 +179,12 @@ For more information, feel free to visit the official website for the NextGEN Ga
 
 == Changelog ==
 
+= V3.9.3 - 04.20.2021
+* Changed: Updated uppy.js
+* Fixed:   Conflict with Avada builder
+* Fixed:   ACG fields cannot be toggled
+* Fixed:   Activation issues with NextGEN Starter
+
 = V3.9.2 - 04.07.2021
 * Fixed:   call_user_func() warning when rendering shortcodes in widgets (1168)
 * Fixed:   do_shortcode and legacy shortcodes (1170)
@@ -186,7 +192,7 @@ For more information, feel free to visit the official website for the NextGEN Ga
 * Fixed:   Tooltips are illegible (1172)
 * Fixed:   PHP foreach warning (1173)
 
-= V3.9.1 - 03.29.2020 = 
+= V3.9.1 - 03.29.2021 = 
 * Fixed:   C_Dynamic_Stylesheet_Controller error
 * Fixed:   Galleries not displaying
 

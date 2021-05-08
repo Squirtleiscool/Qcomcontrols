@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '8d386c025b5058bf8c9619a06df079d7c0794aec',
+    'reference' => '0e226d1d0b3027e276a6a5059de1b4808692bd3d',
     'name' => 'updraftplus/updraftplus',
   ),
   'versions' => 
@@ -321,7 +321,16 @@
       'aliases' => 
       array (
       ),
-      'reference' => '8d386c025b5058bf8c9619a06df079d7c0794aec',
+      'reference' => '0e226d1d0b3027e276a6a5059de1b4808692bd3d',
+    ),
+    'vakata/jstree' => 
+    array (
+      'pretty_version' => 'dev-3.3.12-rc.0-distributable',
+      'version' => 'dev-3.3.12-rc.0-distributable',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '9342b0a31b0abd126f2e201a4318328f25673249',
     ),
   ),
 );

@@ -79,8 +79,7 @@ class C_Ngg_Post_Thumbnails
     function enqueue_post_thumbnails()
     {
         add_thickbox();
-        global $wp_scripts;
-        wp_enqueue_script('ngg-post-thumbnails', C_Router::get_instance()->get_static_url(NEXTGEN_BLOCK . '#build/post-thumbnail.min.js'), ['lodash', 'wp-element', 'wp-data', 'wp-editor', 'wp-components', 'wp-i18n', 'post', 'photocrati_ajax'], NGG_PLUGIN_VERSION);
+        wp_enqueue_script('ngg-post-thumbnails', C_Router::get_instance()->get_static_url(NEXTGEN_BLOCK . '#build/post-thumbnail.min.js'), ['lodash', 'wp-element', 'wp-data', 'wp-editor', 'wp-components', 'wp-i18n', 'photocrati_ajax'], NGG_PLUGIN_VERSION);
         wp_localize_script('ngg-post-thumbnails', 'ngg_featured_image', ['modal_url' => admin_url("/media-upload.php?post_id=%post_id%&type=image&tab=nextgen&from=block-editor&TB_iframe=true")]);
         if (preg_match("/media-upload\\.php/", $_SERVER['REQUEST_URI']) && $_GET['tab'] == 'nextgen') {
             wp_add_inline_style('wp-admin', "#media-upload-header {display: none; }");

@@ -4787,6 +4787,12 @@ class UpdraftPlus {
 			return array($mess, $warn, $err, $info);
 		}
 
+		// If the backup is not from UpdraftPlus and it's not a simple SQL file then we don't want to scan
+		if (!empty($backup['meta_foreign']) && 'genericsql' != $backup['meta_foreign']) {
+			$info['skipped_db_scan'] = 1;
+			return array($mess, $warn, $err, $info);
+		}
+
 		$is_plain = ('.gz' == substr($db_file, -3, 3)) ? false : true;
 
 		$dbhandle = $is_plain ? fopen($db_file, 'r') : UpdraftPlus_Filesystem_Functions::gzopen_for_read($db_file, $warn, $err);
@@ -4978,6 +4984,9 @@ class UpdraftPlus {
 					if (in_array($table, $wanted_tables)) {
 						$wanted_tables = array_diff($wanted_tables, array($table));
 					}
+				}
+				if (empty($old_siteurl) && !empty($backup['meta_foreign'])) {
+					$info['migration'] = true;
 				}
 				if (';' != substr($buffer, -1, 1)) {
 					$processing_create = true;
@@ -5199,7 +5208,12 @@ class UpdraftPlus {
 			$php_max_input_vars_exceeded = true;
 		} elseif (count($tables_found) >= 0.90 * $php_max_input_vars) {
 			$php_max_input_vars_exceeded = true;
+			// If the amount of tables exceed 90% of the php max input vars then truncate the list to 50% of the php max input vars value
+			$tables_found = array_splice($tables_found, 0, $php_max_input_vars / 2);
 		}
+
+		$php_max_input_vars_value = false == $php_max_input_vars ? 0 : $php_max_input_vars;
+		$info['php_max_input_vars'] = $php_max_input_vars_value;
 		
 		// On UD 1.16.30 - 1.16.34 there was a serious bug that did not backup all content in composite key tables, if this is not a migration and the backup was created on one of these versions do not restore this table.
 		$skip_composite_tables = (!empty($info['created_by_version']) && version_compare("1" . substr($info['created_by_version'], 1), '1.16.30', '>=') && version_compare("1" . substr($info['created_by_version'], 1), '1.16.34', '<=')) ? true : false;
