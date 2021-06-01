@@ -99,54 +99,64 @@ class M_Gallery_Display extends C_Base_Module
 
 	function enqueue_frontend_resources()
     {
-        global $post;
+        if ((defined('NGG_SKIP_LOAD_SCRIPTS') && NGG_SKIP_LOAD_SCRIPTS) || $this->is_rest_request())
+            return;
 
-        if (have_posts())
-        {
-            while (have_posts()) {
-                the_post();
+        // Find our content and process it
+        global $wp_query;
+        $posts = $wp_query->posts;
+        foreach ($posts as $post) {
+            if (empty($post->post_content))
+                continue;
 
-                if ((defined('NGG_SKIP_LOAD_SCRIPTS') && NGG_SKIP_LOAD_SCRIPTS) || $this->is_rest_request() || empty($post->post_content))
-                    continue;
+            self::enqueue_frontent_resources_for_content($post->post_content);
+        }
+    }
 
-                $manager = C_NextGen_Shortcode_Manager::get_instance();
-                $ngg_shortcodes = $manager->get_shortcodes();
-                $shortcode_keys = array_keys($ngg_shortcodes);
+    /**
+     * Most content will come from the WP query / global $posts but it's also sometimes necessary to enqueue resources
+     * based on the results of an output filter
+     * @param string $content
+     */
+    public static function enqueue_frontent_resources_for_content($content = '')
+    {
+        $manager = C_NextGen_Shortcode_Manager::get_instance();
+        $pattern = $manager->get_shortcode_regex();
+        $ngg_shortcodes = $manager->get_shortcodes();
+        $ngg_shortcodes_keys = array_keys($ngg_shortcodes);
 
-                preg_match_all('/' . get_shortcode_regex($shortcode_keys) . '/', $post->post_content, $matches, PREG_SET_ORDER);
+        // Determine which shortcodes to look for; 'ngg' is the default but there are legacy aliases
+        preg_match_all($pattern, $content, $matches, PREG_SET_ORDER);
 
-                foreach ($matches as $shortcode) {
-                    // Only process our 'ngg' shortcodes
-                    $this_shortcode_name = $shortcode[2];
-                    if (!in_array($this_shortcode_name, $shortcode_keys))
-                        continue;
+        foreach ($matches as $shortcode) {
+            $this_shortcode_name = $shortcode[2];
+            if (!in_array($this_shortcode_name, $ngg_shortcodes_keys))
+                continue;
 
-                    $params = shortcode_parse_atts(trim($shortcode[0], '[]'));
-                    if (in_array($params[0], $shortcode_keys)) // Don't pass 0 => 'ngg' as a parameter, it's just part of the shortcode itself
-                        unset($params[0]);
+            $params = shortcode_parse_atts(trim($shortcode[0], '[]'));
+            if (in_array($params[0], $ngg_shortcodes_keys)) // Don't pass 0 => 'ngg' as a parameter, it's just part of the shortcode itself
+                unset($params[0]);
 
-                    // And do the enqueueing process
-                    $renderer = C_Displayed_Gallery_Renderer::get_instance();
+            // And do the enqueueing process
+            $renderer = C_Displayed_Gallery_Renderer::get_instance();
 
-                    // This is necessary for legacy shortcode compatibility
-                    if (is_callable($ngg_shortcodes[$this_shortcode_name]['transformer']))
-                        $params = call_user_func($ngg_shortcodes[$this_shortcode_name]['transformer'], $params);
+            // This is necessary for legacy shortcode compatibility
+            if (is_callable($ngg_shortcodes[$this_shortcode_name]['transformer']))
+                $params = call_user_func($ngg_shortcodes[$this_shortcode_name]['transformer'], $params);
 
-                    $displayed_gallery = $renderer->params_to_displayed_gallery($params);
+            $displayed_gallery = $renderer->params_to_displayed_gallery($params);
 
-                    if (did_action('wp_enqueue_scripts') == 1
-                    &&  !C_Photocrati_Resource_Manager::addons_version_check()
-                    &&  in_array($displayed_gallery->display_type, ['photocrati-nextgen_pro_horizontal_filmstrip', 'photocrati-nextgen_pro_slideshow']))
-                        continue;
+            if (did_action('wp_enqueue_scripts') == 1
+                && !C_Photocrati_Resource_Manager::addons_version_check()
+                && in_array($displayed_gallery->display_type, ['photocrati-nextgen_pro_horizontal_filmstrip', 'photocrati-nextgen_pro_slideshow']))
+                continue;
 
-                    $controller = C_Display_Type_Controller::get_instance($displayed_gallery->display_type);
+            $controller = C_Display_Type_Controller::get_instance($displayed_gallery->display_type);
 
-                    if (!$displayed_gallery || empty($params))
-                        continue;
+            if (!$displayed_gallery || empty($params))
+                continue;
 
-                    self::enqueue_frontend_resources_for_displayed_gallery($displayed_gallery, $controller);
-                }
-            }
+            self::enqueue_frontend_resources_for_displayed_gallery($displayed_gallery, $controller);
         }
     }
 

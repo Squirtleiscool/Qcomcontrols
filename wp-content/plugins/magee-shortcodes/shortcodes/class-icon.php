@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Icon') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Icon {
 
 	public static $args;
@@ -9,7 +11,6 @@ class Magee_Icon {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_icon', array( $this, 'render' ) );
 	}
 
@@ -21,7 +22,9 @@ class Magee_Icon {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'',
 				'class' =>'',
@@ -35,30 +38,29 @@ class Magee_Icon {
 		extract( $defaults );
 		self::$args = $defaults;
 		if(is_numeric($size))
-		$size = $size.'px';
+			$size = $size.'px';
 		
 		$html      = '';
 		$css_style = '';
 		$uniqid    = ' magee-fa-icon icon-boxed';
 		if( $size )
-		$css_style .= 'font-size:'.$size.';';
-		if( $icon_box == 'yes'){
+			$css_style .= 'font-size:'.$size.';';
+		if( $icon_box == 'yes') {
 		    $icon .= $uniqid;
 			if( $color )
-			$css_style .= 'background:'.$color.';';
+				$css_style .= 'background:'.$color.';';
 		    if( $icon != '')
-			$html = sprintf('<i id="%s" class="%s fa %s" style="%s"></i>',$id,$class,$icon,$css_style); 
-			}
-		else{
+				$html = sprintf('<i id="%1$s" class="%2$s fa %3$s" style="%4$s"></i>', $id, $class, $icon, $css_style); 
+		} else {
 			if( $color )
-			$css_style .= 'color:'.$color.';';
+				$css_style .= 'color:'.$color.';';
 			if( $icon != '')
-			$html = sprintf('<i id="%s" class="%s fa %s" style="%s"></i>',$id,$class,$icon,$css_style);
-  	         }
+				$html = sprintf('<i id="%1$s" class="%2$s fa %3$s" style="%4$s"></i>', $id, $class, $icon, $css_style);
+  	        }
+		
 		return $html;
 	}
 	
 }
 
 new Magee_Icon();
-endif;

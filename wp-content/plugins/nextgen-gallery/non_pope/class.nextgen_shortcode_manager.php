@@ -87,9 +87,9 @@ class C_NextGen_Shortcode_Manager
         // altered we substitute our shortcodes with placeholders at the start of the the_content() filter
 		// queue and then at the end of the the_content() queue, we substitute the placeholders with our
 		// actual markup
-		add_filter('the_content', array(&$this, 'fix_nested_shortcodes'), -1);
-        add_filter('the_content', array(&$this, 'parse_content'), PHP_INT_MAX);
-		add_filter('widget_text', array(&$this, 'fix_nested_shortcodes'), -1);
+		add_filter('the_content', [$this, 'fix_nested_shortcodes'], -1);
+        add_filter('the_content', [$this, 'parse_content'], PHP_INT_MAX);
+		add_filter('widget_text', [$this, 'fix_nested_shortcodes'], -1);
 	}
 
 	/**
@@ -302,13 +302,24 @@ class C_NextGen_Shortcode_Manager
 
 	function replace_with_placeholder($shortcode, $params=array(), $inner_content='')
 	{
-		$id = count($this->_found);
-		$this->_found[$id] = array(
-			'shortcode'		=>	$shortcode,
-			'params'		=>	$params,
-			'inner_content'	=>	$inner_content
-		);
+        $id = count($this->_found);
+        $this->_found[$id] = array(
+            'shortcode'		=>	$shortcode,
+            'params'		=>	$params,
+            'inner_content'	=>	$inner_content
+        );
 
-		return sprintf($this->_placeholder_text, $id); // try to wptexturize this! ha!
+        $placeholder = sprintf($this->_placeholder_text, $id); // try to wptexturize this! ha!
+
+        return apply_filters('ngg_shortcode_placeholder', $placeholder, $shortcode, $params, $inner_content);
 	}
+
+    /**
+     * @return string
+     */
+	public function get_shortcode_regex()
+    {
+        $keys = array_keys($this->_shortcodes);
+        return '/' . get_shortcode_regex($keys) . '/';
+    }
 }

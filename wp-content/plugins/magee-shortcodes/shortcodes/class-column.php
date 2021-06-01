@@ -1,5 +1,7 @@
 <?php
-if( !class_exists(' Magee_Column') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Column {
 
 	public static $args;
@@ -20,7 +22,10 @@ class Magee_Column {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
@@ -31,6 +36,7 @@ class Magee_Column {
 		
 		extract( $defaults );
 		self::$args = $defaults;
+		$class .= ' magee-shortcode magee-column';
 		$columnclass='';
 		switch($style)
 		{
@@ -72,13 +78,11 @@ class Magee_Column {
 				break;
 		}
 		
-		$html = sprintf('<div class="%s %s" id="%s" style="text-align:%s;">%s</div>',$class,$columnclass,$id,esc_attr($align),do_shortcode( Magee_Core::fix_shortcodes($content)));
-				
-
+		$html = sprintf('<div class="%1$s %2$s" id="%3$s" style="text-align:%4$s;">%5$s</div>', $class, $columnclass, $id, esc_attr($align), do_shortcode( Helper::fix_shortcodes($content)));
+		
 		return $html;
 	}
 	
 }
 
 new Magee_Column();
-endif;

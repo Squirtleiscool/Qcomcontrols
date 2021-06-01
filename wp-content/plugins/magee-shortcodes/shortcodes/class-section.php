@@ -1,5 +1,8 @@
 <?php
-if( !class_exists('Magee_Section') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Section {
 
 	public static $args;
@@ -21,7 +24,9 @@ class Magee_Section {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
@@ -40,38 +45,39 @@ class Magee_Section {
 				'contents_in_container' =>'yes',
 				'top_separator'         => '',
 				'bottom_separator'      => '',
-				'full_height'           => ''
+				'full_height'           => '',
+				'is_preview' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$add_class  = uniqid('section-');
-		$class     .= ' '.$add_class;
+		$add_class  = Utils::rand_str('section-');
+		$class     .= ' magee-shortcode section magee-section '.$add_class;
 		$css_style  = '';
 		$container  = '';
-		if( $contents_in_container == 'yes' )
-		$container  = 'container';
+		if ( $contents_in_container == 'yes' )
+			$container  = 'container';
 		else
-		$container  = 'container-fullwidth';
+			$container  = 'container-fullwidth';
 		
 		
-		if( is_numeric($border_size) )
-		$border_size = $border_size.'px';
-		if( is_numeric($padding_top) )
-		$padding_top = $padding_top.'px';
-		if( is_numeric($padding_bottom) )
-		$padding_bottom = $padding_bottom.'px';
-		if( is_numeric($padding_left) )
-		$padding_left = $padding_left.'px';
-		if( is_numeric($padding_right) )
-		$padding_right = $padding_right.'px';
+		if ( is_numeric($border_size) )
+			$border_size = $border_size.'px';
+		if ( is_numeric($padding_top) )
+			$padding_top = $padding_top.'px';
+		if ( is_numeric($padding_bottom) )
+			$padding_bottom = $padding_bottom.'px';
+		if ( is_numeric($padding_left) )
+			$padding_left = $padding_left.'px';
+		if ( is_numeric($padding_right) )
+			$padding_right = $padding_right.'px';
 		
 		
 		$top_separator_html      = '';
 		$bottom_separator_html   = '';
 		
-		switch( $top_separator ){
+		switch ( $top_separator ) {
 			
 			case "triangle":
 			$top_separator_html      = '<div class="magee-section-separator ss-triangle-up"></div>';
@@ -83,7 +89,7 @@ class Magee_Section {
 			$top_separator_html      = '<div class="magee-section-separator ss-halfcircle-up"></div>';
 			break;
 			case "bigtriangle":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '
 			<style type="text/css">
                                      .'.$add_class.' .ss-bigtriangle-up svg path
@@ -101,7 +107,7 @@ class Magee_Section {
 		
 			break;
 			case "bighalfcircle":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= ' <style type="text/css">
                                         .'.$add_class.' .ss-bighalfcircle-up svg path{
                                             fill: '.$background_color.';
@@ -117,7 +123,7 @@ class Magee_Section {
 			
 			break;
 			case "curl":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-curl-up svg path{
                                             fill: '.$background_color.';
@@ -132,7 +138,7 @@ class Magee_Section {
                                     </div>';
 			break;
 			case "multitriangles":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '<style type="text/css">
                                          .'.$add_class.' .ss-multitriangles-up::before{
                                             box-shadow: -50px 50px 0 '.$background_color.', 50px -50px 0 '.$background_color.'; 
@@ -146,7 +152,7 @@ class Magee_Section {
 			$top_separator_html      = '<div class="magee-section-separator ss-roundedsplit-up"></div>';
 			break;
 			case "boxes":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-boxes-up::before {
                                             background-image: -webkit-gradient(linear, 100% 0, 0 100%, color-stop(0.5, transparent), color-stop(0.5, '.$background_color.'));
@@ -157,7 +163,7 @@ class Magee_Section {
 			$top_separator_html      .= '<div class="magee-section-separator ss-boxes-up"></div>';
 			break;
 			case "zigzag":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-zigzag-up::before {
                                             background-image: -webkit-gradient(linear, 0 0, 300% 100%, color-stop(0.25, transparent), color-stop(0.25, '.$background_color.'));
@@ -171,7 +177,7 @@ class Magee_Section {
 			break;
 			
 			case "clouds":
-			if( $background_color ):
+			if ( $background_color ):
 			$top_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-clouds-up svg path {
                                             fill: '.$background_color.';
@@ -209,7 +215,7 @@ class Magee_Section {
 			
 			}
 		
-		switch( $bottom_separator ){
+		switch( $bottom_separator ) {
 			
 			case "triangle":
 			$bottom_separator_html = '<div class="magee-section-separator ss-triangle-down"></div>';
@@ -218,7 +224,7 @@ class Magee_Section {
 			$bottom_separator_html = '<div class="magee-section-separator ss-halfcircle-down"></div>';
 			break;
 			case "bigtriangle":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html = '<style type="text/css">
                                       .'.$add_class.' .ss-bigtriangle-down svg path {
                                             fill: '.$background_color.';
@@ -234,7 +240,7 @@ class Magee_Section {
 			
 			break;
 			case "bighalfcircle":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      = ' <style type="text/css">
                                         .'.$add_class.' .ss-bighalfcircle-down svg path {
                                             fill: '.$background_color.';
@@ -249,7 +255,7 @@ class Magee_Section {
                                     </div>';
 			break;
 			case "curl":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-curl-down svg path {
                                             fill: '.$background_color.';
@@ -264,7 +270,7 @@ class Magee_Section {
                                     </div>';
 			break;
 			case "multitriangles":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      .= '<style type="text/css">
                                          .'.$add_class.' .ss-multitriangles-down::after {
                                             box-shadow: -50px 50px 0 '.$background_color.', 50px -50px 0 '.$background_color.'; 
@@ -281,7 +287,7 @@ class Magee_Section {
 			$bottom_separator_html = '<div class="magee-section-separator ss-foldedcorner"></div>';
 			break;
 			case "boxes":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-boxes-up::before,
                                         .'.$add_class.' .ss-boxes-down::after {
@@ -293,7 +299,7 @@ class Magee_Section {
 			$bottom_separator_html .= ' <div class="magee-section-separator ss-boxes-down"></div>';
 			break;
 			case "zigzag":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-zigzag-up::before {
                                             background-image: -webkit-gradient(linear, 0 0, 300% 100%, color-stop(0.25, transparent), color-stop(0.25, '.$background_color.'));
@@ -312,7 +318,7 @@ class Magee_Section {
 			$bottom_separator_html .= '<div class="magee-section-separator ss-zigzag-down"></div>';
 			break;
 			case "stamp":
-			if( $background_color ):
+			if ( $background_color ):
 			$bottom_separator_html      .= '<style type="text/css">
                                         .'.$add_class.' .ss-stamp-down svg path {
                                             fill: '.$background_color.';
@@ -329,59 +335,76 @@ class Magee_Section {
 			
 		}
 
-
+		if ( $background_color )
+			$css_style .= '.'.$add_class.'{ background-color:'.esc_attr($background_color).';}';
+		if ( $background_image )
+			$css_style .= '.'.$add_class.'{ background-image: url('.esc_url($background_image).');}';
+		if ( $background_repeat )
+			$css_style .= '.'.$add_class.'{ background-repeat:'.esc_attr($background_repeat).'; }';
+		if ( $background_position )
+			$css_style .= '.'.$add_class.'{ background-position :'.esc_attr($background_position).';}';
 		
-
-		if( $background_color )
-		$css_style .= '.'.$add_class.'{ background-color:'.esc_attr($background_color).';}';
-		if( $background_image )
-		$css_style .= '.'.$add_class.'{ background-image: url('.esc_url($background_image).');}';
-		if( $background_repeat )
-		$css_style .= '.'.$add_class.'{ background-repeat:'.esc_attr($background_repeat).'; }';
-		if( $background_position )
-		$css_style .= '.'.$add_class.'{ background-position :'.esc_attr($background_position).';}';
+		if ( $border_size )
+			$css_style .= '.'.$add_class.'{ border-size :'.esc_attr($border_size).';}';
+		if ( $border_color )
+			$css_style .= '.'.$add_class.'{ border-color :'.esc_attr($border_color).';}';
+		if ( $border_style )
+			$css_style .= '.'.$add_class.'{ border-style :'.esc_attr($border_style).';}';
 		
-		if( $border_size )
-		$css_style .= '.'.$add_class.'{ border-size :'.esc_attr($border_size).';}';
-		if( $border_color )
-		$css_style .= '.'.$add_class.'{ border-color :'.esc_attr($border_color).';}';
-		if( $border_style )
-		$css_style .= '.'.$add_class.'{ border-style :'.esc_attr($border_style).';}';
-		
-		if( $padding_top )
-		$css_style .= '.'.$add_class.'{ padding-top :'.esc_attr($padding_top).';}';
-		if( $padding_bottom )
-		$css_style .= '.'.$add_class.'{ padding-bottom :'.esc_attr($padding_bottom).';}';
-		if( $padding_left )
-		$css_style .= '.'.$add_class.'{ padding-left :'.esc_attr($padding_left).';}';
-		if( $padding_right )
-		$css_style .= '.'.$add_class.'{ padding-right :'.esc_attr($padding_right).';}';
-		if( $background_parallax == 'yes' )
-		$class  .= ' parallax-scrolling';
-		
-		$styles  = sprintf( '<style type="text/css" scoped="scoped">%s </style>',$css_style);		
-		$content = do_shortcode( Magee_Core::fix_shortcodes($content));
+		if ( $padding_top )
+			$css_style .= '.'.$add_class.'{ padding-top :'.esc_attr($padding_top).';}';
+		if ( $padding_bottom )
+			$css_style .= '.'.$add_class.'{ padding-bottom :'.esc_attr($padding_bottom).';}';
+		if ( $padding_left )
+			$css_style .= '.'.$add_class.'{ padding-left :'.esc_attr($padding_left).';}';
+		if ( $padding_right )
+			$css_style .= '.'.$add_class.'{ padding-right :'.esc_attr($padding_right).';}';
+		if ( $background_parallax == 'yes' )
+			$class  .= ' parallax-scrolling';
+				
+		$content = do_shortcode( Helper::fix_shortcodes($content));
 		$html  = '';
 		
-		if( $top_separator == 'triangle' ){
+		if ( $top_separator == 'triangle' ) {
 		if ( $full_height == 'yes'):
-		 $html   .= sprintf('%s<section class="section magee-section %s fullheight verticalmiddle" id="%s">%s<div class="section-content"><div class="%s">%s</div></div> %s</section>',$styles,esc_attr($class),esc_attr($id),$top_separator_html,$container,$content,$bottom_separator_html);
+			$class .= ' fullheight verticalmiddle';
+			$html   .= sprintf('<section class="%1$s" id="%2$s">%3$s<div class="section-content"><div class="%4$s">%5$s</div></div> %6$s</section>', esc_attr($class), esc_attr($id), $top_separator_html, $container, $content, $bottom_separator_html);
 		else:
-		$html   .= sprintf('%s<section class="section magee-section %s" id="%s">%s <div class="section-content"><div class="%s">%s</div></div> %s</section>',$styles,esc_attr($class),esc_attr($id),$top_separator_html,$container,$content,$bottom_separator_html);
+			$html   .= sprintf('<section class="%1$s" id="%2$s">%3$s <div class="section-content"><div class="%4$s">%5$s</div></div> %6$s</section>', esc_attr($class),esc_attr($id), $top_separator_html, $container, $content, $bottom_separator_html);
 		endif;
 		
 		}else{
-		if ( $full_height == 'yes'):
-        $html   .= sprintf('%s<section class="section magee-section %s fullheight verticalmiddle" id="%s"><div class="section-content"><div class="%s">%s</div></div> %s %s</section>',$styles,esc_attr($class),esc_attr($id),$container,$content,$top_separator_html,$bottom_separator_html);
-		else:
-		$html   .= sprintf('%s<section class="section magee-section %s" id="%s"> <div class="section-content"><div class="%s">%s</div></div>%s %s</section>',$styles,esc_attr($class),esc_attr($id),$container,$content,$top_separator_html,$bottom_separator_html);
+			if ( $top_separator == 'doublediagonal') {
+				if ( $full_height == 'yes'):
+					$class .= ' fullheight verticalmiddle';
+        			$html   .= sprintf('<section class="%1$s" id="%2$s"><div class="section-content" style="position: absolute;z-index:2;"><div class="%3$s">%4$s</div></div> %5$s %6$s</section>', $styles,esc_attr($class),esc_attr($id), $container, $content, $top_separator_html, $bottom_separator_html);
+				else:
+					$html   .= sprintf('<section class="%1$s" id="%2$s"> <div class="section-content" style="position: absolute;z-index:2;"><div class="%3$s">%4$s</div></div>%5$s %6$s</section>', esc_attr($class),esc_attr($id), $container, $content, $top_separator_html, $bottom_separator_html);
 
-		endif;
+				endif;
+			}else{
+				if ( $full_height == 'yes'):
+					$class .= ' fullheight verticalmiddle';
+        			$html   .= sprintf('<section class="%1$s" id="%2$s"><div class="section-content"><div class="%3$s">%4$s</div></div> %5$s %6$s</section>', esc_attr($class),esc_attr($id), $container, $content, $top_separator_html, $bottom_separator_html);
+				else:
+					$html   .= sprintf('<section class="%1$s" id="%2$s"> <div class="section-content"><div class="%3$s">%4$s</div></div>%5$s %6$s</section>', esc_attr($class),esc_attr($id), $container, $content, $top_separator_html, $bottom_separator_html);
+				endif;
+			}
 		}
+		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+
 		return $html;
 	}
 	
 }
 
 new Magee_Section();
-endif;

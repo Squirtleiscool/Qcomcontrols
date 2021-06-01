@@ -1,6 +1,8 @@
 <?php
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
 
-if( !class_exists('Magee_Counter') ):
 class Magee_Counter {
 
 	public static $args;
@@ -10,7 +12,6 @@ class Magee_Counter {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_counter', array( $this, 'render' ) );
 	}
 
@@ -22,7 +23,10 @@ class Magee_Counter {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+		Helper::get_script_depends(['jquery-waypoints', 'jquery-countto', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'',
 				'class' =>'',
@@ -34,7 +38,8 @@ class Magee_Counter {
 				'counter_num' =>'',
 				'middle_right_text' =>'',
 				'bottom_title'        =>'',
-				'border' =>'0'
+				'border' =>'0',
+				'is_preview' => ''
 			), $args
 		);
 		
@@ -82,15 +87,14 @@ class Magee_Counter {
 				break;
 		}
 		$class .= ' box-border';
-		$addclass = uniqid('color');
+		$addclass = Utils::rand_str('counter-');
 		$class   .= ' '.$addclass;
 		$css_style = '';
-		$html = '<div class="'.$columnclass.'">' ;
+		$html = '<div class="magee-shortcode magee-counter"><div class="'.$columnclass.'">' ;
 		if( $top_icon_color)
 		$css_style .= '.'.$addclass.' .counter-top-icon i{color:'.$top_icon_color.'}';
-		$html  .= '<style  type="text/css">'.$css_style.'</style>';
 		
-		if( $border == '1' || $border == 'yes'  ):
+		if( $border == '1' || $border == 'yes' ):
 		$html .= '<div class="magee-counter-box '.esc_attr($class).'" id="'.esc_attr($id).'">';
 		else:
 		$html .= '<div class="magee-counter-box '.$addclass.' '.$status_class.'" id="'.esc_attr($id).'">';
@@ -111,18 +115,28 @@ class Magee_Counter {
 		if( $middle_left_text )
 		$html .= '<span class="unit">'.esc_attr($middle_left_text).'</span>';
 		if( $counter_num )
-		$html .= '<span class="counter-num">'.esc_attr($counter_num).'</span>';
+		$html .= '<span class="counter-num js-counter" data-from="0" data-to="'.absint($counter_num).'" data-speed="3000" data-refresh-interval="50"></span>';
 		if( $middle_right_text )
 		$html .= '<span class="unit">'.esc_attr($middle_right_text).'</span>';
 		
         $html .= '</div>';                                             
                                                 
         $html .= '<h3 class="counter-bottom_title">'.esc_attr($bottom_title).'</h3>';
-        $html .= '</div></div>';
+        $html .= '</div></div></div>';
+
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$this->is_preview = "1";
+		}
+
+		if ($this->is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' ,$css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+
 		return $html;
 	} 
 	
 }
 
 new Magee_Counter();
-endif;

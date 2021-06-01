@@ -1,5 +1,8 @@
 <?php
-if( !class_exists('Magee_Image_Compare') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Image_Compare {
 
 	public static $args;
@@ -9,7 +12,6 @@ class Magee_Image_Compare {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_image_compare', array( $this, 'render' ) );
 	}
 
@@ -21,7 +23,10 @@ class Magee_Image_Compare {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['twentytwenty', 'magee-shortcodes']);
+		Helper::get_script_depends(['jquery-event-move', 'jquery-twentytwenty', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'',
 				'class' =>'',
@@ -29,14 +34,16 @@ class Magee_Image_Compare {
 				'percent' => '',
 				'image_left' =>'',
 				'image_right' =>'',
+				'before_label' => '',
+				'after_label' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$unqid = uniqid( 'class-');
-		$class .= $unqid;
-		$html = '<div  id="'.esc_attr($id).'" class="magee-image-compare twentytwenty-container '.esc_attr($class).'" data-pct="'.esc_attr($percent).'" data-orientation="'.esc_attr($style).'">
+		$unqid = Utils::rand_str( 'image-compare-');
+		$class .= ' '.$unqid;
+		$html = '<div  id="'.esc_attr($id).'" class="magee-shortcode magee-image-compare twentytwenty-container '.esc_attr($class).'" data-before_label="'.esc_attr($before_label).'" data-after_label="'.esc_attr($after_label).'" data-pct="'.esc_attr($percent).'" data-orientation="'.esc_attr($style).'">
 				  <img src="'.$image_left.'">
 		          <img src="'.$image_right.'">
 				</div>' ;	
@@ -45,5 +52,4 @@ class Magee_Image_Compare {
 	
 }
 
-new Magee_Image_Compare();		
-endif;
+new Magee_Image_Compare();

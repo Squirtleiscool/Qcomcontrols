@@ -105,10 +105,16 @@ class M_Third_Party_Compat extends C_Base_Module
         add_filter('wpseo_sitemap_urlimages', array($this, 'add_wpseo_xml_sitemap_images'), 10, 2);
         add_filter('ngg_pre_delete_unused_term_id', array($this, 'dont_auto_purge_wpml_terms'));
 
-        if ($this->is_ngg_page()) add_action('admin_enqueue_scripts', array(&$this, 'dequeue_spider_calendar_resources'));
+        // Nimble Builder needs special consideration because of our shortcode manager's use of placeholders
+        add_action('wp_enqueue_scripts', [$this, 'enqueue_nimble_builder_frontend_resources']);
+        add_filter('ngg_shortcode_placeholder', [$this, 'nimble_builder_shortcodes'], 10, 4);
+
+        if ($this->is_ngg_page())
+            add_action('admin_enqueue_scripts', array(&$this, 'dequeue_spider_calendar_resources'));
 
         // WPML fix
-        if (class_exists('SitePress')) {
+        if (class_exists('SitePress'))
+        {
             M_WordPress_Routing::$_use_canonical_redirect = FALSE;
             M_WordPress_Routing::$_use_old_slugs = FALSE;
             add_action('template_redirect', array(&$this, 'fix_wpml_canonical_redirect'), 1);
@@ -116,6 +122,65 @@ class M_Third_Party_Compat extends C_Base_Module
 
         // TODO: Only needed for NGG Pro 1.0.10 and lower
         add_action('the_post', array(&$this, 'add_ngg_pro_page_parameter'));
+    }
+
+    /**
+     * @param string $placeholder
+     * @param string $shortcode
+     * @param array $params
+     * @param string $inner_content
+     * @return string
+     */
+    public function nimble_builder_shortcodes($placeholder, $shortcode, $params, $inner_content)
+    {
+        if (!defined( 'NIMBLE_PLUGIN_FILE'))
+            return $placeholder;
+
+        // Invoke our gallery rendering now
+        if (doing_filter('the_nimble_tinymce_module_content'))
+            $placeholder = C_NextGen_Shortcode_Manager::get_instance()->render_shortcode($shortcode, $params, $inner_content);
+
+        return $placeholder;
+    }
+
+    public function nimble_find_content($collection)
+    {
+        foreach ($collection as $item) {
+            if (isset($item['value']) && !empty($item['value']['text_content']))
+                M_Gallery_Display::enqueue_frontent_resources_for_content($item['value']['text_content']);
+
+            if (!empty($item['collection']))
+                $this->nimble_find_content($item['collection']);
+        }
+    }
+
+    public function enqueue_nimble_builder_frontend_resources()
+    {
+        if (!defined( 'NIMBLE_PLUGIN_FILE'))
+            return;
+
+        if (!function_exists('\Nimble\skp_get_skope_id')
+        ||  !function_exists('\Nimble\sek_get_skoped_seks')
+        ||  !function_exists('\Nimble\sek_sniff_and_decode_richtext'))
+            return;
+
+        // Bail now if called before skope_id is set (before @hook 'wp')
+        $skope_id = \Nimble\skp_get_skope_id();
+        if (empty($skope_id) || '_skope_not_set_' === $skope_id)
+            return;
+
+        $global_sections = \Nimble\sek_get_skoped_seks(NIMBLE_GLOBAL_SKOPE_ID);
+        $local_sections  = \Nimble\sek_get_skoped_seks($skope_id);
+        $raw_content = \Nimble\sek_sniff_and_decode_richtext([
+            'local_sections'  => $local_sections,
+            'global_sections' => $global_sections
+        ]);
+        foreach ($raw_content['local_sections'] as $section) {
+            $this->nimble_find_content($section);
+        }
+        foreach ($raw_content['global_sections'] as $section) {
+            $this->nimble_find_content($section);
+        }
     }
 
     public function divi()

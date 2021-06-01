@@ -1,5 +1,8 @@
 <?php
-if( !class_exists('Magee_Chart_Line') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Chart_Line {
 
 	public static $args;
@@ -8,7 +11,6 @@ class Magee_Chart_Line {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_chart_line', array( $this, 'render_parent' ) );
 		add_shortcode( 'ms_line', array( $this, 'render_child' ) );
 	}
@@ -21,36 +23,50 @@ class Magee_Chart_Line {
 	 */
 	function render_parent( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['chart', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 			    'width'                => '',
 				'height'               => '',
 			    'class'                => '',
 				'id'                   => '',
 				'label'                => '',
+				'is_preview'		   => '',
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('line-');
-		$this->id = $id.$uniqid;
+		$uniqid = Utils::rand_str('line-');
+		$this->id = $uniqid;
 		
-		$html = '<canvas id="'.esc_attr($this->id).'" width="'.esc_attr($width).'" height="'.esc_attr($height).'" class="'.esc_attr($class).'"></canvas>
-		<script>
-		if(document.getElementById(\'magee-sc-form-preview\')){
-		var buyers = document.getElementById(\'magee-sc-form-preview\').contentWindow.document.getElementById("'.$this->id.'").getContext(\'2d\');
-		}else{
+		$html = '<canvas id="'.esc_attr($this->id).'" width="'.esc_attr($width).'" height="'.esc_attr($height).'" class="'.esc_attr($class).'"></canvas>';
+		$script = '
 		var buyers = document.getElementById("'.$this->id.'").getContext(\'2d\');
-		}
-		var buyerData = {
-		labels : ['.do_shortcode($label).'],
-		datasets : ['.do_shortcode(Magee_Core::fix_shortcodes($content)).'
-		]	
-	    }
-		new Chart(buyers).Line(buyerData);
-		</script>';
 		
+		var lineData = {
+			labels : ['.strip_tags(do_shortcode($label)).'],
+			datasets : ['.strip_tags(do_shortcode(Helper::fix_shortcodes($content))).']	
+	    }
+		var lineOptions = {
+			type: "line",
+			data: lineData
+		}
+		new Chart(buyers, lineOptions);
+		';
+
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '%1$s<script>%2$s</script>', $html, $script);
+		}else{
+			wp_add_inline_script('chart', $script, 'after');
+		}
+
 		return $html;
 	}
 	
@@ -62,21 +78,24 @@ class Magee_Chart_Line {
 	 */
 	 function render_child( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
+				'title' => '',
 				'data' =>'',
 				'fillcolor' =>'',
 				'fillopacity' =>'',
 				'strokecolor' =>'',
 				'pointcolor' =>'',
 				'pointstrokecolor' =>'',
+				'pointhoverbackgroundcolor' =>'',
+				'pointborderwidth' =>'',
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
 		
-        $fillcolor = str_replace('#','',$fillcolor);
+        $fillcolor = str_replace('#','', $fillcolor);
 		if(strlen($fillcolor) == 6 ):
 		$r = hexdec(substr($fillcolor,0,2)) ;
 		$g = hexdec(substr($fillcolor,2,2)) ;
@@ -84,10 +103,13 @@ class Magee_Chart_Line {
 		endif;
 		
 		$html = '{
-				fillColor : "rgba('.$r.','.$g.','.$b.','.esc_attr($fillopacity).')",
-				strokeColor : "'.$strokecolor.'",
-				pointColor : "'.$pointcolor.'",
-				pointStrokeColor : "'.$pointstrokecolor.'",
+				label: "'.$title.'",
+				backgroundColor : "rgba('.$r.','.$g.','.$b.','.esc_attr($fillopacity).')",
+				borderColor : "'.$strokecolor.'",
+				pointBackgroundColor : "'.$pointcolor.'",
+				pointBorderColor : "'.$pointstrokecolor.'",
+				pointHoverBackgroundColor: "'.$pointhoverbackgroundcolor.'",
+				pointborderwidth: "'.$pointborderwidth.'",
 				data : ['.$data.'],
 			    },';
 		return $html;
@@ -95,4 +117,3 @@ class Magee_Chart_Line {
 }		
 
 new Magee_Chart_Line();
-endif;

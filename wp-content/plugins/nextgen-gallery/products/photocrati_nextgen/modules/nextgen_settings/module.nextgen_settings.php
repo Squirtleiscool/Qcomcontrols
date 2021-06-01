@@ -18,7 +18,7 @@ class M_NextGen_Settings extends C_Base_Module
 			'photocrati-nextgen_settings',
 			'NextGEN Gallery Settings',
 			'Provides central management for NextGEN Gallery settings',
-			'3.3.7',
+			'3.10',
 			'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
 			'Imagely',
 			'https://www.imagely.com'
@@ -133,10 +133,16 @@ class C_NextGen_Settings_Installer
 			'CSSfile'     => 'nggallery.css',     // set default css filename
 			'always_enable_frontend_logic' => FALSE,
 
-            // Misc
+            // Misc //
+
             // It is known that WPEngine disables 'order by rand()' by default, but exposes it as an option to users
             'use_alternate_random_method' => (function_exists('is_wpe') && is_wpe()) ? TRUE : FALSE,
+
+            // Prevent conflicts with other plugins that enqueue fontawesome
             'disable_fontawesome'         => FALSE,
+
+            // Prevent the /ngg_tag/ page from being enabled
+            'disable_ngg_tags_page'       => FALSE,
 
             // Duration of caching of 'random' widgets image IDs
             'random_widget_cache_ttl' => 30

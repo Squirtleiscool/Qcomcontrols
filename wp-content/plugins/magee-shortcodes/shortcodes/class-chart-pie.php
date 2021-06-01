@@ -1,14 +1,19 @@
 <?php
-if( !class_exists('Magee_Chart_Pie') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Chart_Pie {
 
 	public static $args;
     private  $id;
+	private static $data;
+	private static $bgcolor;
+	private static $label;
 	/**
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_chart_pie', array( $this, 'render_parent' ) );
 		add_shortcode( 'ms_pie', array( $this, 'render_child' ) );
 	}
@@ -21,37 +26,52 @@ class Magee_Chart_Pie {
 	 */
 	function render_parent( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['chart', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 			    'width'                => '',
 				'height'               => '',
 			    'class'                => '',
 				'id'                   => '',
+				'is_preview'		   => '',
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('pie-');
-		$this->id = $id.$uniqid;
-		
-		$html = '<canvas id="'.esc_attr($this->id).'" width="'.esc_attr($width).'" height="'.esc_attr($height).'" class="'.esc_attr($class).'"></canvas>
-		<script>
-		if(document.getElementById(\'magee-sc-form-preview\')){
-		var buyers = document.getElementById(\'magee-sc-form-preview\').contentWindow.document.getElementById("'.$this->id.'").getContext(\'2d\');
-		}else{
+		$uniqid = Utils::rand_str('pie-');
+		$this->id = $uniqid;
+		do_shortcode(Helper::fix_shortcodes($content));
+
+		$html = '<canvas id="'.esc_attr($this->id).'" width="'.esc_attr($width).'" height="'.esc_attr($height).'" class="'.esc_attr($class).'"></canvas>';
+		$script = '
 		var buyers = document.getElementById("'.$this->id.'").getContext(\'2d\');
-		}
-		var pieData = [
-		'.do_shortcode(Magee_Core::fix_shortcodes($content)).'
-	    ];
+		var pieData = {
+			labels: ['.implode(',', self::$label).'],
+			datasets: [{
+				data: ['.implode(',', self::$data).'],
+				backgroundColor: ['.implode(',', self::$bgcolor).'],
+				hoverOffset: 4
+			}]
+		};
 		var pieOptions = {
-			segmentShowStroke : false,
-			animateScale : true
+			type: "pie",
+			data: pieData
 		}
-		new Chart(buyers).Pie(pieData,pieOptions);
-		</script>';
+		new Chart(buyers, pieOptions);
+		';
 		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '%1$s<script>%2$s</script>', $html, $script);
+		}else{
+			wp_add_inline_script('chart', $script, 'after');
+		}
 		return $html;
 	}
 	
@@ -63,8 +83,9 @@ class Magee_Chart_Pie {
 	 */
 	 function render_child( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
+				'label' =>'',
 				'value' =>'',
 				'color' =>'',
 			), $args
@@ -72,14 +93,11 @@ class Magee_Chart_Pie {
 		
 		extract( $defaults );
 		self::$args = $defaults;
-			
-		$html = '{
-				value: '.esc_attr($value).',
-				color : "'.esc_attr($color).'",
-			    },';
-		return $html;
+		self::$data[] = $value;
+		self::$bgcolor[] = "'".$color."'";
+		self::$label[] = "'".$label."'";
+
 	 }	
 }		
 
 new Magee_Chart_Pie();
-endif;

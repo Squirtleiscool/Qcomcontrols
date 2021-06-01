@@ -92,6 +92,10 @@ class C_Widget_Gallery extends WP_Widget
                     if (isset($options[$id])) {
                         $sidebar_data = $wp_registered_sidebars[$sidebar_name];
                         $sidebar_data['widget_id'] = $widget;
+                        // These are normally replaced at display time but we're building our cache before then
+                        $sidebar_data['before_widget'] = str_replace('%1$s', $widget, $sidebar_data['before_widget']);
+                        $sidebar_data['before_widget'] = str_replace('%2$s', 'ngg_images', $sidebar_data['before_widget']);
+                        $sidebar_data['widget_name'] = __('NextGEN Widget', 'nggallery');
                         $displayed_gallery = $this->get_displayed_gallery($sidebar_data, $options[$id]);
                         self::$displayed_gallery_ids[$widget] = $displayed_gallery;
                         $controller = C_Display_Type_Controller::get_instance(NGG_BASIC_THUMBNAILS);
@@ -106,12 +110,16 @@ class C_Widget_Gallery extends WP_Widget
         }, 11);
         // It is important that this run at priority 11 or higher so that M_Gallery_Display->enqueue_frontend_resources() has run first
     }
+    function get_defaults()
+    {
+        return ['exclude' => 'all', 'height' => '75', 'items' => '4', 'list' => '', 'show' => 'thumbnail', 'title' => 'Gallery', 'type' => 'recent', 'webslice' => TRUE, 'width' => '100'];
+    }
     function form($instance)
     {
         // used for rendering utilities
         $parent = C_Widget::get_instance();
         // defaults
-        $instance = wp_parse_args((array) $instance, array('exclude' => 'all', 'height' => '75', 'items' => '4', 'list' => '', 'show' => 'thumbnail', 'title' => 'Gallery', 'type' => 'recent', 'webslice' => TRUE, 'width' => '100'));
+        $instance = wp_parse_args((array) $instance, $this->get_defaults());
         return $parent->render_partial('photocrati-widget#form_gallery', array('self' => $this, 'instance' => $instance, 'title' => esc_attr($instance['title']), 'items' => intval($instance['items']), 'height' => esc_attr($instance['height']), 'width' => esc_attr($instance['width'])));
     }
     function update($new_instance, $old_instance)
@@ -234,8 +242,14 @@ class C_Widget_Gallery extends WP_Widget
     }
     function widget($args, $instance)
     {
-        // The displayed gallery was created during the action wp_enqueue_resources and was cached to avoid ID conflicts
-        $displayed_gallery = self::$displayed_gallery_ids[$args['widget_id']];
+        // This displayed gallery is created dynamically at runtime
+        if (empty(self::$displayed_gallery_ids[$args['widget_id']])) {
+            $displayed_gallery = $this->get_displayed_gallery($args, $instance);
+            self::$displayed_gallery_ids[$displayed_gallery->id()] = $displayed_gallery;
+        } else {
+            // The displayed gallery was created during the action wp_enqueue_resources and was cached to avoid ID conflicts
+            $displayed_gallery = self::$displayed_gallery_ids[$args['widget_id']];
+        }
         print C_Displayed_Gallery_Renderer::get_instance()->display_images($displayed_gallery);
     }
 }
@@ -322,6 +336,10 @@ class C_Widget_Slideshow extends WP_Widget
                     if (isset($options[$id])) {
                         $sidebar_data = $wp_registered_sidebars[$sidebar_name];
                         $sidebar_data['widget_id'] = $widget;
+                        // These are normally replaced at display time but we're building our cache before then
+                        $sidebar_data['before_widget'] = str_replace('%1$s', $widget, $sidebar_data['before_widget']);
+                        $sidebar_data['before_widget'] = str_replace('%2$s', 'widget_slideshow', $sidebar_data['before_widget']);
+                        $sidebar_data['widget_name'] = __('NextGEN Slideshow', 'nggallery');
                         $displayed_gallery = $this->get_displayed_gallery($sidebar_data, $options[$id]);
                         self::$displayed_gallery_ids[$widget] = $displayed_gallery;
                         $controller = C_Display_Type_Controller::get_instance(NGG_BASIC_SLIDESHOW);
@@ -416,8 +434,14 @@ class C_Widget_Slideshow extends WP_Widget
     }
     function render_slideshow($args, $instance)
     {
-        // The displayed gallery was created during the action wp_enqueue_resources and was cached to avoid ID conflicts
-        $displayed_gallery = self::$displayed_gallery_ids[$args['widget_id']];
+        // This displayed gallery is created dynamically at runtime
+        if (empty(self::$displayed_gallery_ids[$args['widget_id']])) {
+            $displayed_gallery = $this->get_displayed_gallery($args, $instance);
+            self::$displayed_gallery_ids[$displayed_gallery->id()] = $displayed_gallery;
+        } else {
+            // The displayed gallery was created during the action wp_enqueue_resources and was cached to avoid ID conflicts
+            $displayed_gallery = self::$displayed_gallery_ids[$args['widget_id']];
+        }
         $renderer = C_Displayed_Gallery_Renderer::get_instance();
         $retval = $renderer->display_images($displayed_gallery);
         $retval = apply_filters('ngg_show_slideshow_widget_content', $retval, $instance['galleryid'], $instance['width'], $instance['height']);

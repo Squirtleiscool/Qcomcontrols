@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Highlight') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Highlight {
 
 	public static $args;
@@ -22,11 +24,11 @@ class Magee_Highlight {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults = Magee_Core::set_shortcode_defaults(
+		$defaults = Helper::set_shortcode_defaults(
 			array(
 				'class'		=> '',			
 				'id'		=> '',
-				'background_color' => '#007005',		
+				'background_color' => '#007005',
 				'color'   => '',
 				'border_radius'	=> '0',
 			), $args 
@@ -36,7 +38,7 @@ class Magee_Highlight {
 
 		self::$args = $defaults;
 		
-		$html = sprintf( '<span %s>%s</span>', Magee_Core::attributes( 'highlight-shortcode' ), do_shortcode( Magee_Core::fix_shortcodes($content)) );
+		$html = sprintf( '<span %1$s>%2$s</span>', Helper::attributes( 'highlight-shortcode' ), do_shortcode( Helper::fix_shortcodes($content)) );
 
 		return $html;
 
@@ -46,7 +48,7 @@ class Magee_Highlight {
 	
 		$attr = array();
 
-		$attr['class'] = 'magee-highlight';
+		$attr['class'] = 'magee-shortcode magee-highlight';
 
 		if( self::$args['class'] ) {
 			$attr['class'] .= ' ' . self::$args['class']; 
@@ -56,12 +58,12 @@ class Magee_Highlight {
 			$attr['id'] = self::$args['id']; 
 		}
 
-	   if(is_numeric(self::$args['border_radius']))
-	   self::$args['border_radius'] = self::$args['border_radius'].'px';
-	   	
-	   $attr['style']  = sprintf( 'border-radius:%s;', self::$args['border_radius'] );
-	   $attr['style'] .= sprintf( 'background-color:%s;', self::$args['background_color'] );
-       $attr['style'] .= sprintf( 'color:%s;', self::$args['color'] );
+		if(is_numeric(self::$args['border_radius']))
+			self::$args['border_radius'] = self::$args['border_radius'].'px';
+			
+		$attr['style']  = sprintf( 'border-radius:%s;', self::$args['border_radius'] );
+		$attr['style'] .= sprintf( 'background-color:%s;', self::$args['background_color'] );
+		$attr['style'] .= sprintf( 'color:%s;', self::$args['color'] );
 		return $attr;
 
 	}
@@ -69,4 +71,3 @@ class Magee_Highlight {
 }
 
 new Magee_Highlight();
-endif;

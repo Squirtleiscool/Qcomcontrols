@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Targeted_content') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Targeted_content {
 
 	public static $args;
@@ -21,7 +23,10 @@ class Magee_Targeted_content {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'type'      => '',
 				'alternative'    => '',
@@ -33,21 +38,21 @@ class Magee_Targeted_content {
 		switch(esc_attr($type)){
 		case 'private':
 		   if(current_user_can( 'publish_posts' ) ):
-		        $html .= '<div class="content-private">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</div>'  ;
+		        $html .= '<div class="content-private">'.do_shortcode( Helper::fix_shortcodes($content)).'</div>'  ;
 		   else:
 		        $html .= '<div class="content-private-no">'.esc_attr($alternative).'</div>'  ;
 		   endif;	
 		break;
 		case 'members':
 		   if( is_user_logged_in()):
-		        $html .= '<div class="content-members">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</div>'  ;
+		        $html .= '<div class="content-members">'.do_shortcode( Helper::fix_shortcodes($content)).'</div>'  ;
 		   else:
 		        $html .= '<div class="content-members-no">'.esc_attr($alternative).'</div>'  ;	
 		   endif;	
 		break;
 		case 'guests':
 		   if( !is_user_logged_in()):
-		        $html .= '<div class="content-guests">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</div>'  ;
+		        $html .= '<div class="content-guests">'.do_shortcode( Helper::fix_shortcodes($content)).'</div>'  ;
 		   else:
 		   	    $html .= '<div class="content-guests-no">'.esc_attr($alternative).'</div>'  ;	
 		   endif;		
@@ -58,5 +63,4 @@ class Magee_Targeted_content {
 	
 }
 
-new Magee_Targeted_content();	
-endif;	
+new Magee_Targeted_content();

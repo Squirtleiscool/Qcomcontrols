@@ -1,5 +1,8 @@
 <?php
-if( !class_exists('Magee_Weather') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Weather {
     
 	
@@ -21,31 +24,34 @@ class Magee_Weather {
 	 * @return string          HTML output
 	 */
      function render( $args, $content = '') {
-	     
-		 $defaults =  Magee_Core::set_shortcode_defaults(
-		     
-			 array(
-			    'class'			 	=> '',
-				'id'				=> '',
-				'background_color'	=> '',
-				'background_img'	=> '',
-				'width'				=> '',
-				'height'			=> '',
-				'api_key'           => '',
-				'location'          => '',
-				'units'             => '',
-				'weather_detail'    => '',
-				'forecast'          => '',
-				'forecast_cnt'      => 4,
-			 ),$args
-	     );
+		
+		Helper::get_style_depends(['magee-shortcodes']);
+	
+		$defaults =  Helper::set_shortcode_defaults(
+			
+			array(
+			'class'			 	=> '',
+			'id'				=> '',
+			'background_color'	=> '',
+			'background_img'	=> '',
+			'width'				=> '',
+			'height'			=> '',
+			'api_key'           => '',
+			'location'          => '',
+			'units'             => '',
+			'weather_detail'    => '',
+			'forecast'          => '',
+			'forecast_cnt'      => 4,
+			'is_preview' => ''
+			), $args
+		);
 		extract( $defaults );
 		self::$args = $defaults; 
 		if(is_numeric($width)) 
 		$width = $width.'px';
 		if(is_numeric($height))
 		$height = $height.'px';
-		$uniqid = uniqid('weather-');
+		$uniqid = Utils::rand_str('weather-');
 		$class .= ' '.$uniqid;
 		$api_query = '';
 		if(is_numeric($location)){
@@ -126,15 +132,15 @@ class Magee_Weather {
 			break;
 			}
 		} 
-		$html = '<style type="text/css">
+		$css_style = '
 		.'.$uniqid.'{
 		background-color:'.$background_color.';
 		background-image:url('.esc_url($background_img).');
 		width:'.$width.';
 		height:'.$height.';
-		}
-		</style>';
-		$html .= '<div class="magee-wheather-box '.$class.'" id="'.$id.'">
+		}';
+	
+		$html = '<div class="magee-shortcode magee-wheather-box '.$class.'" id="'.$id.'">
 				  <div class="magee-wheather simple">';
 		if(isset($city_data->name))
 		$html .= '<h2>'.$city_data->name.'</h2>';
@@ -165,8 +171,8 @@ class Magee_Weather {
 		$pressure = '';
 		$wind     = '';
 		if(isset($city_data->sys)){
-		 $sunrise = date('H:i',$city_data->sys->sunrise);
-		 $sunset  = (date('H',$city_data->sys->sunset)-12).':'.date('i',$city_data->sys->sunset);
+		 $sunrise = date('H:i', $city_data->sys->sunrise);
+		 $sunset  = (date('H', $city_data->sys->sunset)-12).':'.date('i', $city_data->sys->sunset);
 		 }
 		 //current temp
 		$ping_temp  = "http://api.openweathermap.org/data/2.5/forecast/daily?".$api_query . "&units=" . esc_attr($units) ."&APPID=".esc_attr($api_key)."&cnt=1";
@@ -239,7 +245,7 @@ class Magee_Weather {
 		   if(isset($forecast_data->list)){
 		   $days = array('Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday');
 		   $time = $forecast_data->list;
-		   $forcastday = $days[date('w',$time[$i]->dt)];   
+		   $forcastday = $days[date('w', $time[$i]->dt)];   
 		   $forcast_icon = $time[$i]->weather[0]->icon;
 		   switch( $forcast_icon){
 			case '01d':
@@ -321,12 +327,20 @@ class Magee_Weather {
 		$html .= '</tbody>
     </table>';	
 		endif; 
-		$html .= '		  </div>
-				</div>
-			';
+		$html .= '</div></div>';
+		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+	
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+			
 		return $html;
  } 
 	 
 }
-new Magee_Weather();	
-endif;	 		 
+new Magee_Weather();

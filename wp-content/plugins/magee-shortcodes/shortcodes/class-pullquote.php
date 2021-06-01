@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Pullquote') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Pullquote {
 
     public static $args;
@@ -21,27 +23,29 @@ class Magee_Pullquote {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
-				'align'                 =>'',	
+				'align'                 =>'',
+				'border_color' => '#eeee22'
 			), $args
 		);
         extract( $defaults );
 		self::$args = $defaults;
 		$style = '';
 		$html = '';
+		$class .= ' magee-shortcode magee-pullquote';
 		if($align == 'left'):
-		$html .='<blockquote id="'.esc_attr($id).'" class="'.esc_attr($class).'">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</blockquote>' ;
+			$html .='<blockquote id="'.esc_attr($id).'" style="border-color:'.$border_color.';" class="'.esc_attr($class).'">'.do_shortcode( Helper::fix_shortcodes($content)).'</blockquote>' ;
         else:
-		$html .='<blockquote id="'.esc_attr($id).'" class="blockquote-reverse '.esc_attr($class).'">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</blockquote>' ;
+			$html .='<blockquote id="'.esc_attr($id).'" style="border-color:'.$border_color.';" class="blockquote-reverse '.esc_attr($class).'">'.do_shortcode( Helper::fix_shortcodes($content)).'</blockquote>' ;
 		endif;
-		
 		
 		return $html;
    }
 }
 
 new Magee_Pullquote();
-endif;

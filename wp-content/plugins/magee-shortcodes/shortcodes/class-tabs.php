@@ -1,5 +1,8 @@
 <?php
-if( !class_exists(' Magee_Tabs ') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Tabs {
 
 	public static $args;
@@ -24,23 +27,28 @@ class Magee_Tabs {
 	 */
 	function render_parent( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['bootstrap', 'magee-shortcodes']);
+		Helper::get_script_depends(['bootstrap', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
 				'title_color'			=>'',
 				'style'					=>'',
+				'is_preview' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('tabs-');
-		$this->id = $id.$uniqid;
+		$uniqid = Utils::rand_str('tabs-');
+		$this->id = $uniqid;
+		$class .= ' '.$uniqid;
         $this->num = 1;
 		$this->item_tital='';
-		$this->colorid = uniqid('tab');
-		$items_content = do_shortcode(Magee_Core::fix_shortcodes($content));		
+		// $this->colorid = Utils::rand_str('tab-');
+		$items_content = do_shortcode(Helper::fix_shortcodes($content));		
 		$txtsty1='';
 		$tab_content_class = '';
 		
@@ -82,12 +90,23 @@ class Magee_Tabs {
 		}
 		
 		
-		$textstyle = ' .'.$this->colorid.', .'.$this->colorid.' i{color:'.$title_color.'}';
-		$styles = sprintf( '<style type="text/css" scoped="scoped">%s </style>', $textstyle);
-		$html= $styles.'<div class="magee-tab-box '.$class.'" role="tabpanel" data-example-id="togglable-tabs id='.$id.'">
-               <ul id="myTab1" class="list-inline '.$txtsty1.'" role="tablist">'.$this->item_tital.'
-               </ul><div id="myTabContent" class="tab-content '.$tab_content_class.'">'.$items_content.'</div></div>';
+		$css_style = ' .'.$uniqid.' h4, .'.$uniqid.' i{color:'.$title_color.'}';
+
+		$class .= ' magee-shortcode magee-tab-box';
+
+		$html= '<div class="'.$class.'" role="tabpanel" data-example-id="togglable-tabs" id="'.$id.'">
+               <ul id="" class="'.$txtsty1.'" role="tablist">'.$this->item_tital.'
+               </ul><div id="" class="tab-content '.$tab_content_class.'">'.$items_content.'</div></div>';
 		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+	
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
 		return $html;
 	}
 	
@@ -99,7 +118,7 @@ class Magee_Tabs {
 	 */
 	function render_child( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'title' =>'',
 				'icon' =>'',
@@ -110,7 +129,7 @@ class Magee_Tabs {
 		self::$args = $defaults;
 		$itemId = ' '.$this->id."-".$this->num;
 		
-		$tabid = uniqid('tab-');
+		$tabid = Utils::rand_str('tab-');
 		
 		$txtstyle='';
 		$txtbl = ' false';
@@ -123,7 +142,7 @@ class Magee_Tabs {
 		}
         $this->item_tital .= sprintf(' <li role="presentation" class="'.$txtstyle.'"><a href="#'.$tabid.'" id="'.$tabid.'-tab" role="tab" data-toggle="tab" aria-controls="'.$tabid.'" aria-expanded="'.$txtbl.'"><h4 class="tab-title '.$this->colorid.' "> <i class="fa '.$icon.'"></i>'.$title.'</h4></a></li>');
 				 
-		 $html = '<div role="tabpanel" class="tab-pane fade '.$txtat.'" id="'.$tabid.'"><p>'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</p></div>';
+		 $html = '<div role="tabpanel" class="tab-pane fade '.$txtat.'" id="'.$tabid.'"><p>'.do_shortcode( Helper::fix_shortcodes($content)).'</p></div>';
 		 
   		$this->num++;
 		return $html;
@@ -131,4 +150,3 @@ class Magee_Tabs {
 }
 
 new Magee_Tabs();
-endif;

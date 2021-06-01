@@ -1,11 +1,14 @@
 <?php
-if( !class_exists('Magee_Modal') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Modal {
 
 	public static $args;
     private  $id;
-	private  $modal_anchor_text;
-	private  $modal_content;
+	private $modal_anchor_text;
+	private $modal_content;
 
 	/**
 	 * Initiate the shortcode
@@ -25,7 +28,10 @@ class Magee_Modal {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+		
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
@@ -40,41 +46,63 @@ class Magee_Modal {
 				'overlay_color' 		=>'#000000',
 				'overlay_opacity' 		=>'0.3',
 				'close_icon'            =>'yes',
+				'is_preview' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('modal-');
-		$this->id = $id.$uniqid;
+		$uniqid = Utils::rand_str('modal-');
+		$this->id = $uniqid;
         if(isset($width) && is_numeric($width))
-		$width = $width.'px';
+			$width = $width.'px';
 		if(isset($height) && is_numeric($height))
-		$height = $height.'px';
+			$height = $height.'px';
 		 
-		$html = '';
-		$html .='<style type="text/css">';
+		$css_style = '';
+
 		if(isset($title_color) && $title_color !== '')
-		$html .='#'.$uniqid.' .magee-modal-title-wrapper h3{color:'.$title_color.'}';
+			$css_style .='#'.$uniqid.' .magee-modal-title-wrapper h3{color:'.$title_color.'}';
 		if(isset($heading_background) && $heading_background !== '')
-		$html .='#'.$uniqid.' .magee-modal-title-wrapper{background:'.$heading_background.'}';
+			$css_style .='#'.$uniqid.' .magee-modal-title-wrapper{background:'.$heading_background.'}';
 		if(isset($background) && $background !== '')
-		$html .='#'.$uniqid.' .magee-modal-content-wrapper{background:'.$background.'}';
+			$css_style .='#'.$uniqid.' .magee-modal-content-wrapper{background:'.$background.'}';
 		if(isset($color) && $color !== '')
-		$html .='#'.$uniqid.' .magee-modal-content-wrapper{color:'.$color.'}';
+			$css_style .='#'.$uniqid.' .magee-modal-content-wrapper{color:'.$color.'}';
 		if(isset($width) && $width !== '')
-		$html .='#'.$uniqid.' .magee-modal-content-wrapper{width:'.$width.'}';
+			$css_style .='#'.$uniqid.' .magee-modal-content-wrapper{width:'.$width.'}';
 		if(isset($height) && $height !== '')
-		$html .='#'.$uniqid.' .magee-modal-content-wrapper{height:'.$height.'}';
-		if(isset($overlay_color) && $overlay_color !== '')
-		$overlay_color = Magee_Core::hex2rgb($overlay_color);
-		$html .='#'.$uniqid.' .magee-modal-overlay{background-color:rgba('.$overlay_color[0].','.$overlay_color[1].','.$overlay_color[2].','.$overlay_opacity.');}';
+			$css_style .='#'.$uniqid.' .magee-modal-content-wrapper{height:'.$height.'}';
+		if(isset($overlay_color) && $overlay_color !== ''){
+			$overlay_color = Helper::hex2rgb($overlay_color);
+		}
+		$css_style .='#'.$uniqid.' .magee-modal-overlay{background-color:rgba('.$overlay_color[0].','.$overlay_color[1].','.$overlay_color[2].','.$overlay_opacity.');}';
 		
-		$html .='</style>';
-        do_shortcode( Magee_Core::fix_shortcodes($content));
-		
-		$html .= sprintf('<div id="%s" class="magee-modal-trigger %s" data-id="%s" data-title="%s" data-content="%s" data-effect="%s" data-close_icon="%s">%s</div>',$id,$class,$uniqid,$title,base64_encode(do_shortcode( Magee_Core::fix_shortcodes($this->modal_content))), $effect,$close_icon,do_shortcode( Magee_Core::fix_shortcodes($this->modal_anchor_text)));
-		
+        do_shortcode( Helper::fix_shortcodes($content));
+
+		$class .= ' magee-shortcode magee-modal-trigger';
+
+		$html = sprintf('<div 
+		id="%1$s" 
+		class="%2$s" 
+		data-id="%3$s" 
+		data-title="%4$s" 
+		data-content="%5$s" 
+		data-effect="%6$s" 
+		data-close_icon="%7$s"
+		>%8$s
+		</div>', $id, $class, $uniqid, esc_attr($title), wp_kses_post($this->modal_content), $effect, $close_icon, wp_kses_post($this->modal_anchor_text));
+				
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+
 		return $html;
 	}
 	
@@ -84,18 +112,20 @@ class Magee_Modal {
 	 * @param  string $content Content between shortcode
 	 * @return string          HTML output
 	 */
-		function render_modal_anchor_text( $args, $content = '') {
+	function render_modal_anchor_text( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
+				'is_preview' => ''
 			), $args
 		);
 
 		extract( $defaults );
 		self::$args = $defaults;
 						 
-		$this->modal_anchor_text = do_shortcode( Magee_Core::fix_shortcodes($content));
-		 
+		$this->modal_anchor_text = do_shortcode( Helper::fix_shortcodes($content));
+
+		return $this->modal_anchor_text;
 	}
 	
 	/**
@@ -104,21 +134,23 @@ class Magee_Modal {
 	 * @param  string $content Content between shortcode
 	 * @return string          HTML output
 	 */
-		function render_modal_content( $args, $content = '') {
+	function render_modal_content( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
+				'is_preview' => ''
 			), $args
 		);
 
 		extract( $defaults );
 		self::$args = $defaults;
 						 
-		$this->modal_content = do_shortcode( Magee_Core::fix_shortcodes($content));
+		$this->modal_content = do_shortcode( Helper::fix_shortcodes($content));
+		
+		return $this->modal_content;
 	
 	}
 	
 }
 
 new Magee_Modal();
-endif;

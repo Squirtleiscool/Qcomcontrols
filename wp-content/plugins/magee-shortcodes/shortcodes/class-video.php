@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Video') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Video {
     
 	
@@ -21,68 +23,69 @@ class Magee_Video {
 	 * @return string          HTML output
 	 */
      function render( $args, $content = '') {
-	     
-		 $defaults =  Magee_Core::set_shortcode_defaults(
-		     
-			 array(
-			     'id'                    =>'',
-				 'class'                 =>'',
-				 'width'                 =>'',
-				 'height'                =>'',
-				 'mute'                  =>'',
-				 'mp4_url'               =>'',
-				 'ogv_url'               =>'',
-				 'webm_url'               =>'',
-				 'poster'                =>'',
-				 'autoplay'        =>'',
-				 'loop'            =>'',    
-				 'controls'        =>'',  
-				        'position'   => 'left'
-			 ),$args
-	     );
-	     
-		 extract( $defaults );
-		 self::$args = $defaults;
-		 $html = '';
-		 if(is_numeric($width))
-			$width = $width.'px';
-		 if(is_numeric($height))
-			$height = $height.'px'; 
-		 if( $mute == 'yes'):
-		 $mute = 'muted';
-		 else:
-		 $mute = '';
-		 endif;
-		 if( $controls == 'yes'):
-		 $controls = 'controls';
-		 else:
-		 $controls = '';
-		 endif;
-		 if( $loop == 'yes'):
-		 $loop = 'loop';
-		 else:
-		 $loop = '';
-		 endif;
-		 if( $autoplay == 'yes'):       
-		 $autoplay = 'autoplay'	;
-		 else:
-		 $autoplay = '';
-		 endif;	        
-		 if( $mp4_url !=='' || $ogv_url !=='' || $webm_url !=='' ){ $html .= '<video  class="'.esc_attr($class).'" id="'.esc_attr($id).'"  width="'.$width.'" height="'.$height.'" '.$mute.' '.$controls.' '.$loop.' '.$autoplay.' >';
-		 $html .= '<source src="'.esc_url($mp4_url).'" type="video/mp4">
-		           <source src="'.esc_url($ogv_url).'" type="video/mp4">
-				   <source src="'.esc_url($webm_url).'" type="video/mp4">';
-		 	      
-         $html .= '</video>';}
-		 else{
-		 
-		 $html .= '<image src="'.esc_url($poster).'">'	;
-		 }
-		 return $html;
+		
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+	
+		$defaults =  Helper::set_shortcode_defaults(
+			
+			array(
+				'id'                    =>'',
+				'class'                 =>'',
+				'width'                 =>'',
+				'height'                =>'',
+				'mute'                  =>'',
+				'mp4_url'               =>'',
+				'ogv_url'               =>'',
+				'webm_url'               =>'',
+				'poster'                =>'',
+				'autoplay'        =>'',
+				'loop'            =>'',    
+				'controls'        =>'',  
+				'position'   => 'left'
+			), $args
+		);
+		
+		extract( $defaults );
+		self::$args = $defaults;
+		$html = '';
+		if(is_numeric($width))
+		$width = $width.'px';
+		if(is_numeric($height))
+		$height = $height.'px'; 
+		if( $mute == 'yes'):
+		$mute = 'muted';
+		else:
+		$mute = '';
+		endif;
+		if( $controls == 'yes'):
+		$controls = 'controls';
+		else:
+		$controls = '';
+		endif;
+		if( $loop == 'yes'):
+		$loop = 'loop';
+		else:
+		$loop = '';
+		endif;
+		if( $autoplay == 'yes'):       
+		$autoplay = 'autoplay'	;
+		else:
+		$autoplay = '';
+		endif;	        
+		if( $mp4_url !=='' || $ogv_url !=='' || $webm_url !=='' ){ $html .= '<video poster="'.esc_url($poster).'" class="magee-shortcode magee-video '.esc_attr($class).'" id="'.esc_attr($id).'"  width="'.$width.'" height="'.$height.'" '.$mute.' '.$controls.' '.$loop.' '.$autoplay.' >';
+			$html .= '<source src="'.esc_url($mp4_url).'" type="video/mp4">
+					<source src="'.esc_url($ogv_url).'" type="video/mp4">
+					<source src="'.esc_url($webm_url).'" type="video/mp4">';
+					
+			$html .= '</video>';}
+		else{
+			$html .= '<image src="'.esc_url($poster).'">'	;
+		}
+		return $html;
 		 	 
 	 } 
 	 
 }
 
 new Magee_Video();
-endif;

@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Dummy_Text') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Dummy_Text {
 
 	public static $args;
@@ -9,7 +11,6 @@ class Magee_Dummy_Text {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_dummy_text', array( $this, 'render' ) );
 	}
 
@@ -20,8 +21,8 @@ class Magee_Dummy_Text {
 	 * @return string          HTML output
 	 */
 	function render( $args, $content = '') {
-
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'style' 			    =>'',
 				'class' 				=>'',
@@ -32,12 +33,13 @@ class Magee_Dummy_Text {
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$source = simplexml_load_file( 'http://www.lipsum.com/feed/xml?what=' . esc_attr($style). '&amount=' . esc_attr($amount) . '&start=0' );
-		$html = '<div class="'.esc_attr($class).'" id="'.esc_attr($id).'">'.wpautop(str_replace("\n","\n\n",$source->lipsum)).'</div>' ;
+		$class .= ' magee-shortcode magee-dummy-text';
+
+		$source = simplexml_load_file( '//www.lipsum.com/feed/xml?what=' . esc_attr($style). '&amount=' . esc_attr($amount) . '&start=0' );
+		$html = '<div class="'.esc_attr($class).'" id="'.esc_attr($id).'">'.wpautop(str_replace("\n","\n\n", $source->lipsum)).'</div>' ;
 		return  $html;
 	}
 	
 }
 
-new Magee_Dummy_Text();		
-endif;
+new Magee_Dummy_Text();

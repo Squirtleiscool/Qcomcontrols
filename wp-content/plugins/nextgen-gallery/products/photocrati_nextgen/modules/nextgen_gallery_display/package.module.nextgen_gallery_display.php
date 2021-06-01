@@ -1707,9 +1707,13 @@ class C_Displayed_Gallery_Renderer extends C_Component
  */
 class Mixin_Displayed_Gallery_Renderer extends Mixin
 {
+    static $_cache = array();
     function params_to_displayed_gallery($params)
     {
-        $displayed_gallery = NULL;
+        $hash = crc32(serialize($params));
+        if (isset(self::$_cache[$hash])) {
+            return self::$_cache[$hash];
+        }
         // Get the NextGEN settings to provide some defaults
         $settings = C_NextGen_Settings::get_instance();
         // Perform some conversions...
@@ -1799,6 +1803,8 @@ class Mixin_Displayed_Gallery_Renderer extends Mixin
         if ($displayed_gallery) {
             $displayed_gallery->validate();
         }
+        // Cache for reuse
+        self::$_cache[$hash] = $displayed_gallery;
         return $displayed_gallery;
     }
     /**

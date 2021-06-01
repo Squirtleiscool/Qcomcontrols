@@ -1,5 +1,8 @@
 <?php
-if( !class_exists(' Magee_Button') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Button {
 
 	public static $args;
@@ -24,7 +27,10 @@ class Magee_Button {
 	 
 	function render( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'',
 				'class' =>'',
@@ -40,32 +46,33 @@ class Magee_Button {
 				'text_color' => '',
 				'icon' =>'',
 				'icon_animation_type' =>'',
-				'border_width'=>2
-				
+				'border_width'=>2,
+				'is_preview' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
 		
-		$class .= ' magee-btn-normal';
+		$class .= ' magee-shortcode magee-btn-normal';
 		$css_style = ' .magee-btn-normal,.magee-btn-normal:hover{text-decoration:none !important;}';
-		$add_class = uniqid('button-');
+		$add_class = Utils::rand_str('button-');
 		$class .= ' '.$add_class;
 		
 		if( $shape != '' )
-		$class .= ' btn-'.$shape;
-		$border_width = str_replace('px','',$border_width);
+			$class .= ' btn-'.$shape;
+		$border_width = str_replace('px','', $border_width);
+
 		if( $shadow == 'yes' )
-		$class .= ' btn-text-shadow';
+			$class .= ' btn-text-shadow';
 		
 		if( $block == 'yes' )
-		$class .= ' btn-block';
+			$class .= ' btn-block';
 		
 		if( $gradient == 'yes' )
-		$class .= ' btn-gradient';
+			$class .= ' btn-gradient';
 		
-		switch( $size ){
+		switch( $size ) {
 			case "small":
 			$class .= ' btn-sm';
 			break;
@@ -78,9 +85,9 @@ class Magee_Button {
 			case "xlarge":
 			$class .= ' btn-xl';
 			break;
-			}
+		}
 			
-		switch( $style){
+		switch( $style) {
 			case "dark":
 			$class .= ' btn-dark';
 			break;
@@ -95,10 +102,9 @@ class Magee_Button {
 			break;
 			case "line":
 			$class .= ' btn-line';
-			if( is_numeric($border_width ))
-			{
+			if( is_numeric($border_width )) {
 				$css_style .= 'a.'.$add_class.' {border-width:'.$border_width.'px !important;}';
-				}
+			}
 			break;
 			case "line_dark":
 			$class .= ' btn-line btn-dark';
@@ -109,77 +115,83 @@ class Magee_Button {
 			$css_style .= 'a.'.$add_class.' {border-width:'.$border_width.'px !important;}';
 			break;
 			
-			}
-		if( $icon !='' ){
-		$animated = '';
-		if( $icon_animation_type != '' )
-		$animated = 'animated infinite '.$icon_animation_type;
+		}
+
+		if( $icon !='' ) {
+			$animated = '';
+			if( $icon_animation_type != '' )
+				$animated = 'animated infinite '.$icon_animation_type;
 			if( stristr($icon,'fa-')):
-			$content  = '<i class="fa '.$icon.' '.$animated.'"></i>  '.$content;
+				$content  = '<i class="fa '.$icon.' '.$animated.'"></i>  '.$content;
 			else:
-			$content = '<img class="image-instead" src="'.esc_attr($icon).'" style="padding-right:10px"/>'.$content;
-		    endif;
-		}
-		
-		if( $text_color !='' ){
-		$css_style .= 'a.'.$add_class.',a.'.$add_class.':hover{color:'.$text_color.';}';
-		$css_style .= 'a.'.$add_class.' {color: '.$text_color.' !important;border-color: '.$text_color.' !important;}';
-		}
-		
-		if( $color !='' ){
-			
-			
-			switch( $style){
-			case "normal":
-			case "2d":
-			$css_style .= 'a.'.$add_class.' {background-color:'.$color.' !important;}';
-			$css_style .= 'a.'.$add_class.':active,
-			a.'.$add_class.':hover,
-			a.'.$add_class.':focus
-			{background-color:'.Magee_Core::colourBrightness($color,-0.9).' !important;}';
-		
-			break;
-			case "3d":
-			$css_style .= 'a.'.$add_class.' {background-color:'.$color.';box-shadow: 0 3px 0 0 '.Magee_Core::colourBrightness($color,-0.6).' !important;}';
-		    $css_style .= 'a.'.$add_class.':active,
-			a.'.$add_class.':hover,
-			a.'.$add_class.':focus
-			{background-color:'.Magee_Core::colourBrightness($color,-0.9).' !important;}';
+				$content = '<img class="image-instead" src="'.esc_attr($icon).'" style="padding-right:10px"/>'.$content;
+			endif;
 
-			break;
-			case "dark":
-			case "light":
-			$css_style .= 'a.'.$add_class.' {background-color:'.$color.'!important;}';
-			$css_style .= 'a.'.$add_class.':active,
-			a.'.$add_class.':hover,
-			a.'.$add_class.':focus
-			{background-color:'.Magee_Core::colourBrightness($color,-0.9).' !important;}';
-			break;
+		}
 		
-			case "line":
-			case "line_dark":
-			case "line_light":
-			$css_style .= 'a.'.$add_class.':active,
-			a.'.$add_class.':hover,
-			a.'.$add_class.':focus
-			{background-color:'.$color.' !important;}';
+		if( $text_color !='' ) {
+			$css_style .= 'a.'.$add_class.',a.'.$add_class.':hover{color:'.$text_color.';}';
+			$css_style .= 'a.'.$add_class.' {color: '.$text_color.' !important;border-color: '.$text_color.' !important;}';
+		}
+		
+		if( $color !='' ) {
 			
-			break;
+			switch( $style) {
+				case "normal":
+				case "2d":
+				$css_style .= 'a.'.$add_class.' {background-color:'.$color.' !important;}';
+				$css_style .= 'a.'.$add_class.':active,
+				a.'.$add_class.':hover,
+				a.'.$add_class.':focus
+				{background-color:'.Helper::colourBrightness($color,-0.9).' !important;}';
+			
+				break;
+				case "3d":
+				$css_style .= 'a.'.$add_class.' {background-color:'.$color.';box-shadow: 0 3px 0 0 '.Helper::colourBrightness($color,-0.6).' !important;}';
+				$css_style .= 'a.'.$add_class.':active,
+				a.'.$add_class.':hover,
+				a.'.$add_class.':focus
+				{background-color:'.Helper::colourBrightness($color,-0.9).' !important;}';
+
+				break;
+				case "dark":
+				case "light":
+				$css_style .= 'a.'.$add_class.' {background-color:'.$color.'!important;}';
+				$css_style .= 'a.'.$add_class.':active,
+				a.'.$add_class.':hover,
+				a.'.$add_class.':focus
+				{background-color:'.Helper::colourBrightness($color,-0.9).' !important;}';
+				break;
+			
+				case "line":
+				case "line_dark":
+				case "line_light":
+				$css_style .= 'a.'.$add_class.':active,
+				a.'.$add_class.':hover,
+				a.'.$add_class.':focus
+				{background-color:'.$color.' !important;}';
+				
+				break;
 			
 			}
 			
-			}
-		
-		$html = '<style type="text/css">'.$css_style.'</style>';		
-		$html .= sprintf( '<a href="%s" target="%s" style="" class="%s" id="%s">%s</a>', esc_url($link),$target, $class,$id, do_shortcode( Magee_Core::fix_shortcodes($content)) );
+		}		
 
+		$html = sprintf( '<a href="%1$s" target="%2$s" class="%3$s" id="%4$s">%5$s</a>', esc_url($link), $target, $class, $id, do_shortcode( Helper::fix_shortcodes($content)) );
+		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+		
 		return $html;
 	}
-	
-	
 
-	
 }
 
 new Magee_Button();
-endif;

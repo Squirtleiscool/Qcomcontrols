@@ -24,7 +24,7 @@ class M_NextGen_Basic_Tagcloud extends C_Base_Module
 			NGG_BASIC_TAGCLOUD,
             'NextGen Basic Tagcloud',
             'Provides a tagcloud for NextGEN Gallery',
-            '3.9.0',
+            '3.10',
             'https://www.imagely.com/wordpress-gallery-plugin/nextgen-gallery/',
             'Imagely',
             'https://www.imagely.com'
@@ -95,7 +95,8 @@ class M_NextGen_Basic_Tagcloud extends C_Base_Module
             C_NextGen_Shortcode_Manager::add('tagcloud', NULL, [$this, 'render_shortcode']);
             C_NextGen_Shortcode_Manager::add('nggtagcloud', NULL, [$this, 'render_shortcode']);
 
-            add_filter('the_posts', [C_Taxonomy_Controller::get_instance(), 'detect_ngg_tag'], -10, 2);
+            if (!C_NextGen_Settings::get_instance()->get('disable_ngg_tags_page', FALSE))
+                add_filter('the_posts', [C_Taxonomy_Controller::get_instance(), 'detect_ngg_tag'], -10, 2);
         }
 
         add_action('ngg_routes', array(&$this, 'define_routes'));

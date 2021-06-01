@@ -1,16 +1,18 @@
 <?php
-if( !class_exists('Magee_Accordion') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Accordion {
 
 	public static $args;
     private  $id;
 	private  $num;
-
+	private $is_preview;
 	/**
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_accordion', array( $this, 'render_parent' ) );
         add_shortcode( 'ms_accordion_item', array( $this, 'render_child' ) );
 	}
@@ -23,25 +25,61 @@ class Magee_Accordion {
 	 */
 	function render_parent( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'',
 				'class' =>'',
 				'style'=>'simple',
-				'type' =>1
+				'type' => 1,
+				'icon' => '',
+				'background_color' => '',
+				'color' => '',
+				'is_preview' => '',
+				'open_multiple' => 'no'
 			), $args
 		);
-		
 
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('accordion-');
-		$this->id = $id.$uniqid;
+		$uniqid = Utils::rand_str('accordion-');
+		$class .= ' '.$uniqid;
+		$this->id = $uniqid;
         $this->num = 1;
-
-		$class .= ' style'.$type;
+		$this->is_preview = $is_preview;
 		
-		$html = '<div class="panel-group magee-accordion accordion-'.$style.' '.esc_attr($class).'" role="tablist" aria-multiselectable="true" id="'.esc_attr($this->id).'">'.do_shortcode( Magee_Core::fix_shortcodes($content)).'</div>';
+		$type = $icon == 'arrow'? 1: $type;
+		$type = $icon == 'plus'? 2: $type;
+		$type = $icon == 'none'? 3: $type;
+
+		$css_style = '';
+	
+		if($background_color !== '')
+			$css_style .= '.'.$uniqid.' .panel-heading{
+			background-color:'.$background_color.' !important;}
+			.'.$uniqid.'{border-color:'.$background_color.' !important;}';
+		
+		if($color !== '')
+			$css_style .= '.'.$uniqid.' .panel-title{color:'.$color.' !important;}
+			.'.$uniqid.' .panel-title i{color:'.$color.';}
+			.'.$uniqid.' .panel-heading .accordion-toggle:after{color:'.$color.';}';
+
+		$class .= ' style'.$type.' magee-shortcode panel-group magee-accordion accordion-'.$style;
+		
+		$html = '<div class="'.esc_attr($class).'" role="tablist" aria-multiselectable="'.esc_attr($open_multiple).'" id="'.esc_attr($this->id).'">'.do_shortcode( Helper::fix_shortcodes($content)).'</div>';
+		
+		if (class_exists('\Elementor\Plugin') && \Elementor\Plugin::instance()->editor->is_edit_mode() ){
+			$is_preview = "1";
+		}
+
+		if ($is_preview == "1"){
+			$html = sprintf( '<style type="text/css" scoped="scoped">%1$s</style>%2$s' , $css_style, $html );
+		}else{
+			wp_add_inline_style('magee-shortcodes', $css_style);
+		}
+
 		return $html;
 
 	}
@@ -54,84 +92,52 @@ class Magee_Accordion {
 	 */
 	function render_child( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'title' =>'',
 				'status' =>'',
-				'close_icon' =>'',
-				'open_icon' =>'',
-				'background_color' => '',
-				'color' => '',
+				'is_preview' => ''
 			), $args
 		);
 
 		extract( $defaults );
 		self::$args = $defaults;
         $html = '';
-		$icon_str = '';
+
 		if( $status == "open" ) {
-		$status   = "in";
-		$expanded = "true";
-		$collapse = "";
-		if($open_icon !== ''):
-		$icon_str = '<i class="fa '.esc_attr($open_icon).' open-magee-accordion" data-close="'.$close_icon.'" data-open="'.$open_icon.'"></i>';
-		endif;
+			$status   = "in";
+			$expanded = "true";
+			$collapse = "";
 		}
 		else{
-		$status = "";
-		$expanded = "false";
-		$collapse = "collapsed";
-		if($close_icon !== ''):
-		$icon_str = '<i class="fa '.esc_attr($close_icon).' close-magee-accordion" data-close="'.$close_icon.'" data-open="'.$open_icon.'"></i>';
-		endif;
+			$status = "";
+			$expanded = "false";
+			$collapse = "collapsed";
 		}
-        /*if( stristr($icon,'fa-')):
-		
-		else:
-		$icon_str = '<img class="image-instead" src="'.esc_attr($icon).'"/>';
-		endif;*/
 		
         $itemId = 'collapse'.$this->id."-".$this->num;
-		$addclass = 'panel-css-'.$this->num;
+		$panelId = 'panel'.$this->id."-".$this->num;
 		
-		
-		$html .= '<div class="panel panel-default '.$addclass.'">';
-		$html .= '<style type="text/css">';
-		if($background_color !== '')
-		$html .= '#'.$this->id.' .'.$addclass.' .panel-heading{
-		background-color:'.$background_color.'!important;}
-		#'.$this->id.' .'.$addclass.'{border-color:'.$background_color.'!important;}';
-		
-		if($color !== '')
-		$html .= '#'.$this->id.' .'.$addclass.' .panel-title{color:'.$color.'!important;}
-		#'.$this->id.' .'.$addclass.' .panel-title i{color:'.$color.';}
-		#'.$this->id.' .'.$addclass.' .panel-heading .accordion-toggle:after{color:'.$color.';}';
-		
-		$html .= '</style>';
-		
-		$html .= '
-                                                    <div class="panel-heading" role="tab" id="heading'.$itemId.'">
-                                                        <a class="accordion-toggle '.$collapse.'" data-toggle="collapse" data-parent="#'.$this->id.'" href="#'.$itemId.'" aria-expanded="'.$expanded.'" aria-controls="'.$itemId.'">
-                                                            <h4 class="panel-title">
-                                                                 '.$icon_str.esc_attr($title).'
-                                                            </h4>
-                                                        </a>
-                                                    </div>
-                                                    <div id="'.$itemId.'" class="panel-collapse collapse '.$status.'" role="tabpanel" aria-labelledby="heading'.$itemId.'" aria-expanded="'.$expanded.'">
-                                                        <div class="panel-body">
-                                                          '.do_shortcode( Magee_Core::fix_shortcodes($content)).'
-														  <div class="clear"></div>
-                                                        </div>
-                                                    </div>
-                                                </div>';
-         
-$this->num++;
+		$html .= '<div class="panel panel-default " id="'.$panelId.'">';
+
+		$html .= '<div class="panel-heading" role="tab" id="heading'.$itemId.'">
+				<a class="accordion-toggle '.$collapse.'" data-toggle="collapse" data-parent="#'.$this->id.'" href="#'.$itemId.'" aria-expanded="'.$expanded.'" aria-controls="'.$itemId.'">
+					<h4 class="panel-title">
+							'.esc_attr($title).'
+					</h4>
+				</a>
+			</div>
+			<div id="'.$itemId.'" class="panel-collapse collapse '.$status.'" role="tabpanel" aria-labelledby="heading'.$itemId.'" aria-expanded="'.$expanded.'">
+				<div class="panel-body">
+					'.do_shortcode( Helper::fix_shortcodes($content)).'
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>';
+        
+		$this->num++;
        
 		return $html;
 	}
-
-
 }
-
 new Magee_Accordion();
-endif;

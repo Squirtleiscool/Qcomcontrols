@@ -1,8 +1,10 @@
 <?php
-if( !class_exists('Magee_Label') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+use MageeShortcodes\Classes\Utils;
+
 class Magee_Label {
     
-	
 	public static $args;
 	private $id;
     
@@ -22,23 +24,24 @@ class Magee_Label {
 	 */
      function render( $args, $content = '') {
 	 
-	     
-		 $defaults =  Magee_Core::set_shortcode_defaults(
-		     
-			 array(
-				 'background_color'         => '',
-			 ),$args
-	     );
-	    
-		 extract( $defaults );
-		 self::$args = $defaults;
+		Helper::get_style_depends(['magee-shortcodes']);
 
-		 $html = sprintf('<span class="label magee-label" style="background-color:%s;">%s</span>',$background_color,do_shortcode($content));
-		 
-		 return $html;
+		$defaults =  Helper::set_shortcode_defaults(
+			
+		array(
+			'background_color' => '',
+			'text_color' => '',
+		), $args
+		);
+	
+		extract( $defaults );
+		self::$args = $defaults;
+
+		$html = sprintf('<span class="magee-shortcode label magee-label" style="background-color:%1$s;color:%2$s;">%3$s</span>', $background_color, $text_color,do_shortcode($content));
+		
+		return $html;
 		 
 	}	 
 }
 
-new Magee_Label(); 
-endif;
+new Magee_Label();

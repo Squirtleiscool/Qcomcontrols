@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Menu') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Menu {
 
 	public static $args;
@@ -21,7 +23,9 @@ class Magee_Menu {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+		
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'menu'      => '',
 				'class'      => '',
@@ -30,17 +34,17 @@ class Magee_Menu {
 		);
 		extract( $defaults );
 		self::$args = $defaults;
+
+		$class .= ' magee-shortcode magee-menu';
 		if(isset($menu)):
-		$menus = array(
-		   'menu' => esc_attr($menu),
-		   'echo' => false,
-		   'items_wrap' => '<ul id="%1$s '.esc_attr($id).'" class="%2$s ' . esc_attr($class) . '">%3$s</ul>'
-		);
-		$html = wp_nav_menu($menus);
-		return $html;
+			$menus = array(
+			'menu' => esc_attr($menu),
+			'items_wrap' => '<ul id="'.esc_attr($id).'" class="%2$s ' . esc_attr($class) . '">%3$s</ul>'
+			);
+			$html = wp_nav_menu($menus);
+			return $html;
 		endif;
    }
 }
 
-new Magee_Menu();	
-endif;	
+new Magee_Menu();

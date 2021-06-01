@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Row') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Row {
 
 	public static $args;
@@ -21,7 +23,9 @@ class Magee_Row {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
@@ -31,11 +35,12 @@ class Magee_Row {
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		
-		if( $no_padding == 'yes')
-		$class .= ' no-padding';
+		$class .= ' magee-shortcode magee-row';
 
-		$html = sprintf('<div id="%s" class="%s row">%s</div>',$id,$class,do_shortcode( Magee_Core::fix_shortcodes($content)));
+		if( $no_padding == 'yes')
+			$class .= ' no-padding';
+
+		$html = sprintf('<div id="%1$s" class="%2$s row">%3$s</div>', $id, $class, do_shortcode( Helper::fix_shortcodes($content)));
   	
 		return $html;
 	}
@@ -43,4 +48,3 @@ class Magee_Row {
 }
 
 new Magee_Row();
-endif;

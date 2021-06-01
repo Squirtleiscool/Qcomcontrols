@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Timeline') ):
+
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
 
 class Magee_Timeline {
 
@@ -25,7 +27,9 @@ class Magee_Timeline {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' =>'magee-timeline',
 				'class' =>'',
@@ -37,8 +41,8 @@ class Magee_Timeline {
 		self::$args    = $defaults;
 		$this->columns = $columns;
 
-		$html  = '<div class="magee-timeline text-center '.esc_attr($class).'"  id="'.esc_attr($id).'"><ul class="row">';
-		$html .= do_shortcode( Magee_Core::fix_shortcodes($content));
+		$html  = '<div class="magee-shortcode magee-timeline text-center '.esc_attr($class).'"  id="'.esc_attr($id).'"><ul class="row">';
+		$html .= do_shortcode( Helper::fix_shortcodes($content));
         $html .= '</ul></div>';
 										
 		return $html;
@@ -54,7 +58,7 @@ class Magee_Timeline {
 	 */
 	function render_child( $args, $content = '') {
 		
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'time' =>'',
 				'title' =>'',
@@ -90,4 +94,3 @@ class Magee_Timeline {
 }
 
 new Magee_Timeline();
-endif;

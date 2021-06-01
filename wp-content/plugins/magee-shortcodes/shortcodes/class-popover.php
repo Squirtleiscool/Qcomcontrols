@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Popover') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Popover {
 
 	public static $args;
@@ -10,7 +12,6 @@ class Magee_Popover {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_popover', array( $this, 'render' ) );
 	}
 
@@ -22,7 +23,10 @@ class Magee_Popover {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['bootstrap', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'magee-popover',
 				'class' 				=>'',
@@ -30,21 +34,27 @@ class Magee_Popover {
 				'triggering_text' 		=>'',
 				'trigger'				=>'click',
 				'placement'				=>'top',
+				'is_preview' => ''
 			), $args
 		);
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$uniqid = uniqid('popover-');
-		$this->id = $id.$uniqid;
-			
-		$html= sprintf('<span class="popover-preview magee-popover %s" id="%s" data-toggle="popover" data-trigger="%s" data-placement="%s" 
-		data-content="%s" data-original-title="%s" >%s</span>',$class,$id,$trigger,$placement,do_shortcode( Magee_Core::fix_shortcodes($content)),$title,$triggering_text);
-	
+
+		$class .= ' magee-popover magee-shortcode';
+
+		$html = sprintf('<span class="%1$s" id="popper" data-toggle="popover" data-trigger="%3$s" data-placement="%4$s" 
+		data-content="%5$s" data-original-title="%6$s" >%7$s</span>', $class, $id, $trigger, $placement, do_shortcode( Helper::fix_shortcodes($content)), $title, $triggering_text);
+		
+		if ($is_preview == "1"){
+			$html .= '<style>.magee-popover{top: 150px; position: absolute; left: 300px;}</style>';
+		}
+		
+		
+
 		return $html;
 	}
 	
 }
 
 new Magee_Popover();
-endif;

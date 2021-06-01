@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Dummy_Image') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Dummy_Image {
 
 	public static $args;
@@ -9,7 +11,6 @@ class Magee_Dummy_Image {
 	 * Initiate the shortcode
 	 */
 	public function __construct() {
-
         add_shortcode( 'ms_dummy_image', array( $this, 'render' ) );
 	}
 
@@ -21,7 +22,7 @@ class Magee_Dummy_Image {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'style' 				=>'',
 				'class' 				=>'',
@@ -33,19 +34,17 @@ class Magee_Dummy_Image {
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		
+		$class .= ' magee-shortcode magee-dummy-image';
 		
 		if($style == 'any')
-		$style = rand(0,10) ;	
+			$style = rand(0, 10) ;
 			
-		$link = 'http://lorempixel.com/' .esc_attr($width). '/' . esc_attr($height) . '/'.esc_attr($style).'/';
+		$link = '//lorempixel.com/' .esc_attr($width). '/' . esc_attr($height) . '/'.esc_attr($style).'/';
 		$html = '<div class="'.esc_attr($class).'" id="'.esc_attr($id).'"><img src="'.$link.'" width="'.$width.'px" height="'.$height.'px"/></div>';
 		return $html;
-		
-		
+
 	}
 	
 }
 
-new Magee_Dummy_Image();	
-endif;	
+new Magee_Dummy_Image();

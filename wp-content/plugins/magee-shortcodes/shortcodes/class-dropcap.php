@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Dropcap') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Dropcap {
 
 	public static $args;
@@ -22,7 +24,10 @@ class Magee_Dropcap {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['magee-shortcodes']);
+		Helper::get_script_depends(['magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
@@ -35,9 +40,9 @@ class Magee_Dropcap {
 		extract( $defaults );
 		self::$args = $defaults;
 		if(is_numeric($boxed_radius))
-		$boxed_radius = $boxed_radius.'px';
+			$boxed_radius = $boxed_radius.'px';
 		
-		$html = sprintf( '<span %s>%s</span>', Magee_Core::attributes( 'dropcap-shortcode' ), do_shortcode( Magee_Core::fix_shortcodes($content)) );
+		$html = sprintf( '<span %1$s>%2$s</span>', Helper::attributes( 'dropcap-shortcode' ), do_shortcode( Helper::fix_shortcodes($content)) );
 		
 		return $html;
 	}
@@ -45,7 +50,7 @@ class Magee_Dropcap {
 	
 	function attr() {
 
-		$attr['class'] = 'magee-dropcap dropcap';
+		$attr['class'] = 'magee-shortcode magee-dropcap dropcap';
 		$attr['style'] = '';
 		
 		if( self::$args['boxed'] == 'yes' ) {
@@ -80,4 +85,3 @@ class Magee_Dropcap {
 }
 
 new Magee_Dropcap();
-endif;

@@ -1,5 +1,7 @@
 <?php
-if( !class_exists('Magee_Testimonial') ):
+namespace MageeShortcodes\Shortcodes;
+use MageeShortcodes\Classes\Helper;
+
 class Magee_Testimonial {
 
 	public static $args;
@@ -21,13 +23,15 @@ class Magee_Testimonial {
 	 */
 	function render( $args, $content = '') {
 
-		$defaults =	Magee_Core::set_shortcode_defaults(
+		Helper::get_style_depends(['font-awesome', 'magee-shortcodes']);
+
+		$defaults =	Helper::set_shortcode_defaults(
 			array(
 				'id' 					=>'',
 				'class' 				=>'',
 				'style'					=>'normal',
 				'name'					=>'',
-				'avatar'					=>'',
+				'avatar'				=>'',
 				'byline'			=>'',
 				'alignment'				=>'none',
 			), $args
@@ -35,23 +39,23 @@ class Magee_Testimonial {
 		
 		extract( $defaults );
 		self::$args = $defaults;
-		$txtalign='';
-		$txtbox='';
+		$txtalign = '';
+		$txtbox = '';
+		$divimg = '';
+
 		$txtsl = 'style1';				
-		if($alignment=='center')
-		{
+		if($alignment=='center') {
 			$txtalign='text-center';
 			$txtsl = 'style2';
 		}
-		if($style == 'box')
-		{
+		if($style == 'box') {
 			$txtbox='testimonial-boxed';
 		}
-		$divcont = sprintf('<div class="testimonial-content"><div class="testimonial-quote">%s</div></div>',do_shortcode( Magee_Core::fix_shortcodes($content)));
-		$divimg = sprintf('<div class="testimonial-avatar"><img src="%s" class="img-circle"></div>',$avatar);
-		$divauthor = sprintf('<div class="testimonial-author"><h4 class="name" style="text-transform: uppercase;color: #000;">%s</h4><div class="title">%s</div></div>',$name,$byline);
-		$divtitle = sprintf('<div class="testimonial-vcard %s"> %s %s </div>',$txtsl,$divimg,$divauthor);
-		$html = sprintf('<div class="magee-testimonial-box %s %s %s" is="%s">%s %s</div>',$txtalign,$txtbox,$class,$id,$divcont,$divtitle);		
+		$divcont = sprintf('<div class="testimonial-content"><div class="testimonial-quote">%s</div></div>',do_shortcode( Helper::fix_shortcodes($content)));
+		if ($avatar) $divimg = sprintf('<div class="testimonial-avatar"><img src="%s" class="img-circle"></div>', $avatar);
+		$divauthor = sprintf('<div class="testimonial-author"><h4 class="name" style="text-transform: uppercase;color: #000;">%1$s</h4><div class="title">%2$s</div></div>', $name, $byline);
+		$divtitle = sprintf('<div class="testimonial-vcard %1$s"> %2$s %3$s </div>', $txtsl, $divimg, $divauthor);
+		$html = sprintf('<div class="magee-shortcode magee-testimonial-box %1$s %2$s %3$s" is="%4$s">%5$s %6$s</div>', $txtalign, $txtbox, $class, $id, $divcont, $divtitle);		
    	
 		return $html;
 	}
@@ -59,4 +63,3 @@ class Magee_Testimonial {
 }
 
 new Magee_Testimonial();
-endif;
