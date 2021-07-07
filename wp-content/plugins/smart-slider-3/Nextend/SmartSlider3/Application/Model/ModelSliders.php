@@ -235,6 +235,10 @@ class ModelSliders extends AbstractModelTable {
     }
 
     public function create($slider, $groupID = 0) {
+        if (!isset($slider['version'])) {
+            $slider['version'] = SmartSlider3Info::$version;
+        }
+
         if (!isset($slider['title'])) return false;
         if ($slider['title'] == '') $slider['title'] = n2_('New slider');
 
@@ -274,6 +278,8 @@ class ModelSliders extends AbstractModelTable {
     public function saveSimple($id, $title, $params) {
         if ($id <= 0) return false;
 
+        $params['version'] = SmartSlider3Info::$version;
+
         if (empty($title)) $title = n2_('New slider');
 
         $this->table->update(array(
@@ -285,6 +291,8 @@ class ModelSliders extends AbstractModelTable {
     }
 
     public function save($id, $slider) {
+        $slider['version'] = SmartSlider3Info::$version;
+
         if (!isset($slider['title']) || $id <= 0) return false;
         $response = array(
             'changedFields' => array()
@@ -487,6 +495,7 @@ class ModelSliders extends AbstractModelTable {
 
     public function restore($id) {
         $changedSliders = array();
+        $helper         = new HelperSliderChanged($this);
 
         $slider = $this->get($id);
         if ($slider['type'] == 'group') {
@@ -495,6 +504,12 @@ class ModelSliders extends AbstractModelTable {
                 if (!$this->xref->isSliderAvailableInAnyGroups($subSlider['slider_id'])) {
                     $changedSliders[] = $subSlider['slider_id'];
                 }
+            }
+        } else {
+            $relatedGroups = $this->xref->getGroups($id);
+            if ($relatedGroups && isset($relatedGroups[0]['group_id']) && $relatedGroups[0]['group_id'] > 0) {
+                //if a slider was trashed, then it can only be restored to one group
+                $helper->setSliderChanged($relatedGroups[0]['group_id'], 1);
             }
         }
 
@@ -505,7 +520,6 @@ class ModelSliders extends AbstractModelTable {
         ));
 
         if (!empty($changedSliders)) {
-            $helper = new HelperSliderChanged($this);
             foreach ($changedSliders as $sliderID) {
                 $helper->setSliderChanged($sliderID, 1);
             }

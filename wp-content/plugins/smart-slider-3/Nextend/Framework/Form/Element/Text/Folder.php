@@ -20,7 +20,7 @@ class Folder extends Text {
 
         Image::initLightbox();
 
-        Js::addInline("new N2Classes.FormElementFolders('" . $this->fieldID . "' );");
+        Js::addInline("new _N2.FormElementFolders('" . $this->fieldID . "' );");
     }
 
     protected function post() {

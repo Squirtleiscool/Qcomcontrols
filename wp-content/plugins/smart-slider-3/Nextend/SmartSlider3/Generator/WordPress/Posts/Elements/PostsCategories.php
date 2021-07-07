@@ -39,7 +39,7 @@ class PostsCategories extends Select {
 
         $this->options['0'] = n2_('All');
         if (count($options)) {
-            foreach ($options AS $option) {
+            foreach ($options as $option) {
                 $this->options[$option->cat_ID] = ' - ' . $option->treename;
             }
         }

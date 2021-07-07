@@ -26,7 +26,7 @@ class Decoration extends AbstractFieldHidden {
             'style' => $this->style
         ), $this->renderOptions() . parent::fetchElement());
 
-        Js::addInline('new N2Classes.FormElementDecoration("' . $this->fieldID . '", ' . json_encode(array_keys($this->options)) . ');');
+        Js::addInline('new _N2.FormElementDecoration("' . $this->fieldID . '", ' . json_encode(array_keys($this->options)) . ');');
 
         return $html;
     }
@@ -41,7 +41,7 @@ class Decoration extends AbstractFieldHidden {
 
         $html = '';
         $i    = 0;
-        foreach ($this->options AS $value => $class) {
+        foreach ($this->options as $value => $class) {
 
             $html .= Html::tag('div', array(
                 'class'      => 'n2_field_decoration__option ' . ($this->isSelected($value) ? ' n2_field_decoration__option--selected' : ''),

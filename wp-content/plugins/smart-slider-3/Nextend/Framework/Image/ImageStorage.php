@@ -2,38 +2,26 @@
 
 namespace Nextend\Framework\Image;
 
-use Nextend\Framework\Database\Base\AbstractConnectorTable;
+use Nextend\Framework\Database\AbstractPlatformConnectorTable;
 use Nextend\Framework\Database\Database;
 use Nextend\Framework\Misc\Base64;
 
 class ImageStorage {
 
-    /** @var AbstractConnectorTable */
+    /**
+     * @var AbstractPlatformConnectorTable
+     */
     private $tableImageStorage;
 
     public static $emptyImage = array(
-        'desktop'        => array(
-            'size' => '0|*|0'
-        ),
         'desktop-retina' => array(
-            'image' => '',
-            'size'  => '0|*|0'
+            'image' => ''
         ),
         'tablet'         => array(
-            'image' => '',
-            'size'  => '0|*|0'
-        ),
-        'tablet-retina'  => array(
-            'image' => '',
-            'size'  => '0|*|0'
+            'image' => ''
         ),
         'mobile'         => array(
-            'image' => '',
-            'size'  => '0|*|0'
-        ),
-        'mobile-retina'  => array(
-            'image' => '',
-            'size'  => '0|*|0'
+            'image' => ''
         )
     );
 

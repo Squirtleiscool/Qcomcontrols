@@ -5,6 +5,7 @@ namespace Nextend\SmartSlider3\Platform\WordPress;
 
 
 use Nextend\Framework\Asset\AssetManager;
+use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Asset\Predefined;
 use Nextend\Framework\Pattern\GetAssetsPathTrait;
 use Nextend\Framework\Pattern\SingletonTrait;
@@ -62,6 +63,8 @@ class HelperTinyMCE {
 
             AssetManager::getInstance();
 
+            Js::addGlobalInline('window.N2DISABLESCHEDULER=1;');
+
             Predefined::frontend();
             Predefined::backend();
             ApplicationSmartSlider3::getInstance()
@@ -102,7 +105,7 @@ class HelperTinyMCE {
         ?>
         <script>
             window.NextendSmartSliderWPTinyMCEModal = function (ed) {
-                N2Classes.SelectSlider(n2_('Select A Slider'), function (id, alias) {
+                _N2.SelectSlider(n2_('Select A Slider'), function (id, alias) {
                     if (alias) {
                         ed.execCommand('mceInsertContent', false, '<div>[smartslider3 alias="' + alias + '"]</div>');
                     } else if (id) {
@@ -113,7 +116,7 @@ class HelperTinyMCE {
 
             if (typeof QTags !== 'undefined') {
                 QTags.addButton('smart-slider-3', 'Smart Slider', function () {
-                    N2Classes.SelectSlider(n2_('Select A Slider'), function (id, alias) {
+                    _N2.SelectSlider(n2_('Select A Slider'), function (id, alias) {
                         if (alias) {
                             QTags.insertContent("\n" + '<div>[smartslider3 alias="' + alias + '"]</div>');
                         } else if (id) {
@@ -124,7 +127,7 @@ class HelperTinyMCE {
             }
 
             window.NextendSmartSliderSelectModal = function ($input) {
-                N2Classes.SelectSlider(n2_('Select A Slider'), function (id, alias) {
+                _N2.SelectSlider(n2_('Select A Slider'), function (id, alias) {
                     var idOrAlias = false;
                     if (alias) {
                         idOrAlias = alias;
@@ -144,7 +147,7 @@ class HelperTinyMCE {
             };
 
             window.NextendSmartSliderSelectModalCallback = function (cb) {
-                N2Classes.SelectSlider(n2_('Select A Slider'), function (id, alias) {
+                _N2.SelectSlider(n2_('Select A Slider'), function (id, alias) {
                     var idOrAlias = false;
                     if (alias) {
                         idOrAlias = alias;

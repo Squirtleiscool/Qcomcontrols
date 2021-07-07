@@ -16,7 +16,7 @@ class HiddenFont extends AbstractFieldHidden {
 
         FontManager::enqueue($this->getForm());
 
-        Js::addInline('new N2Classes.FormElementFontHidden("' . $this->fieldID . '", {
+        Js::addInline('new _N2.FormElementFontHidden("' . $this->fieldID . '", {
             mode: "' . $this->mode . '",
             label: "' . $this->label . '"
         });');

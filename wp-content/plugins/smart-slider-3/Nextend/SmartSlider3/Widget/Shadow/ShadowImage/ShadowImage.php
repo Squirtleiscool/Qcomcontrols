@@ -5,7 +5,6 @@ namespace Nextend\SmartSlider3\Widget\Shadow\ShadowImage;
 
 
 use Nextend\Framework\Form\Element\Radio\ImageListFromFolder;
-use Nextend\Framework\Form\Element\Text;
 use Nextend\Framework\Form\Element\Text\FieldImage;
 use Nextend\Framework\Form\Fieldset\FieldsetRow;
 use Nextend\SmartSlider3\Widget\Shadow\AbstractWidgetShadow;
@@ -16,7 +15,6 @@ class ShadowImage extends AbstractWidgetShadow {
         'widget-shadow-position-mode'  => 'simple',
         'widget-shadow-position-area'  => 12,
         'widget-shadow-position-stack' => 3,
-        'widget-shadow-width'          => '100%',
         'widget-shadow-shadow-image'   => '',
         'widget-shadow-shadow'         => '$ss$/plugins/widgetshadow/shadow/shadow/shadow/dark.png'
     );

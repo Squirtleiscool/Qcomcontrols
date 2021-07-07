@@ -42,6 +42,16 @@ abstract class AbstractSliderTypeFrontend {
         $this->enqueueAssets();
     }
 
+    public function addJSDependency($dependency) {
+        $this->jsDependency[] = $dependency;
+    }
+
+    protected $classes = array();
+
+    public function addClass($className) {
+        $this->classes[] = $className;
+    }
+
     /**
      * @param AbstractSliderTypeCss $css
      *
@@ -67,24 +77,21 @@ abstract class AbstractSliderTypeFrontend {
     protected abstract function renderType($css);
 
     protected function getSliderClasses() {
-        $alias      = $this->slider->getAlias();
-        $fadeOnLoad = $this->slider->features->fadeOnLoad->getSliderClass();
 
-        return $alias . ' ' . $fadeOnLoad;
+        return $this->slider->getAlias() . ' ' . implode('', $this->classes);
     }
 
     protected function openSliderElement() {
 
         $attributes = array(
-                'id'           => $this->slider->elementId,
-                'data-creator' => 'Smart Slider 3',
-                'class'        => 'n2-ss-slider n2-ow n2-has-hover n2notransition ' . $this->getSliderClasses(),
+            'id'              => $this->slider->elementId,
+            'data-creator'    => 'Smart Slider 3',
+            'data-responsive' => $this->slider->features->responsive->type,
+            'class'           => 'n2-ss-slider n2-ow n2-has-hover n2notransition ' . $this->getSliderClasses(),
+        );
 
-            ) + $this->getFontSizeAttributes();
-
-        $alias = $this->slider->getAlias();
-        if (!empty($alias)) {
-            $attributes['data-alias'] = $alias;
+        if ($this->slider->isLegacyFontScale()) {
+            $attributes['data-ss-legacy-font-scale'] = 1;
         }
 
         return Html::openTag('div', $attributes);
@@ -93,14 +100,6 @@ abstract class AbstractSliderTypeFrontend {
     protected function closeSliderElement() {
 
         return '</div>';
-    }
-
-    private function getFontSizeAttributes() {
-
-        return array(
-            'style'         => "font-size: 1rem;",
-            'data-fontsize' => $this->slider->fontSize
-        );
     }
 
     public function getDefaults() {
@@ -123,7 +122,7 @@ abstract class AbstractSliderTypeFrontend {
         foreach ($this->javaScriptProperties as $k => $v) {
             $encoded[] = '"' . $k . '":' . json_encode($v);
         }
-        $encoded[] = '"initCallbacks":function($){' . $initCallback . '}';
+        $encoded[] = '"initCallbacks":function(){' . $initCallback . '}';
 
         return '{' . implode(',', $encoded) . '}';
     }
@@ -157,202 +156,79 @@ abstract class AbstractSliderTypeFrontend {
 
         Js::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . '/dist/smartslider-frontend.min.js', 'smartslider-frontend');
     }
-}
 
-class SVGFlip {
+    public function handleSliderMinHeight($minHeight) {
 
-    private static $viewBoxX;
-    private static $viewBoxY;
-
-    /**
-     * @param string $svg
-     * @param bool   $x
-     * @param bool   $y
-     *
-     * @return string
-     */
-    public static function mirror($svg, $x, $y) {
-        /* @var callable $callable */
-
-        if ($x && $y) {
-            $callable = array(
-                self::class,
-                'xy'
-            );
-        } else if ($x) {
-            $callable = array(
-                self::class,
-                'x'
-            );
-        } else if ($y) {
-            $callable = array(
-                self::class,
-                'y'
-            );
-        } else {
-            return $svg;
-        }
-
-        preg_match('/(viewBox)=[\'"](.*?)[\'"]/i', $svg, $viewBoxResult);
-        $viewBox        = explode(' ', end($viewBoxResult));
-        self::$viewBoxX = $viewBox[2];
-        self::$viewBoxY = $viewBox[3];
-
-        $pattern = '/(points|d)=[\'"](.*?)[\'"]/i';
-
-        return preg_replace_callback($pattern, $callable, $svg);
+        $this->slider->addDeviceCSS('all', 'div#' . $this->slider->elementId . ' .n2-ss-slider-1{min-height:' . $minHeight . 'px;}');
     }
 
-    private static function x($paths) {
-        $path = $paths[2];
-        if ($paths[1] == 'points') {
-            $points = explode(' ', $path);
-            for ($i = 0; $i < count($points); $i = $i + 2) {
-                $points[$i] = self::$viewBoxX - $points[$i];
-            }
+    public function displaySizeSVGs($css, $hasMaxWidth = false) {
 
-            return 'points="' . implode(' ', $points) . '"';
-        } else if ($paths[1] == 'd') {
-            $path    = substr($path, 0, -1);
-            $values  = explode(' ', $path);
-            $newPath = '';
-            for ($i = 0; $i < count($values); $i++) {
-                $pathCommand = substr($values[$i], 0, 1);
-                $pathPart    = substr($values[$i], 1);
-                $points      = explode(',', $pathPart);
-                for ($j = 0; $j < count($points); $j = $j + 2) {
-                    switch ($pathCommand) {
-                        case 'l':
-                        case 'm':
-                        case 'h':
-                        case 'c':
-                        case 's':
-                        case 'q':
-                        case 't':
-                            $points[$j] = -$points[$j];
-                            break;
-                        case 'L':
-                        case 'M':
-                        case 'H':
-                        case 'C':
-                        case 'S':
-                        case 'Q':
-                        case 'T':
-                            $points[$j] = self::$viewBoxX - $points[$j];
-                            break;
-                    }
+        $attrs = array(
+            'xmlns'               => "http://www.w3.org/2000/svg",
+            'viewBox'             => '0 0 ' . $css->base['sliderWidth'] . ' ' . $css->base['sliderHeight'],
+            'data-related-device' => "desktopPortrait",
+            'class'               => "n2-ow n2-ss-preserve-size n2-ss-preserve-size--slider n2-ss-slide-limiter"
+        );
+        if ($hasMaxWidth) {
+            $attrs['style'] = 'max-width:' . $css->base['sliderWidth'] . 'px';
+        }
+
+        $svgs = array(
+            Html::tag('svg', $attrs, '')
+        );
+
+        foreach ($this->slider->features->responsive->sizes as $device => $size) {
+            if ($device === 'desktopPortrait') continue;
+
+            if ($size['customHeight'] && $size['width'] > 0 && $size['height'] > 0) {
+
+                $attrs['viewBox']             = '0 0 ' . $size['width'] . ' ' . $size['height'];
+                $attrs['data-related-device'] = $device;
+                if ($hasMaxWidth) {
+                    $attrs['style'] = 'max-width:' . $size['width'] . 'px';
                 }
-                $newPath .= $pathCommand . implode(',', $points);
+
+                $svgs[] = Html::tag('svg', $attrs, '');
+
+                $styles = array(
+                    'div#' . $this->slider->elementId . ' .n2-ss-preserve-size[data-related-device="desktopPortrait"] {display:none}',
+                    'div#' . $this->slider->elementId . ' .n2-ss-preserve-size[data-related-device="' . $device . '"] {display:block}'
+                );
+                $this->slider->addDeviceCSS(strtolower($device), implode('', $styles));
             }
 
-            return 'd="' . $newPath . 'z"';
+        }
+
+
+        echo implode('', $svgs);
+    }
+
+    protected function initSliderBackground($selector) {
+
+        $params = $this->slider->params;
+
+        $backgroundImage = $params->get('background');
+        $backgroundColor = $params->get('background-color', '');
+
+        $sliderCSS2 = '';
+
+        if (!empty($backgroundImage)) {
+            $sliderCSS2 .= 'background-image: URL(' . ResourceTranslator::toUrl($backgroundImage) . ');';
+        }
+        if (!empty($backgroundColor)) {
+            $rgba = Color::hex2rgba($backgroundColor);
+            if ($rgba[3] != 0) {
+                $sliderCSS2 .= 'background-color:RGBA(' . $rgba[0] . ',' . $rgba[1] . ',' . $rgba[2] . ',' . round($rgba[3] / 127, 2) . ');';
+            }
+        }
+
+        if (!empty($sliderCSS2)) {
+
+            $this->slider->addCSS('div#' . $this->slider->elementId . ' ' . $selector . '{' . $sliderCSS2 . '}');
         }
     }
 
-    private static function y($paths) {
-        $path = $paths[2];
-        if ($paths[1] == 'points') {
-            $points = explode(' ', $path);
-            for ($i = 1; $i < count($points); $i = $i + 2) {
-                $points[$i] = self::$viewBoxY - $points[$i];
-            }
-
-            return 'points="' . implode(' ', $points) . '"';
-        } else if ($paths[1] == 'd') {
-            $path    = substr($path, 0, -1);
-            $values  = explode(' ', $path);
-            $newPath = '';
-            for ($i = 0; $i < count($values); $i++) {
-                $pathCommand = substr($values[$i], 0, 1);
-                $pathPart    = substr($values[$i], 1);
-                $points      = explode(',', $pathPart);
-                for ($j = 0; $j < count($points); $j = $j + 2) {
-                    switch ($pathCommand) {
-                        case 'v':
-                            $points[$j] = -$points[$j];
-                            break;
-                        case 'V':
-                            $points[$j] = self::$viewBoxY - $points[$j];
-                            break;
-                        case 'l':
-                        case 'm':
-                        case 'c':
-                        case 's':
-                        case 'q':
-                        case 't':
-                            $points[$j + 1] = -$points[$j + 1];
-                            break;
-                        case 'L':
-                        case 'M':
-                        case 'C':
-                        case 'S':
-                        case 'Q':
-                        case 'T':
-                            $points[$j + 1] = self::$viewBoxY - $points[$j + 1];
-                            break;
-                    }
-                }
-                $newPath .= $pathCommand . implode(',', $points);
-            }
-
-            return 'd="' . $newPath . 'z"';
-        }
-    }
-
-    private static function xy($paths) {
-        $path = $paths[2];
-        if ($paths[1] == 'points') {
-            $points = explode(' ', $path);
-            for ($i = 0; $i < count($points); $i = $i + 2) {
-                $points[$i]     = self::$viewBoxX - $points[$i];
-                $points[$i + 1] = self::$viewBoxY - $points[$i + 1];
-            }
-
-            return 'points="' . implode(' ', $points) . '"';
-        } else if ($paths[1] == 'd') {
-            $path    = substr($path, 0, -1);
-            $values  = explode(' ', $path);
-            $newPath = '';
-            for ($i = 0; $i < count($values); $i++) {
-                $pathCommand = substr($values[$i], 0, 1);
-                $pathPart    = substr($values[$i], 1);
-                $points      = explode(',', $pathPart);
-                for ($j = 0; $j < count($points); $j = $j + 2) {
-                    switch ($pathCommand) {
-                        case 'h':
-                        case 'v':
-                            $points[$j] = -$points[$j];
-                            break;
-                        case 'H':
-                            $points[$j] = self::$viewBoxX - $points[$j];
-                            break;
-                        case 'V':
-                            $points[$j] = self::$viewBoxY - $points[$j];
-                            break;
-                        case 'l':
-                        case 'm':
-                        case 'c':
-                        case 's':
-                        case 'q':
-                        case 't':
-                            $points[$j]     = -$points[$j];
-                            $points[$j + 1] = -$points[$j + 1];
-                            break;
-                        case 'L':
-                        case 'M':
-                        case 'C':
-                        case 'S':
-                        case 'Q':
-                        case 'T':
-                            $points[$j]     = self::$viewBoxX - $points[$j];
-                            $points[$j + 1] = self::$viewBoxY - $points[$j + 1];
-                            break;
-                    }
-                }
-                $newPath .= $pathCommand . implode(',', $points);
-            }
-
-            return 'd="' . $newPath . 'z"';
-        }
+    protected function getBackgroundVideo($params) {
     }
 }

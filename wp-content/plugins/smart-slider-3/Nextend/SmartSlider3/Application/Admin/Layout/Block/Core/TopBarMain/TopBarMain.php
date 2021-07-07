@@ -7,8 +7,9 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\TopBarMain;
  */
 ?>
 <script>
-    N2R('documentReady', function ($) {
-        $('#<?php echo $this->getID(); ?>').css('top', N2Classes.Window.getTopOffset() + 'px');
+    _N2.r(['$', 'documentReady'], function () {
+        var $ = _N2.$;
+        $('#<?php echo $this->getID(); ?>').css('top', _N2.Window.getTopOffset() + 'px');
     });
 </script>
 <div id="<?php echo $this->getID(); ?>" class="n2_admin__top_bar n2_top_bar_main">

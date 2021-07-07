@@ -45,8 +45,6 @@ class Responsive {
 
     public $forceFullHorizontalSelector = '';
 
-    public $constrainRatio = 1;
-
     public $minimumHeight = -1;
 
     public $maximumSlideWidthLandscape = -1;
@@ -74,11 +72,27 @@ class Responsive {
 
     protected $breakpoints = array();
 
-    protected $sizes = array(
+    /**
+     * @var array[]
+     */
+    public $mediaQueries = array(
+        'all' => false
+    );
+
+    public $sizes = array(
         'desktopPortrait' => array(
             'width'  => 800,
             'height' => 600
         ),
+    );
+
+    public static $translation = array(
+        'desktoplandscape' => 'desktopLandscape',
+        'desktopportrait'  => 'desktopPortrait',
+        'tabletlandscape'  => 'tabletLandscape',
+        'tabletportrait'   => 'tabletPortrait',
+        'mobilelandscape'  => 'mobileLandscape',
+        'mobileportrait'   => 'mobilePortrait'
     );
 
     public function __construct($slider, $features) {
@@ -143,6 +157,7 @@ class Responsive {
 
             if ($overrideSizeEnabled && $slider->params->get('slider-size-override-desktop-landscape', 0) && $editorWidth > 10) {
 
+                $customHeight = false;
                 $editorHeight = intval($slider->params->get('desktop-landscape-height', 900));
 
                 if ($editorWidth < $breakpointWidthPortrait) {
@@ -162,17 +177,21 @@ class Responsive {
                         default:
                             $editorHeight = $editorWidth * $heightHelperRatio;
                     }
+                } else {
+                    $customHeight = true;
                 }
 
                 $this->sizes['desktopLandscape'] = array(
-                    'width'  => $editorWidth,
-                    'height' => floor($editorHeight)
+                    'width'        => $editorWidth,
+                    'height'       => floor($editorHeight),
+                    'customHeight' => $customHeight
                 );
             } else {
 
                 $this->sizes['desktopLandscape'] = array(
-                    'width'  => $this->sizes['desktopPortrait']['width'],
-                    'height' => $this->sizes['desktopPortrait']['height']
+                    'width'        => $this->sizes['desktopPortrait']['width'],
+                    'height'       => $this->sizes['desktopPortrait']['height'],
+                    'customHeight' => false
                 );
             }
 
@@ -208,6 +227,7 @@ class Responsive {
 
             if ($overrideSizeEnabled && $slider->params->get('slider-size-override-tablet-landscape', 0) && $editorWidth > 10) {
 
+                $customHeight = false;
                 $editorHeight = intval($slider->params->get('tablet-landscape-height', 768));
 
                 if ($editorWidth > $breakpointWidthPortrait) {
@@ -220,11 +240,14 @@ class Responsive {
 
                 if ($editorHeight <= 0) {
                     $editorHeight = $editorWidth * $heightHelperRatio;
+                } else {
+                    $customHeight = true;
                 }
 
                 $this->sizes['tabletLandscape'] = array(
-                    'width'  => $editorWidth,
-                    'height' => floor($editorHeight)
+                    'width'        => $editorWidth,
+                    'height'       => floor($editorHeight),
+                    'customHeight' => $customHeight
                 );
 
                 $smallestWidth = min($smallestWidth, $editorWidth);
@@ -232,9 +255,10 @@ class Responsive {
                 $width = min($smallestWidth, $breakpointWidthPortrait);
 
                 $this->sizes['tabletLandscape'] = array(
-                    'width'  => $width,
-                    'height' => floor($width * $heightHelperRatio),
-                    'auto'   => true
+                    'width'        => $width,
+                    'height'       => floor($width * $heightHelperRatio),
+                    'auto'         => true,
+                    'customHeight' => false
                 );
 
                 $smallestWidth = min($smallestWidth, $breakpointWidthPortrait);
@@ -264,6 +288,7 @@ class Responsive {
 
             if ($overrideSizeEnabled && $slider->params->get('slider-size-override-tablet-portrait', 0) && $editorWidth > 10) {
 
+                $customHeight = false;
                 $editorHeight = intval($slider->params->get('tablet-portrait-height', 1024));
 
                 if ($editorWidth > $breakpointWidthPortrait) {
@@ -276,11 +301,14 @@ class Responsive {
 
                 if ($editorHeight <= 0) {
                     $editorHeight = $editorWidth * $heightHelperRatio;
+                } else {
+                    $customHeight = true;
                 }
 
                 $this->sizes['tabletPortrait'] = array(
-                    'width'  => $editorWidth,
-                    'height' => floor($editorHeight)
+                    'width'        => $editorWidth,
+                    'height'       => floor($editorHeight),
+                    'customHeight' => $customHeight
                 );
 
                 $smallestWidth = min($smallestWidth, $editorWidth);
@@ -288,9 +316,10 @@ class Responsive {
                 $width = min($smallestWidth, $breakpointWidthPortrait);
 
                 $this->sizes['tabletPortrait'] = array(
-                    'width'  => $width,
-                    'height' => floor($width * $heightHelperRatio),
-                    'auto'   => true
+                    'width'        => $width,
+                    'height'       => floor($width * $heightHelperRatio),
+                    'auto'         => true,
+                    'customHeight' => false
                 );
 
                 $smallestWidth = min($smallestWidth, $breakpointWidthPortrait);
@@ -320,6 +349,7 @@ class Responsive {
 
             if ($overrideSizeEnabled && $slider->params->get('slider-size-override-mobile-landscape', 0) && $editorWidth > 10) {
 
+                $customHeight = false;
                 $editorHeight = intval($slider->params->get('mobile-landscape-height', 320));
 
                 if ($editorWidth > $breakpointWidthPortrait) {
@@ -332,11 +362,14 @@ class Responsive {
 
                 if ($editorHeight <= 0) {
                     $editorHeight = $editorWidth * $heightHelperRatio;
+                } else {
+                    $customHeight = true;
                 }
 
                 $this->sizes['mobileLandscape'] = array(
-                    'width'  => $editorWidth,
-                    'height' => floor($editorHeight)
+                    'width'        => $editorWidth,
+                    'height'       => floor($editorHeight),
+                    'customHeight' => $customHeight
                 );
 
                 $smallestWidth = min($smallestWidth, $editorWidth);
@@ -345,9 +378,10 @@ class Responsive {
                 $width = min($smallestWidth, $breakpointWidthPortrait);
 
                 $this->sizes['mobileLandscape'] = array(
-                    'width'  => $width,
-                    'height' => floor($width * $heightHelperRatio),
-                    'auto'   => true
+                    'width'        => $width,
+                    'height'       => floor($width * $heightHelperRatio),
+                    'auto'         => true,
+                    'customHeight' => false
                 );
 
                 $smallestWidth = min($smallestWidth, $breakpointWidthPortrait);
@@ -376,6 +410,8 @@ class Responsive {
             $editorWidth = intval($slider->params->get('mobile-portrait-width', 320));
 
             if ($overrideSizeEnabled && $slider->params->get('slider-size-override-mobile-portrait', 0) && $editorWidth > 10) {
+
+                $customHeight = false;
                 $editorHeight = intval($slider->params->get('mobile-portrait-height', 568));
 
                 if ($editorWidth > $breakpointWidthPortrait) {
@@ -388,18 +424,22 @@ class Responsive {
 
                 if ($editorHeight <= 0) {
                     $editorHeight = $editorWidth * $heightHelperRatio;
+                } else {
+                    $customHeight = true;
                 }
 
                 $this->sizes['mobilePortrait'] = array(
-                    'width'  => $editorWidth,
-                    'height' => floor($editorHeight)
+                    'width'        => $editorWidth,
+                    'height'       => floor($editorHeight),
+                    'customHeight' => $customHeight
                 );
             } else {
                 $width = min(320, $smallestWidth, $breakpointWidthPortrait);
 
                 $this->sizes['mobilePortrait'] = array(
-                    'width'  => $width,
-                    'height' => floor($width * $heightHelperRatio)
+                    'width'        => $width,
+                    'height'       => floor($width * $heightHelperRatio),
+                    'customHeight' => false
                 );
             }
 
@@ -434,45 +474,133 @@ class Responsive {
         }
 
         $this->parseLimitSlideWidth($slider->params);
+
+        $breakpointData = array();
+        foreach ($this->breakpoints as $breakpoint) {
+            $breakpointData[$breakpoint['device']] = $breakpoint;
+        }
+
+        if (isset($breakpointData['desktopLandscape'])) {
+
+            $portraitMinWidth  = $breakpointData['desktopLandscape']['portraitWidth'];
+            $landscapeMinWidth = $breakpointData['desktopLandscape']['landscapeWidth'];
+
+            if ($portraitMinWidth == $landscapeMinWidth || $this->slider->isFrame) {
+                $this->mediaQueries['desktoplandscape'] = array('(min-width: ' . $portraitMinWidth . 'px)');
+
+            } else {
+                $this->mediaQueries['desktoplandscape'] = array(
+                    '(orientation: landscape) and (min-width: ' . $landscapeMinWidth . 'px)',
+                    '(orientation: portrait) and (min-width: ' . $portraitMinWidth . 'px)'
+                );
+            }
+        }
+
+        $nextSize = null;
+        foreach (array(
+                     'tabletLandscape',
+                     'tabletPortrait',
+                     'mobileLandscape',
+                     'mobilePortrait'
+                 ) as $nextDevice) {
+            if (isset($breakpointData[$nextDevice])) {
+                $nextSize = $breakpointData[$nextDevice];
+                break;
+            }
+        }
+
+        $portraitMaxWidth  = 0;
+        $landscapeMaxWidth = 0;
+        if (isset($breakpointData['desktopLandscape'])) {
+            $portraitMaxWidth  = $breakpointData['desktopLandscape']['portraitWidth'] - 1;
+            $landscapeMaxWidth = $breakpointData['desktopLandscape']['landscapeWidth'] - 1;
+        }
+        $portraitMinWidth  = $nextSize['portraitWidth'] + 1;
+        $landscapeMinWidth = $nextSize['landscapeWidth'] + 1;
+
+        if ($portraitMaxWidth == 0 || $landscapeMaxWidth == 0) {
+            if ($portraitMinWidth == $landscapeMinWidth || $this->slider->isFrame) {
+                $this->mediaQueries['desktopportrait'] = array('(min-width: ' . $portraitMinWidth . 'px)');
+
+            } else {
+                $this->mediaQueries['desktopportrait'] = array(
+                    '(orientation: landscape) and (min-width: ' . $landscapeMinWidth . 'px)',
+                    '(orientation: portrait) and (min-width: ' . $portraitMinWidth . 'px)'
+                );
+            }
+        } else {
+            if (($portraitMinWidth == $landscapeMinWidth && $portraitMaxWidth == $landscapeMaxWidth) || $this->slider->isFrame) {
+                $this->mediaQueries['desktopportrait'] = array('(min-width: ' . $portraitMinWidth . 'px) and (max-width: ' . $portraitMaxWidth . 'px)');
+
+            } else {
+                $this->mediaQueries['desktopportrait'] = array(
+                    '(orientation: landscape) and (min-width: ' . $landscapeMinWidth . 'px) and (max-width: ' . $landscapeMaxWidth . 'px)',
+                    '(orientation: portrait) and (min-width: ' . $portraitMinWidth . 'px) and (max-width: ' . $portraitMaxWidth . 'px)'
+                );
+            }
+        }
+
+
+        $this->initMediaQuery($breakpointData, 'tabletLandscape', array(
+            'tabletPortrait',
+            'mobileLandscape',
+            'mobilePortrait'
+        ));
+
+        $this->initMediaQuery($breakpointData, 'tabletPortrait', array(
+            'mobileLandscape',
+            'mobilePortrait'
+        ));
+
+        $this->initMediaQuery($breakpointData, 'mobileLandscape', array(
+            'mobilePortrait'
+        ));
+
+        $this->initMediaQuery($breakpointData, 'mobilePortrait', array());
+    }
+
+    private function initMediaQuery(&$breakpointData, $deviceName, $nextDevices) {
+        if (isset($breakpointData[$deviceName])) {
+
+            $deviceNameLower = strtolower($deviceName);
+
+            $nextSize = null;
+            foreach ($nextDevices as $nextDevice) {
+                if (isset($breakpointData[$nextDevice])) {
+                    $nextSize = $breakpointData[$nextDevice];
+                    break;
+                }
+            }
+
+            $portraitMaxWidth  = $breakpointData[$deviceName]['portraitWidth'];
+            $landscapeMaxWidth = $breakpointData[$deviceName]['landscapeWidth'];
+
+            if ($nextSize) {
+                if (($nextSize['portraitWidth'] == $nextSize['landscapeWidth'] && $portraitMaxWidth == $landscapeMaxWidth) || $this->slider->isFrame) {
+                    $this->mediaQueries[$deviceNameLower] = array('(max-width: ' . $portraitMaxWidth . 'px) and (min-width: ' . ($nextSize['portraitWidth'] + 1) . 'px)');
+
+                } else {
+                    $this->mediaQueries[$deviceNameLower] = array(
+                        '(orientation: landscape) and (max-width: ' . $landscapeMaxWidth . 'px) and (min-width: ' . ($nextSize['landscapeWidth'] + 1) . 'px)',
+                        '(orientation: portrait) and (max-width: ' . $portraitMaxWidth . 'px) and (min-width: ' . ($nextSize['portraitWidth'] + 1) . 'px)'
+                    );
+                }
+            } else {
+                if (($portraitMaxWidth == $landscapeMaxWidth) || $this->slider->isFrame) {
+                    $this->mediaQueries[$deviceNameLower] = array('(max-width: ' . $portraitMaxWidth . 'px)');
+
+                } else {
+                    $this->mediaQueries[$deviceNameLower] = array(
+                        '(orientation: landscape) and (max-width: ' . $landscapeMaxWidth . 'px)',
+                        '(orientation: portrait) and (max-width: ' . $portraitMaxWidth . 'px)'
+                    );
+                }
+            }
+        }
+
     }
 
     public function makeJavaScriptProperties(&$properties) {
-        $normalizedDeviceModes = array(
-            'unknown'         => 'desktopPortrait',
-            'desktopPortrait' => 'desktopPortrait'
-        );
-
-        if (!$this->enabledDevices['desktopLandscape']) {
-            $normalizedDeviceModes['desktopLandscape'] = $normalizedDeviceModes['desktopPortrait'];
-        } else {
-            $normalizedDeviceModes['desktopLandscape'] = 'desktopLandscape';
-        }
-
-
-        if (!$this->enabledDevices['tabletLandscape']) {
-            $normalizedDeviceModes['tabletLandscape'] = $normalizedDeviceModes['desktopPortrait'];
-        } else {
-            $normalizedDeviceModes['tabletLandscape'] = 'tabletLandscape';
-        }
-
-        if (!$this->enabledDevices['tabletPortrait']) {
-            $normalizedDeviceModes['tabletPortrait'] = $normalizedDeviceModes['tabletLandscape'];
-        } else {
-            $normalizedDeviceModes['tabletPortrait'] = 'tabletPortrait';
-        }
-
-
-        if (!$this->enabledDevices['mobileLandscape']) {
-            $normalizedDeviceModes['mobileLandscape'] = $normalizedDeviceModes['tabletPortrait'];
-        } else {
-            $normalizedDeviceModes['mobileLandscape'] = 'mobileLandscape';
-        }
-
-        if (!$this->enabledDevices['mobilePortrait']) {
-            $normalizedDeviceModes['mobilePortrait'] = $normalizedDeviceModes['mobileLandscape'];
-        } else {
-            $normalizedDeviceModes['mobilePortrait'] = 'mobilePortrait';
-        }
 
         if ($this->maximumSlideWidthLandscape <= 0) {
             $this->maximumSlideWidthLandscape = $this->maximumSlideWidth;
@@ -494,8 +622,53 @@ class Responsive {
             $this->maximumSlideWidthMobileLandscape = $this->maximumSlideWidthMobile;
         }
 
+        if (!$this->scaleDown) {
+            $this->slider->addDeviceCSS('all', 'div#' . $this->slider->elementId . '-align{min-width:' . $this->sizes['desktopPortrait']['width'] . 'px;}');
+        }
+
+        if (!$this->scaleUp) {
+            $this->slider->addDeviceCSS('all', 'div#' . $this->slider->elementId . '-align{max-width:' . $this->sizes['desktopPortrait']['width'] . 'px;}');
+        }
+
+
+        if ($this->minimumHeight) {
+            $this->slider->sliderType->handleSliderMinHeight($this->minimumHeight);
+        }
+
+        foreach ($this->mediaQueries as $device => $mediaQuery) {
+            if ($mediaQuery) {
+                $this->slider->addDeviceCSS($device, 'div#' . $this->slider->elementId . ' [data-hide-' . $device . '="1"]{display: none !important;}');
+            }
+        }
+
+        if (!$this->slider->isAdmin) {
+            if ($this->hideOnDesktopLandscape) {
+                $this->slider->addDeviceCSS('desktoplandscape', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+            if (!SmartSlider3Info::$forceDesktop && $this->hideOnDesktopPortrait) {
+                $this->slider->addDeviceCSS('desktopportrait', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+
+            if ($this->hideOnTabletLandscape) {
+                $this->slider->addDeviceCSS('tabletlandscape', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+            if ($this->hideOnTabletPortrait) {
+                $this->slider->addDeviceCSS('tabletportrait', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+
+            if ($this->hideOnMobileLandscape) {
+                $this->slider->addDeviceCSS('mobilelandscape', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+            if ($this->hideOnMobilePortrait) {
+                $this->slider->addDeviceCSS('mobileportrait', '.n2-section-smartslider[data-ssid="' . $this->slider->sliderId . '"]{display: none;}');
+            }
+        }
+
+
         $properties['responsive'] = array(
-            'hideOn' => array(
+            'mediaQueries' => $this->mediaQueries,
+            'base'         => $this->slider->assets->base,
+            'hideOn'       => array(
                 'desktopLandscape' => $this->hideOnDesktopLandscape,
                 'desktopPortrait'  => SmartSlider3Info::$forceDesktop ? false : $this->hideOnDesktopPortrait,
                 'tabletLandscape'  => $this->hideOnTabletLandscape,
@@ -504,25 +677,9 @@ class Responsive {
                 'mobilePortrait'   => $this->hideOnMobilePortrait,
             ),
 
-            'onResizeEnabled'             => $this->onResizeEnabled,
-            'type'                        => $this->type,
-            'downscale'                   => $this->scaleDown,
-            'upscale'                     => $this->scaleUp,
-            'minimumHeight'               => $this->minimumHeight,
-            'maximumSlideWidth'           => array(
-                'desktopLandscape' => $this->maximumSlideWidthLandscape,
-                'desktopPortrait'  => $this->maximumSlideWidth,
-                'tabletLandscape'  => $this->maximumSlideWidthTabletLandscape,
-                'tabletPortrait'   => $this->maximumSlideWidthTablet,
-                'mobileLandscape'  => $this->maximumSlideWidthMobileLandscape,
-                'mobilePortrait'   => $this->maximumSlideWidthMobile
-            ),
-            'forceFull'                   => $this->forceFull,
-            'forceFullOverflowX'          => $this->forceFullOverflowX,
-            'forceFullHorizontalSelector' => $this->forceFullHorizontalSelector,
-            'constrainRatio'              => $this->constrainRatio,
-            'sliderHeightBasedOn'         => $this->sliderHeightBasedOn,
-            'decreaseSliderHeight'        => $this->responsiveDecreaseSliderHeight,
+            'onResizeEnabled'     => $this->onResizeEnabled,
+            'type'                => $this->type,
+            'sliderHeightBasedOn' => $this->sliderHeightBasedOn,
 
             'focusUser' => $this->focusUser,
             'focusEdge' => $this->focusEdge,
@@ -530,8 +687,6 @@ class Responsive {
             'breakpoints'    => $this->breakpoints,
             'enabledDevices' => $this->enabledDevices,
             'sizes'          => $this->sizes,
-
-            'normalizedDeviceModes' => $normalizedDeviceModes,
 
             'overflowHiddenPage' => intval($this->slider->params->get('overflow-hidden-page', 0))
         );
@@ -546,6 +701,8 @@ class Responsive {
             if ($this->enabledDevices['desktopLandscape']) {
                 if ($params->get('responsiveSlideWidthDesktopLandscape', 0)) {
                     $this->maximumSlideWidthLandscape = intval($params->get('responsiveSlideWidthMaxDesktopLandscape', 1600));
+
+                    $this->slider->addDeviceCSS('desktoplandscape', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidthLandscape . 'px;}');
                 }
             }
 
@@ -559,26 +716,36 @@ class Responsive {
                 $this->maximumSlideWidth = 10000;
             }
 
+            $this->slider->addDeviceCSS('all', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidth . 'px;}');
 
-            if ($this->enabledDevices['desktopLandscape']) {
+
+            if ($this->enabledDevices['tabletLandscape']) {
                 if ($params->get('responsiveSlideWidthTabletLandscape', 0)) {
                     $this->maximumSlideWidthTabletLandscape = intval($params->get('responsiveSlideWidthMaxTabletLandscape', 1200));
+
+                    $this->slider->addDeviceCSS('tabletlandscape', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidthTabletLandscape . 'px;}');
                 }
             }
 
             if ($params->get('responsiveSlideWidthTablet', 0)) {
                 $this->maximumSlideWidthTablet = intval($params->get('responsiveSlideWidthMaxTablet', 980));
+
+                $this->slider->addDeviceCSS('tabletportrait', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidthTablet . 'px;}');
             }
 
 
-            if ($this->enabledDevices['desktopLandscape']) {
+            if ($this->enabledDevices['mobileLandscape']) {
                 if ($params->get('responsiveSlideWidthMobileLandscape', 0)) {
                     $this->maximumSlideWidthMobileLandscape = intval($params->get('responsiveSlideWidthMaxMobileLandscape', 780));
+
+                    $this->slider->addDeviceCSS('mobilelandscape', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidthMobileLandscape . 'px;}');
                 }
             }
 
             if ($params->get('responsiveSlideWidthMobile', 0)) {
                 $this->maximumSlideWidthMobile = intval($params->get('responsiveSlideWidthMaxMobile', 480));
+
+                $this->slider->addDeviceCSS('mobileportrait', 'div#' . $this->slider->elementId . ' .n2-ss-slide-limiter{max-width:' . $this->maximumSlideWidthMobile . 'px;}');
             }
         }
     }

@@ -7,7 +7,6 @@ namespace Nextend\Framework\Image;
 use Nextend\Framework\Controller\Admin\AdminVisualManagerAjaxController;
 use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Request\Request;
-use Nextend\Framework\ResourceTranslator\ResourceTranslator;
 
 class ControllerAjaxImage extends AdminVisualManagerAjaxController {
 
@@ -33,27 +32,6 @@ class ControllerAjaxImage extends AdminVisualManagerAjaxController {
 
         Notification::error(n2_('Unexpected error'));
         $this->response->error();
-    }
-
-    public function actionGenerateImage() {
-        $this->validateToken();
-
-        $device = Request::$REQUEST->getVar('device');
-        $this->validateVariable($device == 'tablet' || $device == 'mobile', 'device');
-
-        $image = Request::$REQUEST->getVar('image');
-        $this->validateVariable(!empty($image), 'image');
-
-        $scale = array(
-            'tablet' => 0.5,
-            'mobile' => 0.3
-        );
-
-        $newImage = ImageEdit::scaleImage('image', $image, $scale[$device], true);
-
-        $this->response->respond(array(
-            'image' => ResourceTranslator::toUrl($newImage)
-        ));
     }
 
     public function actionAddVisual() {

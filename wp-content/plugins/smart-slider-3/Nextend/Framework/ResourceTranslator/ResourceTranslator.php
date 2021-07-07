@@ -51,7 +51,7 @@ class ResourceTranslator {
 
     public static function toUrl($resourcePath) {
 
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             $keyword = $resourceIdentifier->getKeyword();
             if (strpos($resourcePath, $keyword) === 0) {
@@ -65,12 +65,12 @@ class ResourceTranslator {
 
     public static function toPath($resourcePath) {
 
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             $keyword = $resourceIdentifier->getKeyword();
             if (strpos($resourcePath, $keyword) === 0) {
 
-                return $resourceIdentifier->getPath() . substr($resourcePath, strlen($keyword));
+                return str_replace('/', DIRECTORY_SEPARATOR, $resourceIdentifier->getPath() . substr($resourcePath, strlen($keyword)));
             }
         }
 
@@ -81,7 +81,7 @@ class ResourceTranslator {
 
         $url = self::convertUrl($url);
 
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             if (strpos($url, $resourceIdentifier->getUrl()) === 0) {
 
@@ -94,7 +94,7 @@ class ResourceTranslator {
 
     public static function pathToResource($path) {
 
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             if (strpos($path, $resourceIdentifier->getPath()) === 0) {
 
@@ -119,7 +119,7 @@ class ResourceTranslator {
     public static function getResourceIdentifierKeywords() {
 
         $keywords = array();
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             $keywords[] = $resourceIdentifier->getKeyword();
         }
@@ -130,7 +130,7 @@ class ResourceTranslator {
     public static function getResourceIdentifierUrls() {
 
         $urls = array();
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             $urls[] = $resourceIdentifier->getUrl();
         }
@@ -142,7 +142,7 @@ class ResourceTranslator {
 
         $data = array();
 
-        foreach (self::$resources AS $resourceIdentifier) {
+        foreach (self::$resources as $resourceIdentifier) {
 
             $data[$resourceIdentifier->getKeyword()] = $resourceIdentifier->getUrl();
         }

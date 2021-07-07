@@ -13,13 +13,13 @@ use Nextend\Framework\Form\Element\OnOff;
 use Nextend\Framework\Form\Element\Select;
 use Nextend\Framework\Form\Element\Select\Gradient;
 use Nextend\Framework\Form\Element\Select\LinkTarget;
+use Nextend\Framework\Form\Element\Text;
 use Nextend\Framework\Form\Element\Text\Color;
 use Nextend\Framework\Form\Element\Text\FieldImage;
 use Nextend\Framework\Form\Element\Text\HiddenText;
 use Nextend\Framework\Form\Element\Text\NumberAutoComplete;
 use Nextend\Framework\Form\Element\Text\NumberSlider;
 use Nextend\Framework\Form\Element\Text\Url;
-use Nextend\Framework\Form\Element\Unit;
 use Nextend\Framework\Form\Fieldset\LayerWindow\FieldsetLayerWindowLabelFields;
 use Nextend\Framework\Form\Fieldset\LayerWindow\FieldsetLayerWindowStyleMode;
 use Nextend\SmartSlider3\Form\Element\Columns;
@@ -86,11 +86,17 @@ class LayerWindowSettingsRow extends AbstractLayerWindowSettings {
 
         new Url($link, 'row-href', n2_('Link'), '', array(
             'relatedFields' => array(
-                'layerrow-href-target'
+                'layerrow-href-target',
+                'layerrow-aria-label'
             ),
             'width'         => 248
         ));
         new LinkTarget($link, 'row-href-target', n2_('Target window'));
+
+        new Text($link, 'row-aria-label', n2_('ARIA label'), '', array(
+            'style'    => 'width:190px;',
+            'tipLabel' => n2_('ARIA label')
+        ));
 
     }
 
@@ -218,11 +224,12 @@ class LayerWindowSettingsRow extends AbstractLayerWindowSettings {
 
         $spacing = new FieldsetLayerWindowLabelFields($container, 'fields-row-spacing', n2_('Spacing'));
 
-        $padding = new MarginPadding($spacing, 'row-padding', n2_('Padding'), '10|*|10|*|10|*|10|*|px+', array(
+        $padding = new MarginPadding($spacing, 'row-padding', n2_('Padding'), '10|*|10|*|10|*|10', array(
             'rowAttributes' => array(
                 'data-devicespecific' => ''
             )
         ));
+        $padding->setUnit('px');
 
         for ($i = 1; $i < 5; $i++) {
             new NumberAutoComplete($padding, 'row-padding-' . $i, false, '', array(
@@ -236,12 +243,5 @@ class LayerWindowSettingsRow extends AbstractLayerWindowSettings {
                 'style'  => 'width: 22px;'
             ));
         }
-
-        new Unit($padding, 'row-padding-5', '', '', array(
-            'units' => array(
-                'px+' => 'px+',
-                'px'  => 'px'
-            )
-        ));
     }
 }

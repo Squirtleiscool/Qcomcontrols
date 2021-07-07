@@ -56,10 +56,17 @@ class SliderControls extends AbstractSliderTab {
             'tipDescription' => n2_('Defines the drag (and touch) direction for your slider.')
         ));
 
-        new OnOff($row1, 'controlsScroll', n2_('Mouse wheel'), 0, array(
+        new Select($row1, 'controlsScroll', n2_('Mouse wheel'), '0', array(
+            'options'        => array(
+                '0' => n2_('Disabled'),
+                '1' => n2_('Vertical'),
+                '2' => n2_('Horizontal')
+            ),
             'tipLabel'       => n2_('Mouse wheel'),
-            'tipDescription' => n2_('Allows switching slides with the mouse wheel.')
+            'tipDescription' => n2_('Allows switching slides with the mouse wheel.'),
+            'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1778-slider-settings-controls#mouse-wheel'
         ));
+
         new OnOff($row1, 'controlsKeyboard', n2_('Keyboard'), 1, array(
             'tipLabel'       => n2_('Keyboard'),
             'tipDescription' => n2_('Allows switching slides with the keyboard.')
@@ -75,7 +82,7 @@ class SliderControls extends AbstractSliderTab {
         unset($plugins['autoplay']);
         unset($plugins['indicator']);
 
-        foreach ($plugins AS $name => $widgetGroup) {
+        foreach ($plugins as $name => $widgetGroup) {
             $widgetGroup->renderFields($this->tab);
         }
     }

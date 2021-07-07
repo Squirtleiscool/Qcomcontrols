@@ -23,7 +23,7 @@ class Plugin {
 
     public static function applyFilters($eventName, $value, $args = array()) {
         if (self::hasAction($eventName)) {
-            foreach (self::$classes[$eventName] AS $callable) {
+            foreach (self::$classes[$eventName] as $callable) {
                 if (is_callable($callable)) {
                     $value = call_user_func_array($callable, array_merge(array($value), $args));
                 }
@@ -35,7 +35,7 @@ class Plugin {
 
     public static function doAction($eventName, $args = array()) {
         if (self::hasAction($eventName)) {
-            foreach (self::$classes[$eventName] AS $callable) {
+            foreach (self::$classes[$eventName] as $callable) {
                 if (is_callable($callable)) {
                     call_user_func_array($callable, $args);
                 }

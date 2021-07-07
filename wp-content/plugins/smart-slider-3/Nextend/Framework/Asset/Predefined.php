@@ -3,17 +3,15 @@
 namespace Nextend\Framework\Asset;
 
 
-use Nextend\Framework\Asset\Builder\BuilderJs;
+use JHtml;
 use Nextend\Framework\Asset\Css\Css;
 use Nextend\Framework\Asset\Fonts\Google\Google;
 use Nextend\Framework\Asset\Js\Js;
-use Nextend\Framework\Filesystem\Filesystem;
 use Nextend\Framework\Font\FontSources;
 use Nextend\Framework\Form\Form;
 use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Plugin;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
-use Nextend\Framework\Url\Url;
 use Nextend\SmartSlider3\Application\Frontend\ApplicationTypeFrontend;
 use Nextend\SmartSlider3\Settings;
 
@@ -24,14 +22,19 @@ class Predefined {
         if ($once != null && !$force) {
             return;
         }
-        $once   = true;
+        $once = true;
+        wp_enqueue_script('jquery');
+        $jQueryFallback = site_url('wp-includes/js/jquery/jquery.js');
+
+        Js::addGlobalInline('_N2._jQueryFallback=\'' . $jQueryFallback . '\';');
+
         $family = n2_x('Montserrat', 'Default Google font family for admin');
         foreach (explode(',', n2_x('latin', 'Default Google font charset for admin')) as $subset) {
             Google::addSubset($subset);
         }
         Google::addFont($family);
 
-        Js::addFirstCode("N2R(['AjaxHelper'],function(){N2Classes.AjaxHelper.addAjaxArray(" . json_encode(Form::tokenizeUrl()) . ");});");
+        Js::addFirstCode("_N2.r(['AjaxHelper'],function(){_N2.AjaxHelper.addAjaxArray(" . json_encode(Form::tokenizeUrl()) . ");});");
 
         Plugin::addAction('afterApplicationContent', array(
             FontSources::class,
@@ -51,28 +54,24 @@ class Predefined {
             Js::addGlobalInline('window.N2PLATFORM="' . Platform::getName() . '";');
         }
     
+        Js::addGlobalInline('(function(){this._N2=this._N2||{_r:[],_d:[],r:function(){this._r.push(arguments)},d:function(){this._d.push(arguments)}}}).call(window);');
 
-        Js::addGlobalInline('(function(){var N=this;N.N2_=N.N2_||{r:[],d:[]},N.N2R=N.N2R||function(){N.N2_.r.push(arguments)},N.N2D=N.N2D||function(){N.N2_.d.push(arguments)}}).call(window);');
-        $jQueryFallback = site_url('wp-includes/js/jquery/jquery.js');
+        /*
+         * +1px needed for Safari to fix: https://bugs.webkit.org/show_bug.cgi?id=225962
+        (function(ua){
+            if(ua.indexOf('Safari') > 0 && ua.indexOf('Chrome') === -1){
+                document.documentElement.style.setProperty('--ss-safari-fix-225962', '1px');
+            }
+        })(navigator.userAgent);
+        */
+        Js::addGlobalInline('!function(a){a.indexOf("Safari")>0&&-1===a.indexOf("Chrome")&&document.documentElement.style.setProperty("--ss-safari-fix-225962","1px")}(navigator.userAgent);');
 
-        Js::addGlobalInline('window.nextend={jQueryFallback:\'' . $jQueryFallback . '\',localization: {}, ready: function(cb){console.error(\'nextend.ready will be deprecated!\');N2R(\'documentReady\', function($){cb.call(window,$)})}};');
-
-        Js::jQuery($force);
-
-
-        self::animation($force);
+        Js::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . "/dist/n2.min.js", 'n2');
 
         FontSources::onFontManagerLoad($force);
-    }
-
-    private static function animation($force = false) {
-        static $once;
-        if ($once != null && !$force) {
-            return;
-        }
-        $once = true;
     }
 
     public static function loadLiteBox() {
     }
 }
+

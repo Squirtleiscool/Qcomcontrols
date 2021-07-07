@@ -26,7 +26,7 @@ class FieldImage extends AbstractChooserText {
             $options['alt'] = $this->relatedAlt;
         }
 
-        Js::addInline("new N2Classes.FormElementImage('" . $this->fieldID . "', " . json_encode($options) . " );");
+        Js::addInline("new _N2.FormElementImage('" . $this->fieldID . "', " . json_encode($options) . " );");
     }
 
     protected function fetchElement() {

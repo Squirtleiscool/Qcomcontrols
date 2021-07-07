@@ -4,6 +4,8 @@
 namespace Nextend\SmartSlider3\Renderable\Placement;
 
 
+use Nextend\SmartSlider3\Renderable\Component\AbstractComponent;
+
 class PlacementNormal extends AbstractPlacement {
 
     public function attributes(&$attributes) {
@@ -11,32 +13,84 @@ class PlacementNormal extends AbstractPlacement {
 
         $attributes['data-pm'] = 'normal';
 
-        $attributes['style'] .= 'margin:' . $this->component->spacingToEm($data->get('desktopportraitmargin', '0|*|0|*|0|*|0|*|px+')) . ';';
-        $this->component->createDeviceProperty('margin', '0|*|0|*|0|*|0|*|px+');
 
-        $height = $data->get('desktopportraitheight', 0);
-        if ($height > 0) {
-            $attributes['style'] .= 'height:' . $this->component->pxToEm($data->get('desktopportraitheight', 0)) . ';';
-        }
-        $this->component->createDeviceProperty('height', 0);
+        $devices = $this->component->getOwner()
+                                   ->getAvailableDevices();
 
-
-        $maxWidth = intval($data->get('desktopportraitmaxwidth', 0));
-        if ($maxWidth > 0) {
-            $attributes['style'] .= 'max-width: ' . $maxWidth . 'px;';
-
-            $attributes['data-has-maxwidth'] = '1';
+        $desktopPortraitSelfAlign = $data->get('desktopportraitselfalign', 'inherit');
+        $desktopPortraitMaxWidth  = intval($data->get('desktopportraitmaxwidth', 0));
+        $desktopPortraitHeight    = $data->get('desktopportraitheight', 0);
+        $desktopPortraitMargin    = $data->get('desktopportraitmargin');
+        if (!empty($desktopPortraitMargin)) {
+            $desktopPortraitMargin = $this->component->spacingToPxValue($desktopPortraitMargin);
         } else {
-            $attributes['data-has-maxwidth'] = '0';
+            $desktopPortraitMargin = array(
+                0,
+                0,
+                0,
+                0
+            );
         }
-        $this->component->createDeviceProperty('maxwidth', 0);
+
+        foreach ($devices as $device) {
+            $margin = $data->get($device . 'margin');
+            if (!empty($margin)) {
+                $marginValues = $this->component->spacingToPxValue($margin);
+
+                $cssText = array();
+                if (($marginValues[0] == 0 && $desktopPortraitMargin[0] != 0) || $marginValues[0] != 0) {
+                    $cssText[] = '--margin-top:' . $marginValues[0] . 'px';
+                }
+                if (($marginValues[1] == 0 && $desktopPortraitMargin[1] != 0) || $marginValues[1] != 0) {
+                    $cssText[] = '--margin-right:' . $marginValues[1] . 'px';
+                }
+                if (($marginValues[2] == 0 && $desktopPortraitMargin[2] != 0) || $marginValues[2] != 0) {
+                    $cssText[] = '--margin-bottom:' . $marginValues[2] . 'px';
+                }
+                if (($marginValues[3] == 0 && $desktopPortraitMargin[3] != 0) || $marginValues[3] != 0) {
+                    $cssText[] = '--margin-left:' . $marginValues[3] . 'px';
+                }
+
+                $this->component->style->add($device, '', implode(';', $cssText));
+            }
+
+            $height = $data->get($device . 'height');
+            if ($height === 0 || !empty($height)) {
+                if ($height == 0) {
+                    if ($desktopPortraitHeight > 0) {
+                        $this->component->style->add($device, '', 'height:auto');
+                    }
+                } else {
+                    $this->component->style->add($device, '', 'height:' . $height . 'px');
+                }
+            }
+
+            $maxWidth = intval($data->get($device . 'maxwidth', -1));
+            if ($maxWidth > 0) {
+                $this->component->style->add($device, '', 'max-width:' . $maxWidth . 'px');
+            } else if ($maxWidth === 0 && $device != 'desktopportrait' && $maxWidth != $desktopPortraitMaxWidth) {
+                $this->component->style->add($device, '', 'max-width:none');
+            }
 
 
-        $attributes['data-cssselfalign'] = $data->get('desktopportraitselfalign', 'inherit');
-        $this->component->createDeviceProperty('selfalign', 'inherit');
+            $selfAlign = $data->get($device . 'selfalign', '');
+
+            if ($device == 'desktopportrait') {
+                if ($desktopPortraitSelfAlign != 'inherit') {
+                    $this->component->style->add($device, '', AbstractComponent::selfAlignToStyle($selfAlign));
+                }
+            } else if ($desktopPortraitSelfAlign != $selfAlign) {
+                $this->component->style->add($device, '', AbstractComponent::selfAlignToStyle($selfAlign));
+            }
+        }
 
     }
 
     public function adminAttributes(&$attributes) {
+
+        $this->component->createDeviceProperty('maxwidth', 0);
+        $this->component->createDeviceProperty('margin', '0|*|0|*|0|*|0');
+        $this->component->createDeviceProperty('height', 0);
+        $this->component->createDeviceProperty('selfalign', 'inherit');
     }
 }

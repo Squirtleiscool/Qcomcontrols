@@ -85,7 +85,7 @@ class Breakpoint extends AbstractField implements ContainerInterface {
             'global'      => $this->global
         );
 
-        Js::addInline('new N2Classes.FormElementBreakpoint("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementBreakpoint("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
 
         return '<div id="' . $this->getID() . '" class="n2_field_breakpoint"><div class="n2_field_breakpoint__pre_fields">' . $preHtml . '</div><div class="n2_field_breakpoint__breakpoint_container" data-orientation="portrait">' . $html . '</div></div>';

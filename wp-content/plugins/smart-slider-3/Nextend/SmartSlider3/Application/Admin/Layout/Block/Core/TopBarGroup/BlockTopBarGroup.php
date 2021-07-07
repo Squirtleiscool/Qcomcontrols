@@ -29,7 +29,7 @@ class BlockTopBarGroup extends AbstractBlock {
 
     public function displayBlocks() {
 
-        foreach ($this->blocks AS $block) {
+        foreach ($this->blocks as $block) {
             $block->display();
         }
     }

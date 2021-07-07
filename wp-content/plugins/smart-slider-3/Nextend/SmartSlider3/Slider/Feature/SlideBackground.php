@@ -10,9 +10,13 @@ use Nextend\Framework\Parser\Color;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Slider\Slide;
+use Nextend\SmartSlider3\Slider\Slider;
 
 class SlideBackground {
 
+    /**
+     * @var Slider
+     */
     private $slider;
 
     public function __construct($slider) {
@@ -22,12 +26,6 @@ class SlideBackground {
 
     public function makeJavaScriptProperties(&$properties) {
         $enabled = intval($this->slider->params->get('slide-background-parallax', 0));
-        if (!$enabled) {
-            if ($this->slider->params->get('backgroundMode') == 'fixed') {
-                $enabled = 1;
-                $this->slider->params->set('slide-background-parallax-strength', 100);
-            }
-        }
         if ($enabled) {
             $properties['backgroundParallax'] = array(
                 'strength' => intval($this->slider->params->get('slide-background-parallax-strength', 50)) / 100,
@@ -54,9 +52,7 @@ class SlideBackground {
             }
         }
 
-        $html = $this->makeBackground($slide);
-
-        return $html;
+        return $this->makeBackground($slide);
     }
 
     private function getBackgroundStyle($slide) {
@@ -132,6 +128,11 @@ class SlideBackground {
             }
         }
 
+        $fillMode = $slide->parameters->get('backgroundMode', 'default');
+        if ($fillMode == 'default') {
+            $fillMode = $this->slider->params->get('backgroundMode', 'fill');
+        }
+
         $backgroundElements = array();
 
         if ($backgroundType == 'color') {
@@ -141,31 +142,31 @@ class SlideBackground {
 
 
             $backgroundElements[] = $this->renderBackgroundVideo($slide);
-            $backgroundElements[] = $this->renderImage($slide);
+            $backgroundElements[] = $this->renderImage($slide, $fillMode);
 
             $backgroundElements[] = $this->renderColor($slide);
 
         } else if ($backgroundType == 'image') {
 
 
-            $backgroundElements[] = $this->renderImage($slide);
+            $backgroundElements[] = $this->renderImage($slide, $fillMode);
 
             $backgroundElements[] = $this->renderColor($slide);
         }
 
-        $fillMode = $slide->parameters->get('backgroundMode', 'default');
-        if ($fillMode == 'default') {
-            $fillMode = $this->slider->params->get('backgroundMode', 'fill');
-        }
+        $html = implode('', $backgroundElements);
 
-        if ($fillMode == 'fixed') {
-            $fillMode = 'fill';
-        }
+        /* @see https://bugs.chromium.org/p/chromium/issues/detail?id=1181291
+         * if (!$slide->getFrontendFirst()) {
+         * $html = '<template>' . $html . '</template>';
+         * }
+         */
 
         return Html::tag('div', array(
-            'class'     => "n2-ss-slide-background n2-ow",
-            'data-mode' => $fillMode
-        ), implode('', $backgroundElements));
+            'class'          => "n2-ss-slide-background",
+            'data-public-id' => $slide->publicID,
+            'data-mode'      => $fillMode
+        ), $html);
     }
 
     private function renderColor($slide) {
@@ -190,10 +191,11 @@ class SlideBackground {
 
     /**
      * @param $slide Slide
+     * @param $fillMode
      *
      * @return string
      */
-    private function renderImage($slide) {
+    private function renderImage($slide, $fillMode) {
 
         $rawBackgroundImage = $slide->parameters->get('backgroundImage', '');
 
@@ -203,37 +205,24 @@ class SlideBackground {
 
         $backgroundImageBlur = max(0, $slide->parameters->get('backgroundImageBlur', 0));
 
-        $x = max(0, min(100, $slide->fill($slide->parameters->get('backgroundFocusX', 50))));
-        $y = max(0, min(100, $slide->fill($slide->parameters->get('backgroundFocusY', 50))));
+        $focusX = max(0, min(100, $slide->fill($slide->parameters->get('backgroundFocusX', 50))));
+        $focusY = max(0, min(100, $slide->fill($slide->parameters->get('backgroundFocusY', 50))));
 
-        if ($slide->hasGenerator()) {
+        $backgroundImageMobile        = '';
+        $backgroundImageTablet        = '';
+        $backgroundImageDesktopRetina = '';
+        $backgroundImage              = $slide->fill($rawBackgroundImage);
 
-            $backgroundImage = $slide->fill($rawBackgroundImage);
-
-            $imageData = ImageManager::getImageData($rawBackgroundImage);
-
-            $imageData['desktop-retina']['image'] = $slide->fill($imageData['desktop-retina']['image']);
-            $imageData['tablet']['image']         = $slide->fill($imageData['tablet']['image']);
-            $imageData['tablet-retina']['image']  = $slide->fill($imageData['tablet-retina']['image']);
-            $imageData['mobile']['image']         = $slide->fill($imageData['mobile']['image']);
-            $imageData['mobile-retina']['image']  = $slide->fill($imageData['mobile-retina']['image']);
-        } else {
-            $backgroundImage = $slide->fill($rawBackgroundImage);
-            $imageData       = ImageManager::getImageData($backgroundImage);
+        if (!$slide->hasGenerator()) {
+            $imageData                    = ImageManager::getImageData($backgroundImage);
+            $backgroundImageDesktopRetina = $imageData['desktop-retina']['image'];
+            $backgroundImageMobile        = $imageData['mobile']['image'];
+            $backgroundImageTablet        = $imageData['tablet']['image'];
         }
-
-        if (empty($backgroundImage)) {
-            $src = ImageEdit::base64Transparent();
-        } else {
-            $src = ResourceTranslator::urlToResource($this->slider->features->optimize->optimizeBackground($backgroundImage, $x, $y));
-            $slide->addImage(ResourceTranslator::toUrl($src));
-        }
-
 
         $alt   = $slide->fill($slide->parameters->get('backgroundAlt', ''));
         $title = $slide->fill($slide->parameters->get('backgroundTitle', ''));
 
-        $deviceAttributes = $this->getDeviceAttributes($src, $imageData);
 
         $opacity = min(100, max(0, $slide->parameters->get('backgroundImageOpacity', 100)));
 
@@ -242,25 +231,20 @@ class SlideBackground {
             $style[] = 'opacity:' . ($opacity / 100);
         }
 
-        if ($x != '50' || $y != '50') {
-            $style[] = 'background-position: ' . $x . '% ' . $y . '%';
+        if ($focusX != '50') {
+            $style[] = '--ss-o-pos-x:' . $focusX . '%';
         }
 
-        $attributes = $deviceAttributes + array(
-                "class"      => 'n2-ss-slide-background-image',
-                "data-blur"  => $backgroundImageBlur,
-                "data-alt"   => $alt,
-                "data-title" => $title
-            );
-
-        if (!$slide->getSlider()->features->lazyLoad->isEnabled && !empty($attributes['data-desktop']) && empty($attributes['data-tablet']) && empty($attributes['data-mobile'])) {
-            $style[] = 'background-image:url(\'' . $attributes['data-desktop'] . '\')';
-
-            /**
-             * Fix for Autoptimize lazy load images
-             */
-            $attributes['data-no-lazy'] = '';
+        if ($focusY != '50') {
+            $style[] = '--ss-o-pos-y:' . $focusY . '%';
         }
+
+        $attributes = array(
+            "class"      => 'n2-ss-slide-background-image',
+            "data-blur"  => $backgroundImageBlur,
+            "data-alt"   => $alt,
+            "data-title" => $title
+        );
 
         if (!empty($style)) {
             $attributes['style'] = implode(';', $style);
@@ -268,43 +252,139 @@ class SlideBackground {
 
         if ($slide->isCurrentlyEdited()) {
             $attributes['data-opacity'] = $opacity;
-            $attributes['data-x']       = $x;
-            $attributes['data-y']       = $y;
+            $attributes['data-x']       = $focusX;
+            $attributes['data-y']       = $focusY;
         }
 
-        return Html::tag('div', $attributes, '');
-    }
+        $sources = array();
 
-    private function getDeviceAttributes($image, $imageData) {
+        if ($this->slider->isAdmin) {
+            $src = $backgroundImage;
 
-        $attributes                 = array();
-        $attributes['data-hash']    = md5($image);
-        $attributes['data-desktop'] = ResourceTranslator::toUrl($image);
-
-        if ($imageData['desktop-retina']['image'] == '' && $imageData['tablet']['image'] == '' && $imageData['tablet-retina']['image'] == '' && $imageData['mobile']['image'] == '' && $imageData['mobile-retina']['image'] == '') {
-
+            $attributes['data-hash']               = md5($src);
+            $attributes['data-src-desktop']        = $src;
+            $attributes['data-src-desktop-retina'] = $backgroundImageDesktopRetina;
+            $attributes['data-src-tablet']         = $backgroundImageTablet;
+            $attributes['data-src-mobile']         = $backgroundImageMobile;
         } else {
-            if ($imageData['desktop-retina']['image'] != '') {
-                $attributes['data-desktop-retina'] = ResourceTranslator::toUrl($imageData['desktop-retina']['image']);
-            }
-            if ($imageData['tablet']['image'] != '') {
-                $attributes['data-tablet'] = ResourceTranslator::toUrl($imageData['tablet']['image']);
-            }
-            if ($imageData['tablet-retina']['image'] != '') {
-                $attributes['data-tablet-retina'] = ResourceTranslator::toUrl($imageData['tablet-retina']['image']);
-            }
-            if ($imageData['mobile']['image'] != '') {
-                $attributes['data-mobile'] = ResourceTranslator::toUrl($imageData['mobile']['image']);
-            }
-            if ($imageData['mobile-retina']['image'] != '') {
-                $attributes['data-mobile-retina'] = ResourceTranslator::toUrl($imageData['mobile-retina']['image']);
+
+            if (empty($backgroundImage)) {
+                /**
+                 * @todo Does it really work as expected?
+                 */
+                $src = ImageEdit::base64Transparent();
+            } else {
+                /**
+                 * @todo this resize might have a better place
+                 */
+                $src = $backgroundImage;
+                if ($this->slider->params->get('optimize-scale', 0)) {
+                    $src = ResourceTranslator::urlToResource($this->slider->features->optimize->optimizeBackground($backgroundImage, $focusX, $focusY));
+                }
+            
+
+                $slide->addImage(ResourceTranslator::toUrl($src));
             }
 
-            //We have to force the fade on load enabled to make sure the user get great result.
-            $this->slider->features->fadeOnLoad->forceFadeOnLoad();
+            $hasDeviceSpecificImage = false;
+
+            $mediaQueries = $this->slider->features->responsive->mediaQueries;
+
+            if (!empty($backgroundImageDesktopRetina)) {
+
+                $hasDeviceSpecificImage = true;
+
+                $backgroundImageDesktopRetina = ResourceTranslator::toUrl($backgroundImageDesktopRetina);
+
+                $mediaQueryMinPixelRatio = ' and (-webkit-min-device-pixel-ratio: 1.5)';
+
+                if (!empty($mediaQueries['desktopportrait'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageDesktopRetina,
+                        'media'  => implode($mediaQueryMinPixelRatio . ',', $mediaQueries['desktopportrait']) . $mediaQueryMinPixelRatio
+                    )));
+                }
+                if (!empty($mediaQueries['desktopLandscape'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageDesktopRetina,
+                        'media'  => implode($mediaQueryMinPixelRatio . ',', $mediaQueries['desktopLandscape']) . $mediaQueryMinPixelRatio
+                    )));
+                }
+
+            }
+
+            if (!empty($backgroundImageMobile)) {
+
+                $hasDeviceSpecificImage = true;
+
+                $backgroundImageMobileUrl = ResourceTranslator::toUrl($backgroundImageMobile);
+
+                if (!empty($mediaQueries['mobileportrait'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageMobileUrl,
+                        'media'  => implode(',', $mediaQueries['mobileportrait'])
+                    )));
+                }
+                if (!empty($mediaQueries['mobilelandscape'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageMobileUrl,
+                        'media'  => implode(',', $mediaQueries['mobilelandscape'])
+                    )));
+                }
+            }
+
+            if (!empty($backgroundImageTablet)) {
+
+                $hasDeviceSpecificImage = true;
+
+                $backgroundImageTabletUrl = ResourceTranslator::toUrl($backgroundImageTablet);
+
+                if (!empty($mediaQueries['tabletportrait'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageTabletUrl,
+                        'media'  => implode(',', $mediaQueries['tabletportrait'])
+                    )));
+                }
+                if (!empty($mediaQueries['tabletlandscape'])) {
+                    $sources[] = HTML::tag('source', Html::addExcludeLazyLoadAttributes(array(
+                        'srcset' => $backgroundImageTabletUrl,
+                        'media'  => implode(',', $mediaQueries['tabletlandscape'])
+                    )));
+                }
+            }
         }
 
-        return $attributes;
+        $imageAttributes = array(
+            'src'     => ResourceTranslator::toUrl($src),
+            'alt'     => $alt,
+            'title'   => $title,
+            'loading' => 'lazy',
+            'style'   => ''
+        );
+
+        $imageAttributes = Html::addExcludeLazyLoadAttributes($imageAttributes);
+
+        $sources[] = Html::tag('img', $imageAttributes, '', false);
+
+        $picture = '<picture>' . implode('', $sources) . '</picture>';
+
+        $originalImage = Html::tag('div', $attributes, $picture);
+
+        if ($fillMode === 'blurfit') {
+
+            $picture = '<picture style="filter:blur(7px)">' . implode('', $sources) . '</picture>';
+
+            if (!isset($attributes['style'])) {
+                $attributes['style'] = '';
+            }
+            $attributes['style'] .= 'margin:-14px;padding:14px;';
+
+            $ret = Html::tag('div', $attributes, $picture) . $originalImage;
+        } else {
+            $ret = $originalImage;
+        }
+
+        return $ret;
     }
 
     /**

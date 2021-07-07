@@ -16,7 +16,7 @@ use Nextend\Framework\View\AbstractLayout;
 
 abstract class AbstractApplicationType {
 
-    Use GetAssetsPathTrait, MVCHelperTrait;
+    use GetAssetsPathTrait, MVCHelperTrait;
 
     /** @var AbstractApplication */
     protected $application;

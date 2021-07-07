@@ -27,7 +27,7 @@ class Upload extends AbstractField {
             'autocomplete' => 'off'
         ), false, false);
 
-        Js::addInline('new N2Classes.FormElementUpload("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementUpload("' . $this->fieldID . '");');
 
         return Html::tag('div', array(
             'class' => 'n2_field_chooser n2_field_upload '

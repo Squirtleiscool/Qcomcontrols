@@ -18,7 +18,7 @@ class Columns extends AbstractFieldHidden {
 
     protected function fetchElement() {
 
-        Js::addInline('new N2Classes.FormElementColumns("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementColumns("' . $this->fieldID . '");');
 
         return Html::tag('div', array(
             'class' => 'n2_field_columns'

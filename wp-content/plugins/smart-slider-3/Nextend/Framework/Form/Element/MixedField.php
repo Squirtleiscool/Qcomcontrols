@@ -47,7 +47,7 @@ class MixedField extends AbstractFieldHidden implements ContainerInterface {
 
         $html .= parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementMixed("' . $this->fieldID . '", ' . json_encode($subElements) . ', "' . $this->separator . '");');
+        Js::addInline('new _N2.FormElementMixed("' . $this->fieldID . '", ' . json_encode($subElements) . ', "' . $this->separator . '");');
 
         return $this->decorate($html);
     }

@@ -2,7 +2,6 @@
 
 namespace Nextend\SmartSlider3\Application\Admin\Sliders;
 
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\View\AbstractView;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Banner\BlockBannerActivate;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Dashboard\DashboardInfo\BlockDashboardInfo;

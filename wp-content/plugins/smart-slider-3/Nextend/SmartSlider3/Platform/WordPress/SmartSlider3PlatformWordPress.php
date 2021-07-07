@@ -17,7 +17,9 @@ use Nextend\SmartSlider3\Platform\WordPress\Integration\Jetpack\Jetpack;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\MotoPressCE\MotoPressCE;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\NimbleBuilder\NimbleBuilder;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\OxygenBuilder\OxygenBuilder;
+use Nextend\SmartSlider3\Platform\WordPress\Integration\RankMath\RankMath;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\TablePress\TablePress;
+use Nextend\SmartSlider3\Platform\WordPress\Integration\ThemifyBuilder\ThemifyBuilder;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\Unyson\Unyson;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\VisualComposer1\VisualComposer1;
 use Nextend\SmartSlider3\Platform\WordPress\Integration\VisualComposer2\VisualComposer2;
@@ -109,6 +111,10 @@ class SmartSlider3PlatformWordPress extends AbstractSmartSlider3Platform {
         new Brizy();
 
         new BoldGrid();
+
+        new RankMath();
+
+        new ThemifyBuilder();
     }
 
     /**

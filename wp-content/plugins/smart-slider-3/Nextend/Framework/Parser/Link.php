@@ -39,7 +39,7 @@ class Link {
     public static function getParser($className) {
         if (!isset(self::$parsers[$className])) {
 
-            foreach (self::$registeredNamespaces AS $namespace) {
+            foreach (self::$registeredNamespaces as $namespace) {
                 $class = $namespace . $className;
                 if (class_exists($class)) {
                     self::$parsers[$className] = new $class();

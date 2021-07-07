@@ -100,7 +100,7 @@ class ImportSlider {
             case 'clone':
                 $images     = isset($importData['images']) ? $importData['images'] : array();
                 $imageStore = new StoreImage('slider' . $this->sliderId, true);
-                foreach ($images AS $file => $content) {
+                foreach ($images as $file => $content) {
                     $localImage = $imageStore->makeCache($file, $content);
                     if ($localImage) {
                         $this->imageTranslation[$file] = ResourceTranslator::urlToResource(Url::pathToUri($localImage));
@@ -115,7 +115,7 @@ class ImportSlider {
             case 'update':
                 $keys   = array_keys($this->backup->NextendImageHelper_Export);
                 $values = array_values($this->backup->NextendImageHelper_Export);
-                foreach ($this->backup->imageTranslation AS $image => $value) {
+                foreach ($this->backup->imageTranslation as $image => $value) {
                     $this->imageTranslation[$value] = str_replace($keys, $values, $image);
                 }
                 break;
@@ -126,7 +126,7 @@ class ImportSlider {
             $sliderModel->setThumbnail($this->sliderId, $this->fixImage($this->backup->slider['thumbnail']));
         }
 
-        foreach ($this->backup->NextendImageManager_ImageData AS $image => $data) {
+        foreach ($this->backup->NextendImageManager_ImageData as $image => $data) {
             $data['tablet']['image'] = $this->fixImage($data['tablet']['image']);
             $data['mobile']['image'] = $this->fixImage($data['mobile']['image']);
             $fixedImage              = $this->fixImage($image);
@@ -144,7 +144,7 @@ class ImportSlider {
             /**
              * Import the sliders for the group!
              */
-            foreach ($importData['sliders'] AS $k => $slider) {
+            foreach ($importData['sliders'] as $k => $slider) {
                 $import = new self($this);
                 if ($this->replace) {
                     $import->enableReplace();
@@ -163,7 +163,7 @@ class ImportSlider {
             $widgetGroups   = WidgetGroupFactory::getGroups();
 
             $params = $this->backup->slider['params'];
-            foreach ($widgetGroups AS $groupName => $group) {
+            foreach ($widgetGroups as $groupName => $group) {
                 $widgetName = $params->get('widget' . $groupName);
                 if ($widgetName && $widgetName != 'disabled') {
                     $widget = $group->getWidget($widgetName);
@@ -173,7 +173,7 @@ class ImportSlider {
                 }
             }
 
-            foreach ($enabledWidgets AS $k => $widget) {
+            foreach ($enabledWidgets as $k => $widget) {
                 $params->fillDefault($widget->getDefaults());
 
                 $widget->prepareImport($this, $params);
@@ -272,7 +272,7 @@ class ImportSlider {
             $data = json_decode($matches[2]);
             if ($data) {
                 $newImages = array();
-                foreach ($data->urls AS $image) {
+                foreach ($data->urls as $image) {
                     $newImages[] = $this->fixImage($image);
                 }
                 $data->urls = $newImages;
@@ -286,12 +286,12 @@ class ImportSlider {
     private function importVisuals($records, $linkedVisuals) {
         if (count($records)) {
             if (!$linkedVisuals) {
-                foreach ($records AS $record) {
+                foreach ($records as $record) {
                     $this->sectionTranslation[$record['id']] = $record['value'];
                 }
             } else {
                 $sets = array();
-                foreach ($records AS $record) {
+                foreach ($records as $record) {
                     $storage = StorageSectionManager::getStorage($record['application']);
                     if (!isset($sets[$record['application'] . '_' . $record['section']])) {
                         $sets[$record['application'] . '_' . $record['section']] = $storage->add($record['section'] . 'set', '', $this->backup->slider['title']);

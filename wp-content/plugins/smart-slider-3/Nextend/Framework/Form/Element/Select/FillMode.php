@@ -16,9 +16,7 @@ class FillMode extends Select {
             'blurfit' => n2_('Blur fit'),
             'fit'     => n2_('Fit'),
             'stretch' => n2_('Stretch'),
-            'center'  => n2_('Center'),
-            'tile'    => n2_('Tile')
-
+            'center'  => n2_('Center')
         );
 
         if ($this->useGlobal) {

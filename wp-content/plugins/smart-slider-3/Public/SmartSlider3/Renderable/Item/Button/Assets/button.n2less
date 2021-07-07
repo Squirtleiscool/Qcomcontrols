@@ -1,12 +1,12 @@
 (~'div#@{sliderid}') {
   .n2-ss-button-container,
   .n2-ss-button-container a {
-    display: inline-block;
+    display: block;
   }
 
-  .n2-ss-button-container.n2-ss-fullwidth,
-  .n2-ss-button-container.n2-ss-fullwidth a {
-    display: block;
+  .n2-ss-button-container--non-full-width,
+  .n2-ss-button-container--non-full-width a {
+    display: inline-block;
   }
 
   .n2-ss-button-container.n2-ss-nowrap {

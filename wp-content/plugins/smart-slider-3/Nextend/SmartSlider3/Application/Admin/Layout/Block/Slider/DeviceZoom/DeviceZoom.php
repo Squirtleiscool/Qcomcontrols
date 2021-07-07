@@ -14,7 +14,8 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slider\DeviceZoom;
     <div class="n2_device_tester"></div>
 </div>
 <script>
-    N2R('documentReady', function ($, undefined) {
+    _N2.r(['$', 'documentReady'], function () {
+        var $ = _N2.$;
         var timeout,
             $el = $('.n2_device_tester_hover')
                 .on({

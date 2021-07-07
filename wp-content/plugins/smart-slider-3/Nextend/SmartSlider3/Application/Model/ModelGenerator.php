@@ -51,7 +51,7 @@ class ModelGenerator extends AbstractModelTable {
 
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+'
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px'
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
@@ -82,7 +82,7 @@ class ModelGenerator extends AbstractModelTable {
 
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
@@ -114,7 +114,7 @@ class ModelGenerator extends AbstractModelTable {
 
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
@@ -158,7 +158,7 @@ class ModelGenerator extends AbstractModelTable {
                 ));
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
@@ -249,25 +249,25 @@ class ModelGenerator extends AbstractModelTable {
 
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'center',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
-                    'desktopportraitmargin'  => '0|*|0|*|0|*|0|*|px+'
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
+                    'desktopportraitmargin'  => '0|*|0|*|0|*|0|*|px'
                 ));
 
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
                     'bgcolor'                => '00000080',
-                    'desktopportraitpadding' => '10|*|10|*|10|*|10|*|px+',
-                    'desktopportraitmargin'  => '0|*|0|*|0|*|0|*|px+'
+                    'desktopportraitpadding' => '10|*|10|*|10|*|10|*|px',
+                    'desktopportraitmargin'  => '0|*|0|*|0|*|0|*|px'
                 ));
                 $col = new BuilderComponentCol($row, '1');
                 $col->set(array(
                     'desktopportraitinneralign' => "left",
-                    'desktopportraitmargin'     => '0|*|0|*|0|*|0|*|px+',
-                    'desktopportraitpadding'    => '10|*|10|*|10|*|10|*|px+'
+                    'desktopportraitmargin'     => '0|*|0|*|0|*|0|*|px',
+                    'desktopportraitpadding'    => '10|*|10|*|10|*|10|*|px'
                 ));
                 $heading = new BuilderComponentLayer($col, 'heading');
                 $heading->set(array(
-                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px',
                     'desktopportraitselfalign' => 'inherit'
                 ));
                 $heading->item->set(array(
@@ -275,7 +275,7 @@ class ModelGenerator extends AbstractModelTable {
                 ));
                 $image = new BuilderComponentLayer($col, 'image');
                 $image->set(array(
-                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px',
                     'desktopportraitselfalign' => 'inherit'
                 ));
                 $image->item->set(array(
@@ -283,7 +283,7 @@ class ModelGenerator extends AbstractModelTable {
                 ));
                 $button = new BuilderComponentLayer($col, 'button');
                 $button->set(array(
-                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitmargin'    => '0|*|0|*|0|*|0|*|px',
                     'desktopportraitselfalign' => 'inherit'
                 ));
                 $button->item->set(array(
@@ -298,7 +298,7 @@ class ModelGenerator extends AbstractModelTable {
                 ));
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(
@@ -325,7 +325,7 @@ class ModelGenerator extends AbstractModelTable {
                 ));
                 $slideBuilder->content->set(array(
                     'verticalalign'          => 'flex-end',
-                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px+',
+                    'desktopportraitpadding' => '0|*|0|*|0|*|0|*|px',
                 ));
                 $row = new BuilderComponentRow($slideBuilder->content);
                 $row->set(array(

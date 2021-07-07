@@ -52,7 +52,7 @@ class LayerWindowFocus extends AbstractField {
 
     protected function fetchElement() {
 
-        Js::addInline('new N2Classes.FormElementLayerWindowFocus("' . $this->fieldID . '", ' . json_encode(array(
+        Js::addInline('new _N2.FormElementLayerWindowFocus("' . $this->fieldID . '", ' . json_encode(array(
                 'image'  => $this->fieldImage->getID(),
                 'focusX' => $this->fieldFocusX->getID(),
                 'focusY' => $this->fieldFocusY->getID(),

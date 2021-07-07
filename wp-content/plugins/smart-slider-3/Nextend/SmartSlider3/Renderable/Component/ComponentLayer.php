@@ -34,9 +34,11 @@ class ComponentLayer extends AbstractComponent {
 
     public function render($isAdmin) {
         if ($this->isRenderAllowed()) {
-            if ($isAdmin) {
-                $this->admin();
-            }
+
+            $this->runPlugins();
+
+            $this->serveLocalStyle();
+
             $this->prepareHTML();
 
             if ($isAdmin) {
@@ -49,15 +51,19 @@ class ComponentLayer extends AbstractComponent {
                 return '';
             }
 
-            if ($this->item->needWidth()) {
-                $this->attributes['class'] .= ' n2-ss-layer--need-width';
-            }
-
             if ($this->item->needHeight()) {
                 $this->attributes['class'] .= ' n2-ss-layer--need-height';
             }
 
+            if ($this->item->isAuto()) {
+                $this->attributes['class'] .= ' n2-ss-layer--auto';
+            }
+
             $html = $this->renderPlugins($renderedItem);
+
+            if ($isAdmin) {
+                $this->admin();
+            }
 
             return Html::tag('div', $this->attributes, $html);
         }

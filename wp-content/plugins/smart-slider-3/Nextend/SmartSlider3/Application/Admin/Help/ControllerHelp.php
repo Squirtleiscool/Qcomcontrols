@@ -8,6 +8,7 @@ use Nextend\Framework\Api;
 use Nextend\Framework\Model\StorageSectionManager;
 use Nextend\Framework\Notification\Notification;
 use Nextend\SmartSlider3\Application\Admin\AbstractControllerAdmin;
+use WP_HTTP_Proxy;
 
 class ControllerHelp extends AbstractControllerAdmin {
 
@@ -36,7 +37,7 @@ class ControllerHelp extends AbstractControllerAdmin {
         $out       = fopen($errorFile, "w");
         curl_setopt($ch, CURLOPT_VERBOSE, true);
         curl_setopt($ch, CURLOPT_STDERR, $out);
-        $proxy = new \WP_HTTP_Proxy();
+        $proxy = new WP_HTTP_Proxy();
 
         if ($proxy->is_enabled() && $proxy->send_through_proxy(Api::getApiUrl())) {
 

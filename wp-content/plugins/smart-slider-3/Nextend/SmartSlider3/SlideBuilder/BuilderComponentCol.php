@@ -6,10 +6,11 @@ namespace Nextend\SmartSlider3\SlideBuilder;
 class BuilderComponentCol extends AbstractBuilderComponent {
 
     protected $defaultData = array(
-        "type"     => 'col',
-        "name"     => 'Column',
-        "colwidth" => '1/1',
-        "layers"   => array()
+        "type"                   => 'col',
+        "name"                   => 'Column',
+        "colwidth"               => '1/1',
+        "layers"                 => array(),
+        "desktopportraitpadding" => '10|*|10|*|10|*|10|*|px'
     );
 
     /** @var AbstractBuilderComponent[] */
@@ -36,7 +37,7 @@ class BuilderComponentCol extends AbstractBuilderComponent {
 
     public function getData() {
         $this->data['layers'] = array();
-        foreach ($this->layers AS $layer) {
+        foreach ($this->layers as $layer) {
             $this->data['layers'][] = $layer->getData();
         }
 

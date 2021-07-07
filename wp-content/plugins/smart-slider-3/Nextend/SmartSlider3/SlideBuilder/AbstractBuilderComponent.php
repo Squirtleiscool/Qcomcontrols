@@ -12,7 +12,7 @@ abstract class AbstractBuilderComponent {
     public function set($keyOrData, $value = null) {
 
         if (is_array($keyOrData)) {
-            foreach ($keyOrData AS $key => $value) {
+            foreach ($keyOrData as $key => $value) {
                 $this->setSingle($key, $value);
             }
         } else {

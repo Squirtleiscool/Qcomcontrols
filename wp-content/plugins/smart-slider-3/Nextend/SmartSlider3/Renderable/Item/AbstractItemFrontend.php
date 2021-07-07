@@ -23,7 +23,7 @@ abstract class AbstractItemFrontend {
     protected $layer;
 
     /** @var Data */
-    protected $data;
+    public $data;
 
     protected $isEditor = false;
 
@@ -73,11 +73,11 @@ abstract class AbstractItemFrontend {
 
     protected abstract function renderAdminTemplate();
 
-    public function needWidth() {
+    public function needHeight() {
         return false;
     }
 
-    public function needHeight() {
+    public function isAuto() {
         return false;
     }
 

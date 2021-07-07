@@ -14,6 +14,10 @@ class Css {
         AssetManager::$css->addFiles($path, $files, $group);
     }
 
+    public static function addStaticGroupPreload($file, $group) {
+        AssetManager::$css->addStaticGroupPreload($file, $group);
+    }
+
     public static function addStaticGroup($file, $group) {
         AssetManager::$css->addStaticGroup($file, $group);
     }
@@ -26,7 +30,7 @@ class Css {
         AssetManager::$css->addUrl($url);
     }
 
-    public static function addInline($code) {
-        AssetManager::$css->addInline($code);
+    public static function addInline($code, $name = null) {
+        AssetManager::$css->addInline($code, $name);
     }
 }

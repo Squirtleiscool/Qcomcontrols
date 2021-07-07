@@ -26,7 +26,7 @@ class Style {
                 $extra = $tab['extra'];
                 unset($tab['extra']);
             }
-            foreach ($tab AS $k => $v) {
+            foreach ($tab as $k => $v) {
                 $style .= $this->parse($k, $v);
             }
             $style .= $this->parse('extra', $extra);

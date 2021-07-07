@@ -40,7 +40,7 @@ class Image {
         $parameters['placeholderImage']         = '$ss3-frontend$/images/placeholder/image.png';
         $parameters['placeholderRepeatedImage'] = '$ss3-frontend$/images/placeholder/image.png';
 
-        Js::addFirstCode('new N2Classes.ImageHelper(' . json_encode($parameters) . ');');
+        Js::addFirstCode('new _N2.ImageHelper(' . json_encode($parameters) . ');');
     }
 
     public static function initLightbox() {

@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Slides;
 
 
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Request\Request;
 use Nextend\SmartSlider3\Application\Admin\AbstractControllerAdmin;

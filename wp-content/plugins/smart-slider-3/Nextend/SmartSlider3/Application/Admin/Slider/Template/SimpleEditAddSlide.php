@@ -69,7 +69,8 @@ $slider = $this->getSlider();
 </form>
 
 <script>
-    N2R('windowLoad', function ($) {
+    _N2.r(['$', 'windowLoad'], function () {
+        var $ = _N2.$;
         var $form = $('#n2_slider_add_slide_form');
 
         $('#slider-add-slide-region').trigger("focus");
@@ -82,7 +83,6 @@ $slider = $this->getSlider();
 
         document.addEventListener('keydown', function (e) {
             if (e.ctrlKey || e.metaKey) {
-                console.log(e.code);
                 if (e.code === 'KeyS') { // ctrl + s
                     e.preventDefault();
 

@@ -84,6 +84,24 @@ class SliderDeveloper extends AbstractSliderTab {
             )
         ));
 
+        $row21 = $table->createRow('developer-21');
+
+        new OnOff($row21, 'is-delayed', n2_('Delayed (for lightbox/tabs)'), 0, array(
+            'tipLabel'       => n2_('Delayed (for lightbox/tabs)'),
+            'tipDescription' => n2_('Delays the loading of the slider until its container gets visible. Useful when you display the slider in a lightbox or tab.'),
+            'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1801-slider-settings-optimize#delayed-for-lightboxtabs'
+        ));
+
+        $row211 = $table->createRow('developer-211');
+
+        new OnOff($row211, 'legacy-font-scale', n2_('Legacy font scale'), 0, array(
+            'relatedFieldsOn' => array(
+                'sliderlegacy-font-scale-notice'
+            )
+        ));
+        new Warning($row211, 'legacy-font-scale-notice', n2_('This feature brings back the non-adaptive font size for absolute layers which were made before version 3.5. Turning on can affect website performance, so we suggest to keep it disabled.
+'));
+
         $row22 = $table->createRow('developer-22');
 
         new Text($row22, 'classes', n2_('Slider CSS classes'), '', array(

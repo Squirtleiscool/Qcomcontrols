@@ -121,16 +121,16 @@ class HTTP {
 
     /* Private methods - DO NOT CALL */
 
-    Function Tokenize($string, $separator = "") {
+    function Tokenize($string, $separator = "") {
         if (!strcmp($separator, "")) {
             $separator = $string;
             $string    = $this->next_token;
         }
         for ($character = 0; $character < strlen($separator); $character++) {
             $position = strpos($string, $separator[$character]);
-            if (GetType($position) == "integer") $found = (IsSet($found) ? min($found, $position) : $position);
+            if (GetType($position) == "integer") $found = (isset($found) ? min($found, $position) : $position);
         }
-        if (IsSet($found)) {
+        if (isset($found)) {
             $this->next_token = substr($string, $found + 1);
 
             return (substr($string, 0, $found));
@@ -141,23 +141,23 @@ class HTTP {
         }
     }
 
-    Function CookieEncode($value, $name) {
+    function CookieEncode($value, $name) {
         return ($name ? str_replace("=", "%25", $value) : str_replace(";", "%3B", $value));
     }
 
-    Function SetError($error, $error_code = HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR) {
+    function SetError($error, $error_code = HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR) {
         $this->error_code = $error_code;
 
         return ($this->error = $error);
     }
 
-    Function SetPHPError($error, $php_error_message, $error_code = HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR) {
-        if (IsSet($php_error_message) && strlen($php_error_message)) $error .= ": " . $php_error_message;
+    function SetPHPError($error, $php_error_message, $error_code = HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR) {
+        if (isset($php_error_message) && strlen($php_error_message)) $error .= ": " . $php_error_message;
 
         return ($this->SetError($error, $error_code));
     }
 
-    Function SetDataAccessError($error, $check_connection = 0) {
+    function SetDataAccessError($error, $check_connection = 0) {
         $this->error      = $error;
         $this->error_code = HTTP_CLIENT_ERROR_COMMUNICATION_FAILURE;
         if (!$this->use_curl && function_exists("socket_get_status")) {
@@ -169,7 +169,7 @@ class HTTP {
         }
     }
 
-    Function OutputDebug($message) {
+    function OutputDebug($message) {
         if ($this->log_debug) error_log($message); else {
             $message .= "\n";
             if ($this->html_debug) $message = str_replace("\n", "<br>\n", HtmlEntities($message));
@@ -178,7 +178,7 @@ class HTTP {
         }
     }
 
-    Function GetLine() {
+    function GetLine() {
         for ($line = ""; ;) {
             if ($this->use_curl) {
                 $eol                 = strpos($this->response, "\n", $this->read_response);
@@ -209,7 +209,7 @@ class HTTP {
         }
     }
 
-    Function PutLine($line) {
+    function PutLine($line) {
         if ($this->debug) $this->OutputDebug("C $line");
         if (!fputs($this->connection, $line . "\r\n")) {
             $this->SetDataAccessError("it was not possible to send a line to the HTTP server");
@@ -220,7 +220,7 @@ class HTTP {
         return (1);
     }
 
-    Function PutData($data) {
+    function PutData($data) {
         if (strlen($data)) {
             if ($this->debug) $this->OutputDebug('C ' . $data);
             if (!fputs($this->connection, $data)) {
@@ -233,7 +233,7 @@ class HTTP {
         return (1);
     }
 
-    Function FlushData() {
+    function FlushData() {
         if (!fflush($this->connection)) {
             $this->SetDataAccessError("it was not possible to send data to the HTTP server");
 
@@ -243,7 +243,7 @@ class HTTP {
         return (1);
     }
 
-    Function ReadChunkSize() {
+    function ReadChunkSize() {
         if ($this->remaining_chunk == 0) {
             $debug = $this->debug;
             if (!$this->debug_response_body) $this->debug = 0;
@@ -262,7 +262,7 @@ class HTTP {
         return ("");
     }
 
-    Function ReadBytes($length) {
+    function ReadBytes($length) {
         if ($this->use_curl) {
             $bytes               = substr($this->response, $this->read_response, min($length, strlen($this->response) - $this->read_response));
             $this->read_response += strlen($bytes);
@@ -309,7 +309,7 @@ class HTTP {
         return ($bytes);
     }
 
-    Function EndOfInput() {
+    function EndOfInput() {
         if ($this->use_curl) return ($this->read_response >= strlen($this->response));
         if ($this->chunked) return ($this->last_chunk_read);
         if ($this->content_length_set) return ($this->content_length <= $this->read_length);
@@ -317,7 +317,7 @@ class HTTP {
         return (feof($this->connection));
     }
 
-    Function Resolve($domain, &$ip, $server_type) {
+    function Resolve($domain, &$ip, $server_type) {
         if (preg_match('/^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$/', $domain)) $ip = $domain; else {
             if ($this->debug) $this->OutputDebug('Resolving ' . $server_type . ' server domain "' . $domain . '"...');
             if (!strcmp($ip = @gethostbyname($domain), $domain)) $ip = "";
@@ -327,7 +327,7 @@ class HTTP {
         return ('');
     }
 
-    Function Connect($host_name, $host_port, $ssl, $server_type = 'HTTP') {
+    function Connect($host_name, $host_port, $ssl, $server_type = 'HTTP') {
         $domain = $host_name;
         $port   = $host_port;
         if (strlen($error = $this->Resolve($domain, $ip, $server_type))) return ($error);
@@ -387,7 +387,7 @@ class HTTP {
                                     "\x5d" => 'request failed because client\'s identd could not confirm the user ID string in the request',
                                 );
                                 $error_code   = $response[1];
-                                $error        = (IsSet($socks_errors[$error_code]) ? $socks_errors[$error_code] : 'unknown');
+                                $error        = (isset($socks_errors[$error_code]) ? $socks_errors[$error_code] : 'unknown');
                                 if (strlen($error)) $error = 'SOCKS error: ' . $error;
                             }
                         }
@@ -418,7 +418,7 @@ class HTTP {
                                             "\x08" => 'Address type not supported'
                                         );
                                         $error_code   = $response[1];
-                                        $error        = (IsSet($socks_errors[$error_code]) ? $socks_errors[$error_code] : 'unknown');
+                                        $error        = (isset($socks_errors[$error_code]) ? $socks_errors[$error_code] : 'unknown');
                                         if (strlen($error)) $error = 'SOCKS error: ' . $error;
                                     }
                                 }
@@ -448,7 +448,7 @@ class HTTP {
         }
     }
 
-    Function Disconnect() {
+    function Disconnect() {
         if ($this->debug) $this->OutputDebug("Disconnected from " . $this->connected_host);
         if ($this->use_curl) {
             curl_close($this->connection);
@@ -462,14 +462,14 @@ class HTTP {
 
     /* Public methods */
 
-    Function GetRequestArguments($url, &$arguments) {
+    function GetRequestArguments($url, &$arguments) {
         $this->error      = '';
         $this->error_code = HTTP_CLIENT_ERROR_NO_ERROR;
         $arguments        = array();
         $url              = str_replace(' ', '%20', $url);
         $parameters       = @parse_url($url);
         if (!$parameters) return ($this->SetError("it was not specified a valid URL", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
-        if (!IsSet($parameters["scheme"])) return ($this->SetError("it was not specified the protocol type argument", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
+        if (!isset($parameters["scheme"])) return ($this->SetError("it was not specified the protocol type argument", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
         switch (strtolower($parameters["scheme"])) {
             case "http":
             case "https":
@@ -478,40 +478,40 @@ class HTTP {
             default:
                 return ($parameters["scheme"] . " connection scheme is not yet supported");
         }
-        if (!IsSet($parameters["host"])) return ($this->SetError("it was not specified the connection host argument", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
+        if (!isset($parameters["host"])) return ($this->SetError("it was not specified the connection host argument", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
         $arguments["HostName"] = $parameters["host"];
-        $arguments["Headers"]  = array("Host" => $parameters["host"] . (IsSet($parameters["port"]) ? ":" . $parameters["port"] : ""));
-        if (IsSet($parameters["user"])) {
+        $arguments["Headers"]  = array("Host" => $parameters["host"] . (isset($parameters["port"]) ? ":" . $parameters["port"] : ""));
+        if (isset($parameters["user"])) {
             $arguments["AuthUser"] = UrlDecode($parameters["user"]);
-            if (!IsSet($parameters["pass"])) $arguments["AuthPassword"] = "";
+            if (!isset($parameters["pass"])) $arguments["AuthPassword"] = "";
         }
-        if (IsSet($parameters["pass"])) {
-            if (!IsSet($parameters["user"])) $arguments["AuthUser"] = "";
+        if (isset($parameters["pass"])) {
+            if (!isset($parameters["user"])) $arguments["AuthUser"] = "";
             $arguments["AuthPassword"] = UrlDecode($parameters["pass"]);
         }
-        if (IsSet($parameters["port"])) {
+        if (isset($parameters["port"])) {
             if (strcmp($parameters["port"], strval(intval($parameters["port"])))) return ($this->SetError("it was not specified a valid connection host argument", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
             $arguments["HostPort"] = intval($parameters["port"]);
         } else
             $arguments["HostPort"] = 0;
-        $arguments["RequestURI"] = (IsSet($parameters["path"]) ? $parameters["path"] : "/") . (IsSet($parameters["query"]) ? "?" . $parameters["query"] : "");
+        $arguments["RequestURI"] = (isset($parameters["path"]) ? $parameters["path"] : "/") . (isset($parameters["query"]) ? "?" . $parameters["query"] : "");
         if (strlen($this->user_agent)) $arguments["Headers"]["User-Agent"] = $this->user_agent;
         if (strlen($this->accept)) $arguments["Headers"]["Accept"] = $this->accept;
 
         return ("");
     }
 
-    Function Open($arguments) {
+    function Open($arguments) {
         if (strlen($this->error)) return ($this->error);
         $error_code = HTTP_CLIENT_ERROR_UNSPECIFIED_ERROR;
-        if (IsSet($arguments["HostName"])) $this->host_name = $arguments["HostName"];
-        if (IsSet($arguments["HostPort"])) $this->host_port = $arguments["HostPort"];
-        if (IsSet($arguments["ProxyHostName"])) $this->proxy_host_name = $arguments["ProxyHostName"];
-        if (IsSet($arguments["ProxyHostPort"])) $this->proxy_host_port = $arguments["ProxyHostPort"];
-        if (IsSet($arguments["SOCKSHostName"])) $this->socks_host_name = $arguments["SOCKSHostName"];
-        if (IsSet($arguments["SOCKSHostPort"])) $this->socks_host_port = $arguments["SOCKSHostPort"];
-        if (IsSet($arguments["SOCKSVersion"])) $this->socks_version = $arguments["SOCKSVersion"];
-        if (IsSet($arguments["Protocol"])) $this->protocol = $arguments["Protocol"];
+        if (isset($arguments["HostName"])) $this->host_name = $arguments["HostName"];
+        if (isset($arguments["HostPort"])) $this->host_port = $arguments["HostPort"];
+        if (isset($arguments["ProxyHostName"])) $this->proxy_host_name = $arguments["ProxyHostName"];
+        if (isset($arguments["ProxyHostPort"])) $this->proxy_host_port = $arguments["ProxyHostPort"];
+        if (isset($arguments["SOCKSHostName"])) $this->socks_host_name = $arguments["SOCKSHostName"];
+        if (isset($arguments["SOCKSHostPort"])) $this->socks_host_port = $arguments["SOCKSHostPort"];
+        if (isset($arguments["SOCKSVersion"])) $this->socks_version = $arguments["SOCKSVersion"];
+        if (isset($arguments["Protocol"])) $this->protocol = $arguments["Protocol"];
         switch (strtolower($this->protocol)) {
             case "http":
                 $default_port = 80;
@@ -554,17 +554,17 @@ class HTTP {
             $error = (($this->connection = curl_init($this->protocol . "://" . $this->host_name . ($host_port == $default_port ? "" : ":" . strval($host_port)) . "/")) ? "" : "Could not initialize a CURL session");
             if (strlen($error) == 0) {
                 curl_setopt($this->connection, CURLOPT_CAINFO, HttpClient::getCacertPath());
-                if (IsSet($arguments["SSLCertificateFile"])) curl_setopt($this->connection, CURLOPT_SSLCERT, $arguments["SSLCertificateFile"]);
-                if (IsSet($arguments["SSLCertificatePassword"])) curl_setopt($this->connection, CURLOPT_SSLCERTPASSWD, $arguments["SSLCertificatePassword"]);
-                if (IsSet($arguments["SSLKeyFile"])) curl_setopt($this->connection, CURLOPT_SSLKEY, $arguments["SSLKeyFile"]);
-                if (IsSet($arguments["SSLKeyPassword"])) curl_setopt($this->connection, CURLOPT_SSLKEYPASSWD, $arguments["SSLKeyPassword"]);
+                if (isset($arguments["SSLCertificateFile"])) curl_setopt($this->connection, CURLOPT_SSLCERT, $arguments["SSLCertificateFile"]);
+                if (isset($arguments["SSLCertificatePassword"])) curl_setopt($this->connection, CURLOPT_SSLCERTPASSWD, $arguments["SSLCertificatePassword"]);
+                if (isset($arguments["SSLKeyFile"])) curl_setopt($this->connection, CURLOPT_SSLKEY, $arguments["SSLKeyFile"]);
+                if (isset($arguments["SSLKeyPassword"])) curl_setopt($this->connection, CURLOPT_SSLKEYPASSWD, $arguments["SSLKeyPassword"]);
             }
             $this->state = "Connected";
         } else {
             $error = "";
-            if (strlen($this->proxy_host_name) && (IsSet($arguments["SSLCertificateFile"]) || IsSet($arguments["SSLCertificateFile"]))) $error = "establishing SSL connections using certificates or private keys via non-SSL proxies is not supported"; else {
+            if (strlen($this->proxy_host_name) && (isset($arguments["SSLCertificateFile"]) || isset($arguments["SSLCertificateFile"]))) $error = "establishing SSL connections using certificates or private keys via non-SSL proxies is not supported"; else {
                 if ($ssl) {
-                    if (IsSet($arguments["SSLCertificateFile"])) $error = "establishing SSL connections using certificates is only supported when the cURL extension is enabled"; elseif (IsSet($arguments["SSLKeyFile"])) $error = "establishing SSL connections using a private key is only supported when the cURL extension is enabled";
+                    if (isset($arguments["SSLCertificateFile"])) $error = "establishing SSL connections using certificates is only supported when the cURL extension is enabled"; elseif (isset($arguments["SSLKeyFile"])) $error = "establishing SSL connections using a private key is only supported when the cURL extension is enabled";
                 }
                 if (strlen($error) == 0) {
                     $error      = $this->Connect($host_name, $host_port, $ssl, $server_type);
@@ -581,7 +581,7 @@ class HTTP {
         return ("");
     }
 
-    Function Close($force = 0) {
+    function Close($force = 0) {
         if ($this->state == "Disconnected") return ("1 already disconnected");
         if (!$this->force_close && $this->keep_alive && !$force && $this->state == 'ResponseReceived') {
             if ($this->debug) $this->OutputDebug('Keeping the connection alive to ' . $this->connected_host);
@@ -593,8 +593,8 @@ class HTTP {
         return ($this->Disconnect());
     }
 
-    Function PickCookies(&$cookies, $secure) {
-        if (IsSet($this->cookies[$secure])) {
+    function PickCookies(&$cookies, $secure) {
+        if (isset($this->cookies[$secure])) {
             $now = gmdate("Y-m-d H-i-s");
             for ($domain = 0, Reset($this->cookies[$secure]); $domain < count($this->cookies[$secure]); Next($this->cookies[$secure]), $domain++) {
                 $domain_pattern = Key($this->cookies[$secure]);
@@ -615,12 +615,12 @@ class HTTP {
         }
     }
 
-    Function GetFileDefinition($file, &$definition) {
+    function GetFileDefinition($file, &$definition) {
         $name = "";
-        if (IsSet($file["FileName"])) $name = basename($file["FileName"]);
-        if (IsSet($file["Name"])) $name = $file["Name"];
+        if (isset($file["FileName"])) $name = basename($file["FileName"]);
+        if (isset($file["Name"])) $name = $file["Name"];
         if (strlen($name) == 0) return ("it was not specified the file part name");
-        if (IsSet($file["Content-Type"])) {
+        if (isset($file["Content-Type"])) {
             $content_type = $file["Content-Type"];
             $type         = $this->Tokenize(strtolower($content_type), "/");
             $sub_type     = $this->Tokenize("");
@@ -794,7 +794,7 @@ class HTTP {
             "Content-Type" => $content_type,
             "NAME"         => $name
         );
-        if (IsSet($file["FileName"])) {
+        if (isset($file["FileName"])) {
             if (GetType($length = @filesize($file["FileName"])) != "integer") {
                 $error        = "it was not possible to determine the length of the file " . $file["FileName"];
                 $errorMessage = self::PHPErrorMessage();
@@ -805,15 +805,15 @@ class HTTP {
             }
             $definition["FILENAME"]       = $file["FileName"];
             $definition["Content-Length"] = $length;
-        } elseif (IsSet($file["Data"])) $definition["Content-Length"] = strlen($definition["DATA"] = $file["Data"]);
+        } elseif (isset($file["Data"])) $definition["Content-Length"] = strlen($definition["DATA"] = $file["Data"]);
         else
             return ("it was not specified a valid file name");
 
         return ("");
     }
 
-    Function ConnectFromProxy($arguments, &$headers) {
-        if (!$this->PutLine('CONNECT ' . $this->host_name . ':' . ($this->host_port ? $this->host_port : 443) . ' HTTP/1.0') || (strlen($this->user_agent) && !$this->PutLine('User-Agent: ' . $this->user_agent)) || (strlen($this->accept) && !$this->PutLine('Accept: ' . $this->accept)) || (IsSet($arguments['Headers']['Proxy-Authorization']) && !$this->PutLine('Proxy-Authorization: ' . $arguments['Headers']['Proxy-Authorization'])) || !$this->PutLine('')) {
+    function ConnectFromProxy($arguments, &$headers) {
+        if (!$this->PutLine('CONNECT ' . $this->host_name . ':' . ($this->host_port ? $this->host_port : 443) . ' HTTP/1.0') || (strlen($this->user_agent) && !$this->PutLine('User-Agent: ' . $this->user_agent)) || (strlen($this->accept) && !$this->PutLine('Accept: ' . $this->accept)) || (isset($arguments['Headers']['Proxy-Authorization']) && !$this->PutLine('Proxy-Authorization: ' . $arguments['Headers']['Proxy-Authorization'])) || !$this->PutLine('')) {
             $this->Disconnect();
 
             return ($this->error);
@@ -845,12 +845,12 @@ class HTTP {
         return ("");
     }
 
-    Function SendRequest($arguments) {
+    function SendRequest($arguments) {
         if (strlen($this->error)) return ($this->error);
-        if (IsSet($arguments["ProxyUser"])) $this->proxy_request_user = $arguments["ProxyUser"]; elseif (IsSet($this->proxy_user)) $this->proxy_request_user = $this->proxy_user;
-        if (IsSet($arguments["ProxyPassword"])) $this->proxy_request_password = $arguments["ProxyPassword"]; elseif (IsSet($this->proxy_password)) $this->proxy_request_password = $this->proxy_password;
-        if (IsSet($arguments["ProxyRealm"])) $this->proxy_request_realm = $arguments["ProxyRealm"]; elseif (IsSet($this->proxy_realm)) $this->proxy_request_realm = $this->proxy_realm;
-        if (IsSet($arguments["ProxyWorkstation"])) $this->proxy_request_workstation = $arguments["ProxyWorkstation"]; elseif (IsSet($this->proxy_workstation)) $this->proxy_request_workstation = $this->proxy_workstation;
+        if (isset($arguments["ProxyUser"])) $this->proxy_request_user = $arguments["ProxyUser"]; elseif (isset($this->proxy_user)) $this->proxy_request_user = $this->proxy_user;
+        if (isset($arguments["ProxyPassword"])) $this->proxy_request_password = $arguments["ProxyPassword"]; elseif (isset($this->proxy_password)) $this->proxy_request_password = $this->proxy_password;
+        if (isset($arguments["ProxyRealm"])) $this->proxy_request_realm = $arguments["ProxyRealm"]; elseif (isset($this->proxy_realm)) $this->proxy_request_realm = $this->proxy_realm;
+        if (isset($arguments["ProxyWorkstation"])) $this->proxy_request_workstation = $arguments["ProxyWorkstation"]; elseif (isset($this->proxy_workstation)) $this->proxy_request_workstation = $this->proxy_workstation;
         switch ($this->state) {
             case "Disconnected":
                 return ($this->SetError("connection was not yet established", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
@@ -864,30 +864,30 @@ class HTTP {
             default:
                 return ($this->SetError("can not send request in the current connection state", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
         }
-        if (IsSet($arguments["RequestMethod"])) $this->request_method = $arguments["RequestMethod"];
-        if (IsSet($arguments["User-Agent"])) $this->user_agent = $arguments["User-Agent"];
-        if (!IsSet($arguments["Headers"]["User-Agent"]) && strlen($this->user_agent)) $arguments["Headers"]["User-Agent"] = $this->user_agent;
-        if (IsSet($arguments["KeepAlive"])) $this->keep_alive = intval($arguments["KeepAlive"]);
-        if (!IsSet($arguments["Headers"]["Connection"]) && $this->keep_alive) $arguments["Headers"]["Connection"] = 'Keep-Alive';
-        if (IsSet($arguments["Accept"])) $this->user_agent = $arguments["Accept"];
-        if (!IsSet($arguments["Headers"]["Accept"]) && strlen($this->accept)) $arguments["Headers"]["Accept"] = $this->accept;
+        if (isset($arguments["RequestMethod"])) $this->request_method = $arguments["RequestMethod"];
+        if (isset($arguments["User-Agent"])) $this->user_agent = $arguments["User-Agent"];
+        if (!isset($arguments["Headers"]["User-Agent"]) && strlen($this->user_agent)) $arguments["Headers"]["User-Agent"] = $this->user_agent;
+        if (isset($arguments["KeepAlive"])) $this->keep_alive = intval($arguments["KeepAlive"]);
+        if (!isset($arguments["Headers"]["Connection"]) && $this->keep_alive) $arguments["Headers"]["Connection"] = 'Keep-Alive';
+        if (isset($arguments["Accept"])) $this->user_agent = $arguments["Accept"];
+        if (!isset($arguments["Headers"]["Accept"]) && strlen($this->accept)) $arguments["Headers"]["Accept"] = $this->accept;
         if (strlen($this->request_method) == 0) return ($this->SetError("it was not specified a valid request method", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
-        if (IsSet($arguments["RequestURI"])) $this->request_uri = $arguments["RequestURI"];
+        if (isset($arguments["RequestURI"])) $this->request_uri = $arguments["RequestURI"];
         if (strlen($this->request_uri) == 0 || substr($this->request_uri, 0, 1) != "/") return ($this->SetError("it was not specified a valid request URI", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
         $this->request_arguments = $arguments;
-        $this->request_headers   = (IsSet($arguments["Headers"]) ? $arguments["Headers"] : array());
+        $this->request_headers   = (isset($arguments["Headers"]) ? $arguments["Headers"] : array());
         $body_length             = 0;
         $this->request_body      = "";
         $get_body                = 1;
         if ($this->request_method == "POST" || $this->request_method == "PUT") {
-            if (IsSet($arguments['StreamRequest'])) {
+            if (isset($arguments['StreamRequest'])) {
                 $get_body                                   = 0;
                 $this->request_headers["Transfer-Encoding"] = "chunked";
-            } elseif (IsSet($arguments["PostFiles"]) || ($this->force_multipart_form_post && IsSet($arguments["PostValues"]))) {
+            } elseif (isset($arguments["PostFiles"]) || ($this->force_multipart_form_post && isset($arguments["PostValues"]))) {
                 $boundary                              = "--" . md5(uniqid(time()));
-                $this->request_headers["Content-Type"] = "multipart/form-data; boundary=" . $boundary . (IsSet($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
+                $this->request_headers["Content-Type"] = "multipart/form-data; boundary=" . $boundary . (isset($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
                 $post_parts                            = array();
-                if (IsSet($arguments["PostValues"])) {
+                if (isset($arguments["PostValues"])) {
                     $values = $arguments["PostValues"];
                     if (GetType($values) != "array") return ($this->SetError("it was not specified a valid POST method values array", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
                     for (Reset($values), $value = 0; $value < count($values); Next($values), $value++) {
@@ -902,7 +902,7 @@ class HTTP {
                     }
                 }
                 $body_length += strlen("--" . $boundary . "--\r\n");
-                $files       = (IsSet($arguments["PostFiles"]) ? $arguments["PostFiles"] : array());
+                $files       = (isset($arguments["PostFiles"]) ? $arguments["PostFiles"] : array());
                 Reset($files);
                 $end = (GetType($input = Key($files)) != "string");
                 for (; !$end;) {
@@ -910,7 +910,7 @@ class HTTP {
                     $headers           = "--" . $boundary . "\r\nContent-Disposition: form-data; name=\"" . $input . "\"; filename=\"" . $definition["NAME"] . "\"\r\nContent-Type: " . $definition["Content-Type"] . "\r\n\r\n";
                     $part              = count($post_parts);
                     $post_parts[$part] = array("HEADERS" => $headers);
-                    if (IsSet($definition["FILENAME"])) {
+                    if (isset($definition["FILENAME"])) {
                         $post_parts[$part]["FILENAME"] = $definition["FILENAME"];
                         $data                          = "";
                     } else
@@ -921,7 +921,7 @@ class HTTP {
                     $end = (GetType($input = Key($files)) != "string");
                 }
                 $get_body = 0;
-            } elseif (IsSet($arguments["PostValues"])) {
+            } elseif (isset($arguments["PostValues"])) {
                 $values = $arguments["PostValues"];
                 if (GetType($values) != "array") return ($this->SetError("it was not specified a valid POST method values array", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
                 for (Reset($values), $value = 0; $value < count($values); Next($values), $value++) {
@@ -936,16 +936,16 @@ class HTTP {
                         $this->request_body .= UrlEncode($k) . "=" . UrlEncode($values[$k]);
                     }
                 }
-                $this->request_headers["Content-Type"] = "application/x-www-form-urlencoded" . (IsSet($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
+                $this->request_headers["Content-Type"] = "application/x-www-form-urlencoded" . (isset($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
                 $get_body                              = 0;
             }
         }
-        if ($get_body && (IsSet($arguments["Body"]) || IsSet($arguments["BodyStream"]))) {
-            if (IsSet($arguments["Body"])) $this->request_body = $arguments["Body"]; else {
+        if ($get_body && (isset($arguments["Body"]) || isset($arguments["BodyStream"]))) {
+            if (isset($arguments["Body"])) $this->request_body = $arguments["Body"]; else {
                 $stream             = $arguments["BodyStream"];
                 $this->request_body = "";
                 for ($part = 0; $part < count($stream); $part++) {
-                    if (IsSet($stream[$part]["Data"])) $this->request_body .= $stream[$part]["Data"]; elseif (IsSet($stream[$part]["File"])) {
+                    if (isset($stream[$part]["Data"])) $this->request_body .= $stream[$part]["Data"]; elseif (isset($stream[$part]["File"])) {
                         if (!($file = @fopen($stream[$part]["File"], "rb"))) return ($this->SetPHPError("could not open upload file " . $stream[$part]["File"], self::PHPErrorMessage(), HTTP_CLIENT_ERROR_CANNOT_ACCESS_LOCAL_FILE));
                         while (!feof($file)) {
                             if (GetType($block = @fread($file, $this->file_buffer_length)) != "string") {
@@ -961,12 +961,12 @@ class HTTP {
                         return ("5 it was not specified a valid file or data body stream element at position " . $part);
                 }
             }
-            if (!IsSet($this->request_headers["Content-Type"])) $this->request_headers["Content-Type"] = "application/octet-stream" . (IsSet($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
+            if (!isset($this->request_headers["Content-Type"])) $this->request_headers["Content-Type"] = "application/octet-stream" . (isset($arguments["CharSet"]) ? "; charset=" . $arguments["CharSet"] : "");
         }
-        if (IsSet($arguments["AuthUser"])) $this->request_user = $arguments["AuthUser"]; elseif (IsSet($this->user)) $this->request_user = $this->user;
-        if (IsSet($arguments["AuthPassword"])) $this->request_password = $arguments["AuthPassword"]; elseif (IsSet($this->password)) $this->request_password = $this->password;
-        if (IsSet($arguments["AuthRealm"])) $this->request_realm = $arguments["AuthRealm"]; elseif (IsSet($this->realm)) $this->request_realm = $this->realm;
-        if (IsSet($arguments["AuthWorkstation"])) $this->request_workstation = $arguments["AuthWorkstation"]; elseif (IsSet($this->workstation)) $this->request_workstation = $this->workstation;
+        if (isset($arguments["AuthUser"])) $this->request_user = $arguments["AuthUser"]; elseif (isset($this->user)) $this->request_user = $this->user;
+        if (isset($arguments["AuthPassword"])) $this->request_password = $arguments["AuthPassword"]; elseif (isset($this->password)) $this->request_password = $this->password;
+        if (isset($arguments["AuthRealm"])) $this->request_realm = $arguments["AuthRealm"]; elseif (isset($this->realm)) $this->request_realm = $this->realm;
+        if (isset($arguments["AuthWorkstation"])) $this->request_workstation = $arguments["AuthWorkstation"]; elseif (isset($this->workstation)) $this->request_workstation = $this->workstation;
         if (strlen($this->proxy_host_name) == 0 || $connect) $request_uri = $this->request_uri; else {
             switch (strtolower($this->protocol)) {
                 case "http":
@@ -979,7 +979,7 @@ class HTTP {
             $request_uri = strtolower($this->protocol) . "://" . $this->host_name . (($this->host_port == 0 || $this->host_port == $default_port) ? "" : ":" . $this->host_port) . $this->request_uri;
         }
         if ($this->use_curl) {
-            $version          = (GetType($v = curl_version()) == "array" ? (IsSet($v["version"]) ? $v["version"] : "0.0.0") : (preg_match("/^libcurl\\/([0-9]+\\.[0-9]+\\.[0-9]+)/", $v, $m) ? $m[1] : "0.0.0"));
+            $version          = (GetType($v = curl_version()) == "array" ? (isset($v["version"]) ? $v["version"] : "0.0.0") : (preg_match("/^libcurl\\/([0-9]+\\.[0-9]+\\.[0-9]+)/", $v, $m) ? $m[1] : "0.0.0"));
             $curl_version     = 100000 * intval($this->Tokenize($version, ".")) + 1000 * intval($this->Tokenize(".")) + intval($this->Tokenize(""));
             $protocol_version = ($curl_version < 713002 ? "1.0" : $this->protocol_version);
         } else
@@ -1017,11 +1017,11 @@ class HTTP {
         }
         $next_state = "RequestSent";
         if ($this->use_curl) {
-            if (IsSet($arguments['StreamRequest'])) return ($this->SetError("Streaming request data is not supported when using Curl", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
+            if (isset($arguments['StreamRequest'])) return ($this->SetError("Streaming request data is not supported when using Curl", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
             if ($body_length && strlen($this->request_body) == 0) {
                 for ($request_body = "", $success = 1, $part = 0; $part < count($post_parts); $part++) {
                     $request_body .= $post_parts[$part]["HEADERS"] . $post_parts[$part]["DATA"];
-                    if (IsSet($post_parts[$part]["FILENAME"])) {
+                    if (isset($post_parts[$part]["FILENAME"])) {
                         if (!($file = @fopen($post_parts[$part]["FILENAME"], "rb"))) {
                             $this->SetPHPError("could not open upload file " . $post_parts[$part]["FILENAME"], self::PHPErrorMessage(), HTTP_CLIENT_ERROR_CANNOT_ACCESS_LOCAL_FILE);
                             $success = 0;
@@ -1061,11 +1061,11 @@ class HTTP {
                     if (!$success = $this->PutLine($headers[$header])) break;
                 }
                 if ($success && ($success = $this->PutLine(""))) {
-                    if (IsSet($arguments['StreamRequest'])) $next_state = "SendingRequestBody"; elseif ($body_length) {
+                    if (isset($arguments['StreamRequest'])) $next_state = "SendingRequestBody"; elseif ($body_length) {
                         if (strlen($this->request_body)) $success = $this->PutData($this->request_body); else {
                             for ($part = 0; $part < count($post_parts); $part++) {
                                 if (!($success = $this->PutData($post_parts[$part]["HEADERS"])) || !($success = $this->PutData($post_parts[$part]["DATA"]))) break;
-                                if (IsSet($post_parts[$part]["FILENAME"])) {
+                                if (isset($post_parts[$part]["FILENAME"])) {
                                     if (!($file = @fopen($post_parts[$part]["FILENAME"], "rb"))) {
                                         $this->SetPHPError("could not open upload file " . $post_parts[$part]["FILENAME"], self::PHPErrorMessage(), HTTP_CLIENT_ERROR_CANNOT_ACCESS_LOCAL_FILE);
                                         $success = 0;
@@ -1097,7 +1097,7 @@ class HTTP {
         return ("");
     }
 
-    Function SetCookie($name, $value, $expires = "", $path = "/", $domain = "", $secure = 0, $verbatim = 0) {
+    function SetCookie($name, $value, $expires = "", $path = "/", $domain = "", $secure = 0, $verbatim = 0) {
         if (strlen($this->error)) return ($this->error);
         if (strlen($name) == 0) return ($this->SetError("it was not specified a valid cookie name", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
         if (strlen($path) == 0 || strcmp($path[0], "/")) return ($this->SetError($path . " is not a valid path for setting cookie " . $name, HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
@@ -1121,7 +1121,7 @@ class HTTP {
         return ("");
     }
 
-    Function SendRequestBody($data, $end_of_data) {
+    function SendRequestBody($data, $end_of_data) {
         if (strlen($this->error)) return ($this->error);
         switch ($this->state) {
             case "Disconnected":
@@ -1150,7 +1150,7 @@ class HTTP {
         return ("");
     }
 
-    Function ReadReplyHeadersResponse(&$headers) {
+    function ReadReplyHeadersResponse(&$headers) {
         $headers = array();
         if (strlen($this->error)) return ($this->error);
         switch ($this->state) {
@@ -1193,7 +1193,7 @@ class HTTP {
             }
             $header_name  = strtolower($this->Tokenize($line, ":"));
             $header_value = Trim(Chop($this->Tokenize("\r\n")));
-            if (IsSet($headers[$header_name])) {
+            if (isset($headers[$header_name])) {
                 if (GetType($headers[$header_name]) == "string") $headers[$header_name] = array($headers[$header_name]);
                 $headers[$header_name][] = $header_value;
             } else
@@ -1256,12 +1256,12 @@ class HTTP {
         return ("");
     }
 
-    Function Redirect(&$headers) {
+    function Redirect(&$headers) {
         if ($this->follow_redirect) {
-            if (!IsSet($headers["location"]) || (GetType($headers["location"]) != "array" && strlen($location = $headers["location"]) == 0) || (GetType($headers["location"]) == "array" && strlen($location = $headers["location"][0]) == 0)) return ($this->SetError("it was received a redirect without location URL", HTTP_CLIENT_ERROR_PROTOCOL_FAILURE));
+            if (!isset($headers["location"]) || (GetType($headers["location"]) != "array" && strlen($location = $headers["location"]) == 0) || (GetType($headers["location"]) == "array" && strlen($location = $headers["location"][0]) == 0)) return ($this->SetError("it was received a redirect without location URL", HTTP_CLIENT_ERROR_PROTOCOL_FAILURE));
             if (strcmp($location[0], "/")) {
                 if (!($location_arguments = @parse_url($location))) return ($this->SetError("the server did not return a valid redirection location URL", HTTP_CLIENT_ERROR_PROTOCOL_FAILURE));
-                if (!IsSet($location_arguments["scheme"])) $location = ((GetType($end = strrpos($this->request_uri, "/")) == "integer" && $end > 1) ? substr($this->request_uri, 0, $end) : "") . "/" . $location;
+                if (!isset($location_arguments["scheme"])) $location = ((GetType($end = strrpos($this->request_uri, "/")) == "integer" && $end > 1) ? substr($this->request_uri, 0, $end) : "") . "/" . $location;
             }
             if (!strcmp($location[0], "/")) $location = $this->protocol . "://" . $this->host_name . ($this->host_port ? ":" . $this->host_port : "") . $location;
             $error = $this->GetRequestArguments($location, $arguments);
@@ -1282,7 +1282,7 @@ class HTTP {
         return ("");
     }
 
-    Function Authenticate(&$headers, $proxy, &$proxy_authorization, &$user, &$password, &$realm, &$workstation) {
+    function Authenticate(&$headers, $proxy, &$proxy_authorization, &$user, &$password, &$realm, &$workstation) {
         if ($proxy) {
             $authenticate_header      = "proxy-authenticate";
             $authorization_header     = "Proxy-Authorization";
@@ -1294,7 +1294,7 @@ class HTTP {
             $authenticate_status      = "401";
             $authentication_mechanism = $this->authentication_mechanism;
         }
-        if (IsSet($headers[$authenticate_header]) && $this->sasl_authenticate) {
+        if (isset($headers[$authenticate_header]) && $this->sasl_authenticate) {
             if (function_exists("class_exists") && !class_exists("sasl_client_class")) return ($this->SetError("the SASL client class needs to be loaded to be able to authenticate" . ($proxy ? " with the proxy server" : "") . " and access this site", HTTP_CLIENT_ERROR_INVALID_PARAMETERS));
             if (GetType($headers[$authenticate_header]) == "array") $authenticate = $headers[$authenticate_header]; else
                 $authenticate = array($headers[$authenticate_header]);
@@ -1310,10 +1310,10 @@ class HTTP {
                     $mechanisms[] = $mechanism;
             }
             $sasl = new sasl_client_class;
-            if (IsSet($user)) $sasl->SetCredential("user", $user);
-            if (IsSet($password)) $sasl->SetCredential("password", $password);
-            if (IsSet($realm)) $sasl->SetCredential("realm", $realm);
-            if (IsSet($workstation)) $sasl->SetCredential("workstation", $workstation);
+            if (isset($user)) $sasl->SetCredential("user", $user);
+            if (isset($password)) $sasl->SetCredential("password", $password);
+            if (isset($realm)) $sasl->SetCredential("realm", $realm);
+            if (isset($workstation)) $sasl->SetCredential("workstation", $workstation);
             $sasl->SetCredential("uri", $this->request_uri);
             $sasl->SetCredential("method", $this->request_method);
             $sasl->SetCredential("session", $this->session);
@@ -1334,20 +1334,20 @@ class HTTP {
                     if (strlen($body) == 0) break;
                 }
             }
-            $authorization_value                         = $sasl->mechanism . (IsSet($message) ? " " . ($sasl->encode_response ? Base64::encode($message) : $message) : "");
+            $authorization_value                         = $sasl->mechanism . (isset($message) ? " " . ($sasl->encode_response ? Base64::encode($message) : $message) : "");
             $request_arguments                           = $this->request_arguments;
             $arguments                                   = $request_arguments;
             $arguments["Headers"][$authorization_header] = $authorization_value;
             if (!$proxy && strlen($proxy_authorization)) $arguments["Headers"]["Proxy-Authorization"] = $proxy_authorization;
             if (strlen($error = $this->Close()) || strlen($error = $this->Open($arguments))) return ($this->SetError($error, $this->error_code));
             $authenticated = 0;
-            if (IsSet($message)) {
+            if (isset($message)) {
                 if ($proxy < 0) {
                     if (strlen($error = $this->ConnectFromProxy($arguments, $headers))) return ($this->SetError($error, $this->error_code));
                 } else {
                     if (strlen($error = $this->SendRequest($arguments)) || strlen($error = $this->ReadReplyHeadersResponse($headers))) return ($this->SetError($error, $this->error_code));
                 }
-                if (!IsSet($headers[$authenticate_header])) $authenticate = array(); elseif (GetType($headers[$authenticate_header]) == "array") $authenticate = $headers[$authenticate_header];
+                if (!isset($headers[$authenticate_header])) $authenticate = array(); elseif (GetType($headers[$authenticate_header]) == "array") $authenticate = $headers[$authenticate_header];
                 else
                     $authenticate = array($headers[$authenticate_header]);
                 for ($mechanism = 0; $mechanism < count($authenticate); $mechanism++) {
@@ -1385,7 +1385,7 @@ class HTTP {
                 } while ($status == SASL_INTERACT);
                 switch ($status) {
                     case SASL_CONTINUE:
-                        $authorization_value                         = $sasl->mechanism . (IsSet($message) ? " " . ($sasl->encode_response ? Base64::encode($message) : $message) : "");
+                        $authorization_value                         = $sasl->mechanism . (isset($message) ? " " . ($sasl->encode_response ? Base64::encode($message) : $message) : "");
                         $arguments                                   = $request_arguments;
                         $arguments["Headers"][$authorization_header] = $authorization_value;
                         if (!$proxy && strlen($proxy_authorization)) $arguments["Headers"]["Proxy-Authorization"] = $proxy_authorization;
@@ -1441,7 +1441,7 @@ class HTTP {
         return ("");
     }
 
-    Function ReadReplyHeaders(&$headers) {
+    function ReadReplyHeaders(&$headers) {
         if (strlen($error = $this->ReadReplyHeadersResponse($headers))) return ($error);
         $proxy_authorization = "";
         while (!strcmp($this->response_status, "100")) {
@@ -1465,7 +1465,7 @@ class HTTP {
         return ("");
     }
 
-    Function ReadReplyBody(&$body, $length) {
+    function ReadReplyBody(&$body, $length) {
         $body = "";
         if (strlen($this->error)) return ($this->error);
         switch ($this->state) {
@@ -1499,7 +1499,7 @@ class HTTP {
         return ("");
     }
 
-    Function ReadWholeReplyBody(&$body) {
+    function ReadWholeReplyBody(&$body) {
         $body = '';
         for (; ;) {
             if (strlen($error = $this->ReadReplyBody($block, $this->file_buffer_length))) return ($error);
@@ -1508,7 +1508,7 @@ class HTTP {
         }
     }
 
-    Function ReadWholeReplyIntoTemporaryFile(&$file) {
+    function ReadWholeReplyIntoTemporaryFile(&$file) {
         if (!($file = tmpfile())) return $this->SetPHPError('could not create the temporary file to save the response', self::PHPErrorMessage(), HTTP_CLIENT_ERROR_CANNOT_ACCESS_LOCAL_FILE);
         for (; ;) {
             if (strlen($error = $this->ReadReplyBody($block, $this->file_buffer_length))) {
@@ -1535,7 +1535,7 @@ class HTTP {
         }
     }
 
-    Function SaveCookies(&$cookies, $domain = '', $secure_only = 0, $persistent_only = 0) {
+    function SaveCookies(&$cookies, $domain = '', $secure_only = 0, $persistent_only = 0) {
         $now     = gmdate("Y-m-d H-i-s");
         $cookies = array();
         for ($secure_cookies = 0, Reset($this->cookies); $secure_cookies < count($this->cookies); Next($this->cookies), $secure_cookies++) {
@@ -1559,15 +1559,15 @@ class HTTP {
         }
     }
 
-    Function SavePersistentCookies(&$cookies, $domain = '', $secure_only = 0) {
+    function SavePersistentCookies(&$cookies, $domain = '', $secure_only = 0) {
         $this->SaveCookies($cookies, $domain, $secure_only, 1);
     }
 
-    Function GetPersistentCookies(&$cookies, $domain = '', $secure_only = 0) {
+    function GetPersistentCookies(&$cookies, $domain = '', $secure_only = 0) {
         $this->SavePersistentCookies($cookies, $domain, $secure_only);
     }
 
-    Function RestoreCookies($cookies, $clear = 1) {
+    function RestoreCookies($cookies, $clear = 1) {
         $new_cookies = ($clear ? array() : $this->cookies);
         for ($secure_cookies = 0, Reset($cookies); $secure_cookies < count($cookies); Next($cookies), $secure_cookies++) {
             $secure = Key($cookies);

@@ -35,7 +35,7 @@ class SelectFile extends Select {
 
         $this->options[''] = n2_('Choose');
 
-        foreach ($validated_files AS $f) {
+        foreach ($validated_files as $f) {
             $this->options[$f] = $f;
         }
     }

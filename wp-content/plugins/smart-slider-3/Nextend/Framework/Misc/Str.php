@@ -4,9 +4,9 @@
 namespace Nextend\Framework\Misc;
 
 
-use Nextend\Framework\Misc\String\MultiByte;
-use Nextend\Framework\Misc\String\SingleByte;
-use Nextend\Framework\Misc\String\StringInterface;
+use Nextend\Framework\Misc\StringPhp\MultiByte;
+use Nextend\Framework\Misc\StringPhp\SingleByte;
+use Nextend\Framework\Misc\StringPhp\StringInterface;
 use Nextend\Framework\Pattern\SingletonTrait;
 
 class Str {

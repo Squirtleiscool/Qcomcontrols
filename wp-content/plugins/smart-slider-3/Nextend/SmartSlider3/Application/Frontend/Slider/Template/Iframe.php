@@ -61,7 +61,7 @@ use Nextend\WordPress\OutputBuffer;
     if (!empty($externals)) {
         $externals = explode("\n", $externals);
         foreach ($externals as $external) {
-            echo "<link rel='stylesheet' href='" . $external . "' type='text/css' media='all'>";
+            echo "<link rel='stylesheet' href='" . $external . "' type='text/css' media='all' />";
         }
     }
     ?>
@@ -71,176 +71,130 @@ use Nextend\WordPress\OutputBuffer;
 echo $this->getSliderHTML();
 ?>
 <script>
-    var tmpChange,
-        notifyParentAboutChange = function (e, responsive) {
-            tmpChange = [e, responsive];
-        };
 
-    function broadCastReady() {
-        parent.postMessage({key: 'ready'}, "*");
-    }
-
-    N2R('windowLoad', function ($) {
-
-        <?php
-        if($this->isGroup()){
-        ?>
-        var deferreds = [],
-            interval = setInterval(broadCastReady, 40),
-            hasForceFull = false;
-
-        function initSliders() {
-            for (var k in n2ss.sliders) {
-                var deferred = $.Deferred();
-                deferreds.push(deferred);
-
-                n2ss.ready(k, (function (deferred, slider) {
-                    deferred.resolve();
-
-                    var $slider = slider.sliderElement.on({
-                        SliderResize: function (e, ratios, responsive) {
-                            notifyParentAboutChange(e, responsive);
+    _N2.r('windowLoad', function () {
+        if (window.n2ss) {
+            var body = document.body,
+                options = {
+                    forceFullWidth: 0,
+                    fullPage: 0,
+                    focusOffsetTop: '',
+                    focusOffsetBottom: '',
+                    margin: 0,
+                    height: 0
+                },
+                setOption = function (name, value) {
+                    if (options[name] != value) {
+                        options[name] = value;
+                        parent.postMessage({
+                            key: 'option',
+                            name: name,
+                            value: value
+                        }, "*");
+                    }
+                },
+                sliders = [],
+                promise = new Promise(function (resolve) {
+                    var checkSliders = function () {
+                            if (Object.keys(n2ss.sliders).length) {
+                                initSliders();
+                            } else {
+                                setTimeout(checkSliders, 16);
+                            }
                         },
-                        Show: function (e) {
-                            notifyParentAboutChange(e, $slider.data('ss').responsive);
-                        }
-                    });
-                }).bind(this, deferred));
-            }
-            if (deferreds.length === 0) {
-                setTimeout(initSliders, 1000);
-            } else {
-                $.when(deferreds).done(function () {
-                    var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-                    window[eventMethod](eventMethod == "attachEvent" ? "onmessage" : "message", function (e) {
-                        var data = e[e.message ? "message" : "data"];
-                        switch (data["key"]) {
-                            case "ackReady":
+                        initSliders = function () {
+                            var promises = [];
+                            for (var k in n2ss.sliders) {
+                                promises.push(new Promise(function (resolve) {
+                                    n2ss.ready(k, (function (slider) {
+                                        sliders.push(slider);
+                                        resolve();
+                                    }).bind(this));
+                                }));
+                            }
 
-                                window.n2Width = data.windowInnerWidth;
-                                window.n2Height = data.windowInnerHeight;
-                                window.n2ClientHeight = data.windowInnerHeight;
-                                clearInterval(interval);
-                                notifyParentAboutChange = NextendDeBounce(function (e, responsive) {
-                                    if (!hasForceFull && responsive.parameters.forceFull) {
-                                        hasForceFull = true;
-                                    }
+                            Promise.all(promises).then(resolve);
+                        };
 
-                                    parent.postMessage({
-                                        key: 'resize',
-                                        width: $('body').width(),
-                                        height: $('body').height(),
-                                        forceFull: hasForceFull,
-                                        fullPage: 0,
-                                        focus: {},
-                                        margin: 0
-                                    }, "*");
-                                }, 33);
-                                if (typeof tmpChange !== 'undefined') {
-                                    notifyParentAboutChange.apply(this, tmpChange);
-                                }
-                                $(window).trigger('resize');
-                                break;
-                            case 'clientHeight':
-                                window.n2ClientHeight = data.clientHeight;
-                                $(window).trigger('resize');
-                                break;
-                            case 'windowSize':
-                                window.n2Width = data.windowInnerWidth;
-                                window.n2Height = data.windowInnerHeight;
-                                $(window).trigger('resize');
-                                break;
-                        }
-                    });
+                    checkSliders();
                 });
-            }
-        }
 
-        initSliders();
-        <?php
-        }else{
-        ?>
-        if (typeof n2ss !== "undefined") {
-            n2ss.ready(<?php echo $this->getSliderID(); ?>, function (slider) {
+            promise.then(function () {
 
-                var $slider = slider.sliderElement.on({
-                        SliderResize: function (e, ratios, responsive) {
-                            notifyParentAboutChange(e, responsive);
-                        },
-                        Show: function (e) {
-                            notifyParentAboutChange(e, $slider.data('ss').responsive);
-                        }
-                    }),
-                    $margin = $slider.closest('.n2-ss-margin'),
-                    margin = [$margin.css('marginTop'), $margin.css('marginRight'), $margin.css('marginBottom'), $margin.css('marginLeft')].join(' ');
+                if (sliders.length === 1) {
+                    var sliderElement = sliders[0].sliderElement,
+                        marginElement = sliderElement.closest('.n2-ss-margin');
 
-                $margin.css('margin', '0');
-
-                // If the slider is already ready, then SliderResize might not happen to adjust the iframe size in the parent
-                if (slider && slider.stages.resolved('ResizeFirst')) {
-                    notifyParentAboutChange(null, slider.responsive);
+                    if (marginElement) {
+                        var cs = window.getComputedStyle(marginElement);
+                        setOption('margin', [cs.marginTop, cs.marginRight, cs.marginBottom, cs.marginLeft].join(' '));
+                        marginElement.style.margin = '0';
+                    }
                 }
 
-                var interval = setInterval(broadCastReady, 40);
-
-                var eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-                window[eventMethod](eventMethod == "attachEvent" ? "onmessage" : "message", function (e) {
-                    var data = e[e.message ? "message" : "data"];
-                    switch (data["key"]) {
-                        case "ackReady":
-                            window.n2Width = data.windowInnerWidth;
-                            window.n2Height = data.windowInnerHeight;
-                            window.n2ClientHeight = data.windowInnerHeight;
-                            clearInterval(interval);
-                            notifyParentAboutChange = NextendDeBounce(function (e, responsive) {
-                                parent.postMessage({
-                                    key: 'resize',
-                                    width: $('body').width(),
-                                    height: $('body').height(),
-                                    forceFull: responsive.parameters.forceFull,
-                                    fullPage: responsive.parameters.type === 'fullpage',
-                                    focus: responsive.parameters.focus,
-                                    margin: margin
-                                }, "*");
-                            }, 33);
-                            if (typeof tmpChange !== 'undefined') {
-                                notifyParentAboutChange.apply(this, tmpChange);
-                            }
-                            break;
-                        case 'clientHeight':
-                            window.n2ClientHeight = data.clientHeight;
-                            $(window).trigger('resize');
-                            break;
-                        case 'windowSize':
-                            window.n2Width = data.windowInnerWidth;
-                            window.n2Height = data.windowInnerHeight;
-                            $(window).trigger('resize');
-                            break;
-                    }
-                });
-
-                n2const.setLocation = function (l) {
-                    parent.postMessage({
-                        key: 'setLocation',
-                        location: l
-                    }, "*");
-                };
-
-                slider.stages.done('HasDimension', function () {
-
-                    $('a').each(function () {
-                        if ($(this).attr('target') !== '_blank') {
-                            $(this).attr('target', '_parent');
+                for (var i = 0; i < sliders.length; i++) {
+                    var slider = sliders[i];
+                    slider.stages.done('ResizeFirst', (function (slider) {
+                        if (slider.sliderElement.closest('ss3-force-full-width')) {
+                            setOption('forceFullWidth', true);
                         }
+
+                        if (slider.responsive.parameters.type === 'fullpage') {
+                            setOption('fullPage', true);
+                        }
+
+                        if (sliders.length === 1) {
+                            setOption('focusOffsetTop', slider.responsive.parameters.focus.offsetTop);
+                            setOption('focusOffsetBottom', slider.responsive.parameters.focus.offsetBottom);
+                        }
+                    }).bind(this, slider));
+
+                    slider.stages.done('HasDimension', function () {
+                        document.querySelectorAll('a:not([target="_parent"]):not([target="_blank"])').forEach(function (a) {
+                            a.target = '_parent';
+                        });
                     });
-                });
+                }
+
+                var observer = new ResizeObserver((function (entries) {
+                    setOption('height', entries[0].contentRect.height);
+                }).bind(this));
+
+                observer.observe(body);
             });
-        } else {
-            console.error('This slider has no slides: <?php echo $this->getSliderID(); ?>');
+
+            var interval = setInterval(function () {
+                parent.postMessage({key: 'ready'}, "*");
+            }, 40);
+            window.addEventListener("message", function (e) {
+                var data = e.data;
+                switch (data["key"]) {
+                    case "ackReady":
+                        window.n2Height = data.windowInnerHeight;
+                        window.n2OffsetTop = 0;
+                        window.n2OffsetBottom = 0;
+                        clearInterval(interval);
+
+                        document.body.style.setProperty('--target-height', window.n2Height + 'px');
+                        break;
+                    case 'fullpage':
+                        window.n2Height = data.height;
+                        window.n2OffsetTop = data.offsetTop;
+                        window.n2OffsetBottom = data.offsetBottom;
+
+                        document.body.style.setProperty('--target-height', window.n2Height + 'px');
+                        window.dispatchEvent(new Event('resize'));
+                        break;
+                }
+            });
+
+            n2const.setLocation = function (l) {
+                parent.postMessage({
+                    key: 'setLocation',
+                    location: l
+                }, "*");
+            };
         }
-        <?php
-        }
-        ?>
     });
 </script>
 </body>

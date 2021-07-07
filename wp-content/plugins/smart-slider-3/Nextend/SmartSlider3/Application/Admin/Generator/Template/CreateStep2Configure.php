@@ -8,7 +8,7 @@ use Nextend\Framework\Asset\Js\Js;
  * @var ViewGeneratorCreateStep2Configure $this
  */
 
-JS::addInline('new N2Classes.GeneratorConfigure();');
+JS::addInline('new _N2.GeneratorConfigure();');
 ?>
 <form id="n2-ss-form-generator-configure" action="<?php echo $this->getAjaxUrlGeneratorCheckConfiguration($this->getGeneratorGroup()
                                                                                                                ->getName(), $this->getSliderID(), $this->getGroupID()); ?>" method="post">

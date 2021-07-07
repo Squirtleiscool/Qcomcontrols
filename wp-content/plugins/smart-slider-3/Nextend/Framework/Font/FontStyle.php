@@ -25,7 +25,7 @@ class FontStyle {
             $extra = $tab['extra'];
             unset($tab['extra']);
         }
-        foreach ($tab AS $k => $v) {
+        foreach ($tab as $k => $v) {
             $style .= $this->parse($k, $v);
         }
         $style .= $this->parse('extra', $extra);
@@ -59,6 +59,7 @@ class FontStyle {
         $rgba = Color::hex2rgba($v);
 
         return 'color: RGBA(' . $rgba[0] . ',' . $rgba[1] . ',' . $rgba[2] . ',' . round($rgba[3] / 127, 2) . ');';
+
     }
 
     /**

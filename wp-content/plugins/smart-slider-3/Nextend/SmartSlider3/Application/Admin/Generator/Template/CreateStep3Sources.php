@@ -14,7 +14,7 @@ $generatorGroup = $this->getGeneratorGroup();
 <div class="n2_slide_generator_step3">
     <?php
 
-    foreach ($generatorGroup->getSources() AS $source) {
+    foreach ($generatorGroup->getSources() as $source) {
 
         $blockGeneratorBox = new BlockGeneratorBox($this);
         $blockGeneratorBox->setImageUrl($generatorGroup->getImageUrl());

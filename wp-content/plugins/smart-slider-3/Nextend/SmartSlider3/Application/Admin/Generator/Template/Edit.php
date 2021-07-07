@@ -13,7 +13,7 @@ $generator       = $this->getGenerator();
 $generatorGroup  = $this->getGeneratorGroup();
 $generatorSource = $this->getGeneratorSource();
 
-JS::addInline('new N2Classes.GeneratorEdit(' . json_encode(array(
+JS::addInline('new _N2.GeneratorEdit(' . json_encode(array(
         'previewInNewWindow' => !!Settings::get('preview-new-window', 0),
         'previewUrl'         => $this->getUrlPreviewGenerator($generator['id'])
     )) . ');');

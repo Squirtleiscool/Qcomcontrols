@@ -68,7 +68,7 @@ class ControlTypePicker extends AbstractFieldHidden {
         $html .= parent::fetchElement();
         $html .= '</div>';
 
-        Js::addInline('new N2Classes.FormElementControlTypePicker( "' . $this->fieldID . '",  ' . json_encode(array(
+        Js::addInline('new _N2.FormElementControlTypePicker( "' . $this->fieldID . '",  ' . json_encode(array(
                 'ajaxUrl'       => $this->ajaxUrl,
                 'target'        => $this->containerSubform->getId(),
                 'originalValue' => $this->getValue()
@@ -91,7 +91,7 @@ class ControlTypePicker extends AbstractFieldHidden {
 
         $this->plugins = $this->widgetGroup->getWidgets();
 
-        foreach ($this->plugins AS $name => $type) {
+        foreach ($this->plugins as $name => $type) {
             $this->options[$name] = array(
                 'path' => $type->getSubFormImagePath()
             );

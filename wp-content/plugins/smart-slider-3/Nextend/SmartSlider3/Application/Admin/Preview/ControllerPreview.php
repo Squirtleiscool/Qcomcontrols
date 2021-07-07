@@ -5,7 +5,6 @@ namespace Nextend\SmartSlider3\Application\Admin\Preview;
 
 
 use Nextend\Framework\Misc\Base64;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Request\Request;
 use Nextend\SmartSlider3\Application\Admin\AbstractControllerAdmin;
 use Nextend\SmartSlider3\Application\Model\ModelGenerator;

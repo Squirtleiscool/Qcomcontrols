@@ -79,7 +79,7 @@ class FontSettings {
             'plugins'         => array()
         ));
 
-        foreach (Section::getAll('system', 'fonts') AS $data) {
+        foreach (Section::getAll('system', 'fonts') as $data) {
             self::$data->set($data['referencekey'], $data['value']);
         }
 

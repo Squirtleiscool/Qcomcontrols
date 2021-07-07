@@ -64,7 +64,7 @@ class ViewSettingsFonts extends AbstractViewSettings {
         $fountSources = FontSources::getFontSources();
 
 
-        foreach ($fountSources AS $fountSource) {
+        foreach ($fountSources as $fountSource) {
 
             $table = new ContainerTable($form->getContainer(), $fountSource->getName(), $fountSource->getLabel());
 

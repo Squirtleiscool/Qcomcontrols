@@ -18,7 +18,7 @@ class Devices extends AbstractFieldHidden {
             'class' => 'n2_field_radio_icon'
         ), $this->generateOptions());
 
-        Js::addInline('new N2Classes.FormElementDevices("' . $this->fieldID . '", ' . json_encode($this->values) . ');');
+        Js::addInline('new _N2.FormElementDevices("' . $this->fieldID . '", ' . json_encode($this->values) . ');');
 
         return $html;
     }

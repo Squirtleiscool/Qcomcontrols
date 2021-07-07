@@ -175,10 +175,10 @@ class ApplicationTypeAdmin extends AbstractApplicationType {
 
     public function enqueueAssets() {
 
-        Js::addInline('N2Classes.AjaxHelper.addAdminUrl(' . json_encode($this->getKey()) . ', ' . json_encode($this->createAjaxUrl('/')) . ');');
+        Js::addInline('_N2.AjaxHelper.addAdminUrl(' . json_encode($this->getKey()) . ', ' . json_encode($this->createAjaxUrl('/')) . ');');
 
 
-        JS::addInline('N2Classes.BrowserCompatibility(' . json_encode($this->getUrlHelpBrowserIncompatible()) . ');');
+        JS::addInline('_N2.BrowserCompatibility(' . json_encode($this->getUrlHelpBrowserIncompatible()) . ');');
 
         parent::enqueueAssets();
         if (Platform::isAdmin()) {

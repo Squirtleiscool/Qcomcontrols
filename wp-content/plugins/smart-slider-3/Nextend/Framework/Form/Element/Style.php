@@ -31,7 +31,7 @@ class Style extends AbstractFieldHidden {
             'fixPreviewImages'
         ), $this->preview);
 
-        Js::addInline('new N2Classes.FormElementStyle("' . $this->fieldID . '", {
+        Js::addInline('new _N2.FormElementStyle("' . $this->fieldID . '", {
             mode: "' . $this->mode . '",
             label: "' . $this->label . '",
             font: "' . $this->font . '",

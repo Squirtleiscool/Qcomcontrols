@@ -40,7 +40,7 @@ class BlockTopBarMain extends AbstractBlock {
 
     public function displayPrimary() {
 
-        foreach ($this->primaryBlocks AS $block) {
+        foreach ($this->primaryBlocks as $block) {
             $block->display();
         }
     }
@@ -51,7 +51,7 @@ class BlockTopBarMain extends AbstractBlock {
 
     public function displaySecondary() {
 
-        foreach ($this->secondaryBlocks AS $block) {
+        foreach ($this->secondaryBlocks as $block) {
             $block->display();
         }
     }

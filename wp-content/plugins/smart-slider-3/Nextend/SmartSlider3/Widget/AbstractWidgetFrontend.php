@@ -13,10 +13,20 @@ abstract class AbstractWidgetFrontend {
     /** @var SliderWidget */
     protected $sliderWidget;
 
+    /**
+     * @var Slider
+     */
+    protected $slider;
+
     /** @var AbstractWidget */
     protected $widget;
 
     protected $key;
+
+    /**
+     * @var Data
+     */
+    protected $params;
 
     /**
      * AbstractWidgetFrontend constructor.
@@ -24,29 +34,61 @@ abstract class AbstractWidgetFrontend {
      * @param SliderWidget   $sliderWidget
      * @param AbstractWidget $widget
      */
-    public function __construct($sliderWidget, $widget) {
+    public function __construct($sliderWidget, $widget, $params) {
         $this->sliderWidget = $sliderWidget;
+        $this->slider       = $sliderWidget->slider;
         $this->widget       = $widget;
+
+        $this->params = $params;
 
         $this->key = $widget->getKey();
     }
 
-    public function getPositions(&$params) {
-        return array();
+    protected function addToPlacement($key, $renderCallback) {
+
+        $params = $this->params;
+
+        if ($params->get($key . 'mode') == 'simple') {
+
+            $area  = intval($params->get($key . 'area'));
+            $stack = intval($params->get($key . 'stack', 1));
+
+            $this->sliderWidget->addToSimplePlacement($renderCallback, $this->translateArea($area), $stack, $params->get($key . 'offset', 0));
+        } else {
+            $horizontalSide     = $params->get($key . 'horizontal', 'left');
+            $horizontalPosition = $params->get($key . 'horizontal-position', 0);
+            $horizontalUnit     = $params->get($key . 'horizontal-unit', 'px');
+
+            $verticalSide     = $params->get($key . 'vertical', 'top');
+            $verticalPosition = $params->get($key . 'vertical-position', 0);
+            $verticalUnit     = $params->get($key . 'vertical-unit', 'px');
+
+            $this->sliderWidget->addToAdvancedPlacement($renderCallback, $horizontalSide, $horizontalPosition, $horizontalUnit, $verticalSide, $verticalPosition, $verticalUnit);
+        }
+    }
+
+    protected function translateArea($area) {
+        static $areas = array(
+            1  => 'above',
+            2  => 'absolute-left-top',
+            3  => 'absolute-center-top',
+            4  => 'absolute-right-top',
+            5  => 'absolute-left',
+            6  => 'absolute-left-center',
+            7  => 'absolute-right-center',
+            8  => 'absolute-right',
+            9  => 'absolute-left-bottom',
+            10 => 'absolute-center-bottom',
+            11 => 'absolute-right-bottom',
+            12 => 'below',
+        );
+
+        return $areas[$area];
     }
 
     public function getDefaults() {
         return $this->widget->getDefaults();
     }
-
-    /**
-     * @param Slider $slider
-     * @param        $id
-     * @param Data   $params
-     *
-     * @return mixed
-     */
-    public abstract function render($slider, $id, $params);
 
     /**
      * @param Data    $params
@@ -56,92 +98,34 @@ abstract class AbstractWidgetFrontend {
      * @return array
      */
     protected function getDisplayAttributes($params, $key, $showOnMobileDefault = 0) {
-        $class = 'n2-ss-widget ';
 
-        if (!$params->get($key . 'display-desktopportrait', 1)) $class .= 'n2-ss-widget-hide-desktopportrait ';
+        $attributes = array(
+            'class' => 'n2-ss-widget'
+        );
 
-        if (!$params->get($key . 'display-tabletportrait', 1)) $class .= 'n2-ss-widget-hide-tabletportrait ';
+        if (!$params->get($key . 'display-desktopportrait', 1)) {
+            $attributes['data-hide-desktopportrait'] = 1;
+        }
 
-        if (!$params->get($key . 'display-mobileportrait', $showOnMobileDefault)) $class .= 'n2-ss-widget-hide-mobileportrait ';
+        if (!$params->get($key . 'display-tabletportrait', 1)) {
+            $attributes['data-hide-tabletportrait'] = 1;
+        }
 
-        if ($params->get($key . 'display-hover', 0)) $class .= 'n2-ss-widget-display-hover ';
+        if (!$params->get($key . 'display-mobileportrait', $showOnMobileDefault)) {
+            $attributes['data-hide-mobileportrait'] = 1;
+        }
 
-        $attributes = array();
+        if ($params->get($key . 'display-hover', 0)) {
+            $attributes['class'] .= ' n2-ss-widget-display-hover';
+        }
+
 
         $excludeSlides = $params->get($key . 'exclude-slides', '');
         if (!empty($excludeSlides)) {
             $attributes['data-exclude-slides'] = $excludeSlides;
         }
 
-        return array(
-            $class,
-            $attributes
-        );
-    }
-
-    /**
-     * @param Data   $params
-     * @param string $key
-     *
-     * @return array
-     */
-    protected function getPosition($params, $key) {
-        $mode = $params->get($key . 'position-mode', 'simple');
-        if ($mode == 'above') {
-            return array(
-                'margin-bottom:' . $params->get($key . 'position-offset', 0) . 'px;',
-                array(
-                    'data-position' => 'above'
-                )
-            );
-        } else if ($mode == 'below') {
-            return array(
-                'margin-top:' . $params->get($key . 'position-offset', 0) . 'px;',
-                array(
-                    'data-position' => 'below'
-                )
-            );
-        }
-        $attributes = array();
-        $style      = 'position: absolute;';
-
-        $side     = $params->get($key . 'position-horizontal', 'left');
-        $position = $params->get($key . 'position-horizontal-position', 0);
-        $unit     = $params->get($key . 'position-horizontal-unit', 'px');
-
-        if (!is_numeric($position)) {
-            $attributes['data-ss' . $side] = $position;
-        } else {
-            $style .= $side . ':' . $position . $unit . ';';
-        }
-
-        $side     = $params->get($key . 'position-vertical', 'top');
-        $position = $params->get($key . 'position-vertical-position', 0);
-        $unit     = $params->get($key . 'position-vertical-unit', 'px');
-
-        if (!is_numeric($position)) {
-            $attributes['data-ss' . $side] = $position;
-        } else {
-            $style .= $side . ':' . $position . $unit . ';';
-        }
-
-        return array(
-            $style,
-            $attributes
-        );
-    }
-
-    /**
-     * @param Data   $params
-     * @param string $key
-     *
-     * @return bool
-     */
-    protected function isNormalFlow($params, $key) {
-
-        $mode = $params->get($key . 'position-mode', 'simple');
-
-        return ($mode == 'above' || $mode == 'below');
+        return $attributes;
     }
 
     public static function getOrientationByPosition($mode, $area, $set = 'auto', $default = 'horizontal') {

@@ -39,8 +39,14 @@ class ComponentSlide extends AbstractComponent {
 
         $this->upgradeData();
 
-        $this->attributes['style'] = 'padding:' . implode('px ', explode('|*|', $this->data->get('desktopportraitpadding', '10|*|10|*|10|*|10'))) . 'px' . ';';
-        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10');
+        $devices = $this->owner->getAvailableDevices();
+
+        foreach ($devices as $device) {
+            $padding = $this->data->get($device . 'padding');
+            if (!empty($padding)) {
+                $this->style->add($device, '', 'padding:' . implode('px ', explode('|*|', $padding)) . 'px');
+            }
+        }
     }
 
     protected function upgradeData() {
@@ -79,6 +85,7 @@ class ComponentSlide extends AbstractComponent {
         $this->createProperty('published', 1);
         $this->createProperty('description', '');
         $this->createProperty('thumbnail', '');
+        $this->createProperty('thumbnailAlt', '');
         $this->createProperty('thumbnailType', 'default');
 
         $this->createProperty('static-slide', 0);
@@ -93,6 +100,7 @@ class ComponentSlide extends AbstractComponent {
 
         $this->createProperty('href', '');
         $this->createProperty('href-target', '');
+        $this->createProperty('aria-label', '');
 
 
         $this->createProperty('background-type', 'color');
@@ -117,16 +125,24 @@ class ComponentSlide extends AbstractComponent {
         $this->createProperty('backgroundVideoLoop', 1);
         $this->createProperty('backgroundVideoReset', 1);
         $this->createProperty('backgroundVideoMode', 'fill');
+
+        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10');
     }
 
     public function render($isAdmin) {
-        $this->attributes['data-sstype']       = $this->type;
-        $this->attributes['data-csstextalign'] = 'center';
+        $this->attributes['data-sstype'] = $this->type;
 
         $this->placement->attributes($this->attributes);
 
+        $this->serveLocalStyle();
+
         if ($isAdmin) {
             $this->admin();
+        }
+
+        $uniqueClass = $this->data->get('uniqueclass', '');
+        if (!empty($uniqueClass)) {
+            $this->addUniqueClass($uniqueClass . $this->owner->unique);
         }
 
         return Html::tag('div', $this->attributes, parent::renderContainer($isAdmin));

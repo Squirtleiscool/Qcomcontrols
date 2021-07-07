@@ -27,7 +27,7 @@ class SelectIcon extends AbstractFieldHidden {
             'class' => 'n2_field_select_icon'
         ));
 
-        foreach ($this->options AS $value => $option) {
+        foreach ($this->options as $value => $option) {
 
             $classes = array('n2_field_select_icon__option');
             if ($currentValue == $value) {
@@ -50,7 +50,7 @@ class SelectIcon extends AbstractFieldHidden {
 
         $html .= parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementSelectIcon("' . $this->fieldID . '", ' . json_encode(array()) . ');');
+        Js::addInline('new _N2.FormElementSelectIcon("' . $this->fieldID . '", ' . json_encode(array()) . ');');
 
         return $html;
     }

@@ -5,7 +5,6 @@ namespace Nextend\Framework\Style\Block\StyleManager;
 
 
 use Nextend\Framework\Asset\Js\Js;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Style\ModelStyle;
 use Nextend\Framework\Style\StyleRenderer;
 use Nextend\Framework\Visual\AbstractBlockVisual;
@@ -46,9 +45,9 @@ class BlockStyleManager extends AbstractBlockVisual {
         $model = $this->getModel();
 
         Js::addFirstCode("
-            N2Classes.CSSRendererStyle.rendererModes =  " . json_encode(StyleRenderer::$mode) . ";
-            N2Classes.CSSRendererStyle.pre =  " . json_encode(StyleRenderer::$pre) . ";
-            new N2Classes.NextendStyleManager();
+            _N2.CSSRendererStyle.rendererModes =  " . json_encode(StyleRenderer::$mode) . ";
+            _N2.CSSRendererStyle.pre =  " . json_encode(StyleRenderer::$pre) . ";
+            new _N2.NextendStyleManager();
         ");
 
         $model->renderForm();

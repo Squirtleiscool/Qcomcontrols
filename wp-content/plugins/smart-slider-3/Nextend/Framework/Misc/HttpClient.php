@@ -6,6 +6,7 @@ use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Settings;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
+use WP_HTTP_Proxy;
 
 class HttpClient {
 
@@ -27,7 +28,7 @@ class HttpClient {
             curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 20);
             curl_setopt($ch, CURLOPT_TIMEOUT, 30);
             curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/73.0.3683.103 Safari/537.36');
-            $proxy = new \WP_HTTP_Proxy();
+            $proxy = new WP_HTTP_Proxy();
 
             if ($proxy->is_enabled() && $proxy->send_through_proxy($url)) {
 

@@ -14,7 +14,7 @@ class RichTextarea extends AbstractField {
 
     protected function fetchElement() {
 
-        Js::addInline('new N2Classes.FormElementRichText("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementRichText("' . $this->fieldID . '");');
 
         $tools = array(
             Html::tag('div', array(

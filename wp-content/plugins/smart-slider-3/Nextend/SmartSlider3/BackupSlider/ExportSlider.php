@@ -68,7 +68,7 @@ class ExportSlider {
             }
             self::addImage($this->backup->slider['thumbnail']);
 
-            $this->backup->slider['params'] = new SliderParams($this->backup->slider['type'], $this->backup->slider['params'], true);
+            $this->backup->slider['params'] = new SliderParams($this->backup->slider['id'], $this->backup->slider['type'], $this->backup->slider['params'], true);
 
             if ($this->backup->slider['type'] == 'group') {
                 $xref = new ModelSlidersXRef($this);
@@ -279,7 +279,7 @@ class ExportSlider {
         }
 
         foreach ($js['url'] as $url) {
-            $headHTML .= Html::script($url, true) . "\n";
+            $headHTML .= Html::scriptFile($url) . "\n";
         }
         foreach ($js['files'] as $file) {
             $path = 'js/' . basename($file);
@@ -288,14 +288,14 @@ class ExportSlider {
                 $this->files[$path] = file_get_contents($file);
             } else {
             }
-            $headHTML .= Html::script($path, true) . "\n";
+            $headHTML .= Html::scriptFile($path) . "\n";
         }
 
         if ($js['inline'] != '') {
             $headHTML .= Html::script($js['inline']) . "\n";
         }
 
-        $sliderHTML = preg_replace_callback('/(src|data-thumbnail|data-desktop|data-tablet|data-mobile)=["|\'](.*?)["|\']/i', array(
+        $sliderHTML = preg_replace_callback('/(src|srcset)=["|\'](.*?)["|\']/i', array(
             $this,
             'replaceHTMLImage'
         ), $sliderHTML);

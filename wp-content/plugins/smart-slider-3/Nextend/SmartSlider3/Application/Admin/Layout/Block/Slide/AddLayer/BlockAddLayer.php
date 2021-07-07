@@ -36,8 +36,8 @@ class BlockAddLayer extends AbstractBlock {
         $itemDefaults = SliderTypeFactory::getType($this->sliderType)
                                          ->getItemDefaults();
 
-        foreach (ItemFactory::getItemGroups() AS $groupLabel => $group) {
-            foreach ($group AS $type => $item) {
+        foreach (ItemFactory::getItemGroups() as $groupLabel => $group) {
+            foreach ($group as $type => $item) {
                 if (!$item->isLegacy()) {
                     if (!isset($this->groups[$groupLabel])) {
                         $this->groups[$groupLabel] = array();

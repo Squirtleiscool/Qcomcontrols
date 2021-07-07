@@ -16,7 +16,7 @@ use Nextend\SmartSlider3\Settings;
         </div>
         <div class="n2_iframe_application__nav_bar_actions">
             <?php
-            foreach ($this->getActions() AS $action) {
+            foreach ($this->getActions() as $action) {
                 $action->display();
             }
             ?>

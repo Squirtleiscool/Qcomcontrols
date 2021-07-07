@@ -45,7 +45,7 @@ class IconTab extends AbstractFieldHidden {
             $options['relatedValueFields'] = $this->relatedValueFields;
         }
 
-        Js::addInline('new N2Classes.FormElementIconTab("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementIconTab("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
         return $html;
     }
@@ -75,14 +75,14 @@ class IconTab extends AbstractFieldHidden {
 
     public function renderOptions() {
         $html = '';
-        foreach ($this->options AS $option => $icon) {
+        foreach ($this->options as $option => $icon) {
             $class = 'n2_field_icon_tab__option';
             if ($option == $this->defaultValue) {
                 $class .= ' n2_field_icon_tab__option--selected';
             }
 
             $element = array(
-                "class"       => $class,
+                "class"         => $class,
                 "data-ssoption" => $option
             );
 

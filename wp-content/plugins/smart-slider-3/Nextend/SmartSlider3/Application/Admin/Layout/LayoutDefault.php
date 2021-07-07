@@ -16,7 +16,7 @@ class LayoutDefault extends AbstractLayoutMenu {
         $admin = new BlockAdmin($this);
         $admin->setLayout($this);
 
-        foreach ($this->state AS $name => $value) {
+        foreach ($this->state as $name => $value) {
             $admin->setAttribute('data-' . $name, $value);
         }
 

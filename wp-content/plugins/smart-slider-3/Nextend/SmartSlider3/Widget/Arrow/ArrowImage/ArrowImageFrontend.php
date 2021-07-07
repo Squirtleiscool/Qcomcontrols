@@ -2,8 +2,8 @@
 
 namespace Nextend\SmartSlider3\Widget\Arrow\ArrowImage;
 
-use Nextend\Framework\Cast;
-use Nextend\Framework\Data\Data;
+use Nextend\Framework\Asset\Js\Js;
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\Filesystem\Filesystem;
 use Nextend\Framework\Misc\Base64;
 use Nextend\Framework\Parser\Color;
@@ -13,31 +13,35 @@ use Nextend\SmartSlider3\Widget\AbstractWidgetFrontend;
 
 class ArrowImageFrontend extends AbstractWidgetFrontend {
 
+    protected $rendered = false;
 
-    public function getPositions(&$params) {
-        $positions = array();
+    protected $previousArguments;
+    protected $nextArguments;
 
-        if ($this->isRenderable('previous', $params)) {
-            $positions['previous-position'] = array(
-                $this->key . 'previous-position-',
-                'previous'
-            );
+    public function __construct($sliderWidget, $widget, $params) {
+
+        parent::__construct($sliderWidget, $widget, $params);
+
+
+        if ($this->isRenderable('previous')) {
+            $this->addToPlacement($this->key . 'previous-position-', array(
+                $this,
+                'renderPrevious'
+            ));
         }
 
-        if ($this->isRenderable('next', $params)) {
-            $positions['next-position'] = array(
-                $this->key . 'next-position-',
-                'next'
-            );
+        if ($this->isRenderable('next')) {
+            $this->addToPlacement($this->key . 'next-position-', array(
+                $this,
+                'renderNext'
+            ));
         }
-
-        return $positions;
     }
 
-    private function isRenderable($side, &$params) {
-        $arrow = $params->get($this->key . $side . '-image');
+    private function isRenderable($side) {
+        $arrow = $this->params->get($this->key . $side . '-image');
         if (empty($arrow)) {
-            $arrow = $params->get($this->key . $side);
+            $arrow = $this->params->get($this->key . $side);
             if ($arrow == -1) {
                 $arrow = null;
             }
@@ -46,11 +50,53 @@ class ArrowImageFrontend extends AbstractWidgetFrontend {
         return !!$arrow;
     }
 
-    public function render($slider, $id, $params) {
+    public function renderPrevious($attributes = array()) {
+
+        $this->render();
+
+        if ($this->previousArguments) {
+
+            array_unshift($this->previousArguments, $attributes);
+
+            return call_user_func_array(array(
+                $this,
+                'getHTML'
+            ), $this->previousArguments);
+        }
+
+        return '';
+    }
+
+    public function renderNext($attributes = array()) {
+
+        $this->render();
+
+        if ($this->nextArguments) {
+
+            array_unshift($this->nextArguments, $attributes);
+
+            return call_user_func_array(array(
+                $this,
+                'getHTML'
+            ), $this->nextArguments);
+        }
+
+        return '';
+    }
+
+    private function render() {
+
+        if ($this->rendered) return;
+
+        $this->rendered = true;
+
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
+
         if ($slider->getSlidesCount() <= 1) {
             return '';
         }
-        $return = array();
 
         $previousImage      = $params->get($this->key . 'previous-image');
         $previousValue      = $params->get($this->key . 'previous');
@@ -104,10 +150,11 @@ class ArrowImageFrontend extends AbstractWidgetFrontend {
             $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
                 "sliderid" => $slider->elementId
             ));
-            $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/arrow.min.js'));
-        
 
-            list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key);
+
+            Js::addStaticGroup(self::getAssetsPath() . '/dist/w-arrow-image.min.js', 'w-arrow-image');
+
+            $displayAttributes = $this->getDisplayAttributes($params, $this->key);
 
             $animation = $params->get($this->key . 'animation');
 
@@ -118,26 +165,58 @@ class ArrowImageFrontend extends AbstractWidgetFrontend {
             }
 
             if ($previous) {
-                $return['previous'] = $this->getHTML($id, $params, $animation, 'previous', $previous, $displayClass, $displayAttributes, $styleClass, $previousColor, $previousHover, $previousHoverColor);
+                $this->previousArguments = array(
+                    $id,
+                    $animation,
+                    'previous',
+                    $previous,
+                    $displayAttributes,
+                    $styleClass,
+                    $previousColor,
+                    $previousHover,
+                    $previousHoverColor
+                );
             }
 
             if ($next) {
-                $return['next'] = $this->getHTML($id, $params, $animation, 'next', $next, $displayClass, $displayAttributes, $styleClass, $nextColor, $nextHover, $nextHoverColor);
+                $this->nextArguments = array(
+                    $id,
+                    $animation,
+                    'next',
+                    $next,
+                    $displayAttributes,
+                    $styleClass,
+                    $nextColor,
+                    $nextHover,
+                    $nextHoverColor
+                );
             }
 
-            $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetArrowImage(this, ' . Cast::floatToString($params->get($this->key . 'responsive-desktop')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-tablet')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-mobile')) . ');');
-        }
+            $desktopWidth = $params->get('widget-arrow-desktop-image-width');
+            $tabletWidth  = $params->get('widget-arrow-tablet-image-width');
+            $mobileWidth  = $params->get('widget-arrow-mobile-image-width');
 
-        return $return;
+            $slider->addDeviceCSS('all', 'div#' . $id . ' .nextend-arrow img{width: ' . $desktopWidth . 'px}');
+            if ($tabletWidth != $desktopWidth) {
+                $slider->addDeviceCSS('tabletportrait', 'div#' . $id . ' .nextend-arrow img{width: ' . $tabletWidth . 'px}');
+                $slider->addDeviceCSS('tabletlandscape', 'div#' . $id . ' .nextend-arrow img{width: ' . $tabletWidth . 'px}');
+            }
+            if ($mobileWidth != $desktopWidth) {
+                $slider->addDeviceCSS('mobileportrait', 'div#' . $id . ' .nextend-arrow img{width: ' . $mobileWidth . 'px}');
+                $slider->addDeviceCSS('mobilelandscape', 'div#' . $id . ' .nextend-arrow img{width: ' . $mobileWidth . 'px}');
+            }
+
+            $slider->features->addInitCallback('new _N2.SmartSliderWidgetArrowImage(this);');
+            $slider->sliderType->addJSDependency('SmartSliderWidgetArrowImage');
+        }
     }
 
     /**
+     * @param array  $attributes
      * @param string $id
-     * @param Data   $params
      * @param string $animation
      * @param string $side
-     * @param string $image
-     * @param string $displayClass
+     * @param string $imageRaw
      * @param string $displayAttributes
      * @param string $styleClass
      * @param string $color
@@ -146,21 +225,19 @@ class ArrowImageFrontend extends AbstractWidgetFrontend {
      *
      * @return string
      */
-    private function getHTML($id, $params, $animation, $side, $image, $displayClass, $displayAttributes, $styleClass, $color = 'ffffffcc', $hover = 0, $hoverColor = 'ffffffcc') {
-
-        list($style, $attributes) = $this->getPosition($params, $this->key . $side . '-');
+    private function getHTML($attributes, $id, $animation, $side, $imageRaw, $displayAttributes, $styleClass, $color = 'ffffffcc', $hover = 0, $hoverColor = 'ffffffcc') {
 
         $imageHover = null;
 
-        $ext = pathinfo($image, PATHINFO_EXTENSION);
+        $ext = pathinfo($imageRaw, PATHINFO_EXTENSION);
 
         /**
          * We can not colorize SVGs when base64 disabled.
          */
-        if ($ext == 'svg' && ResourceTranslator::isResource($image) && $params->get($this->key . 'base64', 1)) {
+        if ($ext == 'svg' && ResourceTranslator::isResource($imageRaw) && $this->params->get($this->key . 'base64', 1)) {
 
             list($color, $opacity) = Color::colorToSVG($color);
-            $content = Filesystem::readFile(ResourceTranslator::toPath($image));
+            $content = Filesystem::readFile(ResourceTranslator::toPath($imageRaw));
             $image   = 'data:image/svg+xml;base64,' . Base64::encode(str_replace(array(
                     'fill="#FFF"',
                     'opacity="1"'
@@ -180,48 +257,46 @@ class ArrowImageFrontend extends AbstractWidgetFrontend {
                     ), $content));
             }
         } else {
-            $image = ResourceTranslator::toUrl($image);
+            $image = ResourceTranslator::toUrl($imageRaw);
         }
 
-        $alt = $params->get($this->key . $side . '-alt', $side . ' arrow');
+        $alt = $this->params->get($this->key . $side . '-alt', $side . ' arrow');
+
+
+        $sizeAttributes = array();
+        FastImageSize::initAttributes($imageRaw, $sizeAttributes);
 
         if ($imageHover === null) {
-            $image = Html::image($image, $alt, Html::addExcludeLazyLoadAttributes(array(
-                'class' => 'n2-ow'
-            )));
+            $image = Html::image($image, $alt, $sizeAttributes + Html::addExcludeLazyLoadAttributes());
         } else {
-            $image = Html::image($image, $alt, Html::addExcludeLazyLoadAttributes(array(
-                    'class' => 'n2-arrow-normal-img n2-ow'
-                ))) . Html::image($imageHover, $alt, Html::addExcludeLazyLoadAttributes(array(
-                    'class' => 'n2-arrow-hover-img n2-ow'
-                )));
+            $image = Html::image($image, $alt, $sizeAttributes + Html::addExcludeLazyLoadAttributes(array(
+                        'class' => 'n2-arrow-normal-img'
+                    ))) . Html::image($imageHover, $alt, $sizeAttributes + Html::addExcludeLazyLoadAttributes(array(
+                        'class' => 'n2-arrow-hover-img'
+                    )));
         }
-
-        $isNormalFlow = $this->isNormalFlow($params, $this->key . $side . '-');
 
         if ($animation == 'none' || $animation == 'fade') {
-            return Html::tag('div', $displayAttributes + $attributes + array(
-                    'id'         => $id . '-arrow-' . $side,
-                    'class'      => $displayClass . $styleClass . 'nextend-arrow n2-ow nextend-arrow-' . $side . '  nextend-arrow-animated-' . $animation . ($isNormalFlow ? '' : ' n2-ib'),
-                    'style'      => $style,
-                    'role'       => 'button',
-                    'aria-label' => $alt,
-                    'tabindex'   => '0'
-                ), $image);
-        }
-
-
-        return Html::tag('div', $displayAttributes + $attributes + array(
+            return Html::tag('div', Html::mergeAttributes($attributes, $displayAttributes, array(
                 'id'         => $id . '-arrow-' . $side,
-                'class'      => $displayClass . 'nextend-arrow nextend-arrow-animated n2-ow nextend-arrow-animated-' . $animation . ' nextend-arrow-' . $side . ($isNormalFlow ? '' : ' n2-ib'),
-                'style'      => $style,
+                'class'      => $styleClass . 'nextend-arrow n2-ow-all nextend-arrow-' . $side . '  nextend-arrow-animated-' . $animation,
                 'role'       => 'button',
                 'aria-label' => $alt,
                 'tabindex'   => '0'
-            ), Html::tag('div', array(
-                'class' => $styleClass . ' n2-resize'
+            )), $image);
+        }
+
+
+        return Html::tag('div', Html::mergeAttributes($attributes, $displayAttributes, array(
+            'id'         => $id . '-arrow-' . $side,
+            'class'      => 'nextend-arrow nextend-arrow-animated n2-ow-all nextend-arrow-animated-' . $animation . ' nextend-arrow-' . $side,
+            'role'       => 'button',
+            'aria-label' => $alt,
+            'tabindex'   => '0'
+        )), Html::tag('div', array(
+                'class' => $styleClass
             ), $image) . Html::tag('div', array(
-                'class' => $styleClass . ' n2-active' . ' n2-resize'
+                'class' => $styleClass . ' n2-active'
             ), $image));
     }
 }

@@ -10,7 +10,7 @@ use Nextend\Framework\Asset\Js\Js;
  * @var ViewSlidersImport $this
  */
 
-JS::addInline('new N2Classes.SliderImport();');
+JS::addInline('new _N2.SliderImport();');
 ?>
 
 <form id="n2-ss-form-slider-import" action="<?php echo $this->getAjaxUrlImport($this->getGroupID()); ?>" method="post">

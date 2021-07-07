@@ -5,16 +5,21 @@ namespace Nextend\SmartSlider3\Slider;
 
 
 use Nextend\Framework\Data\Data;
+use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
+use Nextend\SmartSlider3\Application\Model\ModelSlides;
 
 class SliderParams extends Data {
+
+    protected $sliderID;
 
     /**
      * @var string
      */
     protected $sliderType;
 
-    public function __construct($sliderType, $data = null, $json = false) {
+    public function __construct($sliderID, $sliderType, $data = null, $json = false) {
 
+        $this->sliderID   = $sliderID;
         $this->sliderType = $sliderType;
 
         parent::__construct($data, $json);
@@ -57,6 +62,53 @@ class SliderParams extends Data {
 
         $this->upgradeLoadingType();
 
+        $this->upgradeSlideBackgroundOptimize();
+
+        $this->upgradeThumbnailsControlSize();
+
+        $this->upgradeCarouselSideSpacing();
+
+        $this->upgradeShowcaseSideSpacing();
+
+        if ($this->has('optimize-background-image-width')) {
+            /**
+             * This setting was available only before version 3.5 so, if we end up here then it is an old slider.
+             * If there are root absolute layers with disabled adaptive sizing, we enable the legacy font scale.
+             */
+
+            $slidesModel = new ModelSlides(ApplicationSmartSlider3::getInstance()
+                                                                  ->getApplicationTypeFrontend());
+            $hasAbsolute = false;
+            $slides      = $slidesModel->getAll($this->sliderID);
+            foreach ($slides as $slide) {
+                $layers = json_decode($slide['slide'], true);
+                foreach ($layers as $layer) {
+                    if ($layer['type'] != 'content') {
+                        if (isset($layer['adaptivefont']) && $layer['adaptivefont'] == 0 && isset($layer['item']) && in_array($layer['item']['type'], array(
+                                'button',
+                                'heading',
+                                'text',
+                                'animatedHeading',
+                                'caption',
+                                'highlightedHeading',
+                                'html',
+                                'list',
+                                'imagebox',
+                                'input'
+                            ))) {
+                            $hasAbsolute = true;
+                            break;
+                        }
+                    }
+                }
+                if ($hasAbsolute) {
+                    break;
+                }
+            }
+            if ($hasAbsolute) {
+                $this->set('legacy-font-scale', '1');
+            }
+        }
     }
 
     private function upgradeSliderTypeResponsive() {
@@ -189,6 +241,88 @@ class SliderParams extends Data {
         } else {
             if (!$this->has('loading-type') && $this->get('delay') > 0) {
                 $this->set('loading-type', 'afterDelay');
+            }
+        }
+    }
+
+    private function upgradeSlideBackgroundOptimize() {
+        $optimize = $this->get('optimize');
+
+        //Slide Background Resize
+        $isResizeBackgroundEnabled = $this->get('optimize-background-image-custom');
+        $resizeBackgroundWidth     = $this->get('optimize-background-image-width');
+        if (!empty($optimize) && $optimize) {
+            $this->set('optimize-thumbnail-scale', 1);
+            $this->set('optimize-thumbnail-quality', intval($this->get('optimize-quality', 70)));
+
+            if (!empty($isResizeBackgroundEnabled) && $isResizeBackgroundEnabled && !empty($resizeBackgroundWidth)) {
+                $this->set('optimize-scale', 1);
+
+                $this->set('optimize-slide-width-normal', (int)$resizeBackgroundWidth);
+            }
+        }
+    }
+
+    private function upgradeThumbnailsControlSize() {
+        $isThumbnailEnabled = $this->get('widget-thumbnail-enabled');
+
+        if ($isThumbnailEnabled) {
+
+            if (!$this->has('widget-thumbnail-tablet-width') && !$this->has('widget-thumbnail-mobile-width')) {
+                $defaultThumbnailWidth = intval($this->get('widget-thumbnail-width', 100));
+                $this->set('widget-thumbnail-tablet-width', $defaultThumbnailWidth);
+                $this->set('widget-thumbnail-mobile-width', $defaultThumbnailWidth);
+            }
+            if (!$this->has('widget-thumbnail-tablet-height') && !$this->has('widget-thumbnail-mobile-height')) {
+                $defaultThumbnailHeight = intval($this->get('widget-thumbnail-height', 60));
+                $this->set('widget-thumbnail-tablet-height', $defaultThumbnailHeight);
+                $this->set('widget-thumbnail-mobile-height', $defaultThumbnailHeight);
+            }
+
+        }
+    }
+
+    private function upgradeCarouselSideSpacing() {
+        if ($this->sliderType == 'carousel') {
+            if ($this->has('optimize-background-image-width')) {
+                /**
+                 * This setting was available only before version 3.5 so, if we end up here then it is an old slider.
+                 * Earlier we automatically created top and bottom side spacing: (Slider Height - Slide Height) / 2
+                 * so for old sliders we need to set those values for Side Spacing top and bottom.
+                 */
+                $sliderHeight = intval($this->get('height'));
+                $slideHeight  = intval($this->get('slide-height'));
+                if ($sliderHeight > $slideHeight) {
+                    $heightDifference = $sliderHeight - $slideHeight;
+                    $spacingValue     = intval($heightDifference / 2);
+
+                    if (!$this->get('side-spacing-desktop-enable')) {
+                        $this->set('side-spacing-desktop-enable', 1);
+                        $this->set('side-spacing-desktop', $spacingValue . '|*|0|*|' . $spacingValue . '|*|0');
+                        $this->set('height', ($sliderHeight - $heightDifference));
+                    }
+                }
+            }
+        }
+    }
+
+    private function upgradeShowcaseSideSpacing() {
+        if ($this->sliderType == 'showcase') {
+            if ($this->has('optimize-background-image-width')) {
+                /**
+                 * This setting was available only before version 3.5 so, if we end up here then it is an old slider.
+                 * Earlier we automatically created top and bottom side spacing: (Slider Height - Slide Height) / 2
+                 * so for old sliders we need to set those values for Side Spacing top and bottom.
+                 */
+                $sliderHeight = intval($this->get('height'));
+                $slideHeight  = intval($this->get('slide-height'));
+                if ($sliderHeight > $slideHeight) {
+                    $heightDifference = $sliderHeight - $slideHeight;
+                    $spacingValue     = intval($heightDifference / 2);
+                    $this->set('side-spacing-desktop-enable', 1);
+                    $this->set('side-spacing-desktop', $spacingValue . '|*|20|*|' . $spacingValue . '|*|20');
+                    $this->set('height', ($sliderHeight - $heightDifference));
+                }
             }
         }
     }

@@ -15,7 +15,7 @@ class NumberSlider extends Number {
     protected function fetchElement() {
         $html = parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementNumberSlider("' . $this->fieldID . '", ' . json_encode(array(
+        Js::addInline('new _N2.FormElementNumberSlider("' . $this->fieldID . '", ' . json_encode(array(
                 'min'   => floatval($this->min),
                 'max'   => floatval($this->sliderMax),
                 'step'  => floatval($this->step),

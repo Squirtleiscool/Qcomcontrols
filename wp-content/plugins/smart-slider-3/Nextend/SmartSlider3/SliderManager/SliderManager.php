@@ -75,7 +75,11 @@ class SliderManager {
     }
 
     public function setUsage($usage) {
-        $this->usage = $usage;
+        $this->usage           = $usage;
+
+        if ($usage === 'iframe') {
+            $this->slider->isFrame = true;
+        }
     }
 
     /**
@@ -111,8 +115,12 @@ class SliderManager {
         $cache = new CacheSlider($this->slider->cacheId, array(
             'slider' => $this->slider
         ));
+        $key   = 'slider' . Translation::getCurrentLocale();
+        if ($this->slider->isFrame) {
+            $key .= 'iframe';
+        }
 
-        $cachedSlider = $cache->makeCache('slider' . Translation::getCurrentLocale(), '', array(
+        $cachedSlider = $cache->makeCache($key, '', array(
             $this,
             'renderCachedSlider'
         ));
@@ -148,7 +156,7 @@ class SliderManager {
             } else {
                 $content['html'] = '';
             }
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             $content['html'] = false;
         }
 

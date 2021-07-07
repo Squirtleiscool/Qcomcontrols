@@ -44,6 +44,11 @@ class ViewSettingsFramework extends AbstractViewSettings {
             'tipLabel'       => n2_('Use protocol-relative URL'),
             'tipDescription' => n2_('Loads the URLs without a http or https protocol.')
         ));
+        new OnOff($row1, 'header-preload', n2_('Header preload'), 0, array(
+            'tipLabel'       => n2_('Header preload'),
+            'tipDescription' => n2_('If the slider is an important part of your site, tell the browser to preload its files.'),
+            'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1785-framework#header-preload'
+        ));
 
         new OnOff($row1, 'force-english-backend', n2_('English UI'), 0, array(
             'tipLabel'       => n2_('English UI'),
@@ -60,9 +65,6 @@ class ViewSettingsFramework extends AbstractViewSettings {
 
         $row1 = $table->createRow('javascript-1');
 
-        new OnOff($row1, 'jquery', n2_('Load jQuery on frontend'), 1);
-        new OnOff($row1, 'async', n2_('Async'), 0);
-        new OnOff($row1, 'combine-js', n2_('Combine'), 0);
         new Text($row1, 'scriptattributes', n2_('Script attributes'), '');
 
         new Select($row1, 'javascript-inline', n2_('Slider\'s inline JavaScript'), 'head', array(
@@ -72,17 +74,12 @@ class ViewSettingsFramework extends AbstractViewSettings {
             )
         ));
 
-
         $table = new ContainerTable($form->getContainer(), 'css', 'CSS');
 
         $row1 = $table->createRow('css-1');
-
-        new Select($row1, 'css-mode', n2_('CSS mode'), 'normal', array(
-            'options' => array(
-                'normal' => n2_('Inline'),
-                'inline' => n2_('Inline at head'),
-                'async'  => n2_('Async'),
-            )
+        new OnOff($row1, 'async-non-primary-css', n2_('Async non-primary CSS '), 0, array(
+            'tipLabel'       => n2_('Async non-primary CSS'),
+            'tipDescription' => n2_('Google Fonts, icon and lightbox CSS are loaded in a non-blocking way. Disable if you see missing icons, fonts or styles.')
         ));
 
         $table = new ContainerTable($form->getContainer(), 'requests', n2_('API requests'));

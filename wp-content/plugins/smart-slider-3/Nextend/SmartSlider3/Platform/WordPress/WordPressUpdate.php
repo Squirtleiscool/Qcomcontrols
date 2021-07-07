@@ -77,6 +77,7 @@ class WordPressUpdate {
                     'channel' => SmartSlider3Info::$channel
                 ), true);
 
+                $item->plugin                   = 'nextend-smart-slider3-pro/nextend-smart-slider3-pro.php';
                 $item->package                  = $updateLink;
                 $item->download_link            = $updateLink;
                 $item->versions                 = array();

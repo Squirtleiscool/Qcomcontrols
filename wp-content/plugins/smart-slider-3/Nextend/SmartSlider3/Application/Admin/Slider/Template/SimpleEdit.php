@@ -22,7 +22,7 @@ use Nextend\SmartSlider3\Slider\SliderParams;
 
 $slider = $this->getSlider();
 
-$sliderParams = new SliderParams($slider['type'], $slider['params'], true);
+$sliderParams = new SliderParams($slider['id'], $slider['type'], $slider['params'], true);
 
 $sliderData              = $sliderParams->toArray();
 $sliderData['title']     = $slider['title'];
@@ -131,7 +131,8 @@ $sliderData['alias']     = isset($slider['alias']) ? $slider['alias'] : '';
 </form>
 
 <script>
-    N2R('windowLoad', function ($) {
+    _N2.r(['$', 'windowLoad'], function () {
+        var $ = _N2.$;
         var $form = $('#n2_slider_form');
 
         $('#slider-settings-region').trigger("focus");
@@ -144,7 +145,6 @@ $sliderData['alias']     = isset($slider['alias']) ? $slider['alias'] : '';
 
         document.addEventListener('keydown', function (e) {
             if (e.ctrlKey || e.metaKey) {
-                console.log(e.code);
                 if (e.code === 'KeyS') { // ctrl + s
                     e.preventDefault();
 

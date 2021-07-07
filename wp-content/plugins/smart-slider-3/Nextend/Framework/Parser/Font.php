@@ -30,7 +30,7 @@ class Font {
                 $extra = $tab['extra'];
                 unset($tab['extra']);
             }
-            foreach ($tab AS $k => $v) {
+            foreach ($tab as $k => $v) {
                 $style .= $this->parse($k, $v);
             }
             $style .= $this->parse('extra', $extra);
@@ -66,9 +66,7 @@ class Font {
      * @return string
      */
     public function parseColor($v) {
-
         $hex = Color::hex82hex($v);
-
         if ($hex[1] == 'ff') {
             return 'color: #' . $hex[0] . ';';
         }
@@ -76,6 +74,7 @@ class Font {
         $rgba = Color::hex2rgba($v);
 
         return 'color: RGBA(' . $rgba[0] . ',' . $rgba[1] . ',' . $rgba[2] . ',' . round($rgba[3] / 127, 2) . ');';
+
     }
 
     /**
@@ -191,7 +190,7 @@ class Font {
      */
     public function loadFont($families) {
         preg_match_all("/google\(.*?family=(.*?)\);\)/", $families, $out, PREG_SET_ORDER);
-        foreach ($out AS $f) {
+        foreach ($out as $f) {
             preg_match('/(.*?)(:(.*?))?(&subset=(.*))?$/', $f[1], $g);
             $family = str_replace('+', ' ', $g[1]);
             $styles = 400;
@@ -203,7 +202,7 @@ class Font {
                 $subset = $g[5];
             }
             Google::addSubset($subset);
-            foreach (explode(',', $styles) AS $style) {
+            foreach (explode(',', $styles) as $style) {
                 Google::addFont($family, $style);
             }
             $families = str_replace($f[0], "'" . $family . "'", $families);

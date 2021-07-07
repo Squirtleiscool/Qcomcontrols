@@ -34,7 +34,6 @@ class BuilderComponentLayer extends AbstractBuilderComponent {
         "crop"                        => "visible",
         "inneralign"                  => "left",
         "parallax"                    => 0,
-        "adaptivefont"                => 0,
         "desktopportrait"             => 1,
         "desktoplandscape"            => 1,
         "tabletportrait"              => 1,
@@ -76,7 +75,7 @@ class BuilderComponentLayer extends AbstractBuilderComponent {
     public function add($component) {
         $this->item = $component;
 
-        foreach ($this->item->getLayerProperties() AS $k => $v) {
+        foreach ($this->item->getLayerProperties() as $k => $v) {
             if ($k == 'width' || $k == 'height' || $k == 'top' || $k == 'left') {
                 $this->defaultData['desktopportrait' . $k] = $v;
             } else {

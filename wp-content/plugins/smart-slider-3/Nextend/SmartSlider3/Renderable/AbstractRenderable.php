@@ -4,7 +4,6 @@ namespace Nextend\SmartSlider3\Renderable;
 
 use Nextend\Framework\Font\FontParser;
 use Nextend\Framework\Font\FontRenderer;
-use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Style\StyleParser;
 use Nextend\Framework\Style\StyleRenderer;
 use Nextend\SmartSlider3\Slider\FeatureManager;
@@ -15,6 +14,17 @@ abstract class AbstractRenderable {
 
     public $less = array();
     public $css = array();
+
+    public $cssDevice = array(
+        'all'              => array(),
+        'desktoplandscape' => array(),
+        'desktopportrait'  => array(),
+        'tabletlandscape'  => array(),
+        'tabletportrait'   => array(),
+        'mobilelandscape'  => array(),
+        'mobileportrait'   => array(),
+
+    );
 
     public $elementId = '';
 
@@ -42,10 +52,11 @@ abstract class AbstractRenderable {
         $this->css[] = $css;
     }
 
+    public function addDeviceCSS($device, $css) {
+        $this->cssDevice[$device][] = $css;
+    }
+
     public function getSelector() {
-        if (Platform::needStrongerCSS()) {
-            return 'div#' . $this->elementId . '.n2-ss-slider ';
-        }
 
         return 'div#' . $this->elementId . ' ';
     }

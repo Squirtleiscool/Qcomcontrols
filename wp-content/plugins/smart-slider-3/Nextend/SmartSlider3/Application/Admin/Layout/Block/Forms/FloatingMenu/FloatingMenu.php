@@ -17,7 +17,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\FloatingMenu
         <div class="n2_popover_content_exit"></div>
         <div class="n2_popover_content_inner n2_floating_menu__items">
             <?php
-            foreach ($this->getMenuItems() AS $menuItem) {
+            foreach ($this->getMenuItems() as $menuItem) {
                 $menuItem->display();
             }
             ?>

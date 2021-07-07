@@ -25,7 +25,7 @@ class Textarea extends AbstractField {
 
     protected function fetchElement() {
 
-        Js::addInline('new N2Classes.FormElementText("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementText("' . $this->fieldID . '");');
 
         return Html::tag('div', array(
             'class' => implode(' ', $this->classes),

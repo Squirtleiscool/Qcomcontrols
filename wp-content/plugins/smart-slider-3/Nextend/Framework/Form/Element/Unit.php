@@ -25,7 +25,7 @@ class Unit extends AbstractFieldHidden {
         $html .= Html::openTag('div', array(
             'class' => 'n2_field_unit__units'
         ));
-        foreach ($this->units AS $unit) {
+        foreach ($this->units as $unit) {
             $values[] = $unit;
 
             $html .= Html::tag('div', array(
@@ -47,7 +47,7 @@ class Unit extends AbstractFieldHidden {
 
         $html .= "</div>";
 
-        Js::addInline('new N2Classes.FormElementUnits("' . $this->fieldID . '", ' . json_encode($values) . ');');
+        Js::addInline('new _N2.FormElementUnits("' . $this->fieldID . '", ' . json_encode($values) . ');');
 
         return $html;
     }

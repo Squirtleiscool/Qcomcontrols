@@ -51,7 +51,7 @@ class ViewGeneratorConfigure extends AbstractViewSettings {
         $this->blockHeader = new BlockHeader($this);
         $this->blockHeader->setHeading(n2_('Generators'));
 
-        foreach (GeneratorFactory::getGenerators() AS $generatorGroup) {
+        foreach (GeneratorFactory::getGenerators() as $generatorGroup) {
             if ($generatorGroup->hasConfiguration()) {
                 $button = new MenuItem($generatorGroup->getLabel());
                 $button->setActive($this->generatorGroup === $generatorGroup);

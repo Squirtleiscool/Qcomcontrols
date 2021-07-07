@@ -11,7 +11,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\BlockBreadCru
     <?php
     $breadcrumbs = $this->getBreadCrumbs();
     $length      = count($breadcrumbs);
-    foreach ($breadcrumbs AS $i => $breadcrumb):
+    foreach ($breadcrumbs as $i => $breadcrumb):
         ?>
         <div class="n2_breadcrumbs__breadcrumb<?php echo $breadcrumb->isActive() ? ' n2_breadcrumbs__breadcrumb--active' : ''; ?>"><?php $breadcrumb->display(); ?></div>
         <?php

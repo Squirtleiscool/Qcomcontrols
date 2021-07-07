@@ -62,7 +62,13 @@ class LayerWindowSettingsSlide extends AbstractLayerWindowSettings {
         ));
 
         new FieldImage($general, 'slide-thumbnail', n2_('Thumbnail'), '', array(
-            'width' => 220
+            'width'         => 220,
+            'relatedFields' => array(
+                'layerslide-thumbnailAlt'
+            )
+        ));
+        new Text($general, 'slide-thumbnailAlt', n2_('Thumbnail alt') . ' [SEO]', '', array(
+            'style' => "width:133px;"
         ));
 
 
@@ -72,11 +78,17 @@ class LayerWindowSettingsSlide extends AbstractLayerWindowSettings {
 
             new Url($link, 'slide-href', n2_('Link'), '', array(
                 'relatedFields' => array(
-                    'layerslide-href-target'
+                    'layerslide-href-target',
+                    'layerslide-aria-label'
                 ),
                 'width'         => 248
             ));
             new LinkTarget($link, 'slide-href-target', n2_('Target window'));
+
+            new Text($link, 'slide-aria-label', n2_('ARIA label'), '', array(
+                'style'    => 'width:190px;',
+                'tipLabel' => n2_('ARIA label')
+            ));
         }
 
 

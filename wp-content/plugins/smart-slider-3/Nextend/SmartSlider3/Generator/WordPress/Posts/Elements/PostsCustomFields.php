@@ -15,7 +15,7 @@ class PostsCustomFields extends Select {
         $this->options['0'] = n2_('Nothing');
 
         $metaKeys = $this->generate_meta_keys();
-        foreach ($metaKeys AS $metaKey) {
+        foreach ($metaKeys as $metaKey) {
             $this->options[$metaKey] = $metaKey;
         }
     }

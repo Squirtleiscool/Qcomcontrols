@@ -297,7 +297,7 @@ abstract class AbstractField implements ContainedInterface {
                 'relatedFieldsOn'  => $this->relatedFields,
                 'relatedFieldsOff' => $this->relatedFieldsOff
             );
-            Js::addInline('new N2Classes.FormRelatedFields("' . $this->fieldID . '", ' . json_encode($options) . ');');
+            Js::addInline('new _N2.FormRelatedFields("' . $this->fieldID . '", ' . json_encode($options) . ');');
         }
     }
 

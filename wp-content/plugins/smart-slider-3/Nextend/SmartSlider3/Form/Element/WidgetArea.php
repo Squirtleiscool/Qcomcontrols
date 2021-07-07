@@ -27,7 +27,7 @@ class WidgetArea extends AbstractFieldHidden {
                 'class' => 'n2_field_widget_area__inner'
             )) . $areas . parent::fetchElement());
 
-        Js::addInline('new N2Classes.FormElementSliderWidgetArea("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementSliderWidgetArea("' . $this->fieldID . '");');
 
         return $html;
     }

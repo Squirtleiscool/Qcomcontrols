@@ -59,7 +59,7 @@ class BlockLayerWindow extends AbstractBlock {
         $this->settings[] = new LayerWindowSettingsRow($this);
         $this->settings[] = new LayerWindowSettingsColumn($this);
 
-        foreach (ItemFactory::getItems() AS $type => $item) {
+        foreach (ItemFactory::getItems() as $type => $item) {
             $this->settings[] = new LayerWindowSettingsItem($type, $item, $this, $this->renderableAdminSlider);
         }
 

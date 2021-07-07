@@ -521,7 +521,17 @@ trait TraitAdminUrl {
     public function getUrlSettingsClearCache() {
         return $this->createUrl(array(
             'settings/clearcache',
-        ), true);
+        ));
+    }
+
+    /**
+     *
+     * @return string
+     */
+    public function getAjaxUrlSettingsClearCache() {
+        return $this->createAjaxUrl(array(
+            'settings/clearcache',
+        ));
     }
 
     /**

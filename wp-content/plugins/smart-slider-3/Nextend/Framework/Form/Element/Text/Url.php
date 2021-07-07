@@ -6,14 +6,13 @@ namespace Nextend\Framework\Form\Element\Text;
 
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Form\Element\AbstractChooserText;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Pattern\MVCHelperTrait;
 use Nextend\Framework\Platform\Platform;
 
 class Url extends AbstractChooserText {
 
     protected function addScript() {
-        Js::addInline("new N2Classes.FormElementUrl('" . $this->fieldID . "', " . $this->getElementUrlParameters($this->getForm()) . " );");
+        Js::addInline("new _N2.FormElementUrl('" . $this->fieldID . "', " . $this->getElementUrlParameters($this->getForm()) . " );");
     }
 
     /**

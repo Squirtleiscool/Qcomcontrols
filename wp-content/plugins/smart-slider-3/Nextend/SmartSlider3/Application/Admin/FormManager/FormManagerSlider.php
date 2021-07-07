@@ -16,7 +16,6 @@ use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderAutoplay;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderControls;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderDeveloper;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderGeneral;
-use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderLoading;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderOptimize;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderSize;
 use Nextend\SmartSlider3\Application\Admin\FormManager\Slider\SliderSlides;
@@ -57,7 +56,7 @@ class FormManagerSlider extends AbstractFormManager {
 
         $this->slider = $slider;
 
-        $sliderParams = new SliderParams($slider['type'], $slider['params'], true);
+        $sliderParams = new SliderParams($slider['id'], $slider['type'], $slider['params'], true);
 
         $data              = $sliderParams->toArray();
         $data['title']     = $slider['title'];
@@ -124,8 +123,6 @@ class FormManagerSlider extends AbstractFormManager {
 
         new SliderOptimize($this->form);
 
-        new SliderLoading($this->form);
-
         new SliderSlides($this->form);
 
         new SliderDeveloper($this->form);
@@ -155,7 +152,7 @@ class FormManagerSlider extends AbstractFormManager {
             }
         }
 
-        JS::addInline('new N2Classes.SliderChangeType(' . json_encode(array(
+        JS::addInline('new _N2.SliderChangeType(' . json_encode(array(
                 'types'       => $types,
                 'currentType' => $sliderType,
                 'ajaxUrl'     => $this->form->createAjaxUrl(array(

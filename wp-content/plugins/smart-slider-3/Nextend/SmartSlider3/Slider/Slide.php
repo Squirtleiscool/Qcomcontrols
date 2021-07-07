@@ -7,6 +7,7 @@ namespace Nextend\SmartSlider3\Slider;
 use JRoute;
 use Nextend\Framework\Cast;
 use Nextend\Framework\Data\Data;
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\Image\Image;
 use Nextend\Framework\Image\ImageEdit;
 use Nextend\Framework\Misc\Str;
@@ -16,6 +17,7 @@ use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Plugin;
 use Nextend\Framework\Request\Request;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
+use Nextend\Framework\Sanitize;
 use Nextend\Framework\Translation\Translation;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Generator\Generator;
@@ -30,6 +32,8 @@ class Slide extends AbstractRenderableOwner {
      */
     protected $sliderObject;
     public $id = 0, $slider = 0, $publish_up = '1970-01-01 00:00:00', $publish_down = '1970-01-01 00:00:00', $published = 1, $first = 0, $slide = '', $ordering = 0, $generator_id = 0;
+
+    protected $frontendFirst = false;
 
     protected $title = '', $description = '', $thumbnail = '';
 
@@ -49,10 +53,12 @@ class Slide extends AbstractRenderableOwner {
 
     public $index = -1;
 
-    public $attributes = array(), $linkAttributes = array();
+    public $publicID = 0;
+
+    public $attributes = array(), $linkAttributes = array(), $showOnAttributes = array();
 
     public $containerAttributes = array(
-        'class' => 'n2-ss-layers-container n2-ow'
+        'class' => 'n2-ss-layers-container n2-ss-slide-limiter n2-ow'
     );
 
     public $classes = '', $style = '';
@@ -192,9 +198,26 @@ class Slide extends AbstractRenderableOwner {
         $this->index = $index;
     }
 
+    public function setPublicID($publicID) {
+        $this->publicID = $publicID;
+    }
+
+    /**
+     * @return int
+     */
+    public function getPublicID(): int {
+        return $this->publicID;
+    }
+
     public function setFirst() {
 
+        $this->frontendFirst = true;
+
         $this->attributes['data-first'] = '1';
+    }
+
+    public function getFrontendFirst() {
+        return $this->frontendFirst;
     }
 
     public function prepare() {
@@ -210,8 +233,9 @@ class Slide extends AbstractRenderableOwner {
 
         $this->addSlideLink();
 
-        $this->attributes['data-slide-duration'] = Cast::floatToString(max(0, $this->parameters->get('slide-duration', 0)) / 1000);
-        $this->attributes['data-id']             = $this->id;
+        $this->attributes['data-slide-duration']  = Cast::floatToString(max(0, $this->parameters->get('slide-duration', 0)) / 1000);
+        $this->attributes['data-id']              = $this->id;
+        $this->attributes['data-slide-public-id'] = $this->publicID;
 
         $this->classes .= ' n2-ss-slide-' . $this->id;
 
@@ -253,20 +277,27 @@ class Slide extends AbstractRenderableOwner {
                 $url = Link::parse($url, $this->linkAttributes);
                 $this->linkAttributes['data-href'] = $url;
             
+                $this->linkAttributes['tabindex'] = 0;
+                $this->linkAttributes['role']     = 'button';
+
+                $ariaLabel = $this->parameters->get('aria-label');
+                if (!empty($ariaLabel)) {
+                    $this->linkAttributes['aria-label'] = $ariaLabel;
+                }
 
                 if (empty($this->linkAttributes['onclick']) && !isset($this->linkAttributes['data-n2-lightbox'])) {
                     if (!empty($target) && $target != '_self') {
                         $this->linkAttributes['data-target'] = $target;
                     }
-                    $this->linkAttributes['data-n2click']       = "n2ss.openUrl(e);";
-                    $this->linkAttributes['data-n2middleclick'] = "n2ss.openUrl(e, '_blank');";
+                    $this->linkAttributes['data-n2click'] = "url";
                 }
             }
             if (!isset($this->linkAttributes['style'])) {
                 $this->linkAttributes['style'] = '';
             }
-            $this->linkAttributes['style'] .= 'cursor:pointer;';
-            $this->hasLink                 = true;
+            $this->linkAttributes['data-force-pointer'] = "";
+
+            $this->hasLink = true;
         }
     }
 
@@ -296,6 +327,10 @@ class Slide extends AbstractRenderableOwner {
         return $this->sliderObject;
     }
 
+    public function getAvailableDevices() {
+        return array_diff(array_keys($this->sliderObject->features->responsive->mediaQueries), array('all'));
+    }
+
     protected function renderHtml() {
         if (empty($this->html)) {
 
@@ -303,7 +338,8 @@ class Slide extends AbstractRenderableOwner {
 
             $mainContainer = new ComponentSlide($this, $this->slide);
 
-            $this->html = Html::tag('div', $this->containerAttributes, $mainContainer->render($this->sliderObject->isAdmin));
+            $this->html = '<div tabindex="-1" class="n2-ss-slide--focus" role="note">' . $this->getTitle() . '</div>';
+            $this->html .= Html::tag('div', $this->containerAttributes, $mainContainer->render($this->sliderObject->isAdmin));
         }
     }
 
@@ -326,15 +362,14 @@ class Slide extends AbstractRenderableOwner {
         if ($this->sliderObject->exposeSlideData['thumbnail']) {
             $thumbnail = $this->getThumbnailDynamic();
             if (!empty($thumbnail)) {
-                $this->attributes['data-thumbnail'] = $this->sliderObject->features->optimize->optimizeThumbnail($thumbnail);
-            }
-        }
 
-        if ($this->sliderObject->exposeSlideData['thumbnailType']) {
-            $thumbnailType = $this->parameters->get('thumbnailType', 'default');
+                $attributes = Html::addExcludeLazyLoadAttributes(array(
+                    'loading' => 'lazy',
+                    'style'   => '',
+                    'class'   => 'n2-ss-slide-thumbnail'
+                ));
 
-            if ($thumbnailType != 'default') {
-                $this->attributes['data-thumbnail-type'] = $thumbnailType;
+                $this->html .= Html::image($this->sliderObject->features->optimize->optimizeThumbnail($thumbnail), Sanitize::esc_attr($this->getThumbnailAltDynamic()), $attributes);
             }
         }
 
@@ -344,15 +379,17 @@ class Slide extends AbstractRenderableOwner {
 
         if (!$this->sliderObject->isAdmin || !$this->underEdit) {
             if (!$this->isVisibleDesktopPortrait()) {
-                $this->attributes['data-hide-desktopportrait'] = 1;
+                $this->showOnAttributes['data-hide-desktopportrait'] = 1;
             }
             if (!$this->isVisibleTabletPortrait()) {
-                $this->attributes['data-hide-tabletportrait'] = 1;
+                $this->showOnAttributes['data-hide-tabletportrait'] = 1;
             }
             if (!$this->isVisibleMobilePortrait()) {
-                $this->attributes['data-hide-mobileportrait'] = 1;
+                $this->showOnAttributes['data-hide-mobileportrait'] = 1;
             }
         }
+
+        $this->attributes += $this->showOnAttributes;
     }
 
     public function isVisibleDesktopPortrait() {
@@ -388,8 +425,7 @@ class Slide extends AbstractRenderableOwner {
         $mainContainer = new ComponentSlide($this, $this->slide);
 
         $attributes = array(
-            'class'             => 'n2-ss-static-slide n2-ow' . $this->classes,
-            'data-csstextalign' => 'center'
+            'class' => 'n2-ss-static-slide n2-ow' . $this->classes
         );
 
         if (!$this->sliderObject->isAdmin || !$this->underEdit) {
@@ -524,7 +560,7 @@ class Slide extends AbstractRenderableOwner {
     }
 
     private function _cleanhtml($s) {
-        return strip_tags($s, '<p><a><b><br><br/><i>');
+        return strip_tags($s, '<p><a><b><br><i>');
     }
 
     private function _removehtml($s) {
@@ -582,7 +618,7 @@ class Slide extends AbstractRenderableOwner {
 
     public function getTitle($isAdmin = false) {
 
-        return $this->fill($this->title);
+        return Sanitize::esc_html($this->fill($this->title));
     }
 
     public function getDescription() {
@@ -602,12 +638,17 @@ class Slide extends AbstractRenderableOwner {
     }
 
     public function getThumbnail() {
+
+        return ResourceTranslator::toUrl($this->getThumbnailRaw());
+    }
+
+    public function getThumbnailRaw() {
         $image = $this->thumbnail;
         if (empty($image)) {
-            $image = $this->parameters->get('backgroundImage');
+            return $this->getBackgroundImage();
         }
 
-        return ResourceTranslator::toUrl($this->fill($image));
+        return $this->fill($image);
     }
 
     public function getThumbnailDynamic() {
@@ -617,6 +658,15 @@ class Slide extends AbstractRenderableOwner {
         }
 
         return $this->fill($image);
+    }
+
+    public function getThumbnailAltDynamic() {
+        $alt = $this->fill($this->parameters->get('thumbnailAlt'));
+        if (empty($alt)) {
+            $alt = $this->getTitle();
+        }
+
+        return $alt;
     }
 
     public function getLightboxImage() {
@@ -746,6 +796,10 @@ class Slide extends AbstractRenderableOwner {
         $this->sliderObject->addCSS($css);
     }
 
+    public function addDeviceCSS($device, $css) {
+        $this->sliderObject->addDeviceCSS($device, $css);
+    }
+
     public function addFont($font, $mode, $pre = null) {
         return $this->sliderObject->addFont($font, $mode, $pre);
     }
@@ -766,54 +820,75 @@ class Slide extends AbstractRenderableOwner {
         return $this->sliderObject->features->lazyLoad->isEnabled;
     }
 
-    public function optimizeImage($image) {
-        $image = $this->fill($image);
+    public function optimizeImageWebP($src) {
 
-        $lazyLoad = $this->sliderObject->features->lazyLoad;
+        return array();
+    }
 
-        $imagePath = ResourceTranslator::toPath($image);
-        if (isset($imagePath[0]) && $imagePath[0] == '/' && $imagePath[1] != '/' && $lazyLoad->layerImageSizeBase64 && $lazyLoad->layerImageSizeBase64Size && filesize($imagePath) < $lazyLoad->layerImageSizeBase64Size) {
-            $extension = pathinfo($image, PATHINFO_EXTENSION);
-            if ($extension != 'svg') {
-                return array(
-                    'src' => ImageEdit::base64($imagePath, $image)
-                );
-            } else {
-                return array(
-                    'src' => Image::SVGToBase64($image)
-                );
+    public function renderImage($item, $src, $attributes = array(), $pictureAttributes = array()) {
+
+        /**
+         * @see https://bugs.chromium.org/p/chromium/issues/detail?id=1181291
+         */
+        if (!$this->frontendFirst) {
+            $attributes['loading'] = 'lazy';
+        }
+
+        $imageUrl = ResourceTranslator::toUrl($src);
+
+        FastImageSize::initAttributes($src, $attributes);
+
+        $attributes = Html::addExcludeLazyLoadAttributes($attributes);
+
+        $attributes['src'] = $imageUrl;
+        $this->addImage($imageUrl);
+
+        return Html::tag('img', $attributes);
+    }
+
+    public function getThumbnailType() {
+        return $this->parameters->get('thumbnailType', 'default');
+    }
+
+    public function renderThumbnailImage($width, $height, $attributes = array()) {
+
+        $src = $this->getThumbnailRaw();
+
+        if (empty($src)) {
+            return '<img src="data:," alt style="visibility:hidden;">';
+        }
+
+        $attributes['src']     = ResourceTranslator::toUrl($src);
+        $originalThumbnailSize = FastImageSize::getSize($src);
+        if ($originalThumbnailSize) {
+            $attributes['width']  = $originalThumbnailSize['width'];
+            $attributes['height'] = $originalThumbnailSize['height'];
+        }
+        $attributes['loading'] = 'lazy';
+
+        $attributes = Html::addExcludeLazyLoadAttributes($attributes);
+
+        $sources = array();
+
+        $imagePath = ResourceTranslator::toPath($src);
+        if (isset($imagePath[0])) {
+            $optimizeThumbnail = $this->sliderObject->params->get('optimize-thumbnail-scale', 0);
+
+            if ($optimizeThumbnail) {
+                $optimizedThumbnailUrl  = $this->sliderObject->features->optimize->optimizeThumbnail($attributes['src']);
+                $attributes['src']      = $optimizedThumbnailUrl;
+                $optimizedThumbnailSize = FastImageSize::getSize(ResourceTranslator::urlToResource($optimizedThumbnailUrl));
+                if ($optimizedThumbnailSize) {
+                    $attributes['width']  = $optimizedThumbnailSize['width'];
+                    $attributes['height'] = $optimizedThumbnailSize['height'];
+                }
             }
+
         }
 
-        $fixedImageUrl = ResourceTranslator::toUrl($image);
 
-        if (!$lazyLoad->layerImageOptimize || !$this->parameters->get('image-optimize', 1)) {
-            $this->addImage($fixedImageUrl);
+        $sources[] = Html::tag('img', $attributes, false);
 
-            return array(
-                'src' => $fixedImageUrl
-            );
-        }
-
-        $quality = intval($this->sliderObject->params->get('optimize-quality', 70));
-
-        $tablet = ImageEdit::scaleImage('image', $image, $lazyLoad->layerImageTablet, false, $quality);
-        $mobile = ImageEdit::scaleImage('image', $image, $lazyLoad->layerImageMobile, false, $quality);
-
-        if ($image == $tablet && $image == $mobile) {
-            $this->addImage($fixedImageUrl);
-
-            return array(
-                'src' => $fixedImageUrl
-            );
-        }
-
-        return array(
-            'src'          => ImageEdit::base64Transparent(),
-            'data-desktop' => $fixedImageUrl,
-            'data-tablet'  => ResourceTranslator::toUrl($tablet),
-            'data-mobile'  => ResourceTranslator::toUrl($mobile),
-            'data-device'  => '1'
-        );
+        return HTML::tag('picture', array(), implode('', $sources));
     }
 }

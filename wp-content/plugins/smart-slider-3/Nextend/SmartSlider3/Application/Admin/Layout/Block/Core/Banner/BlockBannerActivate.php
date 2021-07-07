@@ -15,7 +15,7 @@ class BlockBannerActivate extends BlockBanner {
         $this->setDescription(n2_('Activation is required to unlock all features!') . ' ' . n2_('Register Smart Slider 3 Pro on this domain to enable auto update, slider templates and slide library.'));
         $this->setButton(array(
             'title'   => n2_('Activate'),
-            'onclick' => 'N2Classes.License.get().startActivation();return false;'
+            'onclick' => '_N2.License.get().startActivation();return false;'
         ));
     }
 }

@@ -22,7 +22,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\LayerWindow;
 
         <div class="n2_ss_layer_window__tab_buttons">
             <?php
-            foreach ($this->getTabs() AS $tab):
+            foreach ($this->getTabs() as $tab):
                 ?>
                 <div class="n2_ss_layer_window__tab_button" data-related-tab="<?php echo $tab->getName(); ?>">
                     <div class="n2_ss_layer_window__tab_button_icon">
@@ -41,7 +41,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\LayerWindow;
 
         <div class="n2_ss_layer_window__tab_container n2_container_scrollable">
             <?php
-            foreach ($this->getTabs() AS $tab):
+            foreach ($this->getTabs() as $tab):
                 ?>
                 <div class="n2_ss_layer_window__tab" data-tab="<?php echo $tab->getName(); ?>">
                     <?php

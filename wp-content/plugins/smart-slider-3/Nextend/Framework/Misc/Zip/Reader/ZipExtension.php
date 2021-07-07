@@ -3,12 +3,13 @@
 namespace Nextend\Framework\Misc\Zip\Reader;
 
 use Nextend\Framework\Misc\Zip\ReaderInterface;
+use ZipArchive;
 
 class ZipExtension implements ReaderInterface {
 
     public function read($path) {
 
-        $zip = new \ZipArchive();
+        $zip = new ZipArchive();
 
         if (!$zip->open($path)) {
             return array();

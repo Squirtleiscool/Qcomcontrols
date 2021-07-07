@@ -217,7 +217,7 @@ class ControllerGenerator extends AbstractControllerAdmin {
                 } else {
                     $message = 'Something wrong with the credentials';
                 }
-                echo '<script>window.opener.N2Classes.Notification.error("' . htmlspecialchars($message) . '");self.close();</script>';
+                echo '<script>window.opener._N2.Notification.error("' . htmlspecialchars($message) . '");self.close();</script>';
             }
             PageFlow::exitApplication();
         }

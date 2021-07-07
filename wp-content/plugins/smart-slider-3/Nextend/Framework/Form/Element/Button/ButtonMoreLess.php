@@ -24,7 +24,7 @@ class ButtonMoreLess extends Button {
             $options['relatedFields'] = $this->relatedFields;
         }
 
-        Js::addInline('new N2Classes.FormElementButtonMoreLess("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementButtonMoreLess("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
         return parent::fetchElement();
     }

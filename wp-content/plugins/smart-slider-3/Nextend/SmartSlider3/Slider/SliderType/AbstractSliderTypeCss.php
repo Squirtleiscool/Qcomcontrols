@@ -12,6 +12,7 @@ use Nextend\Framework\Parser\Font;
 use Nextend\Framework\Parser\Style;
 use Nextend\Framework\Platform\Platform;
 use Nextend\SmartSlider3\Application\Frontend\ApplicationTypeFrontend;
+use Nextend\SmartSlider3\Slider\Feature\Responsive;
 use Nextend\SmartSlider3\Slider\Slider;
 
 abstract class AbstractSliderTypeCss {
@@ -25,6 +26,8 @@ abstract class AbstractSliderTypeCss {
 
     protected $context = array();
 
+    public $base = array();
+
     /**
      * AbstractSliderTypeCss constructor.
      *
@@ -37,7 +40,7 @@ abstract class AbstractSliderTypeCss {
         $params = $slider->params;
 
         if (!Platform::needStrongerCSS()) {
-            Css::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . '/dist/smartslider.min.css', 'smartslider');
+            Css::addStaticGroupPreload(ApplicationTypeFrontend::getAssetsPath() . '/dist/smartslider.min.css', 'smartslider');
         }
 
         $width  = intval($params->get('width', 900));
@@ -60,10 +63,6 @@ abstract class AbstractSliderTypeCss {
             $this->context['hasPerspective'] = 1;
             $this->context['perspective']    = $perspective . 'px';
         }
-
-        if ($params->get('imageload', 0)) {
-            $this->slider->addLess(ApplicationTypeFrontend::getAssetsPath() . '/less/spinner.n2less', $this->context);
-        }
     }
 
     public function getCSS() {
@@ -82,12 +81,30 @@ abstract class AbstractSliderTypeCss {
         }
         $css .= implode('', $this->slider->css);
 
+        $mediaQueries = $this->slider->features->responsive->mediaQueries;
+
+        foreach ($this->slider->cssDevice as $device => $styles) {
+            if (!empty($styles) && isset($mediaQueries[$device])) {
+                if (empty($mediaQueries[$device])) {
+                    $css .= implode('', $styles);
+                } else {
+                    if (!$this->slider->isAdmin) {
+                        $css .= '@media ' . implode(',', $mediaQueries[$device]) . '{' . implode('', $styles) . '}';
+                    } else {
+                        $css .= str_replace('div#' . $this->slider->elementId, 'body[data-device="' . Responsive::$translation[$device] . '"] div#' . $this->slider->elementId, implode('', $styles));
+                    }
+                }
+            }
+        }
+
         if (Platform::needStrongerCSS()) {
             $css = preg_replace(array(
-                '/' . preg_quote('#' . $this->slider->elementId) . '/',
-                '/\.n2-ss-align([\. \{,])/',
-                '/(?<!' . preg_quote('#' . $this->slider->elementId) . ')\.n2-ss-slider([\. \{,])/'
+                '/' . preg_quote('#' . $this->slider->elementId) . '([\#\. \{,\[])/',
+                '/' . preg_quote('#' . $this->slider->elementId) . '\.n2-ss-slider([\#\. \{,\[])/',
+                '/\.n2-ss-align([\#\. \{,\[])/',
+                '/\.n2-ss-slider([\#\. \{,\[])/'
             ), array(
+                '#' . $this->slider->elementId . '#' . $this->slider->elementId . '#' . $this->slider->elementId . '$1',
                 '#' . $this->slider->elementId . '#' . $this->slider->elementId . '$1',
                 '#' . $this->slider->elementId . '-align#' . $this->slider->elementId . '-align$1',
                 '#' . $this->slider->elementId . '#' . $this->slider->elementId . '$1'

@@ -20,13 +20,14 @@ class Color extends Text {
         }
 
         $html = parent::fetchElement();
-        Js::addInline('new N2Classes.FormElementColor("' . $this->fieldID . '", ' . intval($this->alpha) . ');');
+        Js::addInline('new _N2.FormElementColor("' . $this->fieldID . '", ' . intval($this->alpha) . ');');
 
         return $html;
     }
 
     protected function pre() {
-        return '<div class="n2-sp-replacer"><div class="n2-sp-preview" style="background-color: rgb(62, 62, 62);"></div></div>';
+
+        return '<div class="n2-field-color-preview n2_checker_box"><div class="n2-field-color-preview-inner"></div></div>';
     }
 
     protected function post() {

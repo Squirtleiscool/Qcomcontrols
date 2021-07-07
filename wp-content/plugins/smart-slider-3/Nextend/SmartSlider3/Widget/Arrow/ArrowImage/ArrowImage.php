@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Widget\Arrow\ArrowImage;
 
 
-use Nextend\Framework\Form\Element\FloatToPercent;
 use Nextend\Framework\Form\Element\Grouping;
 use Nextend\Framework\Form\Element\OnOff;
 use Nextend\Framework\Form\Element\Radio\ImageListFromFolder;
@@ -20,9 +19,9 @@ use Nextend\SmartSlider3\Widget\Arrow\AbstractWidgetArrow;
 class ArrowImage extends AbstractWidgetArrow {
 
     protected $defaults = array(
-        'widget-arrow-responsive-desktop'       => 1,
-        'widget-arrow-responsive-tablet'        => 1,
-        'widget-arrow-responsive-mobile'        => 0.5,
+        'widget-arrow-desktop-image-width'      => 32,
+        'widget-arrow-tablet-image-width'       => 32,
+        'widget-arrow-mobile-image-width'       => 16,
         'widget-arrow-previous-image'           => '',
         'widget-arrow-previous'                 => '$ss$/plugins/widgetarrow/image/image/previous/normal.svg',
         'widget-arrow-previous-color'           => 'ffffffcc',

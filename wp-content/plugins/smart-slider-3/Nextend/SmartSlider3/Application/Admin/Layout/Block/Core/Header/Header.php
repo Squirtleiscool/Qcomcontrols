@@ -45,7 +45,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Header;
         ?>
         <div class="n2_header__menu">
             <?php
-            foreach ($this->getMenuItems() AS $menuItem) {
+            foreach ($this->getMenuItems() as $menuItem) {
                 $menuItem->display();
             }
             ?>

@@ -50,7 +50,7 @@ class BlockBreadCrumb extends AbstractBlock {
 
     private function hasActiveItem() {
 
-        foreach ($this->breadCrumbs AS $breadCrumb) {
+        foreach ($this->breadCrumbs as $breadCrumb) {
             if ($breadCrumb->isActive()) {
                 return true;
             }

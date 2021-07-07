@@ -16,7 +16,7 @@ abstract class AbstractGeneratorLoader {
 
             $dir = dirname($reflectionClass->getFileName());
 
-            foreach (Filesystem::folders($dir) AS $name) {
+            foreach (Filesystem::folders($dir) as $name) {
                 $className = '\\' . $namespace . '\\' . $name . '\\GeneratorGroup' . $name;
 
                 if (class_exists($className)) {

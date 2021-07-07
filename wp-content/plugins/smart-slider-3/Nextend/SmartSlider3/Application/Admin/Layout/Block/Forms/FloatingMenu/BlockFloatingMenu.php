@@ -124,4 +124,4 @@ class BlockFloatingMenu extends AbstractBlock {
     }
 }
 
-Js::addInline('$(".n2_floating_menu").nextendPopover();');
+Js::addInline('_N2.r(\'$\', function () {_N2.$(".n2_floating_menu").nextendPopover();});');

@@ -98,13 +98,13 @@ class Generator {
     public function getSource() {
         $generatorGroup = $this->generatorModel->getGeneratorGroup($this->currentGenerator['group']);
         if (!$generatorGroup) {
-            Notification::notice(n2_('Generator group not found'). ': ' . $this->currentGenerator['group']);
+            Notification::notice(n2_('Generator group not found') . ': ' . $this->currentGenerator['group']);
 
             return false;
         }
         $source = $generatorGroup->getSource($this->currentGenerator['type']);
         if (!$source) {
-            Notification::notice(n2_('Generator type not found'). ': ' . $this->currentGenerator['type']);
+            Notification::notice(n2_('Generator type not found') . ': ' . $this->currentGenerator['type']);
 
             return false;
         }

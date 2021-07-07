@@ -16,6 +16,6 @@ class Family extends Text {
         parent::addScript();
 
         $families = FontSettings::getPresetFamilies();
-        Js::addInline('N2Classes.AutocompleteSimple("' . $this->fieldID . '", ' . json_encode($families) . ');');
+        Js::addInline('_N2.AutocompleteSimple("' . $this->fieldID . '", ' . json_encode($families) . ');');
     }
 }

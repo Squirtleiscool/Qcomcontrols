@@ -12,6 +12,8 @@ class AssetInjector {
 
     use SingletonTrait;
 
+    private static $cssComment = '<!--n2css-->';
+
     protected $js = '';
     protected $css = '';
 
@@ -44,9 +46,9 @@ class AssetInjector {
             $this->finalizeCssJs();
 
             if (!empty($this->css)) {
-                if (strpos($buffer, '<!--n2css-->') !== false) {
-                    $buffer = str_replace('<!--n2css-->', $this->css, $buffer);
-
+                $n2cssPos = strpos($buffer, self::$cssComment);
+                if ($n2cssPos !== false) {
+                    $buffer    = substr_replace($buffer, $this->css, $n2cssPos, strlen(self::$cssComment));
                     $this->css = '';
                 } else {
                     $parts = preg_split('/<\/head[\s]*>/i', $buffer, 2);
@@ -62,55 +64,43 @@ class AssetInjector {
                             'tokenizeHead'
                         ), $head);
 
-
                         $head = preg_replace_callback('/<noscript>.*?<\/noscript>/s', array(
                             $this,
                             'tokenizeHead'
                         ), $head);
 
-                        /**
-                         * Find the first <script> tag with src attribute
-                         */
-                        $pattern = '/<script[^>]+src=[\'"][^>"\']*[\'"]/si';
-                        if (preg_match($pattern, $head, $matches)) {
-
-                            $splitBy = $matches[0];
-
-                            $headParts = preg_split($pattern, $head, 2);
+                        $lastStylesheetPosition = strrpos($head, "<link rel='stylesheet'");
+                        if ($lastStylesheetPosition === false) {
+                            $lastStylesheetPosition = strrpos($head, "<link rel=\"stylesheet\"");
+                            if ($lastStylesheetPosition === false) {
+                                $lastStylesheetPosition = strrpos($head, "<link");
+                            }
+                        }
+                        if ($lastStylesheetPosition !== false) {
 
                             /**
-                             * Find the last stylesheet before the first script
+                             * Find the end of the tag <link tag
                              */
-                            if (preg_match_all('/<link[^>]*rel=[\'"]stylesheet[\'"][^>]*>/si', $headParts[0], $matches, PREG_SET_ORDER)) {
+                            $lastStylesheetPositionEnd = strpos($head, ">", $lastStylesheetPosition);
+                            if ($lastStylesheetPositionEnd !== false) {
+
                                 /**
-                                 * If there is a match we insert our stylesheet after that.
+                                 * Insert CSS after the ending >
                                  */
-                                $match          = array_pop($matches);
-                                $lastStylesheet = $match[0];
-
-                                $headParts[0] = str_replace($lastStylesheet, $lastStylesheet . $this->css, $headParts[0]);
-
+                                $head      = substr_replace($head, $this->css, $lastStylesheetPositionEnd + 1, 0);
                                 $this->css = '';
-                            } else {
+
                                 /**
-                                 * No stylesheet found, so  we insert our stylesheet before the first <script>.
+                                 * Restore HTML comments
                                  */
-                                $headParts[0] .= $this->css;
+                                $head = preg_replace_callback('/<!--TOKEN([0-9]+)-->/', array(
+                                    $this,
+                                    'restoreHeadTokens'
+                                ), $head);
 
-                                $this->css = '';
+                                $buffer = $head . '</head>' . $body;
                             }
 
-                            $head = implode($splitBy, $headParts);
-
-                            /**
-                             * Restore HTML comments
-                             */
-                            $head = preg_replace_callback('/<!--TOKEN([0-9]+)-->/', array(
-                                $this,
-                                'restoreHeadTokens'
-                            ), $head);
-
-                            $buffer = $head . '</head>' . $body;
                         }
                     }
                 }
@@ -156,7 +146,7 @@ class AssetInjector {
 
     public function addInjectCSSComment() {
 
-        remove_action('wp_print_scripts', array(
+        add_action('wp_print_scripts', array(
             $this,
             'injectCSSComment'
         ));
@@ -164,7 +154,7 @@ class AssetInjector {
 
     public function removeInjectCSSComment() {
 
-        add_action('wp_print_scripts', array(
+        remove_action('wp_print_scripts', array(
             $this,
             'injectCSSComment'
         ));
@@ -173,7 +163,7 @@ class AssetInjector {
     public function injectCSSComment() {
         static $once;
         if (!$once) {
-            echo "<!--n2css-->";
+            echo self::$cssComment;
             $once = true;
         }
     }

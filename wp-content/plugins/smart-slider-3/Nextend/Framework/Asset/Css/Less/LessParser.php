@@ -396,7 +396,7 @@ class LessParser {
         $ss          = $this->seek();
 
         while (true) {
-            $whiteBefore = isset($this->buffer[$this->count - 1]) && ctype_space($this->buffer[$this->count - 1]);
+            $whiteBefore = isset($this->buffer[$this->count - 1]) && preg_match('/^\\s+$/', $this->buffer[$this->count - 1]);
 
             // If there is whitespace before the operator, then we require
             // whitespace after the operator for it to be an expression
@@ -413,7 +413,7 @@ class LessParser {
                 }
 
 
-                $whiteAfter = isset($this->buffer[$this->count - 1]) && ctype_space($this->buffer[$this->count - 1]);
+                $whiteAfter = isset($this->buffer[$this->count - 1]) && preg_match('/^\\s+$/', $this->buffer[$this->count - 1]);
 
                 if (!$this->value($rhs)) break;
 
@@ -821,7 +821,7 @@ class LessParser {
         // speed shortcut
         if (isset($this->buffer[$this->count])) {
             $char = $this->buffer[$this->count];
-            if (!ctype_digit($char) && $char != ".") return false;
+            if (!preg_match('/^[0-9]+$/', $char) && $char != ".") return false;
         }
 
         if ($this->match('([0-9]+(?:\.[0-9]*)?|\.[0-9]+)([%a-zA-Z]+)?', $m)) {

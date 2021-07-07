@@ -53,7 +53,7 @@ abstract class SubFormIcon extends AbstractFieldHidden {
         $currentValue = $this->getValue();
 
         Js::addInline('
-            new N2Classes.FormElementSubformIcon(
+            new _N2.FormElementSubformIcon(
                "' . $this->fieldID . '",
               "' . $this->ajaxUrl . '",
                "' . $this->containerSubform->getId() . '",
@@ -63,7 +63,7 @@ abstract class SubFormIcon extends AbstractFieldHidden {
         $html = Html::openTag('div', array(
             'class' => 'n2_field_subform_icon'
         ));
-        foreach ($this->options AS $value => $option) {
+        foreach ($this->options as $value => $option) {
             $html .= Html::tag('div', array(
                 'class'      => 'n2_field_subform_icon__option' . ($value == $currentValue ? ' n2_field_subform_icon__option--selected' : ''),
                 'data-value' => $value

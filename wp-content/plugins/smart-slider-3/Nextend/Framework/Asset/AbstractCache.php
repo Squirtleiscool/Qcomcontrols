@@ -27,10 +27,10 @@ abstract class AbstractCache {
 
     protected function getHash() {
         $hash = '';
-        foreach ($this->files AS $file) {
+        foreach ($this->files as $file) {
             $hash .= $this->makeFileHash($file);
         }
-        foreach ($this->codes AS $code) {
+        foreach ($this->codes as $code) {
             $hash .= $code;
         }
 
@@ -39,10 +39,10 @@ abstract class AbstractCache {
 
     protected function getCacheFileName() {
         $hash = '';
-        foreach ($this->files AS $file) {
+        foreach ($this->files as $file) {
             $hash .= $this->makeFileHash($file);
         }
-        foreach ($this->codes AS $code) {
+        foreach ($this->codes as $code) {
             $hash .= $code;
         }
 
@@ -56,11 +56,11 @@ abstract class AbstractCache {
      */
     public function getCachedContent($cache) {
         $fileContents = '';
-        foreach ($this->files AS $file) {
+        foreach ($this->files as $file) {
             $fileContents .= $this->parseFile($cache, Filesystem::readFile($file), $file) . "\n";
         }
 
-        foreach ($this->codes AS $code) {
+        foreach ($this->codes as $code) {
             $fileContents .= $code . "\n";
         }
 

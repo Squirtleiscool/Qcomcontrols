@@ -34,7 +34,7 @@ class Cache extends \Nextend\Framework\Asset\Css\Cache {
 
         $fileContents = '';
 
-        foreach ($this->files AS $parameters) {
+        foreach ($this->files as $parameters) {
             $compiler = new LessCompiler();
 
             if (!empty($parameters['importDir'])) {

@@ -9,11 +9,6 @@ class PlacementAbsolute extends AbstractPlacement {
     public function attributes(&$attributes) {
         $data = $this->component->data;
 
-        $attributes['style'] .= 'left:' . $data->get('desktopportraitleft', 0) . 'px;';
-        $attributes['style'] .= 'top:' . $data->get('desktopportraittop', 0) . 'px;';
-        $attributes['style'] .= 'width:' . self::WHUnit($data->get('desktopportraitwidth')) . ';';
-        $attributes['style'] .= 'height:' . self::WHUnit($data->get('desktopportraitheight')) . ';';
-
         $attributes['data-pm'] = 'absolute';
 
         $this->component->createProperty('responsiveposition', 1);
@@ -34,18 +29,18 @@ class PlacementAbsolute extends AbstractPlacement {
         $this->component->createDeviceProperty('parentalign');
         $this->component->createDeviceProperty('parentvalign');
 
-        //$attributes['style'] .= 'z-index:' . $this->index . ';';
+        $isLegacyFontScale = $this->component->getOwner()
+                                             ->getSlider()
+                                             ->isLegacyFontScale();
+        if ($isLegacyFontScale) {
+            $adaptiveFont = intval($data->get('adaptivefont', 1));
+            if ($adaptiveFont === 0) {
+                $attributes['data-adaptivefont'] = 0;
+            }
+        }
     }
 
     public function adminAttributes(&$attributes) {
 
-    }
-
-    private static function WHUnit($value) {
-        if ($value == 'auto' || substr($value, -1) == '%') {
-            return $value;
-        }
-
-        return $value . 'px';
     }
 }

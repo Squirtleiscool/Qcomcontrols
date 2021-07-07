@@ -4,7 +4,6 @@
 namespace Nextend\Framework\Asset\Js;
 
 use Nextend\Framework\Asset\AbstractAsset;
-use Nextend\Framework\Cache\Combine;
 use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Plugin;
@@ -30,7 +29,7 @@ class Asset extends AbstractAsset {
             $output .= Html::script(self::minify_js($globalInline . "\n"));
         }
 
-        $async            = !!Settings::get('async', '0') && !Platform::isAdmin();
+        $async            = !Platform::isAdmin();
         $scriptAttributes = array();
         if ($async) {
             $scriptAttributes['defer'] = 1;
@@ -41,28 +40,13 @@ class Asset extends AbstractAsset {
             $output .= Html::scriptFile($this->filterSrc($url), $scriptAttributes) . "\n";
         }
 
-        if (!Platform::isAdmin() && Settings::get('combine-js', '0')) {
-            $jsCombined = new Combine('js', false);
-            foreach ($this->getFiles() as $file) {
-                $jsCombined->add($file);
-            }
-            $combinedFile = $jsCombined->make();
-
-            if (substr($combinedFile, 0, 2) == '//') {
-                $output .= Html::scriptFile($this->filterSrc($combinedFile), $scriptAttributes) . "\n";
+        foreach ($this->getFiles() as $file) {
+            if (substr($file, 0, 2) == '//') {
+                $output .= Html::scriptFile($this->filterSrc($file), $scriptAttributes) . "\n";
             } else {
-                $output .= Html::scriptFile($this->filterSrc(Url::pathToUri($combinedFile, $needProtocol)), $scriptAttributes) . "\n";
-            }
-        } else {
-            foreach ($this->getFiles() as $file) {
-                if (substr($file, 0, 2) == '//') {
-                    $output .= Html::scriptFile($this->filterSrc($file), $scriptAttributes) . "\n";
-                } else {
-                    $output .= Html::scriptFile($this->filterSrc(Url::pathToUri($file, $needProtocol) . '?ver=' . SmartSlider3Info::$revisionShort), $scriptAttributes) . "\n";
-                }
+                $output .= Html::scriptFile($this->filterSrc(Url::pathToUri($file, $needProtocol) . '?ver=' . SmartSlider3Info::$revisionShort), $scriptAttributes) . "\n";
             }
         }
-
 
         $output .= Html::script(self::minify_js(Localization::toJS() . "\n" . $this->getInlineScripts() . "\n"));
 
@@ -111,7 +95,7 @@ class Asset extends AbstractAsset {
         if (empty($script)) {
             return "";
         }
-        $inline = "N2R('documentReady', function($){\n";
+        $inline = "_N2.r('documentReady', function(){\n";
         $inline .= $script;
         $inline .= "});\n";
 

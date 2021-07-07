@@ -523,8 +523,8 @@ class PostsPosts extends AbstractGenerator {
              * We used 'Y-m-d H:i:s' date format, so we can get the hour, minute and second for custom date variables.
              * but we need to set the date and modified variables back to the WordPress default date_format.
              */
-            $record['date']          = get_the_date();
-            $record['modified']      = get_the_modified_date();
+            $record['date']     = get_the_date();
+            $record['modified'] = get_the_modified_date();
 
             if (!empty($remove_shortcode)) {
                 foreach ($remove_shortcode as $variable) {

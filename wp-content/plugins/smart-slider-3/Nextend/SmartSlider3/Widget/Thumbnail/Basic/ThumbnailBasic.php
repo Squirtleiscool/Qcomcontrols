@@ -20,33 +20,31 @@ class ThumbnailBasic extends AbstractWidget {
     protected $key = 'widget-thumbnail-';
 
     protected $defaults = array(
-        'widget-thumbnail-minimum-thumbnail-count' => 2,
-        'widget-thumbnail-position-mode'           => 'simple',
-        'widget-thumbnail-position-area'           => 12,
-        'widget-thumbnail-action'                  => 'click',
-        'widget-thumbnail-style-bar'               => '{"data":[{"backgroundcolor":"242424ff","padding":"3|*|3|*|3|*|3|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"0","extra":""}]}',
-        'widget-thumbnail-style-slides'            => '{"data":[{"backgroundcolor":"00000000","padding":"0|*|0|*|0|*|0|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|ffffff00","borderradius":"0","opacity":"40","extra":"margin: 3px;\ntransition: all 0.4s;\nbackground-size: cover;"},{"border":"0|*|solid|*|ffffffcc","opacity":"100","extra":""}]}',
-        'widget-thumbnail-arrow'                   => 1,
-        'widget-thumbnail-arrow-image'             => '',
-        'widget-thumbnail-arrow-width'             => 26,
-        'widget-thumbnail-arrow-offset'            => 0,
-        'widget-thumbnail-arrow-prev-alt'          => 'previous arrow',
-        'widget-thumbnail-arrow-next-alt'          => 'next arrow',
-        'widget-thumbnail-title-style'             => '{"data":[{"backgroundcolor":"000000ab","padding":"3|*|10|*|3|*|10|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"0","extra":"bottom: 0;\nleft: 0;"}]}',
-        'widget-thumbnail-title'                   => 0,
-        'widget-thumbnail-title-font'              => '{"data":[{"color":"ffffffff","size":"12||px","tshadow":"0|*|0|*|0|*|000000ab","afont":"Montserrat","lineheight":"1.2","bold":0,"italic":0,"underline":0,"align":"left"},{"color":"fc2828ff","afont":"google(@import url(http://fonts.googleapis.com/css?family=Raleway);),Arial","size":"25||px"},{}]}',
-        'widget-thumbnail-description'             => 0,
-        'widget-thumbnail-description-font'        => '{"data":[{"color":"ffffffff","size":"12||px","tshadow":"0|*|0|*|0|*|000000ab","afont":"Montserrat","lineheight":"1.3","bold":0,"italic":0,"underline":0,"align":"left"},{"color":"fc2828ff","afont":"google(@import url(http://fonts.googleapis.com/css?family=Raleway);),Arial","size":"25||px"},{}]}',
-        'widget-thumbnail-caption-placement'       => 'overlay',
-        'widget-thumbnail-caption-size'            => 100,
-        'widget-thumbnail-group'                   => 1,
-        'widget-thumbnail-orientation'             => 'auto',
-        'widget-thumbnail-size'                    => '100%',
-        'widget-thumbnail-show-image'              => 1,
-        'widget-thumbnail-width'                   => 100,
-        'widget-thumbnail-height'                  => 60,
-        'widget-thumbnail-align-content'           => 'start',
-        'widget-thumbnail-invert-group-direction'  => 0
+        'widget-thumbnail-position-mode'     => 'simple',
+        'widget-thumbnail-position-area'     => 12,
+        'widget-thumbnail-action'            => 'click',
+        'widget-thumbnail-style-bar'         => '{"data":[{"backgroundcolor":"242424ff","padding":"3|*|3|*|3|*|3|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"0","extra":""}]}',
+        'widget-thumbnail-style-slides'      => '{"data":[{"backgroundcolor":"00000000","padding":"0|*|0|*|0|*|0|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|ffffff00","borderradius":"0","opacity":"40","extra":"margin: 3px;\ntransition: all 0.4s;"},{"border":"0|*|solid|*|ffffffcc","opacity":"100","extra":""}]}',
+        'widget-thumbnail-arrow'             => 1,
+        'widget-thumbnail-arrow-image'       => '',
+        'widget-thumbnail-arrow-width'       => 26,
+        'widget-thumbnail-arrow-offset'      => 0,
+        'widget-thumbnail-arrow-prev-alt'    => 'previous arrow',
+        'widget-thumbnail-arrow-next-alt'    => 'next arrow',
+        'widget-thumbnail-title-style'       => '{"data":[{"backgroundcolor":"000000ab","padding":"3|*|10|*|3|*|10|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"0","extra":"bottom: 0;\nleft: 0;"}]}',
+        'widget-thumbnail-title'             => 0,
+        'widget-thumbnail-title-font'        => '{"data":[{"color":"ffffffff","size":"12||px","tshadow":"0|*|0|*|0|*|000000ab","afont":"Montserrat","lineheight":"1.2","bold":0,"italic":0,"underline":0,"align":"left"},{"color":"fc2828ff","afont":"Raleway,Arial","size":"25||px"},{}]}',
+        'widget-thumbnail-description'       => 0,
+        'widget-thumbnail-description-font'  => '{"data":[{"color":"ffffffff","size":"12||px","tshadow":"0|*|0|*|0|*|000000ab","afont":"Montserrat","lineheight":"1.3","bold":0,"italic":0,"underline":0,"align":"left"},{"color":"fc2828ff","afont":"Raleway,Arial","size":"25||px"},{}]}',
+        'widget-thumbnail-caption-placement' => 'overlay',
+        'widget-thumbnail-caption-size'      => 100,
+        'widget-thumbnail-group'             => 1,
+        'widget-thumbnail-orientation'       => 'auto',
+        'widget-thumbnail-size'              => '100%',
+        'widget-thumbnail-show-image'        => 1,
+        'widget-thumbnail-width'             => 100,
+        'widget-thumbnail-height'            => 60,
+        'widget-thumbnail-align-content'     => 'start'
     );
 
 
@@ -122,15 +120,6 @@ class ThumbnailBasic extends AbstractWidget {
             'unit'           => 'px',
             'tipLabel'       => n2_('Size'),
             'tipDescription' => n2_('The height (horizontal orientation) or width (vertical orientation) of the caption container.')
-        ));
-
-        $row4 = new FieldsetRow($container, 'widget-thumbnail-default-row-4');
-
-        new Number($row4, 'widget-thumbnail-minimum-thumbnail-count', n2_('Minimum thumbnail count'), '', array(
-            'unit'           => n2_x('slides', 'Unit'),
-            'wide'           => 3,
-            'tipLabel'       => n2_('Minimum thumbnail count'),
-            'tipDescription' => n2_('If your thumbnail is vertical, it hides the thumbnails when the set number of thumbnails can\'t fit.') . '<br>' . n2_('If your thumbnail is horizontal, it starts resizing the thumbnails when the set number of thumbnails can\'t fit.')
         ));
     }
 

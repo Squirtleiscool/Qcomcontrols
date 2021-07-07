@@ -2,6 +2,7 @@
 
 namespace Nextend\Framework\View;
 
+use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Settings;
 
 class Html {
@@ -115,7 +116,13 @@ class Html {
             'async' => 1
         );
 
-        if ($htmlOptions === array()) return '';
+        if (empty($htmlOptions)) {
+            return '';
+        }
+
+        if (isset($htmlOptions['style']) && empty($htmlOptions['style'])) {
+            unset($htmlOptions['style']);
+        }
 
         $html = '';
         if (isset($htmlOptions['encode'])) {
@@ -196,25 +203,17 @@ class Html {
             return self::tag('link', $options, false, false);
         }
 
-        return self::tag("style", $scriptOptions + array(
-                "type" => "text/css"
-            ), $script);
+        return self::tag("style", $scriptOptions, $script);
     }
 
     /**
      * Insert script
      *
      * @param string $script
-     * @param bool   $file
      *
      * @return string
      */
-    public static function script($script, $file = false) {
-        if ($file) {
-            return self::tag('script', array(
-                    'src'  => $script
-                ) + self::getScriptAttributes(), '');
-        }
+    public static function script($script) {
 
         return self::tag('script', array(
             'encode' => false
@@ -223,12 +222,17 @@ class Html {
 
     public static function scriptFile($script, $attributes = array()) {
         return self::tag('script', array(
-                'src'  => $script
+                'src' => $script
             ) + self::getScriptAttributes() + $attributes, '');
     }
 
     private static function getScriptAttributes() {
         static $attributes = null;
+
+        if (Platform::isAdmin()) {
+            return array();
+        }
+
         if ($attributes === null) {
             if (class_exists('\\Nextend\\Framework\\Settings', false)) {
                 $value       = trim(html_entity_decode(strip_tags(Settings::get('scriptattributes', ''))));
@@ -276,8 +280,11 @@ class Html {
                 unset($array['style']);
             }
             if (isset($array['class'])) {
-                if (!isset($target['class'])) $target['class'] = '';
-                $target['class'] .= ' ' . $array['class'];
+                if (empty($target['class'])) {
+                    $target['class'] = $array['class'];
+                } else {
+                    $target['class'] .= ' ' . $array['class'];
+                }
                 unset($array['class']);
             }
 
@@ -301,7 +308,7 @@ class Html {
             );
 
             if (defined('JETPACK__VERSION')) {
-                $attrs['class'] = 'jetpack-lazy-image';
+                $attrs['class'] .= ' jetpack-lazy-image';
             }
         }
 

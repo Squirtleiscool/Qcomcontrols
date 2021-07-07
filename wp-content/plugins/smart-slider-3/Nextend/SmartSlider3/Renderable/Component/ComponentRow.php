@@ -19,7 +19,7 @@ class ComponentRow extends AbstractComponent {
     protected $type = 'row';
 
     protected $rowAttributes = array(
-        'class' => 'n2-ss-layer-row ',
+        'class' => 'n2-ss-layer-row n2-ss-layer-with-background',
         'style' => ''
     );
 
@@ -31,9 +31,7 @@ class ComponentRow extends AbstractComponent {
         array(
             "group"    => "normal",
             "selector" => '-inner',
-            "css"      => array(
-                'transition' => 'transition:all .3s;transition-property:border,background-image,background-color,border-radius,box-shadow;'
-            )
+            "css"      => array()
         ),
         array(
             "group"    => "hover",
@@ -50,23 +48,108 @@ class ComponentRow extends AbstractComponent {
         $this->data->un_set('cols');
         $this->data->un_set('inneralign');
 
-        $columns = $this->getColumns();
-
-        for ($i = 0; $i < count($columns); $i++) {
-            $columns[$i]->updateRowSpecificProperties($this->data->get('desktopportraitgutter', 20));
+        $fullWidth = $this->data->get('fullwidth', 1);
+        if ($fullWidth) {
+            $this->attributes['class'] .= ' n2-ss-layer--block';
+        } else {
+            $this->attributes['class'] .= ' n2-ss-layer--auto';
         }
 
-        $this->rowAttributes['style'] .= 'padding:' . $this->spacingToEm($this->data->get('desktopportraitpadding', '10|*|10|*|10|*|10|*|px+')) . ';';
+        $devices = $this->owner->getAvailableDevices();
+
+        $desktopportraitInnerAlign = $this->data->get('desktopportraitinneralign', 'inherit');
+
+        $desktopportraitGutter = $this->getGutter('desktopportrait');
+        if (empty($desktopportraitGutter)) {
+            $desktopportraitGutter = 0;
+        }
+
+        $desktopportraitWrapAfter = $this->data->get('desktopportraitwrapafter', 0);
+        if (empty($desktopportraitWrapAfter)) {
+            $desktopportraitWrapAfter = 0;
+        }
+
+
+        foreach ($devices as $device) {
+            $padding = $this->data->get($device . 'padding');
+            if (!empty($padding)) {
+                $paddingValues = $this->spacingToPxValue($padding);
+
+                $this->style->add($device, '-inner', 'padding:' . implode('px ', $paddingValues) . 'px');
+            }
+
+
+            $innerAlign = $this->data->get($device . 'inneralign', '');
+
+            if ($device == 'desktopportrait') {
+                if ($desktopportraitInnerAlign != 'inherit') {
+                    $this->style->add($device, '-inner', AbstractComponent::innerAlignToStyle($innerAlign));
+                }
+            } else if ($desktopportraitInnerAlign != $innerAlign) {
+                $this->style->add($device, '-inner', AbstractComponent::innerAlignToStyle($innerAlign));
+            }
+
+
+            $gutter    = $this->getGutter($device);
+            $wrapAfter = $this->data->get($device . 'wrapafter', '');
+            if ($wrapAfter === '') {
+                $wrapAfter = $desktopportraitWrapAfter; // inherit desktop value
+            }
+
+            if ($gutter !== null) {
+                $sideGutter = $gutter / 2;
+                /**
+                 * +1 to fix Safari line break
+                 *
+                 * @see https://bugs.webkit.org/show_bug.cgi?id=225962
+                 * @see SSDEV-2980
+                 */
+                $this->style->add($device, '-inner > .n2-ss-layer-row-inner', 'width:calc(100% + ' . ($gutter + 1) . 'px);margin:-' . $sideGutter . 'px');
+                $this->style->add($device, '-inner > .n2-ss-layer-row-inner > .n2-ss-layer[data-sstype="col"]', 'margin:' . $sideGutter . 'px');
+            } else {
+                $gutter = $desktopportraitGutter;
+            }
+
+
+            $columns      = $this->getSortedColumns($device);
+            $columnsCount = count($columns);
+
+            if ($wrapAfter > 0) {
+
+                $this->style->add($device, '-inner > .n2-ss-layer-row-inner', 'flex-wrap:wrap;');
+                if ($fullWidth && $wrapAfter <= $columnsCount) {
+                    $rows = array_fill(0, ceil($columnsCount / $wrapAfter), 0);
+                    for ($i = 0; $i < $columnsCount; $i++) {
+                        $rowIndex        = floor($i / $wrapAfter);
+                        $rows[$rowIndex] += $columns[$i]->getWidth();
+                    }
+
+                    for ($i = 0; $i < $columnsCount; $i++) {
+                        $rowIndex = floor($i / $wrapAfter);
+                        $columns[$i]->setWrapAfterWidth($device, floor($columns[$i]->getWidth() / $rows[$rowIndex] * 100), $gutter);
+                    }
+                } else {
+                    foreach ($columns as $column) {
+                        $column->setWidthAuto($device);
+                    }
+                }
+
+            } else {
+                if ($fullWidth) {
+                    foreach ($columns as $column) {
+                        $column->setWidth($device);
+                    }
+                } else {
+                    foreach ($columns as $column) {
+                        $column->setWidthAuto($device);
+                    }
+                }
+            }
+        }
 
         $this->renderBackground();
 
-
-        $fullWidth = $this->data->get('fullwidth', 1);
-        if (!$fullWidth) {
-            $this->attributes['data-frontend-fullwidth'] = '0';
-        } else {
-            $this->attributes['data-frontend-fullwidth'] = '1';
-        }
+        $this->attributes['class'] .= ' n2-ss-has-self-align';
 
         $stretch = $this->data->get('stretch', 0);
         if ($stretch) {
@@ -119,15 +202,6 @@ class ComponentRow extends AbstractComponent {
         }
 
         $this->placement->attributes($this->attributes);
-        $innerAlign = $this->data->get('desktopportraitinneralign', 'inherit');
-        if (!empty($innerAlign)) {
-            $this->attributes['data-csstextalign'] = $innerAlign;
-        }
-
-        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10|*|px+');
-        $this->createDeviceProperty('gutter', 20);
-        $this->createDeviceProperty('wrapafter', 0);
-        $this->createDeviceProperty('inneralign', 'inherit');
 
 
         if (!AbstractComponent::$isAdmin) {
@@ -135,8 +209,14 @@ class ComponentRow extends AbstractComponent {
         }
     }
 
+    public function getGutter($device) {
+        return $this->data->get($device . 'gutter', null);
+    }
+
     public function render($isAdmin) {
         if ($this->isRenderAllowed()) {
+
+            $this->runPlugins();
 
             $this->serveLocalStyle();
             if ($isAdmin) {
@@ -168,6 +248,23 @@ class ComponentRow extends AbstractComponent {
         return $columns;
     }
 
+    protected function getSortedColumns($device) {
+
+        $columns = $this->getColumns();
+        for ($i = count($columns) - 1; $i >= 0; $i--) {
+            if (!$columns[$i]->isShown($device)) {
+                array_splice($columns, $i, 1);
+            }
+        }
+        ComponentCol::$compareOrderDevice = $device;
+        usort($columns, array(
+            ComponentCol::class,
+            'compareOrder'
+        ));
+
+        return $columns;
+    }
+
     protected function addUniqueClass($class) {
         $this->attributes['class']    .= ' ' . $class;
         $this->rowAttributes['class'] .= ' ' . $class . '-inner';
@@ -190,15 +287,22 @@ class ComponentRow extends AbstractComponent {
 
             $link                          = Link::parse($this->owner->fill($link), $this->attributes);
             $this->attributes['data-href'] = $link;
+            $this->attributes['tabindex']  = 0;
+            $this->attributes['role']      = 'button';
+
+            $ariaLabel = $this->data->get('aria-label');
+            if (!empty($ariaLabel)) {
+                $this->attributes['aria-label'] = $ariaLabel;
+            }
 
             if (!isset($this->attributes['onclick']) && !isset($this->attributes['data-n2-lightbox'])) {
                 if (!empty($target) && $target != '_self') {
                     $this->attributes['data-target'] = $target;
                 }
-                $this->attributes['onclick'] = "n2ss.openUrl(event);";
+                $this->attributes['data-n2click'] = "url";
             }
-            $this->attributes['style'] .= 'cursor:pointer;';
 
+            $this->attributes['data-force-pointer'] = "";
         }
     }
 
@@ -214,6 +318,7 @@ class ComponentRow extends AbstractComponent {
 
         $this->createProperty('href', '');
         $this->createProperty('href-target', '_self');
+        $this->createProperty('aria-label', '');
 
         $this->createProperty('bgimage', '');
         $this->createProperty('bgimagex', 50);
@@ -243,6 +348,12 @@ class ComponentRow extends AbstractComponent {
         $this->createProperty('stretch', '0');
 
         $this->createProperty('opened', 1);
+
+        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10');
+
+        $this->createDeviceProperty('gutter', 20);
+        $this->createDeviceProperty('wrapafter', 0);
+        $this->createDeviceProperty('inneralign', 'inherit');
 
         parent::admin();
     }
@@ -288,7 +399,7 @@ class ComponentRow extends AbstractComponent {
             'href'
         );
 
-        foreach ($fields AS $field) {
+        foreach ($fields as $field) {
             if (!empty($layer[$field])) {
                 $layer[$field] = $slide->fill($layer[$field]);
             }

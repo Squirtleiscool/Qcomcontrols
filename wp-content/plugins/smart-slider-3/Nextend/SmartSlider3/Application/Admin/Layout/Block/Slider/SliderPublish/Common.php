@@ -9,13 +9,14 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slider\SliderPubli
 
 <script>
 
-    N2R('documentReady', function ($) {
+    _N2.r(['$', 'documentReady'], function () {
+        var $ = _N2.$;
 
         $('.n2_ss_slider_publish__option_code')
             .on('click', function (e) {
                 var element = e.currentTarget;
                 if (document.selection) {
-                    var range = document.body.createTextRange();
+                    var range = body.createTextRange();
                     range.moveToElementText(this);
                     range.select();
                 } else if (window.getSelection) {

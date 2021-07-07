@@ -19,7 +19,7 @@ abstract class AbstractPlatform {
         return $this->isAdmin;
     }
 
-    public function setIsAdmin($isAdmin){
+    public function setIsAdmin($isAdmin) {
         $this->isAdmin = $isAdmin;
     }
 

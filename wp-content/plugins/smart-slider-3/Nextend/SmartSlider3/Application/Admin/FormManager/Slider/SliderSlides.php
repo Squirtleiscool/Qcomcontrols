@@ -113,12 +113,6 @@ class SliderSlides extends AbstractSliderTab {
 
     protected function parallax() {
 
-        $backgroundMode = $this->form->get('backgroundMode');
-        if ($backgroundMode == 'fixed') {
-            $this->form->set('backgroundMode', 'fill');
-            $this->form->set('slide-background-parallax', '1');
-            $this->form->set('slide-background-parallax-strength', 100);
-        }
 
         /**
          * Used for field removal: /slides/slides-parallax

@@ -24,7 +24,7 @@ class BlockSliderTrash extends AbstractBlock {
             'previewUrl' => $this->getUrlPreviewIndex(0)
         );
 
-        Js::addInline("new N2Classes.SlidersTrash(" . json_encode($options) . ");");
+        Js::addInline("new _N2.SlidersTrash(" . json_encode($options) . ");");
 
 
         $this->renderTemplatePart('SliderTrash');

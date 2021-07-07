@@ -15,7 +15,7 @@ class ResponsiveSubFormIcon extends SubFormIcon {
 
         $this->plugins = ResponsiveTypeFactory::getAdminTypes();
 
-        foreach ($this->plugins AS $name => $type) {
+        foreach ($this->plugins as $name => $type) {
             $this->options[$name] = array(
                 'label' => $type->getLabel(),
                 'icon'  => $type->getIcon()

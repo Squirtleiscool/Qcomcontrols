@@ -26,7 +26,7 @@ class LayoutEditor extends AbstractLayout {
     public function render() {
         $admin = new BlockAdminEditor($this);
         $admin->setLayout($this);
-        foreach ($this->state AS $name => $value) {
+        foreach ($this->state as $name => $value) {
             $admin->setAttribute('data-' . $name, $value);
         }
 

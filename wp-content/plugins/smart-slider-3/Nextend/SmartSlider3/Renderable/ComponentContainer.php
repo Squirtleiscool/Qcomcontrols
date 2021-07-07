@@ -42,7 +42,7 @@ class ComponentContainer {
                 $componentsData = array_reverse($componentsData);
             }
 
-            foreach ($componentsData AS $componentData) {
+            foreach ($componentsData as $componentData) {
                 $this->addComponent($componentData);
             }
         }
@@ -83,7 +83,7 @@ class ComponentContainer {
                 break;
             case 'group':
                 $componentData['layers'] = array_reverse($componentData['layers']);
-                foreach ($componentData['layers'] AS $subComponentData) {
+                foreach ($componentData['layers'] as $subComponentData) {
                     $this->addComponent($subComponentData);
                 }
                 break;
@@ -103,7 +103,6 @@ class ComponentContainer {
 
         if ($content === false) {
             array_unshift($this->layers, new ComponentContent($layerCount + 1, $slide, $component, array(
-                'adaptivefont'              => 1,
                 'bgimage'                   => '',
                 'bgimagex'                  => 50,
                 'bgimagey'                  => 50,
@@ -111,7 +110,7 @@ class ComponentContainer {
                 'bgcolorgradient'           => 'off',
                 'verticalalign'             => 'center',
                 'desktopportraitinneralign' => 'inherit',
-                'desktopportraitpadding'    => '10|*|10|*|10|*|10|*|px+',
+                'desktopportraitpadding'    => '10|*|10|*|10|*|10|*|px',
                 'layers'                    => array()
             ), 'absolute'));
         }

@@ -13,7 +13,7 @@ class PostsOptions extends Select {
         $options = wp_load_alloptions();
 
         $this->options['0'] = n2_('Nothing');
-        foreach ($options AS $option => $value) {
+        foreach ($options as $option => $value) {
             $this->options[$option] = $option;
         }
     }

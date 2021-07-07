@@ -58,7 +58,7 @@ use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButton
         <div class="n2_add_layer__more_tab" data-tab="layers">
             <div class="n2_add_layer__more_layers">
                 <?php
-                foreach ($this->getGroups() AS $groupLabel => $boxes):
+                foreach ($this->getGroups() as $groupLabel => $boxes):
                     ?>
                     <div class="n2_add_layer_group">
                         <div class="n2_add_layer_group__label">
@@ -66,7 +66,7 @@ use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButton
                         </div>
                         <div class="n2_add_layer_group__content">
                             <?php
-                            foreach ($boxes AS $box):
+                            foreach ($boxes as $box):
                                 echo Html::openTag('div', array(
                                         'class' => 'n2_add_layer_box'
                                     ) + $box['attributes']);

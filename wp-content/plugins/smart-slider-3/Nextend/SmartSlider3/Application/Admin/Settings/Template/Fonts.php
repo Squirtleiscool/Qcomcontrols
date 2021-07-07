@@ -8,7 +8,7 @@ use Nextend\Framework\Asset\Js\Js;
  * @var $this ViewSettingsFonts
  */
 
-JS::addInline('new N2Classes.SettingsFonts();');
+JS::addInline('new _N2.SettingsFonts();');
 
 ?>
 

@@ -19,7 +19,7 @@ class ComponentCol extends AbstractComponent {
     protected $type = 'col';
 
     protected $colAttributes = array(
-        'class' => 'n2-ss-layer-col n2-ss-layer-content',
+        'class' => 'n2-ss-layer-col n2-ss-layer-with-background n2-ss-layer-content',
         'style' => ''
     );
 
@@ -27,9 +27,7 @@ class ComponentCol extends AbstractComponent {
         array(
             "group"    => "normal",
             "selector" => '-inner',
-            "css"      => array(
-                'transition' => 'transition:all .3s;transition-property:border,background-image,background-color,border-radius,box-shadow;'
-            )
+            "css"      => array()
         ),
         array(
             "group"    => "hover",
@@ -38,22 +36,67 @@ class ComponentCol extends AbstractComponent {
         ),
     );
 
+    protected $width;
+
     public function __construct($index, $owner, $group, $data) {
         parent::__construct($index, $owner, $group, $data);
 
         $this->container = new ComponentContainer($owner, $this, $data['layers']);
         $this->data->un_set('layers');
 
+        $this->upgradeData();
+
         $this->attributes['style'] = '';
 
-        $this->colAttributes['data-verticalalign'] = $this->data->get('verticalalign', 'flex-start');
+        $devices = $this->owner->getAvailableDevices();
 
-        $innerAlign = $this->data->get('desktopportraitinneralign', 'inherit');
-        if (!empty($innerAlign)) {
-            $this->attributes['data-csstextalign'] = $innerAlign;
+        $desktopportraitInnerAlign = $this->data->get('desktopportraitinneralign', 'inherit');
+        $desktopPortraitMaxWidth   = intval($this->data->get('desktopportraitmaxwidth'));
+
+        foreach ($devices as $device) {
+
+            if ($this->data->has($device . 'padding')) {
+                $padding = $this->data->get($device . 'padding');
+                if (!empty($padding)) {
+                    $paddingValues = $this->spacingToPxValue($padding);
+
+                    $this->style->add($device, '-inner', 'padding:' . implode('px ', $paddingValues) . 'px');
+                }
+            }
+
+            if ($this->data->has($device . 'maxwidth')) {
+                $maxWidth = intval($this->data->get($device . 'maxwidth'));
+                if ($maxWidth > 0) {
+                    $this->style->add($device, '', 'max-width: ' . $maxWidth . 'px');
+                } else if ($device != 'desktopportrait' && $maxWidth != $desktopPortraitMaxWidth) {
+                    $this->style->add($device, '', 'max-width: none');
+                }
+            }
+
+            $innerAlign = $this->data->get($device . 'inneralign', '');
+
+            if ($device == 'desktopportrait') {
+                if ($desktopportraitInnerAlign != 'inherit') {
+                    $this->style->add($device, '-inner', AbstractComponent::innerAlignToStyle($innerAlign));
+                }
+            } else if ($desktopportraitInnerAlign != $innerAlign) {
+                $this->style->add($device, '-inner', AbstractComponent::innerAlignToStyle($innerAlign));
+            }
+
+
+            $verticalAlign = $this->data->get($device . 'verticalalign');
+            if (!empty($verticalAlign)) {
+                $this->style->add($device, '-inner', 'justify-content:' . $verticalAlign);
+            }
+
+
+            if ($this->data->has($device . 'order')) {
+                $order = intval($this->data->get($device . 'order'));
+                if ($order > 0) {
+                    $this->style->add($device, '', 'order: ' . $order);
+                }
+            }
         }
-
-        $this->colAttributes['style'] .= 'padding:' . $this->spacingToEm($this->data->get('desktopportraitpadding', '10|*|10|*|10|*|10|*|px+')) . ';';
 
         $this->renderBackground();
 
@@ -104,31 +147,8 @@ class ComponentCol extends AbstractComponent {
             $this->addLocalStyle('hover', 'border', $this->getBorderCSS($borderWidthHover, $borderStyleHover, $borderColorHover));
         }
 
-        $maxWidth = intval($this->data->get('desktopportraitmaxwidth', 0));
-        if ($maxWidth > 0) {
-            $this->attributes['style']             .= 'max-width: ' . $maxWidth . 'px;';
-            $this->attributes['data-has-maxwidth'] = '1';
-        } else {
-            $this->attributes['data-has-maxwidth'] = '0';
-        }
-        $this->createDeviceProperty('maxwidth', '0');
-
         $this->placement->attributes($this->attributes);
 
-
-        if ($this->data->has('verticalalign')) {
-            /**
-             * Upgrade data to device specific
-             */
-            $this->data->set('desktopportraitverticalalign', $this->data->get('verticalalign'));
-            $this->data->un_set('verticalalign');
-        }
-        $this->createDeviceProperty('verticalalign', 'flex-start');
-
-        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10|*|px+');
-        $this->createDeviceProperty('inneralign', 'inherit');
-
-        $this->createDeviceProperty('order');
 
         $width = explode('/', $this->data->get('colwidth', 1));
         if (count($width) == 2) {
@@ -142,11 +162,34 @@ class ComponentCol extends AbstractComponent {
             $width = 100;
         }
 
-        $this->attributes['data-colwidthpercent'] = $width;
-        $this->attributes['style']                .= 'width: ' . $width . '%;';
+        $this->width = $width;
 
         if (!AbstractComponent::$isAdmin) {
             $this->makeLink();
+        }
+    }
+
+    public function setWidth($device) {
+        $this->style->add($device, '', 'width:' . $this->width . '%');
+    }
+
+    public function setWidthAuto($device) {
+        $this->style->add($device, '', 'width:auto');
+    }
+
+    public function setWrapAfterWidth($device, $width, $gutter) {
+        $this->style->add($device, '', 'width:calc(' . $width . '% - ' . $gutter . 'px)');
+
+    }
+
+    protected function upgradeData() {
+
+        if ($this->data->has('verticalalign')) {
+            /**
+             * Upgrade data to device specific
+             */
+            $this->data->set('desktopportraitverticalalign', $this->data->get('verticalalign'));
+            $this->data->un_set('verticalalign');
         }
     }
 
@@ -188,12 +231,6 @@ class ComponentCol extends AbstractComponent {
         return '';
     }
 
-    public function updateRowSpecificProperties($gutter) {
-
-        $this->attributes['style'] .= 'margin-right: ' . $gutter . 'px;margin-top: ' . $gutter . 'px;';
-
-    }
-
     private function makeLink() {
 
         $linkV1 = $this->data->get('link', '');
@@ -211,20 +248,29 @@ class ComponentCol extends AbstractComponent {
 
             $link                          = Link::parse($this->owner->fill($link), $this->attributes);
             $this->attributes['data-href'] = $link;
+            $this->attributes['tabindex']  = 0;
+            $this->attributes['role']      = 'button';
+
+            $ariaLabel = $this->data->get('aria-label');
+            if (!empty($ariaLabel)) {
+                $this->attributes['aria-label'] = $ariaLabel;
+            }
 
             if (!isset($this->attributes['onclick']) && !isset($this->attributes['data-n2-lightbox'])) {
                 if (!empty($target) && $target != '_self') {
                     $this->attributes['data-target'] = $target;
                 }
-                $this->attributes['onclick'] = "n2ss.openUrl(event);";
+                $this->attributes['data-n2click'] = "url";
             }
-            $this->attributes['style'] .= 'cursor:pointer;';
 
+            $this->attributes['data-force-pointer'] = "";
         }
     }
 
     public function render($isAdmin) {
         if ($this->isRenderAllowed()) {
+
+            $this->runPlugins();
 
             $this->serveLocalStyle();
             if ($isAdmin) {
@@ -258,6 +304,7 @@ class ComponentCol extends AbstractComponent {
 
         $this->createProperty('href', '');
         $this->createProperty('href-target', '_self');
+        $this->createProperty('aria-label', '');
 
         $this->createProperty('colwidth');
 
@@ -285,6 +332,12 @@ class ComponentCol extends AbstractComponent {
         $this->createProperty('bordercolor-hover');
 
         $this->createProperty('opened', 1);
+
+        $this->createDeviceProperty('maxwidth', '0');
+        $this->createDeviceProperty('padding', '10|*|10|*|10|*|10');
+        $this->createDeviceProperty('verticalalign', 'flex-start');
+        $this->createDeviceProperty('inneralign', 'inherit');
+        $this->createDeviceProperty('order');
 
         parent::admin();
     }
@@ -330,12 +383,47 @@ class ComponentCol extends AbstractComponent {
             'href'
         );
 
-        foreach ($fields AS $field) {
+        foreach ($fields as $field) {
             if (!empty($layer[$field])) {
                 $layer[$field] = $slide->fill($layer[$field]);
             }
         }
 
         $slide->fillLayers($layer['layers']);
+    }
+
+    public function getOrder($device) {
+
+        $order = intval($this->data->get($device . 'order'));
+        if ($order > 0) {
+            return $order;
+        }
+
+        return 10;
+    }
+
+    public function getWidth() {
+
+        return $this->width;
+    }
+
+    public static $compareOrderDevice;
+
+    /**
+     * @param ComponentCol $column1
+     * @param ComponentCol $column2
+     *
+     * @return int
+     */
+    public static function compareOrder($column1, $column2) {
+
+        $order1 = $column1->getOrder(self::$compareOrderDevice);
+        $order2 = $column2->getOrder(self::$compareOrderDevice);
+
+        if ($order1 == $order2) {
+            return 0;
+        }
+
+        return ($order1 < $order2) ? -1 : 1;
     }
 }

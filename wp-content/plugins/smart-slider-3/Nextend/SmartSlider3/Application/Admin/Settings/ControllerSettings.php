@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Settings;
 
 
-use Nextend\Framework\Cache\AbstractCache;
 use Nextend\Framework\Notification\Notification;
 use Nextend\Framework\Request\Request;
 use Nextend\Framework\Settings;
@@ -87,18 +86,8 @@ class ControllerSettings extends AbstractControllerAdmin {
 
     public function actionClearCache() {
         if ($this->validatePermission('smartslider_config')) {
-            if ($this->validateToken()) {
-                $slidersModel = new ModelSliders($this);
-                foreach ($slidersModel->_getAll() AS $slider) {
-                    $slidersModel->refreshCache($slider['id']);
-                }
-                AbstractCache::clearGroup('n2-ss-0');
-                AbstractCache::clearGroup('combined');
-                AbstractCache::clearAll();
-                Notification::success(n2_('Cache cleared.'));
-            }
-
-            $this->redirect($this->getUrlSettingsDefault());
+            $view = new ViewSettingsClearCache($this);
+            $view->display();
         }
     }
 

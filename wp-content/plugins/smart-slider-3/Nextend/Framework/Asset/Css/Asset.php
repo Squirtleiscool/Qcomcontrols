@@ -4,6 +4,7 @@ namespace Nextend\Framework\Asset\Css;
 
 use Nextend\Framework\Asset\AbstractAsset;
 use Nextend\Framework\Asset\Fonts\Google\Google;
+use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Plugin;
 use Nextend\Framework\Settings;
 use Nextend\Framework\Url\Url;
@@ -12,11 +13,16 @@ use Nextend\SmartSlider3\SmartSlider3Info;
 
 class Asset extends AbstractAsset {
 
+
     public function __construct() {
         $this->cache = new Cache();
     }
 
     public function getOutput() {
+
+        $headerPreload = !!Settings::get('header-preload', '0');
+
+        $needProtocol = !Settings::get('protocol-relative', '1');
 
         Google::build();
 
@@ -26,29 +32,57 @@ class Asset extends AbstractAsset {
 
         $this->urls = array_unique($this->urls);
 
-        foreach ($this->urls as $url) {
-            $output .= Html::style($this->filterSrc($url), true, array(
+
+        foreach ($this->staticGroupPreload as $file) {
+            $url    = $this->filterSrc(Url::pathToUri($file, $needProtocol) . '?ver=' . SmartSlider3Info::$revisionShort);
+            $output .= Html::style($url, true, array(
                     'media' => 'all'
                 )) . "\n";
-        }
-
-        $needProtocol = !Settings::get('protocol-relative', '1');
-
-        foreach ($this->getFiles() as $file) {
-            if (substr($file, 0, 2) == '//') {
-                $output .= Html::style($this->filterSrc($file), true, array(
-                        'media' => 'all'
-                    )) . "\n";
-            } else {
-                $output .= Html::style($this->filterSrc(Url::pathToUri($file, $needProtocol) . '?ver=' . SmartSlider3Info::$revisionShort), true, array(
-                        'media' => 'all'
-                    )) . "\n";
+            if ($headerPreload) {
+                header('Link: <' . $url . '>; rel=preload; as=style', false);
             }
         }
 
-        $inline = implode("\n", $this->inline);
-        if (!empty($inline)) {
-            $output .= Html::style($inline);
+        $linkAttributes = array(
+            'media' => 'all'
+        );
+
+        if (!Platform::isAdmin() && Settings::get('async-non-primary-css', 0)) {
+            $linkAttributes = array(
+                'media'  => 'print',
+                'onload' => "this.media='all'"
+            );
+        }
+
+        foreach ($this->urls as $url) {
+
+            $url = $this->filterSrc($url);
+
+            $output .= Html::style($url, true, $linkAttributes) . "\n";
+        }
+
+        foreach ($this->getFiles() as $file) {
+            if (substr($file, 0, 2) == '//') {
+                $url = $this->filterSrc($file);
+            } else {
+                $url = $this->filterSrc(Url::pathToUri($file, $needProtocol) . '?ver=' . SmartSlider3Info::$revisionShort);
+            }
+            $output .= Html::style($url, true, $linkAttributes) . "\n";
+        }
+
+        $inlineText = '';
+        foreach ($this->inline as $key => $value) {
+            if (!is_numeric($key)) {
+                $output .= Html::style($value, false, array(
+                        'data-related' => $key
+                    )) . "\n";
+            } else {
+                $inlineText .= $value;
+            }
+        }
+
+        if (!empty($inlineText)) {
+            $output .= Html::style($inlineText) . "\n";
         }
 
         return $output;
@@ -64,7 +98,7 @@ class Asset extends AbstractAsset {
 
         return array(
             'url'    => $this->urls,
-            'files'  => $this->getFiles(),
+            'files'  => array_merge($this->staticGroupPreload, $this->getFiles()),
             'inline' => implode("\n", $this->inline)
         );
     }

@@ -45,7 +45,7 @@ class BlockBackgroundAnimationManager extends AbstractBlockVisual {
         $model = $this->getModel();
 
         Js::addFirstCode("
-            new N2Classes.BgAnimationManager({
+            new _N2.BgAnimationManager({
                 setsIdentifier: '" . $model->getType() . "set',
                 sets: " . json_encode($model->getSets()) . ",
                 visuals: {},

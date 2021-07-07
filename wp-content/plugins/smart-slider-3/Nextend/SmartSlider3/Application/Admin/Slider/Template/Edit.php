@@ -11,7 +11,7 @@ use Nextend\SmartSlider3\Settings;
 
 $slider = $this->getSlider();
 
-JS::addInline('new N2Classes.SliderEdit(' . json_encode(array(
+JS::addInline('new _N2.SliderEdit(' . json_encode(array(
         'previewInNewWindow' => !!Settings::get('preview-new-window', 0),
         'saveAjaxUrl'        => $this->getAjaxUrlSliderEdit($slider['id']),
         'previewUrl'         => $this->getUrlPreviewSlider($slider['id']),

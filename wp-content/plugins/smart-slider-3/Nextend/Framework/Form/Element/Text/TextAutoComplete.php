@@ -16,7 +16,7 @@ class TextAutoComplete extends Text {
     protected function addScript() {
         parent::addScript();
 
-        Js::addInline('N2Classes.AutocompleteSimple("' . $this->fieldID . '", ' . json_encode($this->values) . ');');
+        Js::addInline('_N2.AutocompleteSimple("' . $this->fieldID . '", ' . json_encode($this->values) . ');');
     }
 
     /**

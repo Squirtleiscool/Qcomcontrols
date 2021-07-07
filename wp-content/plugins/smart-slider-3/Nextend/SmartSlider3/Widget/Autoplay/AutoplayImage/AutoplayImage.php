@@ -2,13 +2,13 @@
 
 namespace Nextend\SmartSlider3\Widget\Autoplay\AutoplayImage;
 
-use Nextend\Framework\Form\Element\FloatToPercent;
 use Nextend\Framework\Form\Element\Grouping;
 use Nextend\Framework\Form\Element\OnOff;
 use Nextend\Framework\Form\Element\Radio\ImageListFromFolder;
 use Nextend\Framework\Form\Element\Style;
 use Nextend\Framework\Form\Element\Text\Color;
 use Nextend\Framework\Form\Element\Text\FieldImage;
+use Nextend\Framework\Form\Element\Text\Number;
 use Nextend\Framework\Form\Fieldset\FieldsetRow;
 use Nextend\SmartSlider3\Form\Element\Group\WidgetPosition;
 use Nextend\SmartSlider3\Widget\Autoplay\AbstractWidgetAutoplay;
@@ -16,20 +16,20 @@ use Nextend\SmartSlider3\Widget\Autoplay\AbstractWidgetAutoplay;
 class AutoplayImage extends AbstractWidgetAutoplay {
 
     protected $defaults = array(
-        'widget-autoplay-responsive-desktop' => 1,
-        'widget-autoplay-responsive-tablet'  => 1,
-        'widget-autoplay-responsive-mobile'  => 0.5,
-        'widget-autoplay-play-image'         => '',
-        'widget-autoplay-play-color'         => 'ffffffcc',
-        'widget-autoplay-play'               => '$ss$/plugins/widgetautoplay/image/image/play/small-light.svg',
-        'widget-autoplay-style'              => '{"data":[{"backgroundcolor":"000000ab","padding":"10|*|10|*|10|*|10|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"3","extra":""},{"backgroundcolor":"000000ab"}]}',
-        'widget-autoplay-position-mode'      => 'simple',
-        'widget-autoplay-position-area'      => 4,
-        'widget-autoplay-position-offset'    => 15,
-        'widget-autoplay-mirror'             => 1,
-        'widget-autoplay-pause-image'        => '',
-        'widget-autoplay-pause-color'        => 'ffffffcc',
-        'widget-autoplay-pause'              => '$ss$/plugins/widgetautoplay/image/image/pause/small-light.svg'
+        'widget-autoplay-desktop-image-width' => 16,
+        'widget-autoplay-tablet-image-width'  => 16,
+        'widget-autoplay-mobile-image-width'  => 8,
+        'widget-autoplay-play-image'          => '',
+        'widget-autoplay-play-color'          => 'ffffffcc',
+        'widget-autoplay-play'                => '$ss$/plugins/widgetautoplay/image/image/play/small-light.svg',
+        'widget-autoplay-style'               => '{"data":[{"backgroundcolor":"000000ab","padding":"10|*|10|*|10|*|10|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"3","extra":""},{"backgroundcolor":"000000ab"}]}',
+        'widget-autoplay-position-mode'       => 'simple',
+        'widget-autoplay-position-area'       => 4,
+        'widget-autoplay-position-offset'     => 15,
+        'widget-autoplay-mirror'              => 1,
+        'widget-autoplay-pause-image'         => '',
+        'widget-autoplay-pause-color'         => 'ffffffcc',
+        'widget-autoplay-pause'               => '$ss$/plugins/widgetautoplay/image/image/pause/small-light.svg'
     );
 
 

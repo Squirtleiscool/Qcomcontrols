@@ -36,9 +36,7 @@ class ModelImage extends ModelVisual {
 
         $this->renderDeviceTab($container, 'desktop-retina', n2_('Desktop retina'));
         $this->renderDeviceTab($container, 'tablet', n2_('Tablet'));
-        $this->renderDeviceTab($container, 'tablet-retina', n2_('Tablet retina'));
         $this->renderDeviceTab($container, 'mobile', n2_('Mobile'));
-        $this->renderDeviceTab($container, 'mobile-retina', n2_('Mobile retina'));
 
         $form->render();
     }

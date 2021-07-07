@@ -66,7 +66,15 @@ class Compatibility {
         if (isset($_GET['pswLoad']) && $_GET['pswLoad'] == 1) {
             Shortcode::forceIframe('psw');
         }
-        
+
+        if (defined('WC_ETRANSACTIONS_PLUGIN')) {
+            /**
+             * Plugin: https://wordpress.org/plugins/e-transactions-wc/
+             *
+             * @see SSDEV-2680
+             */
+            remove_action('admin_notices', 'hmac_admin_notice');
+        }
     }
 
     public function removeEmoji() {

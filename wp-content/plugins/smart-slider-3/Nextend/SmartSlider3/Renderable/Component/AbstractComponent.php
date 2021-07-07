@@ -26,6 +26,11 @@ abstract class AbstractComponent {
      */
     protected $owner;
 
+    /**
+     * @var Style
+     */
+    public $style;
+
     protected $type = '';
 
     protected $name = '';
@@ -46,8 +51,6 @@ abstract class AbstractComponent {
 
     protected $fontSizeModifier = 100;
 
-    protected $baseSize = 16;
-
     protected $attributes = array(
         'class' => 'n2-ss-layer n2-ow',
         'style' => ''
@@ -56,6 +59,8 @@ abstract class AbstractComponent {
     public $data;
 
     protected $localStyle = array();
+
+    protected $localRawStyles = array();
 
     protected $hasBackground = false;
 
@@ -71,14 +76,14 @@ abstract class AbstractComponent {
         $this->owner = $owner;
         $this->group = $group;
 
+        $this->style = new Style($this);
+
         $this->data = new Data($data);
 
         $this->fontSizeModifier = $this->data->get('desktopportraitfontsize', 100);
         if (!is_numeric($this->fontSizeModifier)) {
             $this->fontSizeModifier = 100;
         }
-
-        $this->baseSize = $group ? $group->getBaseSize() : 16;
 
         switch ($this->getPlacement()) {
             case 'normal':
@@ -112,13 +117,6 @@ abstract class AbstractComponent {
      */
     public function getOwner() {
         return $this->owner;
-    }
-
-    /**
-     * @return int
-     */
-    public function getBaseSize() {
-        return $this->baseSize * $this->fontSizeModifier / 100;
     }
 
     public function isRenderAllowed() {
@@ -158,30 +156,16 @@ abstract class AbstractComponent {
         $this->placement->adminAttributes($this->attributes);
     }
 
-    public function pxToEm($value) {
-        $unit     = 'px';
-        $baseSize = $this->getBaseSize();
-        if ($baseSize > 0) {
-            $unit  = 'em';
-            $value = intval($value) / $baseSize;
-        }
+    public function spacingToPxValue($value) {
+        $values = explode('|*|', $value);
+        unset($values[4]);
 
-        return $value . $unit;
-    }
-
-    public function spacingToEm($value) {
-        $values   = explode('|*|', $value);
-        $unit     = $values[4];
-        $baseSize = $this->getBaseSize();
-        if ($unit == 'px+' && $baseSize > 0) {
-            $unit = 'em';
-            for ($i = 0; $i < 4; $i++) {
-                $values[$i] = intval($values[$i]) / $baseSize;
-            }
-        }
-        $values[4] = '';
-
-        return implode($unit . ' ', $values);
+        return array_map('intval', $values) + array(
+                0,
+                0,
+                0,
+                0
+            );
     }
 
     protected function prepareHTML() {
@@ -214,20 +198,25 @@ abstract class AbstractComponent {
         $this->attributes['class'] .= ' ' . $class;
     }
 
-    protected function renderPlugins($html) {
+    protected function runPlugins() {
         $this->pluginRotation();
-        $html = $this->pluginCrop($html);
         $this->pluginShowOn();
         $this->pluginFontSize();
         $this->pluginParallax();
-        $this->attributes['data-plugin'] = 'rendered';
+    }
 
-        return $html;
+    protected function renderPlugins($html) {
+
+        return $this->pluginCrop($html);
     }
 
     private function pluginRotation() {
 
-        $this->createProperty('rotation', 0);
+        $rotation = $this->data->get('rotation', 0);
+        if ($rotation) {
+            $this->createProperty('rotation', 0);
+            $this->attributes['style'] .= 'transform:rotate(' . $rotation . 'deg);';
+        }
     }
 
     private function pluginCrop($html) {
@@ -246,22 +235,20 @@ abstract class AbstractComponent {
 
         if ($cropStyle == 'mask') {
             $cropStyle = 'hidden';
-            $html      = Html::tag('div', array('class' => 'n2-ss-layer-mask'), $html);
+            $html      = Html::tag('div', array('class' => 'n2-ss-layer-mask n2-ss-layer-wrapper'), $html);
 
-            $this->attributes['data-animatableselector'] = '.n2-ss-layer-mask:first';
-        } else if (!self::$isAdmin && $this->data->get('parallax', 0) > 0) {
-            $html = Html::tag('div', array(
-                'class' => 'n2-ss-layer-parallax'
-            ), $html);
-
-            $this->attributes['data-animatableselector'] = '.n2-ss-layer-parallax:first';
+            $this->attributes['data-animatableselector'] = '.n2-ss-layer-mask';
         }
 
-        $this->attributes['style'] .= 'overflow:' . $cropStyle . ';';
+        if (!empty($cropStyle) && $cropStyle != 'visible') {
+            $this->attributes['style'] .= 'overflow:' . $cropStyle . ';';
+        }
 
         if (self::$isAdmin) {
             $crop = $this->data->get('crop', 'visible');
-            if (empty($crop)) $crop = 'visible';
+            if (empty($crop)) {
+                $crop = 'visible';
+            }
             $this->attributes['data-crop'] = $crop;
         }
 
@@ -478,21 +465,55 @@ abstract class AbstractComponent {
 
 
     private function pluginShowOn() {
-        $this->createDeviceProperty('', 1);
+
+        if (self::$isAdmin) {
+            $this->createDeviceProperty('', 1);
+        }
+
+        $devices = $this->owner->getAvailableDevices();
+
+        foreach ($devices as $device) {
+            if (!$this->isShown($device)) {
+                $this->attributes['data-hide' . $device] = 1;
+                $this->style->addOnly($device, '', 'display:none');
+            }
+        }
+    }
+
+    public function isShown($device) {
+
+        return intval($this->data->get($device, 1)) === 1;
     }
 
     protected function pluginFontSize() {
-        $this->attributes['data-adaptivefont'] = $this->data->get('adaptivefont', 0);
 
-        $this->createDeviceProperty('fontsize', 100);
+        if (self::$isAdmin) {
+            $this->createDeviceProperty('fontsize', 100);
+        }
+
+        $devices = $this->owner->getAvailableDevices();
+        foreach ($devices as $device) {
+            $fontSize = $this->data->get($device . 'fontsize');
+            if ($fontSize !== '' && $fontSize != 100) {
+                $this->style->add($device, '', '--ssfont-scale:' . $fontSize / 100 . '');
+            }
+        }
     }
 
     public function pluginParallax() {
 
         $parallax = intval($this->data->get('parallax', 0));
-        if (self::$isAdmin || $parallax >= 1) {
+        if (self::$isAdmin) {
             $this->attributes['data-parallax'] = $parallax;
+        } else if ($parallax >= 1) {
+            /**
+             * FlatSome theme use data-parallax and we are conflicting with it.
+             *
+             * @see SSDEV-2769
+             */
+            $this->attributes['data-ssparallax'] = $parallax;
         }
+
     }
 
     public function createProperty($name, $default = null) {
@@ -530,15 +551,36 @@ abstract class AbstractComponent {
 
     protected function renderBackground() {
 
-        $gradientBackgroundProps = '';
-        $background              = '';
-        $image                   = $this->owner->fill($this->data->get('bgimage', ''));
+        $backgroundStyle = '';
+        $image           = $this->owner->fill($this->data->get('bgimage', ''));
         if ($image != '') {
-            $x          = intval($this->data->get('bgimagex', 50));
-            $y          = intval($this->data->get('bgimagey', 50));
-            $background .= 'URL("' . ResourceTranslator::toUrl($image) . '") ' . $x . '% ' . $y . '% / cover no-repeat';
+            $x = intval($this->data->get('bgimagex', 50));
+            $y = intval($this->data->get('bgimagey', 50));
 
-            $gradientBackgroundProps = ' ' . $x . '% ' . $y . '% / cover no-repeat';
+            $backgroundStyle     .= '--n2bgimage:URL("' . ResourceTranslator::toUrl($image) . '");';
+            $backgroundStyle     .= 'background-position:50% 50%,' . $x . '% ' . $y . '%;';
+            $this->hasBackground = true;
+
+            $optimizedData = $this->owner->optimizeImageWebP($image);
+
+            if (isset($optimizedData['normal'])) {
+                $this->owner->addImage($optimizedData['normal']['src']);
+
+                $this->localRawStyles[] = '.n2webp @rule-inner{--n2bgimage: URL(' . $optimizedData['normal']['src'] . ')}';
+            }
+
+            if (isset($optimizedData['medium'])) {
+                $this->owner->addImage($optimizedData['medium']['src']);
+
+                $this->localRawStyles[] = '@media (max-width: ' . $optimizedData['medium']['width'] . 'px) {.n2webp @rule-inner{--n2bgimage: URL(' . $optimizedData['medium']['src'] . ')}}';
+            }
+
+            if (isset($optimizedData['small'])) {
+                $this->owner->addImage($optimizedData['small']['src']);
+
+                $this->localRawStyles[] = '@media (max-width: ' . $optimizedData['small']['width'] . 'px) {.n2webp @rule-inner{--n2bgimage: URL(' . $optimizedData['small']['src'] . ')}}';
+
+            }
         }
 
         $color = $this->owner->fill($this->data->get('bgcolor', '00000000'));
@@ -550,7 +592,7 @@ abstract class AbstractComponent {
         if (empty($colorEnd)) {
             $colorEnd = '00000000';
         }
-        $this->addLocalStyle('normal', 'background', $this->getBackgroundCSS($color, $gradient, $colorEnd, $background, $gradientBackgroundProps));
+        $this->addLocalStyle('normal', 'background', $this->getBackgroundCSS($color, $gradient, $colorEnd, $backgroundStyle) . $backgroundStyle);
 
 
         $colorHover       = $this->data->get('bgcolor-hover');
@@ -571,44 +613,32 @@ abstract class AbstractComponent {
             if (empty($gradientHover)) $gradientHover = $gradient;
             if (empty($colorEndHover)) $colorEndHover = $colorEnd;
 
-            $this->addLocalStyle('hover', 'background', $this->getBackgroundCSS($colorHover, $gradientHover, $colorEndHover, $background, $gradientBackgroundProps));
+            $this->addLocalStyle('hover', 'background', $this->getBackgroundCSS($colorHover, $gradientHover, $colorEndHover, $backgroundStyle));
         }
     }
 
-    protected function getBackgroundCSS($color, $gradient, $colorend, $background, $gradientBackgroundProps) {
+    protected function getBackgroundCSS($color, $gradient, $colorend, $backgroundStyle) {
         if (Color::hex2alpha($color) != 0 || ($gradient != 'off' && Color::hex2alpha($colorend) != 0)) {
             $this->hasBackground = true;
-            $after               = '';
-            if ($background != '') {
-                $after .= $gradientBackgroundProps . ',' . $background;
-            }
             switch ($gradient) {
                 case 'horizontal':
-                    return 'background:linear-gradient(to right, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%)' . $after . ';';
-                    break;
+                    return '--n2bggradient:linear-gradient(to right, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%);';
                 case 'vertical':
-                    return 'background:linear-gradient(to bottom, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%)' . $after . ';';
-                    break;
+                    return '--n2bggradient:linear-gradient(to bottom, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%);';
                 case 'diagonal1':
-                    return 'background:linear-gradient(45deg, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%)' . $after . ';';
-                    break;
+                    return '--n2bggradient:linear-gradient(45deg, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%);';
                 case 'diagonal2':
-                    return 'background:linear-gradient(135deg, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%)' . $after . ';';
-                    break;
+                    return '--n2bggradient:linear-gradient(135deg, ' . Color::colorToRGBA($color) . ' 0%,' . Color::colorToRGBA($colorend) . ' 100%);';
                 case 'off':
                 default:
-                    if ($background != '') {
-                        return "background:linear-gradient(" . Color::colorToRGBA($color) . ", " . Color::colorToRGBA($color) . ")" . $after . ';';
+                    if (!empty($backgroundStyle)) {
+                        return "--n2bggradient:linear-gradient(" . Color::colorToRGBA($color) . ", " . Color::colorToRGBA($color) . ");";
                     } else {
-                        return "background:" . Color::colorToRGBA($color) . ';';
+                        return "background-color:" . Color::colorToRGBA($color) . ';';
                     }
 
                     break;
             }
-        } else if (($background != '')) {
-            $this->hasBackground = true;
-
-            return "background:" . $background . ';';
         }
 
         return '';
@@ -674,12 +704,12 @@ abstract class AbstractComponent {
     }
 
     protected function serveLocalStyle() {
+
+        $uniqueClassSelector = $this->getUniqueClassSelector();
+
         $css = '';
         for ($i = 0; $i < count($this->localStyle); $i++) {
             $style = '';
-            if (count($this->localStyle[$i]['css']) == 1 && isset($this->localStyle[$i]['css']['transition'])) {
-                unset($this->localStyle[$i]['css']['transition']);
-            }
             foreach ($this->localStyle[$i]['css'] as $_css) {
                 $style .= $_css;
             }
@@ -688,17 +718,36 @@ abstract class AbstractComponent {
             }
         }
         if (!empty($css)) {
-
-            $uniqueClass = $this->data->get('uniqueclass', '');
-            if (empty($uniqueClass)) {
-                $uniqueClass = self::generateUniqueIdentifier('n-uc-');
-                $this->data->set('uniqueclass', $uniqueClass);
-            }
-            $uniqueClass .= $this->owner->unique;
-
             $this->getOwner()
-                 ->addCSS(str_replace('@rule', 'div#' . $this->owner->getElementID() . ' .' . $uniqueClass, $css));
+                 ->addCSS(str_replace('@rule', $uniqueClassSelector, $css));
         }
+
+        if (!empty($this->localRawStyles)) {
+            foreach ($this->localRawStyles as $localRawStyle) {
+                $this->getOwner()
+                     ->addCSS(str_replace('@rule', $uniqueClassSelector, $localRawStyle));
+            }
+        }
+
+        foreach ($this->style->styles as $device => $styles) {
+            foreach ($styles as $selector => $stylesData) {
+                $this->getOwner()
+                     ->addDeviceCSS($device, $uniqueClassSelector . $selector . '{' . implode(';', $stylesData) . '}');
+            }
+        }
+    }
+
+    public function getUniqueClassSelector() {
+
+        $uniqueClass = $this->data->get('uniqueclass', '');
+        if (empty($uniqueClass)) {
+            $uniqueClass = self::generateUniqueIdentifier('n-uc-');
+            $this->data->set('uniqueclass', $uniqueClass);
+        }
+
+        $uniqueClass .= $this->owner->unique;
+
+        return 'div#' . $this->owner->getElementID() . ' .' . $uniqueClass;
     }
 
     protected static function generateUniqueIdentifier($prefix = 'n', $length = 12) {
@@ -801,5 +850,35 @@ abstract class AbstractComponent {
      */
     public function getType() {
         return $this->type;
+    }
+
+    public static function innerAlignToStyle($innerAlign) {
+
+        if ($innerAlign == 'left') {
+            return 'text-align:left;--ssselfalign:var(--ss-fs);';
+        } else if ($innerAlign == 'center') {
+            return 'text-align:center;--ssselfalign:center;';
+        } else if ($innerAlign == 'right') {
+            return 'text-align:right;--ssselfalign:var(--ss-fe);';
+        } else if ($innerAlign == '') {
+            return '';
+        }
+
+        return 'text-align:inherit;--ssselfalign:inherit;';
+    }
+
+    public static function selfAlignToStyle($innerAlign) {
+
+        if ($innerAlign == 'left') {
+            return 'align-self:var(--ss-fs);';
+        } else if ($innerAlign == 'center') {
+            return 'align-self:center;';
+        } else if ($innerAlign == 'right') {
+            return 'align-self:var(--ss-fe);';
+        } else if ($innerAlign == '') {
+            return '';
+        }
+
+        return 'align-self:var(--ssselfalign);';
     }
 }

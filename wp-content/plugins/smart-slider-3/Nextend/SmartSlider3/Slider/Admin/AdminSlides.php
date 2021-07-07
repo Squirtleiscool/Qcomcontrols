@@ -112,6 +112,10 @@ class AdminSlides extends Slides {
 
 
         $this->editedSlide->setCurrentlyEdited();
+
+        for ($i = 0; $i < count($slides); $i++) {
+            $slides[$i]->setPublicID($i + 1);
+        }
     }
 
     /**

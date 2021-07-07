@@ -18,7 +18,7 @@ class Less {
     }
 
     public static function build() {
-        foreach (AssetManager::$less->getFiles() AS $group => $file) {
+        foreach (AssetManager::$less->getFiles() as $group => $file) {
             if (substr($file, 0, 2) == '//') {
                 Css::addUrl($file);
             } else if (!realpath($file)) {

@@ -169,7 +169,7 @@ class ItemImage extends AbstractItem {
         ));
 
         $dev = new Fieldset\LayerWindow\FieldsetLayerWindow($container, 'item-image-dev', n2_('Advanced'));
-        new Text($dev, 'href-class', n2_('CSS Class').' - '.n2_('Link'), '', array(
+        new Text($dev, 'href-class', n2_('CSS Class') . ' - ' . n2_('Link'), '', array(
             'tipLabel'       => n2_('CSS Class'),
             'tipDescription' => sprintf(n2_('Class on the %s element.'), '&lt;a&gt;'),
             'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1833-image-layer#advanced',

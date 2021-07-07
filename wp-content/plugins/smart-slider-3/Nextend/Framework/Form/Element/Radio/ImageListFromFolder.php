@@ -59,7 +59,7 @@ class ImageListFromFolder extends ImageList implements ContainerInterface {
         }
 
         if (!isset($this->options[$currentValue])) {
-            foreach ($this->options AS $value => $option) {
+            foreach ($this->options as $value => $option) {
                 if (pathinfo($value, PATHINFO_FILENAME) == $currentValue) {
                     $currentValue = $value;
                     $this->setValue($currentValue);

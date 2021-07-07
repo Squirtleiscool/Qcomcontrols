@@ -78,14 +78,14 @@ class FontRenderer {
                 }
             }
         }
-        foreach ($tabs AS $k => $tab) {
+        foreach ($tabs as $k => $tab) {
             $search[]            = '@tab' . $k;
             FontStyle::$fontSize = $fontSize;
             $replace[]           = self::$style->style($tab);
         }
 
         $template = '';
-        foreach (self::$mode[$mode]['selectors'] AS $s => $style) {
+        foreach (self::$mode[$mode]['selectors'] as $s => $style) {
             $key = array_search($style, $search);
             if (is_numeric($key) && !empty($replace[$key])) {
                 $template .= $s . "{" . $style . "}";
@@ -99,7 +99,7 @@ class FontRenderer {
 $frontendAccessibility = intval(Settings::get('frontend-accessibility', 1));
 
 FontRenderer::$mode = array(
-    '0'                   => array(
+    '0'         => array(
         'id'            => '0',
         'label'         => n2_('Text'),
         'tabs'          => array(
@@ -113,7 +113,7 @@ FontRenderer::$mode = array(
             '@pre@selector' => '@tab0'
         )
     ),
-    'simple'              => array(
+    'simple'    => array(
         'id'            => 'simple',
         'label'         => n2_('Text'),
         'tabs'          => array(
@@ -127,7 +127,7 @@ FontRenderer::$mode = array(
             '@pre@selector' => '@tab0'
         )
     ),
-    'hover'               => array(
+    'hover'     => array(
         'id'            => 'hover',
         'label'         => n2_('Hover'),
         'tabs'          => array(
@@ -146,7 +146,7 @@ FontRenderer::$mode = array(
             '@pre@selector:HOVER, @pre@selector:ACTIVE' => '@tab1'
         )
     ),
-    'link'                => array(
+    'link'      => array(
         'id'            => 'link',
         'label'         => n2_('Link'),
         'tabs'          => array(
@@ -165,23 +165,7 @@ FontRenderer::$mode = array(
             '@pre@selector a:HOVER, @pre@selector a:ACTIVE' => '@tab1'
         )
     ),
-    'accordionslidetitle' => array(
-        'id'            => 'accordionslidetitle',
-        'label'         => n2_('Accordion slide title'),
-        'tabs'          => array(
-            n2_('Normal'),
-            n2_('Active')
-        ),
-        'renderOptions' => array(
-            'combined' => false
-        ),
-        'preview'       => '<div class="{fontClassName}">' . n2_('Slide title') . '</div>',
-        'selectors'     => array(
-            '@pre@selector'                                          => '@tab0',
-            '@pre.n2-ss-slide-active @selector, @pre@selector:HOVER' => '@tab1'
-        )
-    ),
-    'paragraph'           => array(
+    'paragraph' => array(
         'id'            => 'paragraph',
         'label'         => n2_('Paragraph'),
         'tabs'          => array(
@@ -199,7 +183,7 @@ FontRenderer::$mode = array(
             '@pre@selector a:HOVER, @pre@selector a:ACTIVE' => '@tab2'
         )
     ),
-    'input'               => array(
+    'input'     => array(
         'id'            => 'input',
         'label'         => 'Input',
         'tabs'          => array(
@@ -215,7 +199,7 @@ FontRenderer::$mode = array(
             '@pre@selector:HOVER, @pre@selector:FOCUS' => '@tab2'
         )
     ),
-    'dot'                 => array(
+    'dot'       => array(
         'id'            => 'dot',
         'label'         => n2_('Dot'),
         'tabs'          => array(
@@ -231,7 +215,7 @@ FontRenderer::$mode = array(
             '@pre@selector.n2-active, @pre@selector:HOVER, @pre@selector:ACTIVE' => '@tab1'
         )
     ),
-    'list'                => array(
+    'list'      => array(
         'id'            => 'list',
         'label'         => n2_('List'),
         'tabs'          => array(
@@ -249,7 +233,7 @@ FontRenderer::$mode = array(
             '@pre@selector li a:HOVER, @pre@selector li a:ACTIVE' => '@tab2'
         )
     ),
-    'highlight'           => array(
+    'highlight' => array(
         'id'            => 'highlight',
         'label'         => n2_('Highlight'),
         'tabs'          => array(

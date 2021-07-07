@@ -4,6 +4,7 @@
 namespace Nextend\SmartSlider3\Platform\WordPress;
 
 
+use Exception;
 use Nextend\Framework\PageFlow;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
 
@@ -30,7 +31,7 @@ class WordPressFrontend {
                     $applicationType->process('PreRender' . $_GET['n2controller'], $_GET['n2action']);
 
                     PageFlow::exitApplication();
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     exit;
                 }
             } else if (isset($_GET['sliderid']) && isset($_GET['hash']) && md5($_GET['sliderid'] . NONCE_SALT) == $_GET['hash']) {
@@ -42,7 +43,7 @@ class WordPressFrontend {
                     $applicationType->process('PreRenderSlider', 'iframe');
 
                     PageFlow::exitApplication();
-                } catch (\Exception $e) {
+                } catch (Exception $e) {
                     exit;
                 }
             }

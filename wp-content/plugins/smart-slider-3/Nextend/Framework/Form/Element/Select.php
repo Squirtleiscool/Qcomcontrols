@@ -69,7 +69,7 @@ class Select extends AbstractFieldHidden {
             $options['relatedAttribute'] = $this->relatedAttribute;
         }
 
-        Js::addInline('new N2Classes.FormElementList("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementList("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
         return $html;
     }

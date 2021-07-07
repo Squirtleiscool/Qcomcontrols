@@ -4,23 +4,18 @@
 namespace Nextend\SmartSlider3\Widget\Bullet\BulletTransition;
 
 
-use Nextend\Framework\Filesystem\Filesystem;
+use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Widget\Bullet\AbstractBulletFrontend;
 
 class BulletTransitionFrontend extends AbstractBulletFrontend {
 
-    public function getPositions(&$params) {
-        $positions                    = array();
-        $positions['bullet-position'] = array(
-            $this->key . 'position-',
-            'bullet'
-        );
+    public function render($attributes = array()) {
 
-        return $positions;
-    }
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
 
-    public function render($slider, $id, $params) {
         if ($slider->getSlidesCount() <= 1) {
             return '';
         }
@@ -28,16 +23,13 @@ class BulletTransitionFrontend extends AbstractBulletFrontend {
         $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
             "sliderid" => $slider->elementId
         ));
-        $slider->features->addInitCallback(Filesystem::readFile($this->getCommonAssetsPath() . '/dist/bullet.min.js'));
-    
 
-        list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key, 1);
+        Js::addStaticGroup($this->getCommonAssetsPath() . '/dist/w-bullet.min.js', 'w-bullet');
+
+        $displayAttributes = $this->getDisplayAttributes($params, $this->key, 1);
 
         $bulletStyle = $slider->addStyle($params->get($this->key . 'style'), 'dot');
         $barStyle    = $slider->addStyle($params->get($this->key . 'bar'), 'simple');
-
-        list($style, $attributes) = $this->getPosition($params, $this->key);
-        $attributes['data-offset'] = $params->get($this->key . 'position-offset', 0);
 
         $orientation = $this->getOrientationByPosition($params->get($this->key . 'position-mode'), $params->get($this->key . 'position-area'), $params->get($this->key . 'orientation'), 'horizontal');
 
@@ -50,8 +42,6 @@ class BulletTransitionFrontend extends AbstractBulletFrontend {
         );
 
         if ($params->get($this->key . 'thumbnail-show-image')) {
-
-            $slider->exposeSlideData['thumbnail'] = true;
 
             $parameters['thumbnail']       = 1;
             $parameters['thumbnailWidth']  = intval($params->get($this->key . 'thumbnail-width'));
@@ -76,15 +66,15 @@ class BulletTransitionFrontend extends AbstractBulletFrontend {
             $parameters['thumbnailPosition'] = $position;
         }
 
-        $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetBulletTransition(this, ' . json_encode($parameters) . ');');
+        $slider->features->addInitCallback('new _N2.SmartSliderWidgetBulletTransition(this, ' . json_encode($parameters) . ');');
+        $slider->sliderType->addJSDependency('SmartSliderWidgetBulletTransition');
 
         $fullSize = intval($params->get($this->key . 'bar-full-size'));
 
-        return Html::tag("div", $displayAttributes + $attributes + array(
-                "class" => $displayClass . ' n2-flex n2-ss-control-bullet n2-ss-control-bullet-' . $orientation . ($fullSize ? ' n2-ss-control-bullet-fullsize' : ''),
-                "style" => $style
-            ), Html::tag("div", array(
-            "class" => $barStyle . " nextend-bullet-bar n2-ow n2-bar-justify-content-" . $params->get($this->key . 'align')
-        ), ''));
+        return Html::tag("div", Html::mergeAttributes($attributes, $displayAttributes, array(
+            "class" => 'n2-ss-control-bullet n2-ow-all n2-ss-control-bullet-' . $orientation . ($fullSize ? ' n2-ss-control-bullet-fullsize' : '')
+        )), Html::tag("div", array(
+            "class" => $barStyle . " nextend-bullet-bar n2-bar-justify-content-" . $params->get($this->key . 'align')
+        ), '<div class="n2-bullet ' . $bulletStyle . '" style="visibility:hidden;"></div>'));
     }
 }

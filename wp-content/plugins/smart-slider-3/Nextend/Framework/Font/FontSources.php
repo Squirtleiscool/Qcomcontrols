@@ -13,7 +13,7 @@ class FontSources {
 
     public function __construct() {
         $dir = dirname(__FILE__) . '/Sources/';
-        foreach (Filesystem::folders($dir) AS $folder) {
+        foreach (Filesystem::folders($dir) as $folder) {
             $file = $dir . $folder . '/' . $folder . '.php';
             if (Filesystem::fileexists($file)) {
                 require_once($file);
@@ -40,13 +40,13 @@ class FontSources {
     }
 
     public static function onFontManagerLoad($force = false) {
-        foreach (self::$fontSources AS $source) {
+        foreach (self::$fontSources as $source) {
             $source->onFontManagerLoad($force);
         }
     }
 
     public static function onFontManagerLoadBackend() {
-        foreach (self::$fontSources AS $source) {
+        foreach (self::$fontSources as $source) {
             $source->onFontManagerLoadBackend();
         }
     }

@@ -98,8 +98,8 @@ class ModelSlides extends AbstractModelTable {
         ));
 
         $slideBuilder->content->set(array(
-            'desktopportraitpadding' => '10|*|100|*|10|*|100|*|px+',
-            'mobileportraitpadding'  => '10|*|10|*|10|*|10|*|px+'
+            'desktopportraitpadding' => '10|*|100|*|10|*|100|*|px',
+            'mobileportraitpadding'  => '10|*|10|*|10|*|10|*|px'
         ));
 
         if ($title) {
@@ -114,7 +114,7 @@ class ModelSlides extends AbstractModelTable {
         if ($description) {
             $text = new BuilderComponentLayer($slideBuilder->content, 'text');
             $text->set(array(
-                'desktopportraitmargin' => '0|*|0|*|20|*|0|*|px+',
+                'desktopportraitmargin' => '0|*|0|*|20|*|0|*|px',
             ));
             $text->item->set(array(
                 'content' => '{description/slide}',
@@ -166,8 +166,8 @@ class ModelSlides extends AbstractModelTable {
         ));
 
         $slideBuilder->content->set(array(
-            'desktopportraitpadding' => '10|*|100|*|10|*|100|*|px+',
-            'mobileportraitpadding'  => '10|*|10|*|10|*|10|*|px+'
+            'desktopportraitpadding' => '10|*|100|*|10|*|100|*|px',
+            'mobileportraitpadding'  => '10|*|10|*|10|*|10|*|px'
         ));
 
         $videoUrl = $data->get('video', '');

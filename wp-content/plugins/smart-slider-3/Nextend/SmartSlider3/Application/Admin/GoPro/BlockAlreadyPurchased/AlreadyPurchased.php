@@ -19,7 +19,7 @@ use Nextend\SmartSlider3\SmartSlider3Info;
     </div>
 
     <div class="n2_page_free_go_pro_already_purchased__paragraph">
-        <?php printf(n2_('After making your purchase, %1$slog in to your account%3$s and download the Pro installer. To get started with Smart Slider 3 Pro, simply %2$sinstall it on your website%3$s.'), '<a href="'.SmartSlider3Info::decorateExternalUrl('https://secure.nextendweb.com/', array('utm_source' => 'already-purchased')).'" target="_blank">', '<a href="'.SmartSlider3Info::decorateExternalUrl('https://secure.nextendweb.com/', array('utm_source' => 'already-purchased')).'" target="_blank">', '</a>'); ?>
+        <?php printf(n2_('After making your purchase, %1$slog in to your account%3$s and download the Pro installer. To get started with Smart Slider 3 Pro, simply %2$sinstall it on your website%3$s.'), '<a href="' . SmartSlider3Info::decorateExternalUrl('https://secure.nextendweb.com/', array('utm_source' => 'already-purchased')) . '" target="_blank">', '<a href="' . SmartSlider3Info::decorateExternalUrl('https://secure.nextendweb.com/', array('utm_source' => 'already-purchased')) . '" target="_blank">', '</a>'); ?>
     </div>
 
     <a href="<?php echo SmartSlider3Info::decorateExternalUrl('https://secure.nextendweb.com/', array('utm_source' => 'already-purchased')); ?>" target="_blank" class="n2_page_free_go_pro_already_purchased__button">

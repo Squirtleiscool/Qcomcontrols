@@ -4,6 +4,8 @@
 namespace Nextend\SmartSlider3\Widget\Thumbnail\Basic;
 
 
+use Nextend\Framework\Asset\Js\Js;
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\Filesystem\Filesystem;
 use Nextend\Framework\Misc\Base64;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
@@ -12,17 +14,26 @@ use Nextend\SmartSlider3\Widget\AbstractWidgetFrontend;
 
 class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
 
-    public function getPositions(&$params) {
-        $positions                       = array();
-        $positions['thumbnail-position'] = array(
-            $this->key . 'position-',
-            'thumbnail'
-        );
+    private static $thumbnailTypes = array(
+        'videoDark' => '<svg class="n2-thumbnail-dot-type" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 48 48"><circle cx="24" cy="24" r="24" fill="#000" opacity=".6"/><path fill="#FFF" d="M19.8 32c-.124 0-.247-.028-.36-.08-.264-.116-.436-.375-.44-.664V16.744c.005-.29.176-.55.44-.666.273-.126.592-.1.84.07l10.4 7.257c.2.132.32.355.32.595s-.12.463-.32.595l-10.4 7.256c-.14.1-.31.15-.48.15z"/></svg>'
+    );
 
-        return $positions;
+    public function __construct($sliderWidget, $widget, $params) {
+
+        parent::__construct($sliderWidget, $widget, $params);
+
+        $this->addToPlacement($this->key . 'position-', array(
+            $this,
+            'render'
+        ));
     }
 
-    public function render($slider, $id, $params) {
+    public function render($attributes = array()) {
+
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
+
         $showThumbnail   = intval($params->get($this->key . 'show-image'));
         $showTitle       = intval($params->get($this->key . 'title'));
         $showDescription = intval($params->get($this->key . 'description'));
@@ -32,27 +43,61 @@ class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
             return '';
         }
 
-        $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
-            "sliderid" => $slider->elementId
-        ));
-
         $parameters = array(
-            'area'                  => intval($params->get($this->key . 'position-area')),
             'action'                => $params->get($this->key . 'action'),
-            'minimumThumbnailCount' => max(1, intval($params->get($this->key . 'minimum-thumbnail-count'))) + 0.5,
-            'group'                 => max(1, intval($params->get($this->key . 'group'))),
-            'invertGroupDirection'  => intval($params->get('widget-thumbnail-invert-group-direction', 0)),
+            'minimumThumbnailCount' => max(1, intval($params->get($this->key . 'minimum-thumbnail-count')))
         );
 
-        list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key);
-        list($style, $attributes) = $this->getPosition($params, $this->key);
-        $attributes['data-offset'] = $params->get($this->key . 'position-offset', 0);
+        $displayAttributes = $this->getDisplayAttributes($params, $this->key);
 
         $barStyle   = $slider->addStyle($params->get($this->key . 'style-bar'), 'simple');
         $slideStyle = $slider->addStyle($params->get($this->key . 'style-slides'), 'dot');
 
-        $width  = intval($slider->params->get($this->key . 'width', 160));
-        $height = intval($slider->params->get($this->key . 'height', 100));
+        $width  = intval($slider->params->get($this->key . 'width', 100));
+        $height = intval($slider->params->get($this->key . 'height', 60));
+
+        $css = '';
+        if ($showThumbnail) {
+            $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot img{width:' . $width . 'px;height:' . $height . 'px}';
+        } else {
+            $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot{min-width:' . $width . 'px;min-height:' . $height . 'px}';
+        }
+        if (!empty($css)) {
+            $this->slider->addDeviceCSS('all', $css);
+        }
+
+        $tabletWidth  = intval($slider->params->get($this->key . 'tablet-width', $width));
+        $tabletHeight = intval($slider->params->get($this->key . 'tablet-height', $height));
+
+        if ($tabletWidth !== $width || $tabletHeight !== $height) {
+
+            $css = '';
+            if ($showThumbnail) {
+                $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot img{width:' . $tabletWidth . 'px;height:' . $tabletHeight . 'px}';
+            } else {
+                $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot{min-width:' . $tabletWidth . 'px;min-height:' . $tabletHeight . 'px}';
+            }
+            if (!empty($css)) {
+                $this->slider->addDeviceCSS('tabletportrait', $css);
+                $this->slider->addDeviceCSS('tabletlandscape', $css);
+            }
+        }
+
+        $mobileWidth  = intval($slider->params->get($this->key . 'mobile-width', $width));
+        $mobileHeight = intval($slider->params->get($this->key . 'mobile-height', $height));
+        if ($mobileWidth !== $width || $mobileHeight !== $height) {
+
+            $css = '';
+            if ($showThumbnail) {
+                $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot img{width:' . $mobileWidth . 'px;height:' . $mobileHeight . 'px}';
+            } else {
+                $css .= 'div#' . $this->slider->elementId . ' .n2-thumbnail-dot{min-width:' . $mobileWidth . 'px;min-height:' . $mobileHeight . 'px}';
+            }
+            if (!empty($css)) {
+                $this->slider->addDeviceCSS('mobileportrait', $css);
+                $this->slider->addDeviceCSS('mobilelandscape', $css);
+            }
+        }
 
 
         $captionPlacement = $slider->params->get($this->key . 'caption-placement', 'overlay');
@@ -64,12 +109,11 @@ class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
             $captionPlacement = 'overlay';
         }
 
-        $parameters['captionSize'] = intval($slider->params->get($this->key . 'caption-size', 100));
+        $captionSize = intval($slider->params->get($this->key . 'caption-size', 100));
 
 
-        $orientation               = $params->get($this->key . 'orientation');
-        $orientation               = $this->getOrientationByPosition($params->get($this->key . 'position-mode'), $params->get($this->key . 'position-area'), $orientation, 'vertical');
-        $parameters['orientation'] = $orientation;
+        $orientation = $params->get($this->key . 'orientation');
+        $orientation = $this->getOrientationByPosition($params->get($this->key . 'position-mode'), $params->get($this->key . 'position-area'), $orientation, 'vertical');
 
         $captionExtraStyle = '';
         switch ($captionPlacement) {
@@ -77,108 +121,59 @@ class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
             case 'after':
                 switch ($orientation) {
                     case 'vertical':
-                        if (!$showThumbnail) {
-                            $width = 0;
-                        }
-                        $containerStyle    = "width: " . ($width + $parameters['captionSize']) . "px; height: {$height}px;";
-                        $captionExtraStyle .= "width: " . $parameters['captionSize'] . "px";
+                        $captionExtraStyle .= "width: " . $captionSize . "px";
                         break;
                     default:
-                        if (!$showThumbnail) {
-                            $height = 0;
-                        }
-                        $containerStyle    = "width: {$width}px; height: " . ($height + $parameters['captionSize']) . "px;";
-                        $captionExtraStyle .= "height: " . $parameters['captionSize'] . "px";
+                        $captionExtraStyle .= "height: " . $captionSize . "px";
                 }
                 break;
-            default:
-                $containerStyle            = "width: {$width}px; height: {$height}px;";
-                $parameters['captionSize'] = 0;
         }
 
-
-        $parameters['slideStyle']     = $slideStyle;
-        $parameters['containerStyle'] = $containerStyle;
-
-        if ($showThumbnail) {
-            $slider->exposeSlideData['thumbnail']     = true;
-            $slider->exposeSlideData['thumbnailType'] = true;
-
-            $thumbnailCSS   = array(
-                'background-size',
-                'background-repeat',
-                'background-position'
-            );
-            $thumbnailStyle = json_decode($params->get($this->key . 'style-slides'));
-            if (!empty($thumbnailStyle) && !empty($thumbnailStyle->data[0]->extra)) {
-                $extraCSS      = $thumbnailStyle->data[0]->extra;
-                $thumbnailCode = '';
-                foreach ($thumbnailCSS as $css) {
-                    $currentCode = $this->getStringBetween($extraCSS, $css . ':', ';');
-                    if (!empty($currentCode)) {
-                        $thumbnailCode .= $css . ':' . $currentCode . ';';
-                    }
-                }
-            } else {
-                $thumbnailCode = '';
-            }
-
-            $parameters['thumbnail'] = array(
-                'width'  => $width,
-                'height' => $height,
-                'code'   => $thumbnailCode
-            );
-        }
-
-        if ($showTitle || $showDescription) {
-            $parameters['caption'] = array(
-                'styleClass' => $slider->addStyle($params->get($this->key . 'title-style'), 'simple'),
-                'placement'  => $captionPlacement,
-                'style'      => $captionExtraStyle
-            );
-        }
-
-        if ($showTitle) {
-            $parameters['title']              = array(
-                'font' => $slider->addFont($params->get($this->key . 'title-font'), 'simple'),
-            );
-        }
-
-        if ($showDescription) {
-            $slider->exposeSlideData['description'] = true;
-            $parameters['description']              = array(
-                'font' => $slider->addFont($params->get($this->key . 'description-font'), 'simple')
-            );
-        }
 
         if ($orientation == 'vertical') {
-            $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/thumbnail-vertical.min.js'));
-        
-            $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetThumbnailDefaultVertical(this, ' . json_encode($parameters) . ');');
+
+            Js::addStaticGroup(self::getAssetsPath() . '/dist/w-thumbnail-vertical.min.js', 'w-thumbnail-vertical');
+
+            $slider->features->addInitCallback('new _N2.SmartSliderWidgetThumbnailDefaultVertical(this, ' . json_encode($parameters) . ');');
+            $slider->sliderType->addJSDependency('SmartSliderWidgetThumbnailDefaultVertical');
         } else {
-            $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/thumbnail-horizontal.min.js'));
-        
-            $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetThumbnailDefaultHorizontal(this, ' . json_encode($parameters) . ');');
+
+            Js::addStaticGroup(self::getAssetsPath() . '/dist/w-thumbnail-horizontal.min.js', 'w-thumbnail-horizontal');
+
+            $slider->features->addInitCallback('new _N2.SmartSliderWidgetThumbnailDefaultHorizontal(this, ' . json_encode($parameters) . ');');
+            $slider->sliderType->addJSDependency('SmartSliderWidgetThumbnailDefaultHorizontal');
         }
 
+        $group = max(1, intval($params->get($this->key . 'group')));
+
+        $style = '';
+
         $size = $params->get($this->key . 'size');
+        if (is_numeric($size)) {
+            $size .= '%';
+        }
         if ($orientation == 'horizontal') {
-            if (is_numeric($size) || substr($size, -1) == '%' || substr($size, -2) == 'px') {
+            if (substr($size, -1) == '%' || substr($size, -2) == 'px') {
                 $style .= 'width:' . $size . ';';
                 if (substr($size, -1) == '%') {
                     $attributes['data-width-percent'] = substr($size, 0, -1);
                 }
             }
+
+            $scrollerStyle = 'grid-template-rows:repeat(' . $group . ', 1fr)';
         } else {
-            if (is_numeric($size) || substr($size, -1) == '%' || substr($size, -2) == 'px') {
+            if (substr($size, -1) == '%' || substr($size, -2) == 'px') {
                 $style .= 'height:' . $size . ';';
-                if (substr($size, -1) == '%') {
-                    $attributes['data-height-percent'] = substr($size, 0, -1);
-                }
             }
+
+            $scrollerStyle = 'grid-template-columns:repeat(' . $group . ', 1fr)';
         }
 
-        $previous  = $next = '';
+        $previous = $next = '';
+
+        $nextSizeAttributes     = array();
+        $previousSizeAttributes = array();
+
         $showArrow = intval($slider->params->get($this->key . 'arrow', 1));
         if ($showArrow) {
             $arrowImagePrevious = $arrowImageNext = ResourceTranslator::toUrl($slider->params->get($this->key . 'arrow-image', ''));
@@ -186,20 +181,14 @@ class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
             $commonStyle        = '';
             if (!empty($arrowWidth)) {
                 $commonStyle = 'width:' . $arrowWidth . 'px;';
-                $arrowOffset = intval($slider->params->get($this->key . 'arrow-offset', 0));
-                $marginValue = -($arrowWidth / 2) + $arrowOffset;
-                switch ($orientation) {
-                    case 'vertical':
-                        $commonStyle .= 'margin-left:' . $marginValue . 'px!important;';
-                        break;
-                    default:
-                        $commonStyle .= 'margin-top:' . $marginValue . 'px!important;';
-                }
             }
             $previousStyle = $nextStyle = $commonStyle;
             if (empty($arrowImagePrevious)) {
-                $arrowImagePrevious = 'data:image/svg+xml;base64,' . Base64::encode(Filesystem::readFile(self::getAssetsPath() . '/thumbnail-up-arrow.svg'));
+                $image = self::getAssetsPath() . '/thumbnail-up-arrow.svg';
+                FastImageSize::initAttributes($image, $previousSizeAttributes);
+                $arrowImagePrevious = 'data:image/svg+xml;base64,' . Base64::encode(Filesystem::readFile($image));
             } else {
+                FastImageSize::initAttributes(ResourceTranslator::urlToResource($arrowImagePrevious), $previousSizeAttributes);
                 switch ($orientation) {
                     case 'vertical':
                         $previousStyle .= 'transform:rotateY(180deg) rotateX(180deg);';
@@ -209,51 +198,120 @@ class ThumbnailBasicFrontend extends AbstractWidgetFrontend {
                 }
             }
             if (empty($arrowImageNext)) {
-                $arrowImageNext = 'data:image/svg+xml;base64,' . Base64::encode(Filesystem::readFile(self::getAssetsPath() . '/thumbnail-down-arrow.svg'));
+                $image = self::getAssetsPath() . '/thumbnail-down-arrow.svg';
+                FastImageSize::initAttributes($image, $nextSizeAttributes);
+                $arrowImageNext = 'data:image/svg+xml;base64,' . Base64::encode(Filesystem::readFile($image));
             } else {
                 $nextStyle .= 'transform:none;';
+                FastImageSize::initAttributes(ResourceTranslator::urlToResource($arrowImageNext), $nextSizeAttributes);
             }
 
-            $previous = Html::image($arrowImagePrevious, $slider->params->get($this->key . 'arrow-prev-alt', 'previous arrow'), Html::addExcludeLazyLoadAttributes(array(
-                'class' => 'nextend-thumbnail-button nextend-thumbnail-previous n2-ow',
-                'style' => $previousStyle
-            )));
-            $next     = Html::image($arrowImageNext, $slider->params->get($this->key . 'arrow-next-alt', 'next arrow'), Html::addExcludeLazyLoadAttributes(array(
-                'class' => 'nextend-thumbnail-button nextend-thumbnail-next n2-ow n2-active',
-                'style' => $nextStyle
-            )));
+            $previous = Html::tag('div', array(
+                'class' => 'nextend-thumbnail-button nextend-thumbnail-previous'
+            ), Html::image($arrowImagePrevious, $slider->params->get($this->key . 'arrow-prev-alt', 'previous arrow'), $previousSizeAttributes + Html::addExcludeLazyLoadAttributes(array(
+                    'style'   => $previousStyle,
+                    'loading' => 'lazy'
+                ))));
+            $next     = Html::tag('div', array(
+                'class' => 'nextend-thumbnail-button nextend-thumbnail-next'
+            ), Html::image($arrowImageNext, $slider->params->get($this->key . 'arrow-next-alt', 'next arrow'), $nextSizeAttributes + Html::addExcludeLazyLoadAttributes(array(
+                    'style'   => $nextStyle,
+                    'loading' => 'lazy'
+                ))));
         }
 
-        if ($params->get($this->key . 'position-mode') == 'simple' && $orientation == 'vertical') {
-            $area = $params->get($this->key . 'position-area');
-            switch ($area) {
-                case '5':
-                case '6':
-                case '7':
-                case '8':
-                    $attributes['data-sstop'] = '0';
-                    break;
+        $captionStyle = '';
+        if ($showTitle || $showDescription) {
+            $captionStyle = $slider->addStyle($params->get($this->key . 'title-style'), 'simple');
+        }
+
+        $titleFont = '';
+        if ($showTitle) {
+            $titleFont = $slider->addFont($params->get($this->key . 'title-font'), 'simple');
+        }
+
+        $descriptionFont = '';
+        if ($showDescription) {
+            $descriptionFont = $slider->addFont($params->get($this->key . 'description-font'), 'simple');
+        }
+
+        $dots   = array();
+        $slides = $slider->getSlides();
+        foreach ($slides as $slide) {
+
+            $dotHTML = array();
+
+            if ($showThumbnail) {
+
+                $dotHTML[] = $slide->renderThumbnailImage($width, $height, array(
+                    'alt' => $slide->getThumbnailAltDynamic()
+                ));
+
+                $thumbnailType = $slide->getThumbnailType();
+                if (isset(self::$thumbnailTypes[$thumbnailType])) {
+                    $dotHTML[] = self::$thumbnailTypes[$thumbnailType];
+                }
             }
+
+            if ($showTitle || $showDescription) {
+                $captionHTML = '';
+                if ($showTitle) {
+                    $title = $slide->getTitle();
+                    if (!empty($title)) {
+                        $captionHTML .= '<div class="' . $titleFont . '">' . $title . '</div>';
+                    }
+                }
+
+                if ($showDescription) {
+                    $description = $slide->getDescription();
+                    if (!empty($description)) {
+                        $captionHTML .= '<div class="' . $descriptionFont . '">' . $description . '</div>';
+                    }
+                }
+
+                if (!empty($captionHTML)) {
+                    $dotHTML[] = Html::tag('div', array(
+                        'class' => $captionStyle . ' n2-ss-caption n2-ow n2-caption-' . $captionPlacement,
+                        'style' => $captionExtraStyle
+                    ), $captionHTML);
+                }
+            }
+
+
+            $dots[] = Html::tag('div', $slide->showOnAttributes + array(
+                    'class'                => 'n2-thumbnail-dot ' . $slideStyle,
+                    'data-slide-public-id' => $slide->getPublicID(),
+                    'role'                 => 'button',
+                    'aria-label'           => $slide->getTitle(),
+                    'tabindex'             => '0'
+                ), implode('', $dotHTML));
         }
 
+        $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
+            "sliderid" => $slider->elementId
+        ));
 
-        return Html::tag('div', $displayAttributes + $attributes + array(
-                'class' => $displayClass . 'nextend-thumbnail nextend-thumbnail-default n2-ow nextend-thumbnail-' . $orientation,
-                'style' => $style
-            ), $previous . $next . Html::tag('div', array(
-                'class' => 'nextend-thumbnail-inner n2-ow ' . $barStyle
+        return Html::tag('div', Html::mergeAttributes($attributes, $displayAttributes, array(
+            'class'             => 'nextend-thumbnail nextend-thumbnail-default nextend-thumbnail-' . $orientation . ' n2-ow-all',
+            'data-has-next'     => 0,
+            'data-has-previous' => 0,
+            'style'             => $style
+        )), Html::tag('div', array(
+                'class' => 'nextend-thumbnail-inner ' . $barStyle
             ), Html::tag('div', array(
-                'class' => 'nextend-thumbnail-scroller n2-ow n2-align-content-' . $params->get('widget-thumbnail-align-content'),
-            ), '')));
+                'class' => 'nextend-thumbnail-scroller n2-align-content-' . $params->get('widget-thumbnail-align-content'),
+                'style' => $scrollerStyle
+            ), implode('', $dots))) . $previous . $next);
     }
 
-    private function getStringBetween($string, $start, $end) {
-        $string = ' ' . $string;
-        $ini    = strpos($string, $start);
-        if ($ini == 0) return '';
-        $ini += strlen($start);
-        $len = strpos($string, $end, $ini) - $ini;
+    protected function translateArea($area) {
 
-        return substr($string, $ini, $len);
+        if ($area == 5) {
+            return 'left';
+        } else if ($area == 8) {
+            return 'right';
+        }
+
+        return parent::translateArea($area);
     }
 }

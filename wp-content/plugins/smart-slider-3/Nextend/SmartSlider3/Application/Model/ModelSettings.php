@@ -32,7 +32,7 @@ class ModelSettings extends AbstractModel {
 
     public function saveDefaults($defaults) {
         if (!empty($defaults)) {
-            foreach ($defaults AS $referenceKey => $value) {
+            foreach ($defaults as $referenceKey => $value) {
                 Section::set('smartslider', 'default', $referenceKey, $value);
             }
         }

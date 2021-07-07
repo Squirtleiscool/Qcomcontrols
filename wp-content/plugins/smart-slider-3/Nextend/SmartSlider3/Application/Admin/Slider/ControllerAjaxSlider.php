@@ -107,13 +107,6 @@ class ControllerAjaxSlider extends AdminAjaxController {
                     $slider['widgetbullet']          = 'transitionRectangle';
                     break;
 
-                case 'accordion':
-                    $slider['type']        = 'accordion';
-                    $slider['orientation'] = 'horizontal';
-
-                    $slider['widget-arrow-enabled'] = 0;
-                    break;
-
                 case 'simple':
                 default:
                     $slider['type'] = 'simple';

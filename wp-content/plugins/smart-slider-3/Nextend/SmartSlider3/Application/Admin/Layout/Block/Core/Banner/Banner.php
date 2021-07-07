@@ -27,13 +27,14 @@ $closeUrl = $this->getCloseUrl();
         </div>
 
         <script>
-            N2R('documentReady', function ($) {
+            _N2.r(['$', 'documentReady'], function () {
+                var $ = _N2.$;
                 var $banner = $('#<?php echo $this->getID(); ?>');
 
                 $banner.find('.n2_admin__banner_close').on('click', function (e) {
                     e.preventDefault();
 
-                    N2Classes.AjaxHelper.ajax({url: <?php echo json_encode($closeUrl); ?>});
+                    _N2.AjaxHelper.ajax({url: <?php echo json_encode($closeUrl); ?>});
                     $banner.remove();
                 });
             });

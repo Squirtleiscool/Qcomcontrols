@@ -10,6 +10,7 @@ use Nextend\Framework\Asset\Css\Css;
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Data\Data;
 use Nextend\Framework\Pattern\MVCHelperTrait;
+use Nextend\Framework\Settings;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Application\Model\ModelSliders;
 use Nextend\SmartSlider3\Renderable\AbstractRenderable;
@@ -44,6 +45,8 @@ class Slider extends AbstractRenderable {
 
     public $cacheId = '';
 
+    public $isFrame = false;
+
     /** @var  Data */
     public $data;
 
@@ -71,7 +74,7 @@ class Slider extends AbstractRenderable {
     public $staticSlides = array();
 
     /** @var  AbstractSliderTypeFrontend */
-    protected $sliderType;
+    public $sliderType;
 
     /**
      * @var AbstractSliderTypeCss
@@ -86,7 +89,6 @@ class Slider extends AbstractRenderable {
         'title'         => true,
         'description'   => false,
         'thumbnail'     => false,
-        'thumbnailType' => false,
         'lightboxImage' => false
     );
 
@@ -168,14 +170,16 @@ class Slider extends AbstractRenderable {
                     unset($sliderData['type']);
 
                     $this->data   = new Data($sliderRow);
-                    $this->params = new SliderParams($sliderRow['type'], $sliderData);
+                    $this->params = new SliderParams($this->sliderId, $sliderRow['type'], $sliderData);
                 } else {
                     $this->data   = new Data($sliderRow);
-                    $this->params = new SliderParams($sliderRow['type'], $sliderRow['params'], true);
+                    $this->params = new SliderParams($this->sliderId, $sliderRow['type'], $sliderRow['params'], true);
                 }
 
                 switch ($sliderRow['type']) {
                     case 'group':
+                        throw new Exception(n2_('Groups are only available in the Pro version.'));
+                    
                         $this->isGroup = true;
                         break;
                 }
@@ -220,19 +224,6 @@ class Slider extends AbstractRenderable {
 
         $this->sliderType = SliderTypeFactory::createFrontend($this->data->get('type', 'simple'), $this);
         $defaults         = $this->sliderType->getDefaults();
-
-        $parallaxOverlap = $this->params->get('animation-parallax-overlap', false);
-
-        if ($parallaxOverlap === false) {
-            $animationParallax = $this->params->get('animation-parallax', false);
-            if ($animationParallax !== false) {
-                $parallaxOverlap = 100 - floatval($animationParallax) * 100;
-            } else {
-                $parallaxOverlap = 0;
-            }
-            $this->params->set('animation-parallax-overlap', $parallaxOverlap);
-            $this->params->un_set('animation-parallax');
-        }
 
         $this->params->fillDefault($defaults);
         $this->sliderType->limitParams($this->params);
@@ -290,55 +281,39 @@ class Slider extends AbstractRenderable {
         $slider = $this->sliderType->render($this->assets);
 
         $slider = str_replace('n2-ss-0', $this->elementId, $slider);
+
+        $rockedLoader = false;
         if (!$this->isAdmin) {
             $rocketAttributes = '';
 
             $loadingType = $this->params->get('loading-type');
             if ($loadingType == 'afterOnLoad') {
-                $rocketAttributes .= 'data-loading-type="' . $loadingType . '"';
+                $rocketAttributes .= ' data-loading-type="' . $loadingType . '"';
             } else if ($loadingType == 'afterDelay') {
 
                 $delay = max(0, intval($this->params->get('delay'), 0));
                 if ($delay > 0) {
-                    $rocketAttributes .= 'data-loading-type="' . $loadingType . '"';
-                    $rocketAttributes .= 'data-loading-delay="' . $delay . '"';
+                    $rocketAttributes .= ' data-loading-type="' . $loadingType . '"';
+                    $rocketAttributes .= ' data-loading-delay="' . $delay . '"';
                 }
             }
 
             if (!empty($rocketAttributes)) {
-                $slider = '<template id="' . $this->elementId . '" ' . $rocketAttributes . '>' . $slider . '</template>';
+                $slider       = '<template id="' . $this->elementId . '_t"' . $rocketAttributes . '>' . $slider . '</template>';
+                $rockedLoader = true;
             }
         }
         if (!$this->isGroup) {
-            $slider = $this->features->translateUrl->renderSlider($slider);
+            $slider = $this->features->translateUrl->renderSlider($slider) . HTML::tag('ss3-loader', array(), '');
 
-            $slider = $this->features->loadSpinner->renderSlider($this, $slider);
             $slider = $this->features->align->renderSlider($slider, $this->assets->sizes['width']);
             $slider = $this->features->margin->renderSlider($slider);
 
 
-            $style = $this->sliderType->getStyle();
-            if ($this->isAdmin) {
-                $slider = '<style type="text/css">' . $style . '</style>' . $slider;
-            } else {
-                $cssMode = \Nextend\Framework\Settings::get('css-mode', 'normal');
-                switch ($cssMode) {
-                    case 'inline':
-                        Css::addInline($style);
-                        break;
-                    case 'async':
-                        $this->sliderType->setJavaScriptProperty('css', $style);
-                        break;
-                    default:
-                        $slider = '<style>' . $style . '</style>' . $slider;
-                        break;
-                }
-            }
+            Css::addInline($this->sliderType->getStyle(), $this->elementId);
 
 
-            $slider .= $this->features->fadeOnLoad->renderPlaceholder($this->assets->sizes);
-
-            $jsInlineMode = \Nextend\Framework\Settings::get('javascript-inline', 'head');
+            $jsInlineMode = Settings::get('javascript-inline', 'head');
             if (class_exists('ElementorPro\Plugin', false)) {
                 $jsInlineMode = 'body';
             }
@@ -366,14 +341,64 @@ class Slider extends AbstractRenderable {
             $classes[] = 'n2_clear';
         }
 
-        $html .= Html::tag("div", array(
-            'class'      => implode(' ', $classes),
-            'role'       => 'region',
-            'aria-label' => $this->params->get('aria-label', 'Slider')
-        ), $slider);
+
+        $sliderAttributes = array(
+            'class'     => implode(' ', $classes),
+            'data-ssid' => $this->sliderId
+        );
+
+        $ariaLabel = $this->params->get('aria-label', 'Slider');
+        if (!empty($ariaLabel)) {
+            $sliderAttributes['tabindex']   = '0';
+            $sliderAttributes['role']       = 'region';
+            $sliderAttributes['aria-label'] = $ariaLabel;
+        }
+
+        $alias = $this->getAlias();
+        if (!empty($alias)) {
+            $sliderAttributes['data-alias'] = $alias;
+
+            if (intval($this->params->get('alias-id', 0))) {
+                $sliderAttributes['id'] = $alias;
+
+                if (intval($this->params->get('alias-slideswitch-scroll', 1))) {
+                    $slideAnchorHTML = '';
+                    $slideCount      = $this->getSlidesCount();
+                    for ($i = 1; $i <= $slideCount; $i++) {
+                        $slideAnchorHTML .= Html::tag('div', array(
+                            'id' => $alias . '-' . $i
+                        ));
+                    }
+
+                    $slider = $slideAnchorHTML . $slider;
+                }
+            }
+        }
+
+        $sizes = $this->assets->sizes;
+
+        if ($rockedLoader && !empty($sizes['width']) && !empty($sizes['height'])) {
+            $sliderAttributes['style'] = 'height:' . $sizes['height'] . 'px;';
+        }
+
+        $html .= Html::tag("div", $sliderAttributes, $slider);
 
         if (!$this->params->get('optimize-jetpack-photon', 0)) {
             AssetManager::$image->add($this->images);
+        }
+
+        $needDivWrap = false;
+
+        if (!$this->isGroup && !$this->isAdmin && $this->features->responsive->forceFull) {
+            $html        = Html::tag("ss3-force-full-width", array(
+                'data-overflow-x'          => $this->features->responsive->forceFullOverflowX,
+                'data-horizontal-selector' => $this->features->responsive->forceFullHorizontalSelector
+            ), $html);
+            $needDivWrap = true;
+        }
+
+        if ($needDivWrap) {
+            return Html::tag("div", array(), $html);
         }
 
         return $html;
@@ -447,5 +472,9 @@ class Slider extends AbstractRenderable {
         $this->initSlider();
 
         return $this->isGroup;
+    }
+
+    public function isLegacyFontScale() {
+        return !!$this->params->get('legacy-font-scale', 0);
     }
 }

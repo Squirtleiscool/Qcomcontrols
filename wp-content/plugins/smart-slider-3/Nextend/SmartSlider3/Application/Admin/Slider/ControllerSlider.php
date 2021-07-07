@@ -62,10 +62,15 @@ class ControllerSlider extends AbstractControllerAdmin {
             }
 
             if ($slider['type'] == 'group') {
+                Notification::error(n2_('Groups are only available in the Pro version.'));
+                $this->redirectToSliders();
+            
 
-                $this->doAction('editGroup', array(
-                    $slider
-                ));
+                if (N2SSPRO) {
+                    $this->doAction('editGroup', array(
+                        $slider
+                    ));
+                }  //N2SSPRO
 
             } else {
 

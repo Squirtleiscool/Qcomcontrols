@@ -25,7 +25,7 @@ class GeneratorFactory {
     }
 
     public static function getGenerators() {
-        foreach (self::$generators AS $generator) {
+        foreach (self::$generators as $generator) {
             $generator->load();
         }
 

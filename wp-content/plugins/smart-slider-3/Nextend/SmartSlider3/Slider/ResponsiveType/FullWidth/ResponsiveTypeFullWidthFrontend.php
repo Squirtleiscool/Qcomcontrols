@@ -10,9 +10,6 @@ class ResponsiveTypeFullWidthFrontend extends AbstractResponsiveTypeFrontend {
     public function parse($params, $responsive, $features) {
         $features->align->align = 'normal';
 
-        $responsive->scaleDown = 1;
-        $responsive->scaleUp   = 1;
-
         $responsive->minimumHeight = intval($params->get('responsiveSliderHeightMin', 0));
 
         $responsive->forceFull = intval($params->get('responsiveForceFull', 1));

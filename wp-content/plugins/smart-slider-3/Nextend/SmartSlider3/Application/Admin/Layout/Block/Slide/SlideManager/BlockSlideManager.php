@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Slide\SlideManager;
 
 
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\View\AbstractBlock;
 use Nextend\SmartSlider3\Application\Admin\TraitAdminUrl;
 use Nextend\SmartSlider3\Slider\Slider;

@@ -3,7 +3,9 @@
 namespace Nextend\SmartSlider3\Widget\Autoplay\AutoplayImage;
 
 
+use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Cast;
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\Filesystem\Filesystem;
 use Nextend\Framework\Misc\Base64;
 use Nextend\Framework\Parser\Color;
@@ -13,23 +15,28 @@ use Nextend\SmartSlider3\Widget\AbstractWidgetFrontend;
 
 class AutoplayImageFrontend extends AbstractWidgetFrontend {
 
+    public function __construct($sliderWidget, $widget, $params) {
 
-    public function getPositions(&$params) {
-        $positions = array();
+        parent::__construct($sliderWidget, $widget, $params);
 
-        $positions['autoplay-position'] = array(
-            $this->key . 'position-',
-            'autoplay'
-        );
+        $this->addToPlacement($this->key . 'position-', array(
+            $this,
+            'render'
+        ));
 
-        return $positions;
     }
 
-    public function render($slider, $id, $params) {
+    public function render($attributes = array()) {
+
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
 
         if (!$params->get('autoplay', 0)) {
             return '';
         }
+
+        $sizeAttributes = array();
 
         $html = '';
 
@@ -72,6 +79,9 @@ class AutoplayImageFrontend extends AbstractWidgetFrontend {
 
         $ext = pathinfo($play, PATHINFO_EXTENSION);
         if ($ext == 'svg' && ResourceTranslator::isResource($play)) {
+
+            FastImageSize::initAttributes($playColor, $sizeAttributes);
+
             list($color, $opacity) = Color::colorToSVG($playColor);
             $play = 'data:image/svg+xml;base64,' . Base64::encode(str_replace(array(
                     'fill="#FFF"',
@@ -81,6 +91,7 @@ class AutoplayImageFrontend extends AbstractWidgetFrontend {
                     'opacity="' . $opacity . '"'
                 ), Filesystem::readFile(ResourceTranslator::toPath($play))));
         } else {
+            FastImageSize::initAttributes($play, $sizeAttributes);
             $play = ResourceTranslator::toUrl($play);
         }
 
@@ -100,34 +111,47 @@ class AutoplayImageFrontend extends AbstractWidgetFrontend {
 
         if ($play && $pause) {
 
+            $desktopWidth = $params->get('widget-autoplay-desktop-image-width');
+            $tabletWidth  = $params->get('widget-autoplay-tablet-image-width');
+            $mobileWidth  = $params->get('widget-autoplay-mobile-image-width');
+
+            $slider->addDeviceCSS('all', 'div#' . $id . ' .nextend-autoplay img{width: ' . $desktopWidth . 'px}');
+            if ($tabletWidth != $desktopWidth) {
+                $slider->addDeviceCSS('tabletportrait', 'div#' . $id . ' .nextend-autoplay img{width: ' . $tabletWidth . 'px}');
+                $slider->addDeviceCSS('tabletlandscape', 'div#' . $id . ' .nextend-autoplay img{width: ' . $tabletWidth . 'px}');
+            }
+            if ($mobileWidth != $desktopWidth) {
+                $slider->addDeviceCSS('mobileportrait', 'div#' . $id . ' .nextend-autoplay img{width: ' . $mobileWidth . 'px}');
+                $slider->addDeviceCSS('mobilelandscape', 'div#' . $id . ' .nextend-autoplay img{width: ' . $mobileWidth . 'px}');
+            }
+
             $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
                 "sliderid" => $slider->elementId
             ));
-            $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/autoplay.min.js'));
-        
 
-            list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key, 1);
+            Js::addStaticGroup(self::getAssetsPath() . '/dist/w-autoplay.min.js', 'w-autoplay');
+
+
+            $displayAttributes = $this->getDisplayAttributes($params, $this->key, 1);
 
             $styleClass = $slider->addStyle($params->get($this->key . 'style'), 'heading');
 
+            $slider->features->addInitCallback('new _N2.SmartSliderWidgetAutoplayImage(this, ' . Cast::floatToString($params->get($this->key . 'responsive-desktop')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-tablet')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-mobile')) . ');');
 
-            $isNormalFlow = $this->isNormalFlow($params, $this->key);
-            list($style, $attributes) = $this->getPosition($params, $this->key);
+            $slider->sliderType->addJSDependency('SmartSliderWidgetAutoplayImage');
 
-
-            $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetAutoplayImage(this, ' . Cast::floatToString($params->get($this->key . 'responsive-desktop')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-tablet')) . ', ' . Cast::floatToString($params->get($this->key . 'responsive-mobile')) . ');');
-
-            $html = Html::tag('div', $displayAttributes + $attributes + array(
-                    'class'      => $displayClass . $styleClass . 'nextend-autoplay n2-ow nextend-autoplay-image' . ($isNormalFlow ? '' : ' n2-ib'),
-                    'style'      => $style,
-                    'role'       => 'button',
-                    'aria-label' => n2_('Pause autoplay'),
-                    'tabindex'   => '0'
-                ), Html::image($play, 'Play', HTML::addExcludeLazyLoadAttributes(array(
-                    'class' => 'nextend-autoplay-play n2-ow'
-                ))) . Html::image($pause, 'Pause', HTML::addExcludeLazyLoadAttributes(array(
-                    'class' => 'nextend-autoplay-pause n2-ow'
-                ))));
+            $html = Html::tag('div', Html::mergeAttributes($attributes, $displayAttributes, array(
+                'class'            => $styleClass . 'nextend-autoplay n2-ow-all nextend-autoplay-image',
+                'role'             => 'button',
+                'aria-label'       => n2_('Play autoplay'),
+                'data-pause-label' => n2_('Pause autoplay'),
+                'data-play-label'  => n2_('Play autoplay'),
+                'tabindex'         => '0'
+            )), Html::image($play, 'Play', $sizeAttributes + HTML::addExcludeLazyLoadAttributes(array(
+                        'class' => 'nextend-autoplay-play'
+                    ))) . Html::image($pause, 'Pause', $sizeAttributes + HTML::addExcludeLazyLoadAttributes(array(
+                        'class' => 'nextend-autoplay-pause'
+                    ))));
         }
 
         return $html;

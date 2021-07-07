@@ -5,12 +5,10 @@ namespace Nextend\Framework\Asset\Fonts\Google;
 
 
 use Nextend\Framework\Asset\AbstractAsset;
-use Nextend\Framework\Asset\Js\Js;
-use Nextend\SmartSlider3\Application\Frontend\ApplicationTypeFrontend;
+use Nextend\Framework\Asset\Css\Css;
+use Nextend\Framework\Url\UrlHelper;
 
 class Asset extends AbstractAsset {
-
-    public static $hasWebFontLoader = false;
 
     public function getLoadedFamilies() {
         return array_keys($this->files);
@@ -33,99 +31,28 @@ class Asset extends AbstractAsset {
     }
 
     public function loadFonts() {
-        $familyQuery = array();
-        $names       = array();
-        if (count($this->files)) {
-            foreach ($this->files as $family => $styles) {
-                if (count($styles) && !in_array($family, Google::$excludedFamilies)) {
-                    $familyQuery[] = $family . ':' . implode(',', $styles);
-                    foreach ($styles as $style) {
-                        $names[] = $family . ':' . (substr($style, -6) == 'italic' ? 'i' : 'n') . $style[0];
-                    }
+
+        if (!empty($this->files)) {
+            //https://fonts.googleapis.com/css?display=swap&family=Montserrat:400%7CRoboto:100italic,300,400&subset=latin,greek-ext
+
+            $families = array();
+            foreach ($this->files as $name => $styles) {
+                if (count($styles) && !in_array($name, Google::$excludedFamilies)) {
+                    $families[] = $name . ':' . implode(',', $styles);
                 }
             }
-        }
-        if (empty($familyQuery)) {
-            return false;
-        }
-        $subsets                              = array_unique($this->inline);
-        $familyQuery[count($familyQuery) - 1] .= ':' . implode(',', $subsets);
 
-        self::$hasWebFontLoader = true;
+            if (count($families)) {
+                $params = array(
+                    'display' => 'swap',
+                    'family'  => implode('|', $families),
+                    'subset'  => implode(',', $this->inline)
+                );
 
-        Js::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . "/dist/nextend-webfontloader.min.js", "nextend-webfontloader");
-
-        Js::addGlobalInline("
-        nextend.fontsLoaded = false;
-        nextend.fontsLoadedActive = function () {nextend.fontsLoaded = true;};
-        var requiredFonts = " . json_encode($names) . ",
-            fontData = {
-                google: {
-                    families: " . json_encode($familyQuery) . "
-                },
-                active: function(){nextend.fontsLoadedActive()},
-                inactive: function(){nextend.fontsLoadedActive()},
-                fontactive: function(f,s){fontData.resolveFont(f+':'+s);},
-                fontinactive: function(f,s){fontData.resolveFont(f+':'+s);},
-                resolveFont: function(n){
-                    for(var i = requiredFonts.length - 1; i >= 0; i--) {
-                        if(requiredFonts[i] === n) {
-                           requiredFonts.splice(i, 1);
-                           break;
-                        }
-                    }
-                    if(!requiredFonts.length) nextend.fontsLoadedActive();
-                }
-            };
-        if(typeof WebFontConfig !== 'undefined' && typeof WebFont === 'undefined'){
-            var _WebFontConfig = WebFontConfig;
-            for(var k in WebFontConfig){
-                if(k == 'active'){
-                  fontData.active = function(){nextend.fontsLoadedActive();_WebFontConfig.active();}
-                }else if(k == 'inactive'){
-                  fontData.inactive = function(){nextend.fontsLoadedActive();_WebFontConfig.inactive();}
-                }else if(k == 'fontactive'){
-                  fontData.fontactive = function(f,s){fontData.resolveFont(f+':'+s);_WebFontConfig.fontactive.apply(this,arguments);}
-                }else if(k == 'fontinactive'){
-                  fontData.fontinactive = function(f,s){fontData.resolveFont(f+':'+s);_WebFontConfig.fontinactive.apply(this,arguments);}
-                }else if(k == 'google'){
-                    if(typeof WebFontConfig.google.families !== 'undefined'){
-                        for(var i = 0; i < WebFontConfig.google.families.length; i++){
-                            fontData.google.families.push(WebFontConfig.google.families[i]);
-                        }
-                    }
-                }else{
-                    fontData[k] = WebFontConfig[k];
-                }
+                Css::addUrl(UrlHelper::add_query_arg($params, 'https://fonts.googleapis.com/css'));
             }
-        }
-        fontData.classes=true;
-        fontData.events=true;
-        
-        if(typeof WebFont === 'undefined'){
-            window.WebFontConfig = fontData;
-        }else{
-            WebFont.load(fontData);
-        }");
 
-        Js::addFirstCode("
-        nextend.fontsDeferred = $.Deferred();
-        if(nextend.fontsLoaded){
-            nextend.fontsDeferred.resolve();
-        }else{
-            nextend.fontsLoadedActive = function () {
-                nextend.fontsLoaded = true;
-                nextend.fontsDeferred.resolve();
-            };
-            var intercalCounter = 0;
-            nextend.fontInterval = setInterval(function(){
-                if(intercalCounter > 3 || document.documentElement.className.indexOf('wf-active') !== -1){
-                    nextend.fontsLoadedActive();
-                    clearInterval(nextend.fontInterval);
-                }
-                intercalCounter++;
-            }, 1000);
-        }", true);
+        }
 
         return true;
     }

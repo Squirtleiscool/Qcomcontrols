@@ -13,6 +13,7 @@ use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Url\Url;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
+use WP_HTTP_Proxy;
 
 class Api {
 
@@ -48,7 +49,7 @@ class Api {
                 curl_setopt($ch, CURLOPT_TIMEOUT, 30);
                 curl_setopt($ch, CURLOPT_USERAGENT, 'Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1; SV1; .NET CLR 1.0.3705; .NET CLR 1.1.4322)');
                 curl_setopt($ch, CURLOPT_REFERER, $_SERVER['REQUEST_URI']);
-                $proxy = new \WP_HTTP_Proxy();
+                $proxy = new WP_HTTP_Proxy();
 
                 if ($proxy->is_enabled() && $proxy->send_through_proxy($api)) {
 

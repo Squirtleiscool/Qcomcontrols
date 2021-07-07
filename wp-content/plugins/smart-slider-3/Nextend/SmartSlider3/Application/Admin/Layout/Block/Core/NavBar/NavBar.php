@@ -17,7 +17,7 @@ namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\NavBar;
     </div>
     <div class="n2_nav_bar__menu">
         <?php
-        foreach ($this->getMenuItems() AS $menuItem):
+        foreach ($this->getMenuItems() as $menuItem):
             ?>
             <div class="n2_nav_bar__menuitem<?php echo $menuItem->isActive() ? ' n2_nav_bar__menuitem--active' : ''; ?>"><?php $menuItem->display(); ?></div>
         <?php

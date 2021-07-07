@@ -59,7 +59,7 @@ class Thumbnail extends AbstractWidgetGroup {
 
         $row2 = $table->createRow('widget-thumbnail-2');
 
-        new NumberAutoComplete($row2, 'widget-thumbnail-width', n2_('Width'), 100, array(
+        new NumberAutoComplete($row2, 'widget-thumbnail-width', n2_('Desktop width'), 100, array(
             'unit'   => 'px',
             'values' => array(
                 60,
@@ -71,6 +71,50 @@ class Thumbnail extends AbstractWidgetGroup {
         ));
 
         new NumberAutoComplete($row2, 'widget-thumbnail-height', n2_('Height'), 60, array(
+            'unit'   => 'px',
+            'values' => array(
+                60,
+                100,
+                150,
+                200
+            ),
+            'wide'   => 4
+        ));
+
+        new NumberAutoComplete($row2, 'widget-thumbnail-tablet-width', n2_('Tablet width'), 100, array(
+            'unit'   => 'px',
+            'values' => array(
+                60,
+                100,
+                150,
+                200
+            ),
+            'wide'   => 4
+        ));
+
+        new NumberAutoComplete($row2, 'widget-thumbnail-tablet-height', n2_('Height'), 60, array(
+            'unit'   => 'px',
+            'values' => array(
+                60,
+                100,
+                150,
+                200
+            ),
+            'wide'   => 4
+        ));
+
+        new NumberAutoComplete($row2, 'widget-thumbnail-mobile-width', n2_('Mobile width'), 100, array(
+            'unit'   => 'px',
+            'values' => array(
+                60,
+                100,
+                150,
+                200
+            ),
+            'wide'   => 4
+        ));
+
+        new NumberAutoComplete($row2, 'widget-thumbnail-mobile-height', n2_('Height'), 60, array(
             'unit'   => 'px',
             'values' => array(
                 60,

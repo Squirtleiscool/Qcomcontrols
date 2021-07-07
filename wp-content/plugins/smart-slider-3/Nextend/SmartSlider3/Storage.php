@@ -1186,18 +1186,18 @@ class Storage {
                         ),
                         'next'     => array(
                             'ease' => 'easeOutCubic',
-                            'left' => "100%"
+                            'xP'   => 100
                         )
                     ),
                     'invert' => array(
                         'zIndex'  => 2,
                         'current' => array(
-                            'left'  => "100%",
+                            'xP'    => 100,
                             'scale' => 1
                         ),
                         'next'    => array(
                             'scale' => 0.7,
-                            'left'  => 0
+                            'xP'    => 0
                         )
                     )
                 )
@@ -1323,12 +1323,12 @@ class Storage {
                         'next'     => array(
                             'ease'    => 'easeInQuart',
                             'opacity' => "0",
-                            'left'    => '-100%'
+                            'xP'      => -100
                         )
                     ),
                     'invert'      => array(
                         'next' => array(
-                            'left' => '100%'
+                            'xP' => 100
                         )
                     ),
                     'invertTiles' => array(
@@ -1390,18 +1390,18 @@ class Storage {
                         ),
                         'next'     => array(
                             'ease' => 'easeOutCubic',
-                            'top'  => "100%"
+                            'yP'   => 100
                         )
                     ),
                     'invert' => array(
                         'zIndex'  => 2,
                         'current' => array(
-                            'top'   => "100%",
-                            'scale' => 1
+                            'scale' => 1,
+                            'yP'    => 100
                         ),
                         'next'    => array(
                             'scale' => 0.7,
-                            'top'   => 0
+                            'yP'    => 0
                         )
                     )
                 )
@@ -1429,18 +1429,18 @@ class Storage {
                         ),
                         'next'     => array(
                             'ease' => 'easeOutCubic',
-                            'top'  => "-100%"
+                            'yP'   => -100
                         )
                     ),
                     'invert' => array(
                         'zIndex'  => 2,
                         'current' => array(
-                            'top'   => "-100%",
-                            'scale' => 1
+                            'scale' => 1,
+                            'yP'    => -100
                         ),
                         'next'    => array(
                             'scale' => 0.7,
-                            'top'   => 0
+                            'yP'    => 0
                         )
                     )
                 )
@@ -1466,12 +1466,12 @@ class Storage {
                         'next'     => array(
                             'ease'    => 'easeInQuart',
                             'opacity' => "0",
-                            'top'     => '100%'
+                            'yP'      => 100
                         )
                     ),
                     'invert'      => array(
                         'next' => array(
-                            'top' => '-100%'
+                            'yP' => -100
                         )
                     ),
                     'invertTiles' => array(
@@ -1500,12 +1500,12 @@ class Storage {
                         'next'     => array(
                             'ease'    => 'easeInQuart',
                             'opacity' => "0",
-                            'top'     => '-100%'
+                            'yP'      => -100
                         )
                     ),
                     'invert'      => array(
                         'next' => array(
-                            'top' => '100%'
+                            'yP' => 100
                         )
                     ),
                     'invertTiles' => array(
@@ -1542,18 +1542,18 @@ class Storage {
                         ),
                         'next'     => array(
                             'ease' => 'easeOutCubic',
-                            'left' => "-100%"
+                            'xP'   => -100
                         )
                     ),
                     'invert' => array(
                         'zIndex'  => 2,
                         'current' => array(
-                            'left'  => "-100%",
+                            'xP'    => -100,
                             'scale' => 1
                         ),
                         'next'    => array(
                             'scale' => 0.7,
-                            'left'  => 0
+                            'xP'    => 0
                         )
                     )
                 )
@@ -1579,12 +1579,12 @@ class Storage {
                         'next'     => array(
                             'ease'    => 'easeInQuart',
                             'opacity' => "0",
-                            'left'    => '100%'
+                            'xP'      => 100
                         )
                     ),
                     'invert'      => array(
                         'next' => array(
-                            'left' => '-100%'
+                            'xP' => -100
                         )
                     ),
                     'invertTiles' => array(

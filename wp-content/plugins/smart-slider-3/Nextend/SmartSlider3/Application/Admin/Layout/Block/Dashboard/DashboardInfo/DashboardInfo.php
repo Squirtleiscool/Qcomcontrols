@@ -11,7 +11,7 @@ use Nextend\SmartSlider3\SmartSlider3Info;
  * @var $this BlockDashboardInfo
  */
 
-Js::addInline('new N2Classes.DashboardInfo();');
+Js::addInline('new _N2.DashboardInfo();');
 ?>
 
 <div class="n2_dashboard_info">

@@ -16,7 +16,7 @@ class TextAlign extends AbstractRadioIcon {
      * @param $excluded array
      */
     public function setExcludeOptions($excluded) {
-        foreach ($excluded AS $exclude) {
+        foreach ($excluded as $exclude) {
             if (isset($this->options[$exclude])) {
                 unset($this->options[$exclude]);
             }

@@ -20,11 +20,11 @@ class Arrow extends AbstractWidgetGroup {
         parent::__construct();
 
         new ArrowImage($this, 'imageSmallRectangle', array(
-            'widget-arrow-responsive-desktop' => 0.8,
-            'widget-arrow-responsive-tablet'  => 0.8,
-            'widget-arrow-previous'           => '$ss$/plugins/widgetarrow/image/image/previous/full.svg',
-            'widget-arrow-next'               => '$ss$/plugins/widgetarrow/image/image/next/full.svg',
-            'widget-arrow-style'              => '{"data":[{"backgroundcolor":"000000ab","padding":"2|*|2|*|2|*|2|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"3","extra":""},{"backgroundcolor":"FF9139FF"}]}'
+            'widget-arrow-desktop-image-width' => 26,
+            'widget-arrow-tablet-image-width'  => 26,
+            'widget-arrow-previous'            => '$ss$/plugins/widgetarrow/image/image/previous/full.svg',
+            'widget-arrow-next'                => '$ss$/plugins/widgetarrow/image/image/next/full.svg',
+            'widget-arrow-style'               => '{"data":[{"backgroundcolor":"000000ab","padding":"2|*|2|*|2|*|2|*|px","boxshadow":"0|*|0|*|0|*|0|*|000000ff","border":"0|*|solid|*|000000ff","borderradius":"3","extra":""},{"backgroundcolor":"FF9139FF"}]}'
         ));
 
         new ArrowImage($this, 'imageEmpty', array(

@@ -6,7 +6,6 @@ namespace Nextend\Framework\Form\Element\Radio;
 
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Form\Element\AbstractFieldHidden;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Url\Url;
 use Nextend\Framework\View\Html;
 
@@ -59,7 +58,7 @@ abstract class ImageList extends AbstractFieldHidden {
         $jsParameters['column']  = min($this->column, count($this->options) + ($this->hasDisabled ? 1 : 0));
         $jsParameters['options'] = $frontendOptions;
 
-        Js::addInline('new N2Classes.FormElementImageList("' . $this->fieldID . '", ' . json_encode($jsParameters) . ', ' . json_encode($this->relatedFields) . ');');
+        Js::addInline('new _N2.FormElementImageList("' . $this->fieldID . '", ' . json_encode($jsParameters) . ', ' . json_encode($this->relatedFields) . ');');
 
         return $html;
     }

@@ -4,6 +4,7 @@
 namespace Nextend\SmartSlider3\Application\Admin\Layout\Block\Core\Header;
 
 
+use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\AbstractBlock;
 
 class BlockHeader extends AbstractBlock {
@@ -35,7 +36,7 @@ class BlockHeader extends AbstractBlock {
      * @param string $heading
      */
     public function setHeading($heading) {
-        $this->heading = $heading;
+        $this->heading = Sanitize::esc_html($heading);
     }
 
     /**

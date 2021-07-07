@@ -65,7 +65,7 @@ class Number extends Text {
     }
 
     protected function addScript() {
-        Js::addInline('new N2Classes.FormElementNumber("' . $this->fieldID . '", ' . $this->min . ', ' . $this->max . ', ' . json_encode($this->units) . ');');
+        Js::addInline('new _N2.FormElementNumber("' . $this->fieldID . '", ' . $this->min . ', ' . $this->max . ', ' . json_encode($this->units) . ');');
     }
 
     public function setMin($min) {

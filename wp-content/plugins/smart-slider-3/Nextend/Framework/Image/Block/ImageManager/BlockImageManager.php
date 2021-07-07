@@ -7,7 +7,6 @@ namespace Nextend\Framework\Image\Block\ImageManager;
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Image\ImageManager;
 use Nextend\Framework\Image\ModelImage;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Visual\AbstractBlockVisual;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButtonApply;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButtonCancel;
@@ -47,7 +46,7 @@ class BlockImageManager extends AbstractBlockVisual {
 
     public function displayContent() {
         Js::addFirstCode("
-            new N2Classes.NextendImageManager({
+            new _N2.NextendImageManager({
                 visuals: " . json_encode(ImageManager::$loaded) . ",
                 ajaxUrl: '" . $this->getAjaxUrlImage() . "'
             });

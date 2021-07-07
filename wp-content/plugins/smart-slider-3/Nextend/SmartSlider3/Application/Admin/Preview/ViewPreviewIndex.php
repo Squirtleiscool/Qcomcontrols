@@ -85,11 +85,11 @@ class ViewPreviewIndex extends AbstractView {
 
     public function getWidthCSS() {
         if ($this->sliderData) {
-            $sliderParams = new SliderParams($this->sliderData['type'], $this->sliderData);
+            $sliderParams = new SliderParams($this->sliderID, $this->sliderData['type'], $this->sliderData);
         } else {
             $model        = new ModelSliders($this);
             $slider       = $model->get($this->sliderID);
-            $sliderParams = new SliderParams($slider['type'], $slider['params'], true);
+            $sliderParams = new SliderParams($this->sliderID, $slider['type'], $slider['params'], true);
         }
 
         if ($sliderParams->get('responsive-mode') == 'fullwidth' || $sliderParams->get('responsive-mode') == 'fullpage') {

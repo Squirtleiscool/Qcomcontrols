@@ -4,7 +4,6 @@ namespace Nextend\SmartSlider3\Application\Admin\Slides;
 
 
 use Nextend\Framework\Asset\Js\Js;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Platform\Platform;
 use Nextend\Framework\Request\Request;
 use Nextend\Framework\View\Html;
@@ -23,7 +22,7 @@ JS::addGlobalInline('document.documentElement.classList.add("n2_html--applicatio
 $externals = Settings::get('external-css-files');
 if (!empty($externals)) {
     $externals = explode("\n", $externals);
-    foreach ($externals AS $external) {
+    foreach ($externals as $external) {
         echo "<link rel='stylesheet' href='" . $external . "' type='text/css' media='all'>";
     }
 }
@@ -42,7 +41,8 @@ $renderedSlider = $this->renderedSlider;
 
     <div id='n2-ss-slide-canvas-container' class='n2_slide_editor_slider'>
         <?php echo Html::tag('div', array(
-            'class' => "n2_slide_editor_slider__editor"
+            'class' => "n2_slide_editor_slider__editor",
+            'style' => 'width:' . $slider->features->responsive->sizes['desktopPortrait']['width'] . 'px'
         ), Html::tag('div', array(
             'class' => "n2_slide_editor_slider__editor_inner"
         ), $renderedSlider)); ?>
@@ -51,7 +51,7 @@ $renderedSlider = $this->renderedSlider;
     <?php
 
 $fillMode = $slider->params->get('backgroundMode', 'fill');
-if ($fillMode == 'fixed') {
+if ($fillMode == 'fixed' || $fillMode == 'tile') {
     $fillMode = 'fill';
 }
 
@@ -77,7 +77,7 @@ $options['sectionLibraryGoProUrl'] = SmartSlider3Info::getProUrlPricing(array(
 
 
 
-JS::addInline('new N2Classes.SlideEdit(' . json_encode(array(
+JS::addInline('new _N2.SlideEdit(' . json_encode(array(
         'ajaxUrl'            => $this->getAjaxUrl(),
         'slideAsFile'        => intval(Settings::get('slide-as-file', 0)),
         'nextendAction'      => Request::$GET->getCmd('nextendaction'),

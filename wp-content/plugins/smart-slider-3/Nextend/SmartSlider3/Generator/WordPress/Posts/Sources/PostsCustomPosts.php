@@ -213,7 +213,7 @@ class PostsCustomPosts extends AbstractGenerator {
 
     protected function _getData($count, $startIndex) {
         global $post, $wp_query;
-        $tmpPost          = $post;
+        $tmpPost = $post;
 
         $identifyDateTime = $this->data->get('identifydatetime', 0);
 
@@ -231,7 +231,7 @@ class PostsCustomPosts extends AbstractGenerator {
 
         if (count($taxonomies)) {
             $tax_array = array();
-            foreach ($taxonomies AS $tax) {
+            foreach ($taxonomies as $tax) {
                 $parts = explode('|*|', $tax);
                 if (!is_array(@$tax_array[$parts[0]]) || !in_array($parts[1], $tax_array[$parts[0]])) {
                     $tax_array[$parts[0]][] = $parts[1];
@@ -239,7 +239,7 @@ class PostsCustomPosts extends AbstractGenerator {
             }
 
             $tax_query = array();
-            foreach ($tax_array AS $taxonomy => $terms) {
+            foreach ($tax_array as $taxonomy => $terms) {
                 $tax_query[] = array(
                     'taxonomy' => $taxonomy,
                     'terms'    => $terms,
@@ -277,7 +277,7 @@ class PostsCustomPosts extends AbstractGenerator {
         $metaMore = $this->data->get('postmetakeymore', '');
         if (!empty($metaMore) && $metaMore != 'field_name||compare_method||field_value') {
             $metaMoreValues = explode(PHP_EOL, $metaMore);
-            foreach ($metaMoreValues AS $metaMoreValue) {
+            foreach ($metaMoreValues as $metaMoreValue) {
                 $metaMoreValue = trim($metaMoreValue);
                 if ($metaMoreValue != 'field_name||compare_method||field_value') {
                     $metaMoreArray = explode('||', $metaMoreValue);
@@ -428,16 +428,16 @@ class PostsCustomPosts extends AbstractGenerator {
                 'techline-sidebar'
             );
 
-            foreach ($excluded_metas AS $excluded_meta) {
+            foreach ($excluded_metas as $excluded_meta) {
                 if (isset($post_meta[$excluded_meta])) {
                     unset($post_meta[$excluded_meta]);
                 }
             }
 
             if (count($post_meta) && is_array($post_meta) && !empty($post_meta)) {
-                foreach ($post_meta AS $key => $value) {
+                foreach ($post_meta as $key => $value) {
                     if (count($value) && is_array($value) && !empty($value)) {
-                        foreach ($value AS $v) {
+                        foreach ($value as $v) {
                             if (!empty($v) && !is_array($v) && !is_object($v)) {
                                 $key = str_replace(array(
                                     '_',
@@ -453,12 +453,12 @@ class PostsCustomPosts extends AbstractGenerator {
                                     $unserialize_values = unserialize($v);
                                     $unserialize_count  = 1;
                                     if (!empty($unserialize_values) && is_array($unserialize_values)) {
-                                        foreach ($unserialize_values AS $unserialize_value) {
+                                        foreach ($unserialize_values as $unserialize_value) {
                                             if (!empty($unserialize_value) && is_string($unserialize_value)) {
                                                 $record['us_' . $key . $unserialize_count] = $unserialize_value;
                                                 $unserialize_count++;
                                             } else if (is_array($unserialize_value)) {
-                                                foreach ($unserialize_value AS $u_v) {
+                                                foreach ($unserialize_value as $u_v) {
                                                     if (is_string($u_v)) {
                                                         $record['us_' . $key . $unserialize_count] = $u_v;
                                                         $unserialize_count++;
@@ -483,7 +483,7 @@ class PostsCustomPosts extends AbstractGenerator {
                 'fields'  => 'all'
             );
 
-            foreach ($taxonomies AS $taxonomy) {
+            foreach ($taxonomies as $taxonomy) {
                 $post_terms = wp_get_object_terms($post->ID, $taxonomy, $args);
                 $taxonomy   = str_replace('-', '', $taxonomy);
 
@@ -497,7 +497,7 @@ class PostsCustomPosts extends AbstractGenerator {
             if (class_exists('acf')) {
                 $fields = get_fields($post->ID);
                 if (is_array($fields) && !empty($fields) && count($fields)) {
-                    foreach ($fields AS $k => $v) {
+                    foreach ($fields as $k => $v) {
                         $type = $this->getACFType($k, $post->ID);
                         $k    = str_replace('-', '', $k);
 
@@ -515,7 +515,7 @@ class PostsCustomPosts extends AbstractGenerator {
                             if (isset($v['url'])) {
                                 $record[$k] = $v['url'];
                             } else if (is_array($v)) {
-                                foreach ($v AS $v_v => $k_k) {
+                                foreach ($v as $v_v => $k_k) {
                                     if (is_array($k_k) && isset($k_k['url'])) {
                                         $record[$k . $v_v] = $k_k['url'];
                                     }
@@ -542,7 +542,7 @@ class PostsCustomPosts extends AbstractGenerator {
             $record['excerpt'] = get_the_excerpt();
 
             if (!empty($timestampVariables)) {
-                foreach ($timestampVariables AS $timestampVariable) {
+                foreach ($timestampVariables as $timestampVariable) {
                     if (isset($record[$timestampVariable])) {
                         $record[$timestampVariable] = date($datetimeformat, intval($record[$timestampVariable]));
                     }
@@ -550,7 +550,7 @@ class PostsCustomPosts extends AbstractGenerator {
             }
 
             if (!empty($fileVariables)) {
-                foreach ($fileVariables AS $fileVariable) {
+                foreach ($fileVariables as $fileVariable) {
                     if (isset($record[$fileVariable])) {
                         $record[$fileVariable] = wp_get_attachment_url($record[$fileVariable]);
                     }
@@ -589,7 +589,7 @@ class PostsCustomPosts extends AbstractGenerator {
             $translateValue  = explode(PHP_EOL, $translate_dates);
             $translate       = array();
             if (!empty($translateValue)) {
-                foreach ($translateValue AS $tv) {
+                foreach ($translateValue as $tv) {
                     $translateArray = explode('||', $tv);
                     if (!empty($translateArray) && count($translateArray) == 2) {
                         $translate[$translateArray[0]] = $translateArray[1];
@@ -597,7 +597,7 @@ class PostsCustomPosts extends AbstractGenerator {
                 }
             }
             for ($i = 0; $i < count($data); $i++) {
-                foreach ($data[$i] AS $key => $value) {
+                foreach ($data[$i] as $key => $value) {
                     if ($this->isDate($value)) {
                         $data[$i][$key] = $this->translate($this->formatDate($value, $datetimeformat), $translate);
                     }
@@ -627,7 +627,7 @@ class PostsCustomPosts extends AbstractGenerator {
 
     protected function translate($from, $translate) {
         if (!empty($translate) && !empty($from)) {
-            foreach ($translate AS $key => $value) {
+            foreach ($translate as $key => $value) {
                 $from = str_replace($key, trim($value), $from);
             }
         }
@@ -642,7 +642,7 @@ class PostsCustomPosts extends AbstractGenerator {
         } else {
             $prefix = $prefix . "_";
         }
-        foreach ($sizes AS $size => $image) {
+        foreach ($sizes as $size => $image) {
             $imageSrc                                               = wp_get_attachment_image_src($thumbnail_id, $size);
             $data[$prefix . 'image_' . $this->clearSizeName($size)] = $imageSrc[0];
         }

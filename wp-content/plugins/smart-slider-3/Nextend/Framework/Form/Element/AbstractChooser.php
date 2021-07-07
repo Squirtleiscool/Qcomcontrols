@@ -4,7 +4,6 @@
 namespace Nextend\Framework\Form\Element;
 
 
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\View\Html;
 
 abstract class AbstractChooser extends AbstractFieldHidden {

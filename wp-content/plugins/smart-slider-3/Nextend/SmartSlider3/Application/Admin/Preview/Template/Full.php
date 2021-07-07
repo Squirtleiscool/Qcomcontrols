@@ -42,7 +42,6 @@ if (!empty($slidesData)) {
 }
 ?>
 
-
 <script>
 
     document.addEventListener('keydown', function (e) {
@@ -51,8 +50,11 @@ if (!empty($slidesData)) {
         }
     });
     if (window.parent !== window) {
-        N2R('documentReady', function ($) {
-            var $sliders = n2('.n2-ss-slider');
+        _N2.r(['$', 'documentReady'], function () {
+            var $ = _N2.$,
+                html = document.documentElement,
+                body = document.body,
+                $sliders = $('.n2-ss-slider');
 
             function syncDeviceDetails() {
                 $sliders.each(function () {
@@ -68,12 +70,13 @@ if (!empty($slidesData)) {
             }
 
             function syncDeviceDetailsSlider(slider) {
-                var breakpoints = slider.responsive.parameters.breakpoints,
+                var isLandscape = window.matchMedia("(orientation: landscape)").matches,
+                    breakpoints = slider.responsive.parameters.breakpoints,
                     breakpoint, screenWidthLimit, maxWidth = -1, minWidth = 0, hadMinScreenWidth = false, i;
 
                 for (i = breakpoints.length - 1; i >= 0; i--) {
                     breakpoint = breakpoints[i];
-                    screenWidthLimit = slider.responsive.isLandscape ? breakpoint.landscapeWidth : breakpoint.portraitWidth;
+                    screenWidthLimit = isLandscape ? breakpoint.landscapeWidth : breakpoint.portraitWidth;
 
                     if (breakpoint.type === 'max-screen-width') {
                         minWidth = maxWidth + 1;
@@ -103,9 +106,9 @@ if (!empty($slidesData)) {
                         action: 'device_info',
                         data: {
                             id: slider.id,
-                            top: slider.sliderElement[0].getBoundingClientRect().top + document.documentElement.scrollTop,
+                            top: slider.sliderElement.getBoundingClientRect().top + document.documentElement.scrollTop,
                             device: slider.responsive.device,
-                            isLandscape: slider.responsive.isLandscape,
+                            isLandscape: isLandscape,
                             minScreenWidth: minWidth,
                             maxScreenWidth: maxWidth
                         }
@@ -118,7 +121,7 @@ if (!empty($slidesData)) {
                 var observer = new ResizeObserver((function () {
                     syncDeviceDetails();
                 }).bind(this));
-                observer.observe(document.body);
+                observer.observe(body);
             } else {
                 try {
                     /**
@@ -131,14 +134,14 @@ if (!empty($slidesData)) {
                                     syncDeviceDetails();
                                 });
                         })
-                        .appendTo(document.body);
+                        .appendTo(body);
                 } catch (e) {
                 }
             }
 
-            $(document).on('SliderDeviceOrientation', function (e, data) {
-                syncDeviceDetailsSlider(data.slider);
-            });
+            n2ss.on('SliderDeviceOrientation', function (slider) {
+                syncDeviceDetailsSlider(slider);
+            })
 
             function broadcastScrollTop(scrollTop) {
 
@@ -154,12 +157,12 @@ if (!empty($slidesData)) {
             }
 
             document.addEventListener('scroll', function () {
-                broadcastScrollTop(document.documentElement.scrollTop || document.body.scrollTop);
+                broadcastScrollTop(html.scrollTop || body.scrollTop);
             }, {
                 passive: true,
                 capture: true
             });
-            broadcastScrollTop(document.documentElement.scrollTop || document.body.scrollTop);
+            broadcastScrollTop(html.scrollTop || body.scrollTop);
         });
     }
 

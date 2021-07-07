@@ -39,7 +39,7 @@ class PostsPostsByIDs extends AbstractGenerator {
         $i    = 0;
         $data = array();
 
-        foreach ($this->getIDs() AS $id) {
+        foreach ($this->getIDs() as $id) {
             $record = array();
             $post   = get_post($id);
             if (!$post) continue;
@@ -91,7 +91,7 @@ class PostsPostsByIDs extends AbstractGenerator {
             if (class_exists('acf')) {
                 $fields = get_fields($post->ID);
                 if (is_array($fields) && !empty($fields) && count($fields)) {
-                    foreach ($fields AS $k => $v) {
+                    foreach ($fields as $k => $v) {
                         $type = $this->getACFType($k, $post->ID);
                         $k    = str_replace('-', '', $k);
 
@@ -109,7 +109,7 @@ class PostsPostsByIDs extends AbstractGenerator {
                             if (isset($v['url'])) {
                                 $record[$k] = $v['url'];
                             } else if (is_array($v)) {
-                                foreach ($v AS $v_v => $k_k) {
+                                foreach ($v as $v_v => $k_k) {
                                     if (is_array($k_k) && isset($k_k['url'])) {
                                         $record[$k . $v_v] = $k_k['url'];
                                     }
@@ -158,7 +158,7 @@ class PostsPostsByIDs extends AbstractGenerator {
         } else {
             $prefix = $prefix . "_";
         }
-        foreach ($sizes AS $size => $image) {
+        foreach ($sizes as $size => $image) {
             $imageSrc                                               = wp_get_attachment_image_src($thumbnail_id, $size);
             $data[$prefix . 'image_' . $this->clearSizeName($size)] = $imageSrc[0];
         }

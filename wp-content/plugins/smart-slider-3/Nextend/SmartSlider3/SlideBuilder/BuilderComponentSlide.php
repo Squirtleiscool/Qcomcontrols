@@ -27,7 +27,8 @@ class BuilderComponentSlide extends AbstractBuilderComponent {
         "backgroundVideoMode"    => "fill",
         "href"                   => "",
         "href-target"            => "",
-        "slide-duration"         => 0
+        "slide-duration"         => 0,
+        "desktopportraitpadding" => '10|*|10|*|10|*|10'
     );
 
     /** @var AbstractBuilderComponent[] */

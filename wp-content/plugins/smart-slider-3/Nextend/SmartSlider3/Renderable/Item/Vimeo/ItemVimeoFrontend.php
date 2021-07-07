@@ -4,6 +4,7 @@
 namespace Nextend\SmartSlider3\Renderable\Item\Vimeo;
 
 
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\Image\Image;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
 use Nextend\Framework\View\Html;
@@ -24,12 +25,19 @@ class ItemVimeoFrontend extends AbstractItemFrontend {
 
         $this->data->set("vimeocode", $videoID);
 
-        $hasImage = 0;
-        $image    = $this->data->get('image');
+        $hasImage      = 0;
+        $coverImageUrl = $this->data->get('image');
 
         $coverImage = '';
-        if (!empty($image)) {
-            $style     = 'cursor:pointer; background: URL(' . ResourceTranslator::toUrl($image) . ') no-repeat 50% 50%; background-size: cover';
+        if (!empty($coverImageUrl)) {
+
+            $coverImageElement = $owner->renderImage($this, $coverImageUrl, array(
+                'class' => 'n2_ss_video_cover',
+                'alt'   => n2_('Play')
+            ), array(
+                'class' => 'n2-ow-all'
+            ));
+
             $hasImage  = 1;
             $playImage = '';
 
@@ -41,19 +49,25 @@ class ItemVimeoFrontend extends AbstractItemFrontend {
 
                     $attributes = Html::addExcludeLazyLoadAttributes(array(
                         'style' => '',
-                        'class' => ''
+                        'class' => 'n2_ss_video_play_btn'
                     ));
 
-                    $attributes['style'] .= 'width:' . $playWidth . 'px;';
-                    $attributes['style'] .= 'height:' . $playHeight . 'px;';
-                    $attributes['style'] .= 'margin-left:' . ($playWidth / -2) . 'px;';
-                    $attributes['style'] .= 'margin-top:' . ($playHeight / -2) . 'px;';
+                    if ($playWidth != 48) {
+                        $attributes['style'] .= 'width:' . $playWidth . 'px;';
+                    }
+                    if ($playHeight != 48) {
+                        $attributes['style'] .= 'height:' . $playHeight . 'px;';
+                    }
 
                     $playButtonImage = $this->data->get('playbuttonimage', '');
                     if (!empty($playButtonImage)) {
-                        $src = ResourceTranslator::toUrl($this->data->get('playbuttonimage', ''));
+                        $image = $this->data->get('playbuttonimage', '');
+                        FastImageSize::initAttributes($image, $attributes);
+                        $src = ResourceTranslator::toUrl($image);
                     } else {
-                        $src = Image::SVGToBase64('$ss3-frontend$/images/play.svg');
+                        $image = '$ss3-frontend$/images/play.svg';
+                        FastImageSize::initAttributes($image, $attributes);
+                        $src = Image::SVGToBase64($image);
                     }
 
                     $playImage = Html::image($src, 'Play', $attributes);
@@ -61,14 +75,14 @@ class ItemVimeoFrontend extends AbstractItemFrontend {
             }
 
             $coverImage = Html::tag('div', array(
-                'class' => 'n2_ss_video_player__cover',
-                'style' => $style
-            ), $playImage);
+                'class'              => 'n2_ss_video_player__cover',
+                'data-force-pointer' => ''
+            ), $coverImageElement . $playImage);
         }
 
         $this->data->set('privacy-enhanced', intval(Settings::get('youtube-privacy-enhanced', 0)));
 
-        $owner->addScript('new N2Classes.FrontendItemVimeo(this, "' . $this->id . '", "' . $owner->getElementID() . '", ' . $this->data->toJSON() . ', ' . $hasImage . ', ' . $owner->fill($this->data->get('start', '0')) . ');');
+        $owner->addScript('new _N2.FrontendItemVimeo(this, "' . $this->id . '", "' . $owner->getElementID() . '", ' . $this->data->toJSON() . ', ' . $hasImage . ', ' . $owner->fill($this->data->get('start', '0')) . ');');
 
         $aspectRatio = $this->data->get('aspect-ratio', '16:9');
         $style       = '';
@@ -92,15 +106,34 @@ class ItemVimeoFrontend extends AbstractItemFrontend {
             $style = 'style="padding-top:' . ($this->data->get('aspect-ratio-height', '9') / $this->data->get('aspect-ratio-width', '16') * 100) . '%"';
         }
 
+        $playButtonImage = $this->data->get('playbuttonimage', '');
+        if (!empty($playButtonImage)) {
+            $playButtonImage = ResourceTranslator::toUrl($playButtonImage);
+        } else {
+            $playButtonImage = Image::SVGToBase64('$ss3-frontend$/images/play.svg');
+        }
+
+        $playButtonStyle  = '';
+        $playButtonWidth  = intval($this->data->get('playbuttonwidth', '48'));
+        $playButtonHeight = intval($this->data->get('playbuttonheight', '48'));
+
+        if ($playButtonWidth > 0) {
+            $playButtonStyle .= 'width:' . $playButtonWidth . 'px;';
+        }
+        if ($playButtonHeight > 0) {
+            $playButtonStyle .= 'height:' . $playButtonHeight . 'px;';
+        }
+
+        $playButton = Html::image($playButtonImage, n2_('Play'), Html::addExcludeLazyLoadAttributes(array(
+            'class' => 'n2_ss_video_play_btn',
+            'style' => $playButtonStyle
+        )));
+
         return Html::tag('div', array(
             "class"             => 'n2_ss_video_player n2-ow-all',
             'data-aspect-ratio' => $aspectRatio,
             "style"             => 'background: URL(' . ResourceTranslator::toUrl($this->data->getIfEmpty('image', '$ss3-frontend$/images/placeholder/video.png')) . ') no-repeat 50% 50%; background-size: cover;'
-        ), '<div class="n2_ss_video_player__placeholder" ' . $style . '></div>' . '<div class="n2_ss_video_player__cover">' . Html::image(Image::SVGToBase64('$ss3-frontend$/images/play.svg')) . '</div>');
+        ), '<div class="n2_ss_video_player__placeholder" ' . $style . '></div>' . '<div class="n2_ss_video_player__cover">' . $playButton . '</div>');
 
-    }
-
-    public function needWidth() {
-        return true;
     }
 }

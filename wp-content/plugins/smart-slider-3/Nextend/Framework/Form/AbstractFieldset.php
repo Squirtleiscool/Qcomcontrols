@@ -73,7 +73,7 @@ abstract class AbstractFieldset implements ContainerContainedInterface {
 
         $this->controlName = $this->parent->getControlName();
 
-        foreach ($parameters AS $option => $value) {
+        foreach ($parameters as $option => $value) {
             $option = 'set' . $option;
             $this->{$option}($value);
         }

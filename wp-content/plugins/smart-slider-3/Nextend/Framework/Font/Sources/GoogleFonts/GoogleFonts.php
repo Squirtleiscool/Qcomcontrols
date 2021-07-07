@@ -162,7 +162,7 @@ class GoogleFonts extends AbstractFontSource {
         $parameters->fillDefault(self::getDefaults());
 
         if ($parameters->get('google-enabled-backend', 1)) {
-            Js::addInline('new N2Classes.NextendFontServiceGoogle("' . implode(',', self::$styles) . '","' . implode(',', self::$subsets) . '", ' . json_encode(self::$fonts) . ', ' . json_encode(AssetManager::$googleFonts->getLoadedFamilies()) . ');');
+            Js::addInline('new _N2.NextendFontServiceGoogle("' . implode(',', self::$styles) . '","' . implode(',', self::$subsets) . '", ' . json_encode(self::$fonts) . ', ' . json_encode(AssetManager::$googleFonts->getLoadedFamilies()) . ');');
         }
     }
 

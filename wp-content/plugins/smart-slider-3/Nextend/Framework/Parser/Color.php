@@ -98,7 +98,7 @@ class Color {
             $hex .= 'ff';
         }
         if (strlen($hex) != 8) {
-            return false;
+            $hex = '00000000';
         }
 
         // Convert each tuple to decimal.
@@ -126,7 +126,7 @@ class Color {
             $hex .= 'ff';
         }
         if (strlen($hex) != 8) {
-            return false;
+            $hex = '00000000';
         }
 
         return array(

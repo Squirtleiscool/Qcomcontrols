@@ -15,7 +15,7 @@ abstract class AbstractRadioIcon extends Radio {
 
         $html = '';
         $i    = 0;
-        foreach ($this->options AS $value => $class) {
+        foreach ($this->options as $value => $class) {
 
             $html .= Html::tag('div', array(
                 'class' => 'n2_field_radio__option' . ($this->isSelected($value) ? ' n2_field_radio__option--selected' : '')

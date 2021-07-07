@@ -22,7 +22,7 @@ class ButtonRecordViewer extends Button {
                               ->createAjaxUrl(array(
                                   'generator/recordstable'
                               ));
-        Js::addInline('new N2Classes.FieldRecordViewer(' . json_encode($this->fieldID) . ',' . json_encode($ajaxRecordUrl) . ');');
+        Js::addInline('new _N2.FieldRecordViewer(' . json_encode($this->fieldID) . ',' . json_encode($ajaxRecordUrl) . ');');
 
 
         return parent::fetchElement();

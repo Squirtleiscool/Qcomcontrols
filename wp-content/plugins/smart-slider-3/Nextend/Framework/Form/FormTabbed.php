@@ -53,7 +53,7 @@ class FormTabbed extends Form {
     public function render() {
         parent::render();
 
-        Js::addInline('new N2Classes.FormTabbed("' . $this->id . '", ' . json_encode(array(
+        Js::addInline('new _N2.FormTabbed("' . $this->id . '", ' . json_encode(array(
                 'toggleMode' => $this->toggleMode,
                 'sessionID'  => $this->sessionID
             )) . ');');

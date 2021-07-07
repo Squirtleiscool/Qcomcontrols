@@ -8,7 +8,6 @@ use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Font\FontRenderer;
 use Nextend\Framework\Font\FontSettings;
 use Nextend\Framework\Font\ModelFont;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Visual\AbstractBlockVisual;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButtonApply;
 use Nextend\SmartSlider3\Application\Admin\Layout\Block\Forms\Button\BlockButtonCancel;
@@ -47,10 +46,10 @@ class BlockFontManager extends AbstractBlockVisual {
         $model = $this->getModel();
 
         Js::addFirstCode("
-            N2Classes.CSSRendererFont.defaultFamily = " . json_encode(FontSettings::getDefaultFamily()) . ";
-            N2Classes.CSSRendererFont.rendererModes = " . json_encode(FontRenderer::$mode) . ";
-            N2Classes.CSSRendererFont.pre = " . json_encode(FontRenderer::$pre) . ";
-            new N2Classes.NextendFontManager();
+            _N2.CSSRendererFont.defaultFamily = " . json_encode(FontSettings::getDefaultFamily()) . ";
+            _N2.CSSRendererFont.rendererModes = " . json_encode(FontRenderer::$mode) . ";
+            _N2.CSSRendererFont.pre = " . json_encode(FontRenderer::$pre) . ";
+            new _N2.NextendFontManager();
         ");
 
         $model->renderForm();

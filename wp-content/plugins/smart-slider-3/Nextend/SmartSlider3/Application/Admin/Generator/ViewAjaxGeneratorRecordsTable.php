@@ -21,7 +21,7 @@ class ViewAjaxGeneratorRecordsTable extends AbstractViewAjax {
 
         for ($currentGroupIndex = 1; $currentGroupIndex <= $this->getRecordGroup(); $currentGroupIndex++) {
             $headings[] = '#';
-            foreach ($records[0][0] AS $recordKey => $v) {
+            foreach ($records[0][0] as $recordKey => $v) {
                 $headings[] = '{' . $recordKey . '/' . $currentGroupIndex . '}';
             }
         }
@@ -29,10 +29,10 @@ class ViewAjaxGeneratorRecordsTable extends AbstractViewAjax {
         $rows = array();
 
         $i = 0;
-        foreach ($records AS $recordGroup) {
-            foreach ($recordGroup AS $record) {
+        foreach ($records as $recordGroup) {
+            foreach ($recordGroup as $record) {
                 $rows[$i][] = $i + 1;
-                foreach ($record AS $recordValue) {
+                foreach ($record as $recordValue) {
                     $rows[$i][] = htmlspecialchars($recordValue, ENT_QUOTES, "UTF-8");
                 }
             }

@@ -4,42 +4,46 @@
 namespace Nextend\SmartSlider3\Widget\Bar\BarHorizontal;
 
 
-use Nextend\Framework\Filesystem\Filesystem;
+use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Widget\AbstractWidgetFrontend;
 
 class BarHorizontalFrontend extends AbstractWidgetFrontend {
 
-    public function getPositions(&$params) {
-        $positions = array();
+    public function __construct($sliderWidget, $widget, $params) {
 
-        $positions['bar-position'] = array(
-            $this->key . 'position-',
-            'bar'
-        );
+        parent::__construct($sliderWidget, $widget, $params);
 
-        return $positions;
+        if (intval($params->get($this->key . 'show-description'))) {
+            $this->slider->exposeSlideData['description'] = true;
+        }
+
+        $this->addToPlacement($this->key . 'position-', array(
+            $this,
+            'render'
+        ));
     }
 
-    public function render($slider, $id, $params) {
+    public function render($attributes = array()) {
+
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
 
         $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
             "sliderid" => $slider->elementId
         ));
-        $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/bar.min.js'));
-    
 
-        list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key, 1);
+        Js::addStaticGroup(self::getAssetsPath() . '/dist/w-bar-horizontal.min.js', 'w-bar-horizontal');
+
+        $displayAttributes = $this->getDisplayAttributes($params, $this->key, 1);
 
         $styleClass = $slider->addStyle($params->get($this->key . 'style'), 'simple');
 
         $fontTitle       = $slider->addFont($params->get($this->key . 'font-title'), 'simple');
         $fontDescription = $slider->addFont($params->get($this->key . 'font-description'), 'simple');
 
-        list($style, $attributes) = $this->getPosition($params, $this->key);
-        $attributes['data-offset'] = $params->get($this->key . 'position-offset');
-
-        $style .= 'text-align: ' . $params->get($this->key . 'align') . ';';
+        $style = 'text-align: ' . $params->get($this->key . 'align') . ';';
 
         $width = $params->get($this->key . 'width');
         if (is_numeric($width) || substr($width, -1) == '%' || substr($width, -2) == 'px') {
@@ -54,9 +58,6 @@ class BarHorizontalFrontend extends AbstractWidgetFrontend {
         $showTitle = intval($params->get($this->key . 'show-title'));
 
         $showDescription = intval($params->get($this->key . 'show-description'));
-        if ($showDescription) {
-            $slider->exposeSlideData['description'] = true;
-        }
 
         $parameters = array(
             'area'            => intval($params->get($this->key . 'position-area')),
@@ -69,14 +70,16 @@ class BarHorizontalFrontend extends AbstractWidgetFrontend {
             'separator'       => $params->get($this->key . 'separator')
         );
 
-        $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetBarHorizontal(this, ' . json_encode($parameters) . ');');
+        $slider->features->addInitCallback('new _N2.SmartSliderWidgetBarHorizontal(this, ' . json_encode($parameters) . ');');
 
-        return Html::tag("div", $displayAttributes + $attributes + array(
-                "class" => $displayClass . "nextend-bar nextend-bar-horizontal n2-ow",
-                "style" => $style
-            ), Html::tag("div", array(
-            "class" => $styleClass . ' n2-ow',
+        $slider->sliderType->addJSDependency('SmartSliderWidgetBarHorizontal');
+
+        return Html::tag("div", Html::mergeAttributes($attributes, $displayAttributes, array(
+            "class" => "nextend-bar nextend-bar-horizontal n2-ss-widget-hidden n2-ow-all",
+            "style" => $style
+        )), Html::tag("div", array(
+            "class" => $styleClass,
             "style" => $innerStyle
-        ), ''));
+        ), '<span class="' . $fontTitle . '">&nbsp;</span>'));
     }
 }

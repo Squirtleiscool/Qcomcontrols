@@ -11,7 +11,7 @@ use Nextend\Framework\Asset\Js\Js;
 $generatorGroup  = $this->getGeneratorGroup();
 $generatorSource = $this->getGeneratorSource();
 
-JS::addInline('new N2Classes.GeneratorAdd();');
+JS::addInline('new _N2.GeneratorAdd();');
 ?>
 
 <form id="n2-ss-form-generator-add" action="<?php echo $this->getAjaxUrlGeneratorCreateSettings($this->getGeneratorGroup()

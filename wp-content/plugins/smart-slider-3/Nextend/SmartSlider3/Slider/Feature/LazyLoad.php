@@ -8,7 +8,7 @@ class LazyLoad {
 
     private $slider;
 
-    public $isEnabled = 0, $neighborCount = 0, $layerImageOptimize = 0, $layerImageTablet = 50, $layerImageMobile = 30;
+    public $isEnabled = 0, $neighborCount = 0, $layerImageOptimize = 0, $layerImageWidthNormal = 1400, $layerImageWidthTablet = 800, $layerImageWidthMobile = 425;
 
     public function __construct($slider) {
 
@@ -18,8 +18,11 @@ class LazyLoad {
         $this->neighborCount = intval($slider->params->get('imageloadNeighborSlides', 0));
 
         $this->layerImageOptimize = intval($slider->params->get('layer-image-optimize', 0)) && !$slider->isAdmin;
-        $this->layerImageTablet   = min(100, max(1, intval($slider->params->get('layer-image-tablet', 50)))) / 100;
-        $this->layerImageMobile   = min(100, max(1, intval($slider->params->get('layer-image-mobile', 30)))) / 100;
+        if ($this->layerImageOptimize) {
+            $this->layerImageWidthNormal = $slider->params->get('layer-image-width-normal', 1400);
+            $this->layerImageWidthTablet = $slider->params->get('layer-image-width-tablet', 800);
+            $this->layerImageWidthMobile = $slider->params->get('layer-image-width-mobile', 425);
+        }
 
         $this->layerImageSizeBase64     = intval($slider->params->get('layer-image-base64', 0)) && !$slider->isAdmin;
         $this->layerImageSizeBase64Size = max(0, intval($slider->params->get('layer-image-base64-size', 5))) * 1024;

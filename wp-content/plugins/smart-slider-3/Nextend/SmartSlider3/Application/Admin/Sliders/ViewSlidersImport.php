@@ -135,7 +135,7 @@ class ViewSlidersImport extends AbstractView {
             'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1728-export-import-slider#image-mode'
         ));
 
-        echo $form->render();
+        $form->render();
     }
 
     /**

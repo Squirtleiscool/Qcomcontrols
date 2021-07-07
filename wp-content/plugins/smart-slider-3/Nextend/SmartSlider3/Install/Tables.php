@@ -160,7 +160,7 @@ class Tables {
         self::fixIndex('#__nextend2_smartslider3_slides', 'ordering');
         self::fixIndex('#__nextend2_smartslider3_slides', 'slider');
 
-        if(Notification::hasErrors()){
+        if (Notification::hasErrors()) {
             Notification::displayPlainErrors();
             exit;
         }

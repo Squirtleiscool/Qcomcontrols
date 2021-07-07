@@ -18,6 +18,15 @@ class SliderTypeSimpleCss extends AbstractSliderTypeCss {
         $width  = intval($this->context['width']);
         $height = intval($this->context['height']);
 
+        $this->base = array(
+            'slideOuterWidth'  => $width,
+            'slideOuterHeight' => $height,
+            'sliderWidth'      => $width,
+            'sliderHeight'     => $height,
+            'slideWidth'       => $width,
+            'slideHeight'      => $height
+        );
+
         $this->context['backgroundSize']       = $params->getIfEmpty('background-size', 'inherit');
         $this->context['backgroundAttachment'] = $params->get('background-fixed') ? 'fixed' : 'scroll';
 
@@ -44,7 +53,6 @@ class SliderTypeSimpleCss extends AbstractSliderTypeCss {
 
         $rgba                        = Color::hex2rgba($borderColor);
         $this->context['borderrgba'] = 'RGBA(' . $rgba[0] . ',' . $rgba[1] . ',' . $rgba[2] . ',' . round($rgba[3] / 127, 2) . ')';
-        $this->context['borderhex']  = '#' . substr($borderColor, 0, 6);
 
         $width                         = $width - (max(0, $padding[1]) + max(0, $padding[3])) - $borderWidth * 2;
         $height                        = $height - (max(0, $padding[0]) + max(0, $padding[2])) - $borderWidth * 2;

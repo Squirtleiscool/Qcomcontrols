@@ -22,16 +22,16 @@ class ScrollTo implements ParserInterface {
                 $onclick = 'n2ss.scroll(event, "bottom");';
                 break;
             case 'beforeSlider':
-                $onclick = 'n2ss.scroll(event, "before", N2Classes.$(this).closest(".n2-ss-slider").addBack());';
+                $onclick = 'n2ss.scroll(event, "before", this.closest(".n2-ss-slider"));';
                 break;
             case 'afterSlider':
-                $onclick = 'n2ss.scroll(event, "after", N2Classes.$(this).closest(".n2-ss-slider").addBack());';
+                $onclick = 'n2ss.scroll(event, "after", this.closest(".n2-ss-slider"));';
                 break;
             case 'nextSlider':
-                $onclick = 'n2ss.scroll(event, "next", this, ".n2-ss-slider");';
+                $onclick = 'n2ss.scroll(event, "next", this, ".n2-section-smartslider");';
                 break;
             case 'previousSlider':
-                $onclick = 'n2ss.scroll(event, "previous", this, ".n2-ss-slider");';
+                $onclick = 'n2ss.scroll(event, "previous", this, ".n2-section-smartslider");';
                 break;
             default:
                 if (is_numeric($argument)) {

@@ -50,7 +50,7 @@ class DatePicker extends AbstractFieldHidden implements ContainerInterface {
 
         $html .= parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementDatePicker("' . $this->fieldID . '", ' . json_encode($subElements) . ');');
+        Js::addInline('new _N2.FormElementDatePicker("' . $this->fieldID . '", ' . json_encode($subElements) . ');');
 
         return $html;
     }

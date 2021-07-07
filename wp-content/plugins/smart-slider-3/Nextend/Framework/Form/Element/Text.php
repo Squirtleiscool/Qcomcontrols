@@ -21,7 +21,7 @@ class Text extends AbstractField implements ContainerInterface {
     protected $unit = false;
 
     protected function addScript() {
-        Js::addInline('new N2Classes.FormElementText("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementText("' . $this->fieldID . '");');
     }
 
     protected function fetchElement() {

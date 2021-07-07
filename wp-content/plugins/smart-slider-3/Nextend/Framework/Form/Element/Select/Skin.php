@@ -6,7 +6,6 @@ namespace Nextend\Framework\Form\Element\Select;
 
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Form\Element\Select;
-use Nextend\Framework\Localization\Localization;
 
 class Skin extends Select {
 
@@ -16,7 +15,7 @@ class Skin extends Select {
 
         $html = parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementSkin("' . $this->fieldID . '", "' . str_replace($this->name, '', $this->fieldID) . '", ' . json_encode($this->options) . ', ' . json_encode($this->fixed) . ');');
+        Js::addInline('new _N2.FormElementSkin("' . $this->fieldID . '", "' . str_replace($this->name, '', $this->fieldID) . '", ' . json_encode($this->options) . ', ' . json_encode($this->fixed) . ');');
 
         return $html;
     }

@@ -14,7 +14,7 @@ class PostsPostTypes extends Select {
         $this->options['0'] = n2_('All');
 
         $postTypes = get_post_types();
-        foreach ($postTypes AS $postType) {
+        foreach ($postTypes as $postType) {
             $this->options[$postType] = $postType;
         }
 

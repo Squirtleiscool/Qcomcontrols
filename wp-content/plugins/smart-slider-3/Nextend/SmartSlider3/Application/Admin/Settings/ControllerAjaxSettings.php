@@ -4,7 +4,11 @@
 namespace Nextend\SmartSlider3\Application\Admin\Settings;
 
 
+use Nextend\Framework\Cache\AbstractCache;
+use Nextend\Framework\Cache\CacheImage;
 use Nextend\Framework\Controller\Admin\AdminAjaxController;
+use Nextend\Framework\Data\Data;
+use Nextend\Framework\Filesystem\Filesystem;
 use Nextend\Framework\Font\FontSettings;
 use Nextend\Framework\Model\StorageSectionManager;
 use Nextend\Framework\Notification\Notification;
@@ -142,5 +146,33 @@ class ControllerAjaxSettings extends AdminAjaxController {
 
         $slidersModel = new ModelSliders($this);
         $slidersModel->invalidateCache();
+    }
+
+    public function actionClearCache() {
+
+        $this->validateToken();
+
+        $this->validatePermission('smartslider_config');
+
+        $formData = new Data(Request::$POST->getVar('clear_cache', array()));
+        if ($formData->get('delete-image-cache')) {
+
+            $imageCachePath = CacheImage::getStorage()
+                                        ->getPath('slider/cache', '', 'image');
+            if (Filesystem::existsFolder($imageCachePath) && Filesystem::is_writable($imageCachePath)) {
+                Filesystem::deleteFolder($imageCachePath);
+            }
+        }
+
+        $slidersModel = new ModelSliders($this);
+        foreach ($slidersModel->_getAll() as $slider) {
+            $slidersModel->refreshCache($slider['id']);
+        }
+        AbstractCache::clearGroup('n2-ss-0');
+        AbstractCache::clearGroup('combined');
+        AbstractCache::clearAll();
+        Notification::success(n2_('Cache cleared.'));
+
+        Request::redirect($this->getUrlSettingsDefault());
     }
 }

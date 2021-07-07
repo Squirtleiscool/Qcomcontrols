@@ -36,7 +36,7 @@ class OnOff extends AbstractFieldHidden {
             $options['relatedAttribute'] = $this->relatedAttribute;
         }
 
-        Js::addInline('new N2Classes.FormElementOnoff("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementOnoff("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
         return $html;
     }

@@ -4,7 +4,6 @@
 namespace Nextend\SmartSlider3\Application\Admin\Sliders;
 
 
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Misc\Zip\Creator;
 use Nextend\Framework\Model\StorageSectionManager;
 use Nextend\Framework\PageFlow;

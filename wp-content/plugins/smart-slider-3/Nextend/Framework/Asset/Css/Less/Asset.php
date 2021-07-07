@@ -18,7 +18,7 @@ class Asset extends AbstractAsset {
         $this->uniqueFiles();
 
         $files = array();
-        foreach ($this->groups AS $group) {
+        foreach ($this->groups as $group) {
             $files[$group] = $this->cache->getAssetFile($group, $this->files[$group], $this->codes[$group]);
         }
 

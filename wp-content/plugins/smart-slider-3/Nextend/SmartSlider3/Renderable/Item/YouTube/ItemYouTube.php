@@ -60,22 +60,25 @@ class ItemYouTube extends AbstractItem {
 
     public function getValues() {
         return parent::getValues() + array(
-                'code'           => 'qesNtYIBDfs',
-                'aspect-ratio'   => '16:9',
-                'youtubeurl'     => 'https://www.youtube.com/watch?v=3PPtkRU7D74',
-                'image'          => '$ss3-frontend$/images/placeholder/video.png',
-                'autoplay'       => 0,
-                'ended'          => '',
-                'controls'       => 1,
-                'defaultimage'   => 'hqdefault',
-                'related'        => '1',
-                'center'         => 0,
-                'loop'           => 0,
-                'modestbranding' => 1,
-                'reset'          => 0,
-                'start'          => '0',
-                'playbutton'     => 1,
-                'scroll-pause'   => 'partly-visible',
+                'code'             => 'qesNtYIBDfs',
+                'aspect-ratio'     => '16:9',
+                'youtubeurl'       => 'https://www.youtube.com/watch?v=3PPtkRU7D74',
+                'image'            => '$ss3-frontend$/images/placeholder/video.png',
+                'autoplay'         => 0,
+                'ended'            => '',
+                'controls'         => 1,
+                'defaultimage'     => 'hqdefault',
+                'related'          => '1',
+                'center'           => 0,
+                'loop'             => 0,
+                'modestbranding'   => 1,
+                'reset'            => 0,
+                'start'            => '0',
+                'playbutton'       => 1,
+                'playbuttonwidth'  => 48,
+                'playbuttonheight' => 48,
+                'playbuttonimage'  => '',
+                'scroll-pause'     => 'partly-visible',
             );
     }
 
@@ -211,6 +214,11 @@ class ItemYouTube extends AbstractItem {
             'relatedFieldsOff' => array(
                 'item_youtubeended'
             )
+        ));
+
+        new OnOff($misc, 'reset', n2_('Restart on slide change'), 0, array(
+            'tipLabel'       => n2_('Restart on slide change'),
+            'tipDescription' => n2_('Starts the video from the beginning when the slide is viewed again.')
         ));
 
         $display = new Fieldset\LayerWindow\FieldsetLayerWindow($container, 'item-youtube-display', n2_('Display'));

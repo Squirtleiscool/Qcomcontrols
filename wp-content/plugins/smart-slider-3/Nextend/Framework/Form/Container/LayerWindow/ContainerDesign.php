@@ -37,6 +37,6 @@ class ContainerDesign extends ContainerGeneral {
                               ->createAjaxUrl('css/index')
         );
 
-        Js::addInline('new N2Classes.BasicCSS(' . json_encode($id) . ', ' . json_encode($options) . ');');
+        Js::addInline('new _N2.BasicCSS(' . json_encode($id) . ', ' . json_encode($options) . ');');
     }
 }

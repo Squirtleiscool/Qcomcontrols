@@ -5,7 +5,6 @@ namespace Nextend\SmartSlider3\Application\Admin\Slider;
 
 
 use Nextend\Framework\Acl\Acl;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\AbstractView;
 use Nextend\SmartSlider3\Application\Admin\FormManager\FormManagerSlider;

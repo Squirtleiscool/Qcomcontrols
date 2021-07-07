@@ -7,7 +7,6 @@ namespace Nextend\SmartSlider3\Slider\SliderType\Simple;
 use Nextend\Framework\Asset\Js\Js;
 use Nextend\Framework\Model\Section;
 use Nextend\Framework\Parser\Color;
-use Nextend\Framework\ResourceTranslator\ResourceTranslator;
 use Nextend\Framework\Sanitize;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\BackgroundAnimation\BackgroundAnimationStorage;
@@ -32,7 +31,6 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
             'animation-duration'                     => 800,
             'animation-delay'                        => 0,
             'animation-easing'                       => 'easeOutQuad',
-            'animation-parallax-overlap'             => 0,
             'animation-shifted-background-animation' => 'auto',
             'carousel'                               => 1,
 
@@ -47,32 +45,23 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
 
         $this->loadResources();
 
-        $background      = $params->get('background');
-        $backgroundColor = $params->get('background-color', '');
-        $sliderCSS       = $params->get('slider-css');
+        $sliderCSS = $params->get('slider-css');
 
-        $sliderCSS2 = '';
-
-        if (!empty($background)) {
-            $sliderCSS2 .= 'background-image: URL(' . ResourceTranslator::toUrl($background) . ');';
-        }
-        if (!empty($backgroundColor)) {
-            $rgba = Color::hex2rgba($backgroundColor);
-            if ($rgba[3] != 0) {
-                $sliderCSS2 .= 'background-color:RGBA(' . $rgba[0] . ',' . $rgba[1] . ',' . $rgba[2] . ',' . round($rgba[3] / 127, 2) . ');';
-            }
-        }
+        $this->initSliderBackground('.n2-ss-slider-2');
 
         $slideCSS = $params->get('slide-css');
 
         $this->initBackgroundAnimation();
 
         echo $this->openSliderElement();
-        $this->widgets->echoAbove();
+
+        ob_start();
+
+        $slides = $this->slider->getSlides();
         ?>
 
         <div class="n2-ss-slider-1 n2_ss__touch_element n2-ow" style="<?php echo Sanitize::esc_attr($sliderCSS); ?>">
-            <div class="n2-ss-slider-2 n2-ow" style="<?php echo Sanitize::esc_attr($sliderCSS2); ?>">
+            <div class="n2-ss-slider-2 n2-ow">
                 <?php
                 echo $this->getBackgroundVideo($params);
                 ?>
@@ -84,25 +73,35 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
                     <?php
                     echo $this->slider->staticHtml;
 
-                    echo Html::tag('div', array('class' => 'n2-ss-slide-backgrounds'));
-
-                    foreach ($this->slider->getSlides() as $i => $slide) {
-                        $slide->finalize();
-
-                        echo Html::tag('div', Html::mergeAttributes($slide->attributes, $slide->linkAttributes, array(
-                            'class' => 'n2-ss-slide n2-ss-canvas n2-ow ' . $slide->classes,
-                            'style' => $slide->style
-                        )), $slide->background . $slide->getHTML());
+                    echo Html::openTag('div', array('class' => 'n2-ss-slide-backgrounds n2-ow-all'));
+                    foreach ($slides as $slide) {
+                        echo $slide->background;
                     }
+                    echo Html::closeTag('div');
+                    ?>
+                    <div class="n2-ss-slider-4 n2-ow">
+                        <?php
+                        $this->displaySizeSVGs($css);
+
+                        foreach ($slides as $slide) {
+                            $slide->finalize();
+
+                            echo Html::tag('div', Html::mergeAttributes($slide->attributes, $slide->linkAttributes, array(
+                                'class' => 'n2-ss-slide n2-ow ' . $slide->classes,
+                                'style' => $slide->style
+                            )), $slide->getHTML());
+                        }
+                        ?>
+                    </div>
+
+                    <?php
                     ?>
                 </div>
             </div>
-            <?php
-            $this->widgets->echoRemainder();
-            ?>
         </div>
         <?php
-        $this->widgets->echoBelow();
+        echo $this->widgets->wrapSlider(ob_get_clean());
+
         echo $this->closeSliderElement();
 
         $this->javaScriptProperties['mainanimation'] = array(
@@ -110,41 +109,34 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
             'duration'                   => intval($params->get('animation-duration')),
             'delay'                      => intval($params->get('animation-delay')),
             'ease'                       => $params->get('animation-easing'),
-            'parallax'                   => floatval($params->get('animation-parallax')),
             'shiftedBackgroundAnimation' => $params->get('animation-shifted-background-animation')
         );
-
-        $this->javaScriptProperties['mainanimation']['parallax'] = intval($params->get('animation-parallax-overlap'));
         $this->javaScriptProperties['mainanimation']['shiftedBackgroundAnimation'] = 0;
     
 
         $this->javaScriptProperties['carousel'] = intval($params->get('carousel'));
 
-        $this->javaScriptProperties['dynamicHeight'] = intval($params->get('dynamic-height', '0'));
-        $this->javaScriptProperties['dynamicHeight'] = 0;
-    
-
         $this->style .= $css->getCSS();
 
-        $this->jsDependency[] = 'smartslider-simple-type-frontend';
+        $this->jsDependency[] = 'ss-simple';
     }
 
     public function getScript() {
-        return "N2R(" . json_encode($this->jsDependency) . ",function(){new N2Classes.SmartSliderSimple('#{$this->slider->elementId}', " . $this->encodeJavaScriptProperties() . ");});";
+        return "_N2.r(" . json_encode(array_unique($this->jsDependency)) . ",function(){new _N2.SmartSliderSimple('{$this->slider->elementId}', " . $this->encodeJavaScriptProperties() . ");});";
     }
 
     public function loadResources() {
 
-        Js::addStaticGroup(SliderTypeSimple::getAssetsPath() . '/dist/smartslider-simple-type-frontend.min.js', 'smartslider-simple-type-frontend');
+        Js::addStaticGroup(SliderTypeSimple::getAssetsPath() . '/dist/ss-simple.min.js', 'ss-simple');
     }
 
     private function initBackgroundAnimation() {
         $speed = $this->slider->params->get('background-animation-speed', 'normal');
+        $color = Color::colorToRGBA($this->slider->params->get('background-animation-color', '333333ff'));
 
-        $this->javaScriptProperties['bgAnimationsColor'] = Color::colorToRGBA($this->slider->params->get('background-animation-color', '333333ff'));
-        $this->javaScriptProperties['bgAnimations']      = array(
+        $this->javaScriptProperties['bgAnimations'] = array(
             'global' => $this->parseBackgroundAnimations($this->slider->params->get('background-animation', '')),
-            'color'  => Color::colorToRGBA($this->slider->params->get('background-animation-color', '333333ff')),
+            'color'  => $color,
             'speed'  => $speed
         );
 
@@ -162,6 +154,12 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
                     'animation' => $this->parseBackgroundAnimations($slide->parameters->get('background-animation')),
                     'speed'     => $slideSpeed
                 );
+
+                $localColor = $slide->parameters->get('background-animation-color', '');
+                if (!empty($localColor)) {
+                    $slides[$i]['color'] = Color::colorToRGBA($localColor);
+                }
+
                 if ($slides[$i]) {
                     $hasCustom = true;
                 }
@@ -179,6 +177,11 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
             // We have background animation so load the required JS files
 
             Js::addStaticGroup(SliderTypeSimple::getAssetsPath() . '/dist/smartslider-backgroundanimation.min.js', 'smartslider-backgroundanimation');
+
+            $this->slider->addLess(SliderTypeSimple::getAssetsPath() . '/BackgroundAnimation/style.n2less', array(
+                'sliderid' => "~'#{$this->slider->elementId}'",
+                "color"    => $color
+            ));
         }
 
     }
@@ -207,36 +210,5 @@ class SliderTypeSimpleFrontend extends AbstractSliderTypeFrontend {
         }
 
         return 0;
-    }
-
-    private function getBackgroundVideo($params) {
-        $mp4 = ResourceTranslator::toUrl($params->get('backgroundVideoMp4', ''));
-
-        if (empty($mp4)) {
-            return '';
-        }
-
-        $attributes = array();
-
-        if ($params->get('backgroundVideoMuted', 1)) {
-            $attributes['muted'] = 'muted';
-        }
-
-        if ($params->get('backgroundVideoLoop', 1)) {
-            $attributes['loop'] = 'loop';
-        }
-
-        return Html::tag('div', array('class' => 'n2-ss-slider-background-video-container n2-ow'), Html::tag('video', $attributes + array(
-                'class'              => 'n2-ss-slider-background-video n2-ow',
-                'data-mode'          => $params->get('backgroundVideoMode', 'fill'),
-                'playsinline'        => 1,
-                'webkit-playsinline' => 1,
-                'data-keepplaying'   => 1,
-                'preload'            => 'none'
-            ), Html::tag("source", array(
-            "src"  => $mp4,
-            "type" => "video/mp4"
-        ), '', false)));
-
     }
 }

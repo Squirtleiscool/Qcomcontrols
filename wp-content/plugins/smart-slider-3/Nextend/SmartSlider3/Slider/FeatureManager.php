@@ -6,12 +6,10 @@ namespace Nextend\SmartSlider3\Slider;
 
 use Nextend\Framework\Asset\Predefined;
 use Nextend\SmartSlider3\Renderable\AbstractRenderable;
-use Nextend\SmartSlider3\Settings;
 use Nextend\SmartSlider3\Slider\Feature\Align;
 use Nextend\SmartSlider3\Slider\Feature\Autoplay;
 use Nextend\SmartSlider3\Slider\Feature\BlockRightClick;
 use Nextend\SmartSlider3\Slider\Feature\Controls;
-use Nextend\SmartSlider3\Slider\Feature\FadeOnLoad;
 use Nextend\SmartSlider3\Slider\Feature\Focus;
 use Nextend\SmartSlider3\Slider\Feature\LayerMode;
 use Nextend\SmartSlider3\Slider\Feature\LazyLoad;
@@ -21,7 +19,6 @@ use Nextend\SmartSlider3\Slider\Feature\Optimize;
 use Nextend\SmartSlider3\Slider\Feature\PostBackgroundAnimation;
 use Nextend\SmartSlider3\Slider\Feature\Responsive;
 use Nextend\SmartSlider3\Slider\Feature\SlideBackground;
-use Nextend\SmartSlider3\Slider\Feature\Spinner;
 use Nextend\SmartSlider3\Slider\Feature\TranslateUrl;
 
 class FeatureManager {
@@ -30,11 +27,6 @@ class FeatureManager {
      * @var AbstractRenderable
      */
     private $slider;
-
-    /**
-     * @var FadeOnLoad
-     */
-    public $fadeOnLoad;
 
     /**
      * @var Responsive
@@ -91,11 +83,6 @@ class FeatureManager {
     public $focus;
 
     /**
-     * @var Spinner
-     */
-    public $loadSpinner;
-
-    /**
      * @var MaintainSession
      */
     public $maintainSession;
@@ -116,7 +103,6 @@ class FeatureManager {
         $this->slider = $slider;
 
         $this->optimize        = new Optimize($slider);
-        $this->fadeOnLoad      = new FadeOnLoad($slider);
         $this->align           = new Align($slider);
         $this->responsive      = new Responsive($slider, $this);
         $this->controls        = new Controls($slider);
@@ -129,7 +115,6 @@ class FeatureManager {
         $this->layerMode       = new LayerMode($slider);
         $this->slideBackground = new SlideBackground($slider);
         $this->focus           = new Focus($slider);
-        $this->loadSpinner = new Spinner($slider);
     }
 
     public function generateJSProperties() {
@@ -161,9 +146,9 @@ class FeatureManager {
 
     protected function makeJavaScriptProperties(&$properties) {
         $this->align->makeJavaScriptProperties($properties);
-        $this->fadeOnLoad->makeJavaScriptProperties($properties);
         $this->responsive->makeJavaScriptProperties($properties);
         $this->controls->makeJavaScriptProperties($properties);
+        $this->optimize->makeJavaScriptProperties($properties);
         $this->lazyLoad->makeJavaScriptProperties($properties);
         $this->blockRightClick->makeJavaScriptProperties($properties);
         $this->maintainSession->makeJavaScriptProperties($properties);

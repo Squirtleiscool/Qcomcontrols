@@ -14,16 +14,17 @@ use Nextend\Framework\Url\Url;
 
 class ImageEdit {
 
-    public static function resizeImage($group, $imageUrl, $targetWidth, $targetHeight, $lazy = false, $mode = 'cover', $backgroundColor = false, $resizeRemote = false, $quality = 100, $optimize = false, $x = 50, $y = 50) {
+    public static function resizeImage($group, $imageUrlOrPath, $targetWidth, $targetHeight, $lazy = false, $mode = 'cover', $backgroundColor = false, $resizeRemote = false, $quality = 100, $optimize = false, $x = 50, $y = 50) {
 
-        if (strpos($imageUrl, Filesystem::getBasePath()) === 0) {
-            $imageUrl = Url::pathToUri($imageUrl);
+        if (strpos($imageUrlOrPath, Filesystem::getBasePath()) === 0) {
+            $imageUrl = Url::pathToUri($imageUrlOrPath);
+        } else {
+            $imageUrl = ResourceTranslator::toUrl($imageUrlOrPath);
         }
 
         if ($targetWidth <= 0 || $targetHeight <= 0 || !function_exists('imagecreatefrompng')) {
-            return Filesystem::pathToAbsoluteURL($imageUrl);
+            return $imageUrl;
         }
-
 
         $quality          = max(0, min(100, $quality));
         $originalImageUrl = $imageUrl;
@@ -32,12 +33,8 @@ class ImageEdit {
             $imageUrl = parse_url(Url::getFullUri(), PHP_URL_SCHEME) . ':' . $imageUrl;
         }
 
-        if (strpos($imageUrl, Filesystem::getBasePath()) !== 0) {
-            $imageUrl  = Url::relativetoabsolute($imageUrl);
-            $imagePath = Filesystem::absoluteURLToPath($imageUrl);
-        } else {
-            $imagePath = $imageUrl;
-        }
+        $imageUrl  = Url::relativetoabsolute($imageUrl);
+        $imagePath = Filesystem::absoluteURLToPath($imageUrl);
 
         $cache = new CacheImage($group);
         if ($lazy) {
@@ -47,13 +44,13 @@ class ImageEdit {
         if ($imagePath == $imageUrl) {
             // The image is not local
             if (!$resizeRemote) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             $pathInfo  = pathinfo(parse_url($imageUrl, PHP_URL_PATH));
-            $extension = self::validateExtension($pathInfo['extension']);
+            $extension = self::validateGDExtension($pathInfo['extension']);
             if (!$extension) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             $resizedPath = $cache->makeCache($extension, array(
@@ -77,7 +74,7 @@ class ImageEdit {
             }
 
             if ($resizedPath === $originalImageUrl) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             return Filesystem::pathToAbsoluteURL($resizedPath);
@@ -90,11 +87,15 @@ class ImageEdit {
                     $extension = 'jpg';
                     break;
                 case IMAGETYPE_PNG:
+                    if (self::isPNG8($imagePath)) {
+                        // GD cannot resize palette PNG so we return the original image
+                        return $originalImageUrl;
+                    }
                     $extension = 'png';
                     break;
             }
             if (!$extension) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             return Filesystem::pathToAbsoluteURL($cache->makeCache($extension, array(
@@ -144,12 +145,13 @@ class ImageEdit {
             $originalHeight = imagesy($image);
 
             if ($optimize) {
-
                 if ($originalWidth <= $targetWidth || $originalHeight <= $targetHeight) {
                     if (!Filesystem::existsFolder($targetDir)) {
                         Filesystem::createFolder($targetDir);
                     }
                     if ($extension == 'png') {
+                        imagesavealpha($image, true);
+                        imagealphablending($image, false);
                         imagepng($image, $targetFile);
                     } else if ($extension == 'jpg') {
                         imagejpeg($image, $targetFile, $quality);
@@ -202,39 +204,40 @@ class ImageEdit {
         throw new Exception('Unable to resize image: ' . $imagePath);
     }
 
-    public static function scaleImage($group, $imageUrl, $scale = 1, $resizeRemote = false, $quality = 100) {
+    public static function scaleImage($group, $imageUrlOrPath, $scale = 1, $resizeRemote = false, $quality = 100) {
+
+
+        if (strpos($imageUrlOrPath, Filesystem::getBasePath()) === 0) {
+            $imageUrl = Url::pathToUri($imageUrlOrPath);
+        } else {
+            $imageUrl = ResourceTranslator::toUrl($imageUrlOrPath);
+        }
 
         if ($scale <= 0 || !function_exists('imagecreatefrompng')) {
-            return Filesystem::pathToAbsoluteURL($imageUrl);
+            return $imageUrl;
         }
 
         $quality          = max(0, min(100, $quality));
         $originalImageUrl = $imageUrl;
-        $imageUrl         = ResourceTranslator::toUrl($imageUrl);
-
 
         if (substr($imageUrl, 0, 2) == '//') {
             $imageUrl = parse_url(Url::getFullUri(), PHP_URL_SCHEME) . ':' . $imageUrl;
         }
 
-        if (strpos($imageUrl, Filesystem::getBasePath()) !== 0) {
-            $imageUrl  = Url::relativetoabsolute($imageUrl);
-            $imagePath = Filesystem::absoluteURLToPath($imageUrl);
-        } else {
-            $imagePath = $imageUrl;
-        }
+        $imageUrl  = Url::relativetoabsolute($imageUrl);
+        $imagePath = Filesystem::absoluteURLToPath($imageUrl);
 
         $cache = new CacheImage($group);
         if ($imagePath == $imageUrl) {
             // The image is not local
             if (!$resizeRemote) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             $pathInfo  = pathinfo(parse_url($imageUrl, PHP_URL_PATH));
-            $extension = self::validateExtension($pathInfo['extension']);
+            $extension = self::validateGDExtension($pathInfo['extension']);
             if (!$extension) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             return ResourceTranslator::urlToResource(Filesystem::pathToAbsoluteURL($cache->makeCache($extension, array(
@@ -255,19 +258,15 @@ class ImageEdit {
                     $extension = 'jpg';
                     break;
                 case IMAGETYPE_PNG:
-                    $extension = 'png';
-                    $fp        = fopen($imagePath, 'r');
-                    fseek($fp, 25);
-                    $data = fgets($fp, 2);
-                    fclose($fp);
-                    if (ord($data) == 3) {
+                    if (self::isPNG8($imagePath)) {
                         // GD cannot resize palette PNG so we return the original image
-                        return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                        return $originalImageUrl;
                     }
+                    $extension = 'png';
                     break;
             }
             if (!$extension) {
-                return Filesystem::pathToAbsoluteURL($originalImageUrl);
+                return $originalImageUrl;
             }
 
             return ResourceTranslator::urlToResource(Filesystem::pathToAbsoluteURL($cache->makeCache($extension, array(
@@ -378,26 +377,15 @@ class ImageEdit {
         $src_h           = $OriginalHeight;
         $horizontalRatio = $width / $originalWidth;
         $verticalRatio   = $height / $OriginalHeight;
-        if ($mode == 'cover') {
-            if ($horizontalRatio > $verticalRatio) {
-                $new_h = $horizontalRatio * $OriginalHeight;
-                $dst_y = ($height - $new_h) / 2 * $y / 50;
-                $dst_h = $new_h;
-            } else {
-                $new_w = $verticalRatio * $originalWidth;
-                $dst_x = ($width - $new_w) / 2 * $x / 50;
-                $dst_w = $new_w;
-            }
-        } else if ($mode == 'contain') {
-            if ($horizontalRatio < $verticalRatio) {
-                $new_h = $horizontalRatio * $OriginalHeight;
-                $dst_y = ($height - $new_h) / 2 * $y / 50;
-                $dst_h = $new_h;
-            } else {
-                $new_w = $verticalRatio * $originalWidth;
-                $dst_x = ($width - $new_w) / 2 * $x / 50;
-                $dst_w = $new_w;
-            }
+
+        if ($horizontalRatio > $verticalRatio) {
+            $new_h = $horizontalRatio * $OriginalHeight;
+            $dst_y = ($height - $new_h) / 2 * $y / 50;
+            $dst_h = $new_h;
+        } else {
+            $new_w = $verticalRatio * $originalWidth;
+            $dst_x = ($width - $new_w) / 2 * $x / 50;
+            $dst_w = $new_w;
         }
 
         return array(
@@ -410,6 +398,22 @@ class ImageEdit {
             $src_w,
             $src_h
         );
+    }
+
+    private static function validateGDExtension($extension) {
+        static $validExtensions = array(
+            'png'  => 'png',
+            'jpg'  => 'jpg',
+            'jpeg' => 'jpg',
+            'gif'  => 'gif',
+            'svg'  => 'svg'
+        );
+        $extension = strtolower($extension);
+        if (isset($validExtensions[$extension])) {
+            return $validExtensions[$extension];
+        }
+
+        return false;
     }
 
     private static function validateExtension($extension) {
@@ -453,5 +457,173 @@ class ImageEdit {
         }
 
         return exif_imagetype($filename);
+    }
+
+    public static function isPNG8($path) {
+        $fp = fopen($path, 'r');
+        fseek($fp, 25);
+        $data = fgets($fp, 2);
+        fclose($fp);
+        if (ord($data) == 3) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public static function scaleImageWebp($group, $imageUrlOrPath, $options) {
+
+        $options = array_merge(array(
+            'mode'    => 'scale',
+            'scale'   => 1,
+            'quality' => 100,
+            'remote'  => false
+        ), $options);
+
+        if (strpos($imageUrlOrPath, Filesystem::getBasePath()) === 0) {
+            $imageUrl = Url::pathToUri($imageUrlOrPath);
+        } else {
+            $imageUrl = ResourceTranslator::toUrl($imageUrlOrPath);
+        }
+
+        if (!function_exists('imagecreatefrompng') || ($options['mode'] === 'scale' && $options['scale'] <= 0)) {
+            return Filesystem::pathToAbsoluteURL($imageUrl);
+        }
+
+        $options['quality'] = max(0, min(100, $options['quality']));
+        $originalImageUrl   = $imageUrl;
+
+
+        if (substr($imageUrl, 0, 2) == '//') {
+            $imageUrl = parse_url(Url::getFullUri(), PHP_URL_SCHEME) . ':' . $imageUrl;
+        }
+
+        $imageUrl  = Url::relativetoabsolute($imageUrl);
+        $imagePath = Filesystem::absoluteURLToPath($imageUrl);
+
+        $cache = new CacheImage($group);
+        if ($imagePath == $imageUrl) {
+            // The image is not local
+            if (!$options['remote']) {
+                return $originalImageUrl;
+            }
+
+            $pathInfo  = pathinfo(parse_url($imageUrl, PHP_URL_PATH));
+            $extension = self::validateGDExtension($pathInfo['extension']);
+            if (!$extension) {
+                return $originalImageUrl;
+            }
+
+            return ResourceTranslator::urlToResource(Filesystem::pathToAbsoluteURL($cache->makeCache('webp', array(
+                self::class,
+                '_scaleRemoteImageWebp'
+            ), array(
+                $extension,
+                $imageUrl,
+                $options
+            ))));
+
+        } else {
+            $extension = false;
+            $imageType = @self::exif_imagetype($imagePath);
+            switch ($imageType) {
+                case IMAGETYPE_JPEG:
+                    $extension = 'jpg';
+                    break;
+                case IMAGETYPE_PNG:
+                    $extension = 'png';
+                    break;
+            }
+            if (!$extension) {
+                return $originalImageUrl;
+            }
+
+            return ResourceTranslator::urlToResource(Filesystem::pathToAbsoluteURL($cache->makeCache('webp', array(
+                self::class,
+                '_scaleImageWebp'
+            ), array(
+                $extension,
+                $imagePath,
+                $options
+            ))));
+        }
+    }
+
+    public static function _scaleRemoteImageWebp($targetFile, $extension, $imageUrl, $options) {
+        return self::_scaleImageWebp($targetFile, $extension, $imageUrl, $options);
+    }
+
+    public static function _scaleImageWebp($targetFile, $extension, $imagePath, $options) {
+
+        $options = array_merge(array(
+            'focusX' => 50,
+            'focusY' => 50,
+        ), $options);
+
+        $targetDir = dirname($targetFile);
+
+        $image = false;
+
+        if ($extension == 'png') {
+            $image = @imagecreatefrompng($imagePath);
+            if (!imageistruecolor($image)) {
+                imagepalettetotruecolor($image);
+                imagealphablending($image, true);
+                imagesavealpha($image, true);
+            }
+        } else if ($extension == 'jpg') {
+            $image = @imagecreatefromjpeg($imagePath);
+            if (function_exists("exif_read_data")) {
+                $exif = @exif_read_data($imagePath);
+
+                $rotated = self::getOrientation($exif, $image);
+                if ($rotated) {
+                    imagedestroy($image);
+                    $image = $rotated;
+                }
+            }
+        }
+
+        if ($image) {
+            $originalWidth  = imagesx($image);
+            $originalHeight = imagesy($image);
+            switch ($options['mode']) {
+                case 'scale':
+                    $targetWidth  = $originalWidth * $options['scale'];
+                    $targetHeight = $originalHeight * $options['scale'];
+                    break;
+                case 'resize':
+                    $targetWidth  = $options['width'];
+                    $targetHeight = $options['height'];
+                    break;
+            }
+            if ((isset($rotated) && $rotated) || $originalWidth != $targetWidth || $originalHeight != $targetHeight) {
+                $newImage = imagecreatetruecolor($targetWidth, $targetHeight);
+                if ($extension == 'png') {
+                    imagesavealpha($newImage, true);
+                    imagealphablending($newImage, false);
+                    $transparent = imagecolorallocatealpha($newImage, 255, 255, 255, 127);
+                    imagefilledrectangle($image, 0, 0, $targetWidth, $targetHeight, $transparent);
+                }
+
+                list($dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) = self::imageMode($targetWidth, $targetHeight, $originalWidth, $originalHeight, 'cover', $options['focusX'], $options['focusY']);
+                imagecopyresampled($newImage, $image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+                imagedestroy($image);
+
+            } else {
+                $newImage = $image;
+            }
+
+            if (!Filesystem::existsFolder($targetDir)) {
+                Filesystem::createFolder($targetDir);
+            }
+
+            imagewebp($newImage, $targetFile, $options['quality']);
+            imagedestroy($newImage);
+
+            return true;
+        }
+
+        throw new Exception('Unable to scale image: ' . $imagePath);
     }
 }

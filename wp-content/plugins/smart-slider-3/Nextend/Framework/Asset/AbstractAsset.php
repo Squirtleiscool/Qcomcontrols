@@ -17,6 +17,7 @@ class AbstractAsset {
     protected $globalInline = array();
     protected $firstCodes = array();
     protected $inline = array();
+    protected $staticGroupPreload = array();
     protected $staticGroup = array();
 
     protected $groups = array();
@@ -28,9 +29,13 @@ class AbstractAsset {
 
     public function addFiles($path, $files, $group) {
         $this->addGroup($group);
-        foreach ($files AS $file) {
+        foreach ($files as $file) {
             $this->files[$group][] = $path . DIRECTORY_SEPARATOR . $file;
         }
+    }
+
+    public function addStaticGroupPreload($file, $group) {
+        $this->staticGroupPreload[$group] = $file;
     }
 
     public function addStaticGroup($file, $group) {
@@ -66,12 +71,16 @@ class AbstractAsset {
         }
     }
 
-    public function addInline($code, $unshift = false) {
+    public function addInline($code, $name = null, $unshift = false) {
         if ($unshift) {
             array_unshift($this->inline, $code);
 
         } else {
-            $this->inline[] = $code;
+            if ($name) {
+                $this->inline[$name] = $code;
+            } else {
+                $this->inline[] = $code;
+            }
         }
     }
 
@@ -88,14 +97,14 @@ class AbstractAsset {
     }
 
     protected function uniqueFiles() {
-        foreach ($this->files AS $group => &$files) {
+        foreach ($this->files as $group => &$files) {
             $this->files[$group] = array_values(array_unique($files));
         }
         $this->initGroups();
     }
 
     public function removeFiles($notNeededFiles) {
-        foreach ($this->files AS $group => &$files) {
+        foreach ($this->files as $group => &$files) {
             $this->files[$group] = array_diff($files, $notNeededFiles);
         }
     }
@@ -122,20 +131,20 @@ class AbstractAsset {
         $files = array();
 
         if (AssetManager::$cacheAll) {
-            foreach ($this->groups AS $group) {
+            foreach ($this->groups as $group) {
                 if (isset($this->staticGroup[$group])) continue;
                 $files[$group] = $this->cache->getAssetFile($group, $this->files[$group], $this->codes[$group]);
             }
         } else {
-            foreach ($this->groups AS $group) {
+            foreach ($this->groups as $group) {
                 if (isset($this->staticGroup[$group])) continue;
                 if (in_array($group, AssetManager::$cachedGroups)) {
                     $files[$group] = $this->cache->getAssetFile($group, $this->files[$group], $this->codes[$group]);
                 } else {
-                    foreach ($this->files[$group] AS $file) {
+                    foreach ($this->files[$group] as $file) {
                         $files[] = $file;
                     }
-                    foreach ($this->codes[$group] AS $code) {
+                    foreach ($this->codes[$group] as $code) {
                         array_unshift($this->inline, $code);
                     }
                 }
@@ -151,20 +160,22 @@ class AbstractAsset {
 
     public function serialize() {
         return array(
-            'staticGroup'  => $this->staticGroup,
-            'files'        => $this->files,
-            'urls'         => $this->urls,
-            'codes'        => $this->codes,
-            'firstCodes'   => $this->firstCodes,
-            'inline'       => $this->inline,
-            'globalInline' => $this->globalInline
+            'staticGroupPreload' => $this->staticGroupPreload,
+            'staticGroup'        => $this->staticGroup,
+            'files'              => $this->files,
+            'urls'               => $this->urls,
+            'codes'              => $this->codes,
+            'firstCodes'         => $this->firstCodes,
+            'inline'             => $this->inline,
+            'globalInline'       => $this->globalInline
         );
     }
 
     public function unSerialize($array) {
-        $this->staticGroup = array_merge($this->staticGroup, $array['staticGroup']);
+        $this->staticGroupPreload = array_merge($this->staticGroupPreload, $array['staticGroupPreload']);
+        $this->staticGroup        = array_merge($this->staticGroup, $array['staticGroup']);
 
-        foreach ($array['files'] AS $group => $files) {
+        foreach ($array['files'] as $group => $files) {
             if (!isset($this->files[$group])) {
                 $this->files[$group] = $files;
             } else {
@@ -173,7 +184,7 @@ class AbstractAsset {
         }
         $this->urls = array_merge($this->urls, $array['urls']);
 
-        foreach ($array['codes'] AS $group => $codes) {
+        foreach ($array['codes'] as $group => $codes) {
             if (!isset($this->codes[$group])) {
                 $this->codes[$group] = $codes;
             } else {

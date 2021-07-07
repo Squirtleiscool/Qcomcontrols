@@ -110,7 +110,7 @@ class Notification {
 
         if (is_array(self::$error) && count(self::$error)) {
             foreach (self::$error as $error) {
-                Js::addInline("N2Classes.Notification.error(" . json_encode($error[0]) . ", " . json_encode($error[1]) . ");");
+                Js::addInline("_N2.Notification.error(" . json_encode($error[0]) . ", " . json_encode($error[1]) . ");");
             }
             self::$error = array();
         }
@@ -120,7 +120,7 @@ class Notification {
         if (is_array(self::$success) && count(self::$success)) {
             foreach (self::$success as $success) {
 
-                Js::addInline("N2Classes.Notification.success(" . json_encode($success[0]) . ", " . json_encode($success[1]) . ");");
+                Js::addInline("_N2.Notification.success(" . json_encode($success[0]) . ", " . json_encode($success[1]) . ");");
             }
             self::$success = array();
         }
@@ -130,7 +130,7 @@ class Notification {
         if (is_array(self::$notice) && count(self::$notice)) {
             foreach (self::$notice as $notice) {
 
-                Js::addInline("N2Classes.Notification.notice(" . json_encode($notice[0]) . ", " . json_encode($notice[1]) . ");");
+                Js::addInline("_N2.Notification.notice(" . json_encode($notice[0]) . ", " . json_encode($notice[1]) . ");");
             }
             self::$notice = array();
         }

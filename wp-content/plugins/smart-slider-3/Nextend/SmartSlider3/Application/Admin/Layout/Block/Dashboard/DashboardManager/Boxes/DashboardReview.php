@@ -64,13 +64,14 @@ use Nextend\SmartSlider3\SmartSlider3Info;
 </div>
 
 <script>
-    N2R('documentReady', function ($) {
+    _N2.r(['$', 'documentReady'], function () {
+        var $ = _N2.$;
         var $box = $('.n2_dashboard_manager_review'),
             close = function () {
-                N2Classes.AjaxHelper
+                _N2.AjaxHelper
                     .ajax({
                         type: "POST",
-                        url: N2Classes.AjaxHelper.makeAjaxUrl(N2Classes.AjaxHelper.getAdminUrl('ss3-admin'), {
+                        url: _N2.AjaxHelper.makeAjaxUrl(_N2.AjaxHelper.getAdminUrl('ss3-admin'), {
                             nextendcontroller: 'settings',
                             nextendaction: 'rated'
                         }),

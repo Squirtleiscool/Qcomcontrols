@@ -14,7 +14,15 @@ use Nextend\Framework\Sanitize;
      data-title="<?php echo Sanitize::esc_attr($this->getSliderTitle()); ?>"
      data-sliderid="<?php echo $this->getSliderID(); ?>">
 
-    <div class="n2_slider_box__content" style="background-image: URL('<?php echo Sanitize::esc_attr($this->getThumbnail()); ?>');">
+    <?php
+    $thumbnailUrl   = Sanitize::esc_attr($this->getThumbnail());
+    $thumbnailStyle = '';
+    if (!empty($thumbnailUrl)) {
+        $thumbnailStyle = "background-image: url('" . $thumbnailUrl . "');";
+    }
+    ?>
+
+    <div class="n2_slider_box__content" style="<?php echo $thumbnailStyle; ?>">
         <?php
         if ($this->isThumbnailEmpty()):
             $icon = "ssi_64 ssi_64--image";

@@ -5,6 +5,7 @@ namespace Nextend\SmartSlider3\Platform\WordPress\Admin;
 
 
 use Nextend\Framework\PageFlow;
+use Nextend\Framework\Sanitize;
 use Nextend\SmartSlider3\Application\ApplicationSmartSlider3;
 use Nextend\SmartSlider3\Application\Model\ModelLicense;
 use Nextend\SmartSlider3\Application\Model\ModelSliders;
@@ -230,7 +231,7 @@ class AdminHelper {
                 $wp_admin_bar->add_node(array(
                     'id'     => 'smart_slider_3_slider_' . $slider['id'],
                     'parent' => 'smart_slider_3_edit',
-                    'title'  => '#' . $slider['id'] . ' - ' . $slider['title'],
+                    'title'  => Sanitize::esc_html('#' . $slider['id'] . ' - ' . $slider['title']),
                     'href'   => $applicationType->getUrlSliderEdit($slider['id'])
                 ));
             }

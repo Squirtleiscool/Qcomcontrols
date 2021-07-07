@@ -62,7 +62,7 @@ abstract class AbstractLayout {
     }
 
     public function displayContent() {
-        foreach ($this->contentBlocks AS $content) {
+        foreach ($this->contentBlocks as $content) {
             if (is_string($content)) {
                 echo $content;
             } else if (is_array($content)) {

@@ -54,10 +54,12 @@ abstract class AbstractWidget {
      *
      * @return AbstractWidgetFrontend
      */
-    public function createFrontend($sliderWidget) {
+    public function createFrontend($sliderWidget, $params) {
         $className = static::class . 'Frontend';
 
-        return new $className($sliderWidget, $this);
+        $params->fillDefault($this->getDefaults());
+
+        return new $className($sliderWidget, $this, $params);
     }
 
     public function getKey() {

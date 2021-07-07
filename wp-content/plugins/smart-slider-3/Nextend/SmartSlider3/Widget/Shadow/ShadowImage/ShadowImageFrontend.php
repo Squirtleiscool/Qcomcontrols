@@ -4,24 +4,28 @@
 namespace Nextend\SmartSlider3\Widget\Shadow\ShadowImage;
 
 
-use Nextend\Framework\Filesystem\Filesystem;
+use Nextend\Framework\FastImageSize\FastImageSize;
 use Nextend\Framework\ResourceTranslator\ResourceTranslator;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Widget\AbstractWidgetFrontend;
 
 class ShadowImageFrontend extends AbstractWidgetFrontend {
 
-    public function getPositions(&$params) {
-        $positions                    = array();
-        $positions['shadow-position'] = array(
-            $this->key . 'position-',
-            'shadow'
-        );
+    public function __construct($sliderWidget, $widget, $params) {
 
-        return $positions;
+        parent::__construct($sliderWidget, $widget, $params);
+
+        $this->addToPlacement($this->key . 'position-', array(
+            $this,
+            'render'
+        ));
     }
 
-    public function render($slider, $id, $params) {
+    public function render($attributes = array()) {
+
+        $slider = $this->slider;
+        $id     = $this->slider->elementId;
+        $params = $this->params;
 
         $shadow = $params->get($this->key . 'shadow-image');
         if (empty($shadow)) {
@@ -39,28 +43,22 @@ class ShadowImageFrontend extends AbstractWidgetFrontend {
         $slider->addLess(self::getAssetsPath() . '/style.n2less', array(
             "sliderid" => $slider->elementId
         ));
-        $slider->features->addInitCallback(Filesystem::readFile(self::getAssetsPath() . '/dist/shadow.min.js'));
-    
 
+        $displayAttributes = $this->getDisplayAttributes($params, $this->key);
 
-        list($displayClass, $displayAttributes) = $this->getDisplayAttributes($params, $this->key);
+        $slider->features->addInitCallback("new _N2.SmartSliderWidget(this, 'shadow', '.nextend-shadow');");
 
-        list($style, $attributes) = $this->getPosition($params, $this->key);
+        $slider->sliderType->addJSDependency('SmartSliderWidget');
 
-        $width = $params->get($this->key . 'width');
-        if (is_numeric($width) || substr($width, -1) == '%' || substr($width, -2) == 'px') {
-            $style .= 'width:' . $width . ';';
-        }
+        $sizeAttributes = array();
+        FastImageSize::initAttributes(ResourceTranslator::urlToResource($shadow), $sizeAttributes);
 
-        $slider->features->addInitCallback('new N2Classes.SmartSliderWidgetShadow(this);');
-
-
-        return Html::tag('div', $displayAttributes + $attributes + array(
-                'class' => $displayClass . "nextend-shadow n2-ow",
-                'style' => $style
-            ), Html::image(ResourceTranslator::toUrl($shadow), 'Shadow', Html::addExcludeLazyLoadAttributes(array(
-            'style' => 'display: block; width:100%;max-width:none;',
-            'class' => 'n2-ow nextend-shadow-image'
-        ))));
+        return Html::tag('div', Html::mergeAttributes($displayAttributes, array(
+            'class' => "nextend-shadow n2-ow-all"
+        )), Html::image(ResourceTranslator::toUrl($shadow), 'Shadow', $sizeAttributes + Html::addExcludeLazyLoadAttributes(array(
+                'style'   => 'display: block; width:100%;max-width:none;',
+                'class'   => 'nextend-shadow-image',
+                'loading' => 'lazy'
+            ))));
     }
 }

@@ -30,7 +30,7 @@ class Tab extends AbstractFieldHidden {
 
         $html .= parent::fetchElement();
 
-        Js::addInline('new N2Classes.FormElementTab("' . $this->fieldID . '", ' . json_encode($this->relatedValueFields) . ');');
+        Js::addInline('new _N2.FormElementTab("' . $this->fieldID . '", ' . json_encode($this->relatedValueFields) . ');');
 
         return $html;
     }
@@ -52,13 +52,13 @@ class Tab extends AbstractFieldHidden {
 
     public function renderOptions() {
         $html = '';
-        foreach ($this->options AS $option => $label) {
+        foreach ($this->options as $option => $label) {
             $class = 'n2_field_tab__option';
             if ($option == $this->defaultValue) {
                 $class .= ' n2_field_tab__option--selected';
             }
             $html .= Html::openTag("div", array(
-                "class"       => $class,
+                "class"         => $class,
                 "data-ssoption" => $option
             ));
             $html .= $label;

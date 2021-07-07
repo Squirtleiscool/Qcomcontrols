@@ -16,7 +16,7 @@ class HiddenStyle extends AbstractFieldHidden {
 
         StyleManager::enqueue($this->getForm());
 
-        Js::addInline('new N2Classes.FormElementStyleHidden("' . $this->fieldID . '", {
+        Js::addInline('new _N2.FormElementStyleHidden("' . $this->fieldID . '", {
             mode: "' . $this->mode . '",
             label: "' . $this->label . '"
         });');

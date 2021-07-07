@@ -32,7 +32,7 @@ class CheckboxOnOff extends AbstractFieldHidden {
             'relatedFields' => $this->relatedFields
         );
 
-        Js::addInline('new N2Classes.FormElementCheckboxOnOff("' . $this->fieldID . '", ' . json_encode($options) . ');');
+        Js::addInline('new _N2.FormElementCheckboxOnOff("' . $this->fieldID . '", ' . json_encode($options) . ');');
 
         $attr = array(
             'class' => 'n2_field_checkbox_onoff' . ($this->isActive() ? ' n2_field_checkbox_onoff--active' : '')

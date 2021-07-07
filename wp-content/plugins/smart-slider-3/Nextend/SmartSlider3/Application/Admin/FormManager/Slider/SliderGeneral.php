@@ -78,7 +78,7 @@ class SliderGeneral extends AbstractSliderTab {
             'tipDescription' => n2_('Slider thumbnail which appears in the slider list.')
         ));
 
-        new Text($row1, 'aria-label', n2_('ARIA label'), n2_('Slider'), array(
+        new Text($row1, 'aria-label', n2_('ARIA label'), '', array(
             'style'          => 'width:200px;',
             'tipLabel'       => n2_('ARIA label'),
             'tipDescription' => n2_('It allows you to label your slider for screen readers.'),

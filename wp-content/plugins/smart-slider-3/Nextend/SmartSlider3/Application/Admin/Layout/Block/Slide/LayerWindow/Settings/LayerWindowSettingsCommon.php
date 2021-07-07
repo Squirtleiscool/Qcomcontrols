@@ -16,7 +16,6 @@ use Nextend\Framework\Form\Element\Text;
 use Nextend\Framework\Form\Element\Text\Number;
 use Nextend\Framework\Form\Element\Text\NumberAutoComplete;
 use Nextend\Framework\Form\Element\Text\NumberSlider;
-use Nextend\Framework\Form\Element\Unit;
 use Nextend\Framework\Form\Fieldset\LayerWindow\FieldsetLayerWindowLabelFields;
 use Nextend\SmartSlider3\Form\Element\Radio\HorizontalAlign;
 use Nextend\SmartSlider3\Form\Element\Radio\VerticalAlign;
@@ -98,7 +97,7 @@ class LayerWindowSettingsCommon extends AbstractLayerWindowSettings {
 
         new Number($size, 'normal-height', n2_('Height'), 0, array(
             'wide'           => 4,
-            'unit'           => 'px+',
+            'unit'           => 'px',
             'rowAttributes'  => array(
                 'data-devicespecific' => ''
             ),
@@ -106,13 +105,16 @@ class LayerWindowSettingsCommon extends AbstractLayerWindowSettings {
             'tipDescription' => n2_('You can set a fix height for your layer.')
         ));
 
-        $margin = new MarginPadding($size, 'normal-margin', n2_('Margin'), '0|*|0|*|0|*|0|*|px+', array(
+        $margin = new MarginPadding($size, 'normal-margin', n2_('Margin'), '0|*|0|*|0|*|0', array(
             'rowAttributes'  => array(
-                'data-devicespecific' => ''
+                'data-devicespecific' => 'right'
             ),
             'tipLabel'       => n2_('Margin'),
             'tipDescription' => n2_('With margins you can create distance between your layers.')
         )); // spacing
+
+        $margin->setUnit('px');
+
         for ($i = 1; $i < 5; $i++) {
             new NumberAutoComplete($margin, 'normal-margin-' . $i, false, '', array(
                 'values' => array(
@@ -125,13 +127,6 @@ class LayerWindowSettingsCommon extends AbstractLayerWindowSettings {
                 'wide'   => 3
             ));
         }
-
-        new Unit($margin, 'normal-margin-5', '', '', array(
-            'units' => array(
-                'px+' => 'px+',
-                'px'  => 'px'
-            )
-        ));
     }
 
     /**
@@ -144,6 +139,8 @@ class LayerWindowSettingsCommon extends AbstractLayerWindowSettings {
                 'data-placement' => 'absolute'
             )
         ));
+
+        new Hidden($position, 'adaptive-font', 1);
 
         new Select($position, 'position-absolute', n2_('Position'), 'absolute', array(
             'options' => array(
@@ -233,14 +230,8 @@ class LayerWindowSettingsCommon extends AbstractLayerWindowSettings {
             'unit'          => '%',
             'wide'          => 3,
             'rowAttributes' => array(
-                'data-devicespecific' => ''
+                'data-devicespecific' => 'right'
             )
-        ));
-
-        new OnOff($responsive, 'adaptive-font', n2_('Adaptive'), 0, array(
-            'tipLabel'       => n2_('Adaptive'),
-            'tipDescription' => n2_('Keeps the same size for your text on each device for best legibility. It\'s enabled by default on the Content layer.'),
-            'tipLink'        => 'https://smartslider.helpscoutdocs.com/article/1812-layer-style#adaptive'
         ));
 
         new Button($responsive, '-clear-device-specific-changes', n2_('Device specific settings'), n2_('Clear'), array(

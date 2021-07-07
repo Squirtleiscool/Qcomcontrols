@@ -4,9 +4,6 @@ namespace Nextend\Framework\Asset\Js;
 
 use Nextend\Framework\Asset\AssetManager;
 use Nextend\Framework\Filesystem\Filesystem;
-use Nextend\Framework\Platform\Platform;
-use Nextend\Framework\Settings;
-use Nextend\SmartSlider3\Application\Frontend\ApplicationTypeFrontend;
 
 class Js {
 
@@ -35,7 +32,7 @@ class Js {
     }
 
     public static function addInline($code, $unshift = false) {
-        AssetManager::$js->addInline($code, $unshift);
+        AssetManager::$js->addInline($code, null, $unshift);
     }
 
     public static function addGlobalInline($code, $unshift = false) {
@@ -45,7 +42,7 @@ class Js {
     public static function addInlineFile($path, $unshift = false) {
         static $loaded = array();
         if (!isset($loaded[$path])) {
-            AssetManager::$js->addInline(Filesystem::readFile($path), $unshift);
+            AssetManager::$js->addInline(Filesystem::readFile($path), null, $unshift);
             $loaded[$path] = 1;
         }
     }
@@ -56,25 +53,6 @@ class Js {
             AssetManager::$js->addGlobalInline(Filesystem::readFile($path), $unshift);
             $loaded[$path] = 1;
         }
-    }
-
-    public static function jQuery($force = false, $overrideJQuerySetting = false) {
-        $loadJQuery = Settings::get('jquery');
-
-        if (!$loadJQuery) {
-            wp_enqueue_script('jquery');
-        }
-        // WordPress FREE only
-        if ($force) {
-            if ($overrideJQuerySetting || $loadJQuery) {
-                self::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . "/dist/n2-j.min.js", 'n2');
-            } else {
-                self::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . "/dist/n2.min.js", 'n2');
-            }
-        } else {
-            self::addStaticGroup(ApplicationTypeFrontend::getAssetsPath() . "/dist/n2.min.js", 'n2');
-        }
-    
     }
 
 }

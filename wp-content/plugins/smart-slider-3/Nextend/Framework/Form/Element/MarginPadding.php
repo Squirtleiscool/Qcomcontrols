@@ -49,7 +49,7 @@ class MarginPadding extends AbstractFieldHidden implements ContainerInterface {
         $html .= parent::fetchElement();
         $html .= "</div>";
 
-        Js::addInline('new N2Classes.FormElementMarginPadding("' . $this->fieldID . '", ' . json_encode($subElements) . ', "' . self::$separator . '");');
+        Js::addInline('new _N2.FormElementMarginPadding("' . $this->fieldID . '", ' . json_encode($subElements) . ', "' . self::$separator . '");');
 
         $this->renderRelatedFields();
 

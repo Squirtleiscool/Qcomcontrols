@@ -22,6 +22,7 @@
 
   .nextend-bullet-bar {
     display: inline-flex;
+    vertical-align: top;
     visibility: visible;
     align-items: center;
     flex-wrap: wrap;
@@ -66,7 +67,6 @@
 
   div.n2-ss-bullet-thumbnail-container {
     position: absolute;
-    opacity: 0;
     z-index: 10000000;
   }
 

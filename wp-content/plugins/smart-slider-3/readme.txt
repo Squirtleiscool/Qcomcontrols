@@ -4,7 +4,7 @@ Tags: slider, wordpress slider, image slider, layer slider, responsive slider, s
 Donate link: https://sites.fastspring.com/nextend/product/smartslider3donate
 Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 3.4.1.17
+Stable tag: 3.5.0.9
 Requires PHP: 7.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
@@ -208,6 +208,39 @@ Of course! Smart Slider use protocol relative urls which works fine on http:// a
 9. Layer slider with layers styles. Made with FREE version.
 
 == Changelog ==
+
+= 3.5.0.9 - 10. June 2021 =
+* Feature: From now on your can set an Alt tag for the Slide Thumbnail. 
+* Fix: Absolute positioned layers didn't rotate. 
+* Fix: Workaround adjusted for the Safari bug which makes non-fullwidth rows create unnecessary line wrap. 
+* Fix: Slider and slide title fields are sanitized. 
+* Fix: Arrow style didn't work in preview. 
+* Fix: Empty background color caused PHP error. 
+* Fix: Force fullwidth slider might appeared offscreen in rare cases. 
+* Fix: Compatibility fix for Admin 2020 plugin. 
+* Fix: Slider flickered in Gutenberg editor in rare cases. 
+* Fix: Nested, not full width Absolute layer width couldn't be changed. 
+* Other: Editor role no longer gets access to Smart Slider on new installations.
+
+= 3.5.0.8 - 02. June 2021 =
+Warning: Smart Slider 3.5 is not backwards compatible! Before upgrading check the [possible issues and their solutions](https://smartslider.helpscoutdocs.com/article/2028-sliders-look-different-after-the-3-5-update) you might see after updating to 3.5.
+
+* New: [Speed improvements](https://smartslider3.com/blog/smart-slider-35/) which help you make Smart Slider 3 pass Core Web Vitals.
+* Removed: jQuery dependency is removed. From now on Smart Slider only uses vanilla JavaScript.
+* Removed: px+ from padding and margin values. From now on everything will be fix px value.
+* Removed: Non adaptive font resizing is removed, and from now on everything will be adaptive. If you need the adaptive scaling at the layers you created before the update which previously used non-adaptive scaling, turn on "Legacy Font Scale" at Slider settings > Developer tab.
+* Feature: Async option for non-primary CSS files.
+* Feature: Horizontal mouse wheel control option.
+* Fix: Compatibility fix for Cachify plugin.
+* Fix: Compatibility fix for WooCommerce Blocks plugin.
+* Fix: Compatibility fix for A3 Lazy Loading plugin.
+* Fix: Compatibility fix for Woodmart theme.
+* Fix: Compatibility fix for Flatsome theme.
+* Fix: Compatibility fix for Newspaper theme's tagDiv Composer.
+* Fix: LiteSpeed cache plugin's Generate Critical CSS option.
+* Fix: Twenty Seventeen theme conflict with Scroll to Slider option.
+* Fix: Divi Builder plugin caused problems with the align and max width options.
+* Fix: Fixes for RTL display that affected the Inner align, force full width calculation and arrow control positioning.
 
 = 3.4.1.17 - 08. March 2021 =
 * Feature: Remove script type attributes

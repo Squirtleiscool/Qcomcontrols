@@ -10,7 +10,6 @@ use Nextend\Framework\Form\Element\Select;
 use Nextend\Framework\Form\Element\Text;
 use Nextend\Framework\Form\Element\Text\Number;
 use Nextend\Framework\Form\Element\Unit;
-use Nextend\Framework\Localization\Localization;
 use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Form\Element\WidgetArea;
 
@@ -22,7 +21,7 @@ class WidgetPosition extends Grouping {
 
         $this->addSimple();
 
-        Js::addInline('new N2Classes.FormElementWidgetPosition("' . $this->fieldID . '");');
+        Js::addInline('new _N2.FormElementWidgetPosition("' . $this->fieldID . '");');
 
         $html = '';
 

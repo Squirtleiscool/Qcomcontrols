@@ -4,11 +4,12 @@
 namespace Nextend\SmartSlider3\Renderable;
 
 
-use Nextend\Framework\ResourceTranslator\ResourceTranslator;
+use Nextend\Framework\View\Html;
 use Nextend\SmartSlider3\Renderable\Component\ComponentCol;
 use Nextend\SmartSlider3\Renderable\Component\ComponentContent;
 use Nextend\SmartSlider3\Renderable\Component\ComponentLayer;
 use Nextend\SmartSlider3\Renderable\Component\ComponentRow;
+use Nextend\SmartSlider3\Renderable\Item\AbstractItemFrontend;
 
 abstract class AbstractRenderableOwner {
 
@@ -71,10 +72,16 @@ abstract class AbstractRenderableOwner {
         return false;
     }
 
-    public function optimizeImage($image) {
-        return array(
-            'src' => ResourceTranslator::toUrl($this->fill($image))
-        );
+    /**
+     * @param AbstractItemFrontend $item
+     * @param                      $src
+     * @param array                $attributes
+     *
+     * @return string
+     */
+    public function renderImage($item, $src, $attributes = array(), $pictureAttributes = array()) {
+
+        return Html::image($src, $attributes);
     }
 
     public abstract function addScript($script, $name = false);
@@ -85,6 +92,8 @@ abstract class AbstractRenderableOwner {
 
     public abstract function addCSS($css);
 
+    public abstract function addDeviceCSS($device, $css);
+
     public abstract function addFont($font, $mode, $pre = null);
 
     public abstract function addStyle($style, $mode, $pre = null);
@@ -92,4 +101,6 @@ abstract class AbstractRenderableOwner {
     public abstract function addImage($imageUrl);
 
     public abstract function isAdmin();
+
+    public abstract function getAvailableDevices();
 }

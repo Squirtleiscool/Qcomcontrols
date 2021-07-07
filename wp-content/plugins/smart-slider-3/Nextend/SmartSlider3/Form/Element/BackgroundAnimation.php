@@ -15,6 +15,6 @@ class BackgroundAnimation extends AbstractChooser {
 
         Js::addStaticGroup(SliderTypeSimple::getAssetsPath() . '/dist/smartslider-backgroundanimation.min.js', 'smartslider-backgroundanimation');
 
-        Js::addInline('new N2Classes.FormElementAnimationManager("' . $this->fieldID . '", "backgroundanimationManager");');
+        Js::addInline('new _N2.FormElementAnimationManager("' . $this->fieldID . '", "backgroundanimationManager");');
     }
 }

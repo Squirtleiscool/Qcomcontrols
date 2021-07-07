@@ -73,7 +73,7 @@ class Localization {
 
     public static function toJS() {
         if (count(self::$js)) {
-            return 'window.nextend.localization = ' . json_encode(self::$js) . ';';
+            return '_N2._localization = ' . json_encode(self::$js) . ';';
         }
 
         return '';

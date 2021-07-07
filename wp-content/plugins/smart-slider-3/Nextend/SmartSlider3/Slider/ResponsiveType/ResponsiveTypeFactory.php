@@ -60,7 +60,7 @@ class ResponsiveTypeFactory {
     public static function getAdminTypes() {
         $adminTypes = array();
 
-        foreach (self::$types AS $name => $type) {
+        foreach (self::$types as $name => $type) {
             $adminTypes[$name] = $type->createAdmin();
         }
 

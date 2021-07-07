@@ -4,6 +4,7 @@
 namespace Nextend\SmartSlider3\Slider\WordPress;
 
 
+use Jetpack_Photon;
 use Nextend\SmartSlider3\Slider\Base\PlatformSliderBase;
 
 class PlatformSlider extends PlatformSliderBase {
@@ -19,7 +20,7 @@ class PlatformSlider extends PlatformSliderBase {
         $text = apply_filters('translate_text', $text);
 
         if (function_exists('jetpack_photon_url')) {
-            $text = \Jetpack_Photon::filter_the_content(preg_replace_callback('/data-(desktop|tablet|mobile)="(.*?)"/', array(
+            $text = Jetpack_Photon::filter_the_content(preg_replace_callback('/data-(desktop|tablet|mobile)="(.*?)"/', array(
                 $this,
                 'deviceImageReplaceCallback'
             ), $text));

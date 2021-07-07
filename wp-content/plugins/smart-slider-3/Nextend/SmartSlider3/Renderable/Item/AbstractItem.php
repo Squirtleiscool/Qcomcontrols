@@ -41,11 +41,11 @@ abstract class AbstractItem {
 
     private function initDefault() {
 
-        foreach ($this->fonts AS &$fontData) {
+        foreach ($this->fonts as &$fontData) {
             $this->loadDefaultFont($fontData['defaultName'], $fontData['value']);
         }
 
-        foreach ($this->styles AS &$styleData) {
+        foreach ($this->styles as &$styleData) {
             $this->loadDefaultStyle($styleData['defaultName'], $styleData['value']);
         }
     }
@@ -107,11 +107,11 @@ abstract class AbstractItem {
     public function getValues() {
         $values = array();
 
-        foreach ($this->fonts AS $name => $fontData) {
+        foreach ($this->fonts as $name => $fontData) {
             $values[$name] = $fontData['value'];
         }
 
-        foreach ($this->styles AS $name => $styleData) {
+        foreach ($this->styles as $name => $styleData) {
             $values[$name] = $styleData['value'];
         }
 
@@ -144,11 +144,11 @@ abstract class AbstractItem {
      */
     public function adminNormalizeFontsStyles($data) {
 
-        foreach ($this->fonts AS $name => $fontData) {
+        foreach ($this->fonts as $name => $fontData) {
             $data->set($name, FontParser::parse($data->get($name)));
         }
 
-        foreach ($this->styles AS $name => $styleData) {
+        foreach ($this->styles as $name => $styleData) {
             $data->set($name, StyleParser::parse($data->get($name)));
         }
     }
@@ -193,7 +193,7 @@ abstract class AbstractItem {
         if (!empty($matches) && $matches[1] == 'lightbox') {
             $images    = explode(',', $matches[2]);
             $newImages = array();
-            foreach ($images AS $image) {
+            foreach ($images as $image) {
                 $newImages[] = ResourceTranslator::toUrl($image);
             }
             $url = 'lightbox[' . implode(',', $newImages) . ']' . $matches[3];

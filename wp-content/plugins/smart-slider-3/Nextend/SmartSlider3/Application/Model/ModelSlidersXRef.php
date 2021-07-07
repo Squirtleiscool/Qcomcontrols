@@ -25,6 +25,10 @@ class ModelSlidersXRef extends AbstractModelTable {
                 'ordering'  => $this->getMaximalOrderValue($groupID)
             ));
 
+            $helper = new HelperSliderChanged($this);
+            $helper->setSliderChanged($sliderID, 1);
+            $helper->setSliderChanged($groupID, 1);
+
             SmartSlider3Info::sliderChanged();
 
             return true;
@@ -172,7 +176,7 @@ class ModelSlidersXRef extends AbstractModelTable {
 
         $slidersModel = new ModelSliders($this);
 
-        foreach ($allRelatedGroups AS $group) {
+        foreach ($allRelatedGroups as $group) {
             if ($group['group_id'] != 0) {
                 /*
                  * It is a group

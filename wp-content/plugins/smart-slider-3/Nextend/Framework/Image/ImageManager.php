@@ -9,6 +9,7 @@ use Nextend\Framework\Pattern\VisualManagerTrait;
 class ImageManager {
 
     use VisualManagerTrait;
+
     /**
      * @var ImageStorage
      */

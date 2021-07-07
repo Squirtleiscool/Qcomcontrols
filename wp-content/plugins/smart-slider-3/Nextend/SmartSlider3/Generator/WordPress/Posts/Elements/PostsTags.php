@@ -19,7 +19,7 @@ class PostsTags extends Select {
         $terms = get_terms('post_tag');
 
         if (count($terms)) {
-            foreach ($terms AS $term) {
+            foreach ($terms as $term) {
                 $this->options[$term->term_id] = '- ' . $term->name;
             }
         }
