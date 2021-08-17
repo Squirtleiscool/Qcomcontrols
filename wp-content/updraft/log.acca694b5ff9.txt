@@ -1,0 +1,514 @@
+0000.001 (0) Opened log file at time: Tue, 17 Aug 2021 17:30:03 +0000 on http://qcomcontrols.com
+0000.002 (0) UpdraftPlus WordPress backup plugin (https://updraftplus.com): 1.16.56 WP: 5.7 PHP: 7.0.33-0+deb9u11+hw1 (cgi-fcgi, Linux lsh1025 4.14.239-hw+ #96 SMP Wed Jul 14 18:52:56 UTC 2021 x86_64) MySQL: 5.5.39-MariaDB-2 WPLANG: en_US Server: Apache safe_mode: 0 max_execution_time: 900 memory_limit: 256M (used: 19.3M | 22M) multisite: N openssl: OpenSSL 1.1.1d  10 Sep 2019 mcrypt: Y LANG:  ZipArchive::addFile: Y
+0000.004 (0) Free space on disk containing Updraft's temporary directory: 2261888 MB
+0000.007 (0) Deleting old log file: log.3c82c4d50394.txt
+0000.009 (0) Deleting old log file: log.df11396ef4b1.txt
+0000.010 (0) Tasks: Backup files: 1 (schedule: manual) Backup DB: 1 (schedule: manual)
+0000.066 (0) Requesting semaphore lock (fd) (apparently not via scheduler)
+0000.071 (0) Set semaphore last lock (fd) time to 2021-08-17 17:30:03
+0000.072 (0) Semaphore lock (fd) complete
+0000.078 (0) Backup run: resumption=0, nonce=acca694b5ff9, file_nonce=acca694b5ff9 begun at=1629221403 (0s ago), job type=backup
+0000.081 (0) Scheduling a resumption (1) after 300 seconds (1629221703) in case this run gets aborted
+0000.182 (0) Checking if we have a zip executable available
+0000.184 (0) Testing: /usr/bin/zip
+0000.205 (0) Output: zip warning: binziptest/test.zip not found or empty
+0000.208 (0) Output: adding: binziptest/subdir1/	(in=0) (out=0) (stored 0%)
+0000.210 (0) Output: adding: binziptest/subdir1/subdir2/	(in=0) (out=0) (stored 0%)
+0000.212 (0) Output: adding: binziptest/subdir1/subdir2/test.html	(in=131) (out=107) (deflated 18%)
+0000.214 (0) Output: total bytes=131, compressed=107 -> 18% savings
+0000.234 (0) Output: adding: binziptest/subdir1/subdir2/test2.html	(in=138) (out=113) (deflated 18%)
+0000.236 (0) Output: total bytes=269, compressed=220 -> 18% savings
+0000.257 (0) Working binary zip found: /usr/bin/zip
+0000.261 (0) Zip engine: found/will use a binary zip: /usr/bin/zip
+0000.263 (0) Creation of backups of directories: beginning
+0000.269 (0) Beginning creation of dump of plugins (split every: 400 MB)
+0003.528 (0) Total entities for the zip file: 1304 directories, 6700 files (0 skipped as non-modified), 87.3 MB
+0003.531 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 2.0 seconds have passed since the last write (0 MB, 1 (1) files added so far); re-opening (prior size: 0 KB)
+0003.598 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 0.30 MB
+0003.627 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 100 files added (on-disk size: 315.1 KB)
+0003.654 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 200 files added (on-disk size: 315.1 KB)
+0003.680 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 300 files added (on-disk size: 315.1 KB)
+0003.706 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 400 files added (on-disk size: 315.1 KB)
+0003.731 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 500 files added (on-disk size: 315.1 KB)
+0003.754 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 600 files added (on-disk size: 315.1 KB)
+0003.787 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 700 files added (on-disk size: 315.1 KB)
+0003.812 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 800 files added (on-disk size: 315.1 KB)
+0003.838 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 900 files added (on-disk size: 315.1 KB)
+0003.862 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1000 files added (on-disk size: 315.1 KB)
+0003.865 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (14.4 MB, 6700 files batched, 1001 (1002) added so far); re-opening (prior size: 315.1 KB)
+0025.817 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 5.00 MB
+0025.846 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1100 files added (on-disk size: 5139.3 KB)
+0025.872 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1200 files added (on-disk size: 5139.3 KB)
+0025.897 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1300 files added (on-disk size: 5139.3 KB)
+0025.920 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1400 files added (on-disk size: 5139.3 KB)
+0025.946 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1500 files added (on-disk size: 5139.3 KB)
+0025.975 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1600 files added (on-disk size: 5139.3 KB)
+0026.004 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1700 files added (on-disk size: 5139.3 KB)
+0026.029 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1800 files added (on-disk size: 5139.3 KB)
+0026.055 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 1900 files added (on-disk size: 5139.3 KB)
+0026.081 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2000 files added (on-disk size: 5139.3 KB)
+0026.083 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (22 MB, 6700 files batched, 1001 (2003) added so far); re-opening (prior size: 5139.3 KB)
+0056.379 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 11.90 MB
+0056.427 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2100 files added (on-disk size: 12172.6 KB)
+0056.471 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2200 files added (on-disk size: 12172.6 KB)
+0056.522 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2300 files added (on-disk size: 12172.6 KB)
+0056.568 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2400 files added (on-disk size: 12172.6 KB)
+0056.611 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2500 files added (on-disk size: 12172.6 KB)
+0056.653 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2600 files added (on-disk size: 12172.6 KB)
+0056.698 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2700 files added (on-disk size: 12172.6 KB)
+0056.741 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2800 files added (on-disk size: 12172.6 KB)
+0056.780 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 2900 files added (on-disk size: 12172.6 KB)
+0056.823 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3000 files added (on-disk size: 12172.6 KB)
+0056.827 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (11.5 MB, 6700 files batched, 1001 (3004) added so far); re-opening (prior size: 12172.6 KB)
+0076.025 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 14.80 MB
+0076.064 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3100 files added (on-disk size: 15115.1 KB)
+0076.100 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3200 files added (on-disk size: 15115.1 KB)
+0076.136 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3300 files added (on-disk size: 15115.1 KB)
+0076.173 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3400 files added (on-disk size: 15115.1 KB)
+0076.209 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3500 files added (on-disk size: 15115.1 KB)
+0076.242 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3600 files added (on-disk size: 15115.1 KB)
+0076.292 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3700 files added (on-disk size: 15115.1 KB)
+0076.333 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3800 files added (on-disk size: 15115.1 KB)
+0076.369 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 3900 files added (on-disk size: 15115.1 KB)
+0076.399 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4000 files added (on-disk size: 15115.1 KB)
+0076.402 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (10 MB, 6700 files batched, 1001 (4005) added so far); re-opening (prior size: 15115.1 KB)
+0095.711 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 18.90 MB
+0095.747 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4100 files added (on-disk size: 19395.9 KB)
+0095.779 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4200 files added (on-disk size: 19395.9 KB)
+0095.809 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4300 files added (on-disk size: 19395.9 KB)
+0095.850 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4400 files added (on-disk size: 19395.9 KB)
+0095.887 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4500 files added (on-disk size: 19395.9 KB)
+0095.925 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4600 files added (on-disk size: 19395.9 KB)
+0095.957 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4700 files added (on-disk size: 19395.9 KB)
+0095.987 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4800 files added (on-disk size: 19395.9 KB)
+0096.019 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 4900 files added (on-disk size: 19395.9 KB)
+0096.049 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5000 files added (on-disk size: 19395.9 KB)
+0096.055 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (5.4 MB, 6700 files batched, 1001 (5006) added so far); re-opening (prior size: 19395.9 KB)
+0116.600 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5100 files added (on-disk size: 21384.8 KB)
+0116.745 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5200 files added (on-disk size: 21384.8 KB)
+0116.781 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5300 files added (on-disk size: 21384.8 KB)
+0116.816 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5400 files added (on-disk size: 21384.8 KB)
+0116.847 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5500 files added (on-disk size: 21384.8 KB)
+0116.886 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5600 files added (on-disk size: 21384.8 KB)
+0116.918 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5700 files added (on-disk size: 21384.8 KB)
+0116.954 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5800 files added (on-disk size: 21384.8 KB)
+0116.996 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 5900 files added (on-disk size: 21384.8 KB)
+0117.039 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6000 files added (on-disk size: 21384.8 KB)
+0117.043 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 1000 files added on this batch (11 MB, 6700 files batched, 1001 (6007) added so far); re-opening (prior size: 21384.8 KB)
+0130.924 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6100 files added (on-disk size: 24777.6 KB)
+0130.960 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6200 files added (on-disk size: 24777.6 KB)
+0130.989 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6300 files added (on-disk size: 24777.6 KB)
+0131.015 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6400 files added (on-disk size: 24777.6 KB)
+0131.051 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6500 files added (on-disk size: 24777.6 KB)
+0131.095 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6600 files added (on-disk size: 24777.6 KB)
+0131.137 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: 6700 files added (on-disk size: 24777.6 KB)
+0136.510 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip.tmp: size is now: 29.10 MB
+0137.079 (0) Created plugins zip (0) - 29804.7 KB in 136.8 s (217.9 KB/s) (sha1: d969110e1379db81ce79207b4f50c33ab98019a8, sha256: c36c311b80b7b23f4501aee89e53a1736554c741cfd20fda69f1920e118af01c)
+0137.086 (0) Beginning creation of dump of themes (split every: 400 MB)
+0137.362 (0) Total entities for the zip file: 87 directories, 559 files (0 skipped as non-modified), 11.1 MB
+0137.387 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: 100 files added (on-disk size: 0 KB)
+0137.411 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: 200 files added (on-disk size: 0 KB)
+0137.436 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: 300 files added (on-disk size: 0 KB)
+0137.460 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: 400 files added (on-disk size: 0 KB)
+0137.485 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: 500 files added (on-disk size: 0 KB)
+0149.792 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip.tmp: size is now: 5.80 MB
+0149.887 (0) Created themes zip (0) - 5979.9 KB in 12.8 s (467.3 KB/s) (sha1: e91d1537b1252a4785825b44a552f2f0aad97113, sha256: 0e5c91a314feab3922d1e385c74bfb5c8b8ad7ae8ef0b1f7ebecfd6bfec91dd5)
+0149.894 (0) Exclusion option setting (uploads): backup*,*backups,backwpup*,wp-clone,snapshots
+0149.896 (0) Looking for candidates to backup in: /home/97/72/2017297/web/wp-content/uploads
+0149.898 (0) finding files: 2016: adding to list (1)
+0149.899 (0) finding files: 2017: adding to list (2)
+0149.901 (0) finding files: 2018: adding to list (3)
+0149.902 (0) finding files: 2019: adding to list (4)
+0149.903 (0) finding files: 2020: adding to list (5)
+0149.905 (0) finding files: sites: adding to list (6)
+0149.906 (0) finding files: wp_letsencrypt: adding to list (7)
+0149.907 (0) finding files: 2021: adding to list (8)
+0149.909 (0) finding files: revisr-backups: skipping: excluded by options (glob)
+0149.910 (0) finding files: wpcf7_uploads: adding to list (9)
+0149.911 (0) finding files: wp-file-manager-pro: adding to list (10)
+0149.913 (0) finding files: wp_encryption: adding to list (11)
+0149.914 (0) Beginning creation of dump of uploads (split every: 400 MB)
+0150.124 (0) Total entities for the zip file: 64 directories, 384 files (0 skipped as non-modified), 32.5 MB
+0150.152 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip.tmp: 100 files added (on-disk size: 0 KB)
+0150.180 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip.tmp: 200 files added (on-disk size: 0 KB)
+0150.206 (0) Adding batch to zip file (UpdraftPlus_BinZip): over 25 MB added on this batch (25.3 MB, 384 files batched, 292 (292) added so far); re-opening (prior size: 0 KB)
+0156.117 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip.tmp: size is now: 25.30 MB
+0156.121 (0) A useful amount of data was added after this amount of zip processing: 6.6 s (normalised: 6.6 s, rate: 3898 KB/s)
+0156.127 (0) Zip: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip.tmp: 300 files added (on-disk size: 25952.3 KB)
+0157.897 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip.tmp: size is now: 32.60 MB
+0158.536 (0) Created uploads zip (0) - 33348.9 KB in 8.6 s (3870.4 KB/s) (sha1: 12fb99afd785009a73189bb9a783699c589e6071, sha256: 02307c4b167d707da2cbd1eecfab607960c8740fa7d77ac9b6bb4968d4d2a7f0)
+0158.542 (0) Beginning backup of other directories found in the content directory (index: 0)
+0158.548 (0) Exclusion option setting (others): upgrade,cache,updraft,backup*,*backups,mysql.sql,debug.log
+0158.550 (0) Looking for candidates to backup in: /home/97/72/2017297/web/wp-content
+0158.551 (0) finding files: index.php: adding to list (1)
+0158.553 (0) finding files: uploads: skipping: this is the uploads directory
+0158.554 (0) finding files: themes: skipping: this is the themes directory
+0158.556 (0) finding files: wflogs: adding to list (2)
+0158.557 (0) finding files: updraft: skipping: this is the updraft directory
+0158.558 (0) finding files: upgrade: skipping: excluded by options
+0158.560 (0) finding files: temp-write-test-5e2d717f753b37-70837960: adding to list (3)
+0158.561 (0) finding files: temp-write-test-5e2d717f7541e9-25103095: adding to list (4)
+0158.562 (0) finding files: cache: skipping: excluded by options
+0158.564 (0) finding files: w3tc-config: adding to list (5)
+0158.565 (0) finding files: ngg: adding to list (6)
+0158.567 (0) finding files: plugins: skipping: this is the plugins directory
+0158.593 (0) Total entities for the zip file: 26 directories, 15 files (0 skipped as non-modified), 5.7 MB
+0159.349 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip.tmp: size is now: 2.70 MB
+0159.416 (0) Created others zip (0) - 2718.7 KB in 0.8 s (3218.8 KB/s) (sha1: f01dc1208a3a20a4b07c14052c1e3392df0a6ee5, sha256: 7fcd58d97bcdad8d5711c4ddd30a23d055b3f451430ae32ce12d095421d4cf03)
+0159.427 (0) Saving backup status to database (elements: 8)
+0159.431 (0) Beginning creation of database dump (WordPress DB)
+0159.433 (0) Couldn't get the sql_mode value (N;)
+0159.435 (0) SQL compatibility mode successfully changed to 
+0159.439 (0) Testing potential mysqldump binary: /usr/bin/mysqldump
+0159.492 (0) Output: /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;\n/*!40103 SET TIME_ZONE='+00:00' */;\n/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;\n/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;\n/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;\n/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;\nDROP TABLE IF EXISTS `wp_options`;\n/*!40101 SET @saved_cs_client     = @@character_set_client */;\n/*!40101 SET character_set_client = utf8 */;\nCRE (truncated - 1225 bytes total)
+0159.505 (0) Working binary mysqldump found: /usr/bin/mysqldump
+0159.535 (0) Table wp_options: Total expected rows (approximate): 1525
+0159.629 (0) Table wp_options: Rows added in this batch (next record: 214484): 397 (uncompressed bytes in this segment=1374485) in 0.09 seconds
+0159.641 (0) Table wp_options: finishing file(s) (2, 304.5 KB)
+0159.650 (0) Table wp_users: Total expected rows (approximate): 1
+0159.654 (0) Table wp_users: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1340) in 0.00 seconds
+0159.663 (0) Table wp_users: finishing file(s) (2, 0.6 KB)
+0159.668 (0) Table wp_usermeta: Total expected rows (approximate): 55
+0159.673 (0) Table wp_usermeta: Rows added in this batch (next record: 103): 55 (uncompressed bytes in this segment=6940) in 0.00 seconds
+0159.681 (0) Table wp_usermeta: finishing file(s) (2, 2.7 KB)
+0159.690 (0) Table wp_commentmeta: Total expected rows (approximate): 0
+0159.693 (0) Table wp_commentmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=673) in 0.00 seconds
+0159.701 (0) Table wp_commentmeta: finishing file(s) (2, 0.4 KB)
+0159.707 (0) Table wp_comments: Total expected rows (approximate): 0
+0159.710 (0) Table wp_comments: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1669) in 0.00 seconds
+0159.719 (0) Table wp_comments: finishing file(s) (2, 0.5 KB)
+0159.726 (0) Table wp_links: Total expected rows (approximate): 0
+0159.730 (0) Table wp_links: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=1270) in 0.00 seconds
+0159.740 (0) Table wp_links: finishing file(s) (2, 0.5 KB)
+0159.750 (0) Table wp_postmeta: Total expected rows (approximate): 811
+0159.772 (0) Table wp_postmeta: Rows added in this batch (next record: 2016): 666 (uncompressed bytes in this segment=114615) in 0.02 seconds
+0159.781 (0) Table wp_postmeta: finishing file(s) (2, 11.1 KB)
+0159.789 (0) Table wp_posts: Total expected rows (approximate): 96
+0159.807 (0) Table wp_posts: Rows added in this batch (next record: 397): 147 (uncompressed bytes in this segment=62457) in 0.02 seconds
+0159.816 (0) Table wp_posts: finishing file(s) (2, 8.3 KB)
+0159.824 (0) Table wp_term_relationships: Total expected rows (approximate): 23
+0159.829 (0) Table wp_term_relationships: Rows added in this batch (next record: 100000): 23 (uncompressed bytes in this segment=1005) in 0.00 seconds
+0159.838 (0) Table wp_term_relationships: finishing file(s) (2, 0.4 KB)
+0159.844 (0) Table wp_term_taxonomy: Total expected rows (approximate): 4
+0159.849 (0) Table wp_term_taxonomy: Rows added in this batch (next record: 5): 4 (uncompressed bytes in this segment=1008) in 0.00 seconds
+0159.859 (0) Table wp_term_taxonomy: finishing file(s) (2, 0.5 KB)
+0159.869 (0) Table wp_termmeta: Total expected rows (approximate): 0
+0159.884 (0) Table wp_termmeta: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=646) in 0.01 seconds
+0159.894 (0) Table wp_termmeta: finishing file(s) (2, 0.4 KB)
+0159.900 (0) Table wp_terms: Total expected rows (approximate): 4
+0159.904 (0) Table wp_terms: Rows added in this batch (next record: 5): 4 (uncompressed bytes in this segment=817) in 0.00 seconds
+0159.912 (0) Table wp_terms: finishing file(s) (2, 0.5 KB)
+0159.931 (0) Table wp_nextend2_image_storage: Total expected rows (approximate): 18
+0159.935 (0) Table wp_nextend2_image_storage: Rows added in this batch (next record: 18): 18 (uncompressed bytes in this segment=7903) in 0.00 seconds
+0159.945 (0) Table wp_nextend2_image_storage: finishing file(s) (2, 1.2 KB)
+0159.951 (0) Table wp_nextend2_section_storage: Total expected rows (approximate): 4
+0159.955 (0) Table wp_nextend2_section_storage: Rows added in this batch (next record: 13767): 4 (uncompressed bytes in this segment=1267) in 0.00 seconds
+0159.965 (0) Table wp_nextend2_section_storage: finishing file(s) (2, 0.6 KB)
+0159.973 (0) Table wp_nextend2_smartslider3_generators: Total expected rows (approximate): 0
+0159.976 (0) Table wp_nextend2_smartslider3_generators: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=591) in 0.00 seconds
+0159.985 (0) Table wp_nextend2_smartslider3_generators: finishing file(s) (2, 0.3 KB)
+0159.991 (0) Table wp_nextend2_smartslider3_sliders: Total expected rows (approximate): 4
+0159.997 (0) Table wp_nextend2_smartslider3_sliders: Rows added in this batch (next record: 8): 7 (uncompressed bytes in this segment=21718) in 0.00 seconds
+0160.023 (0) Table wp_nextend2_smartslider3_sliders: finishing file(s) (2, 3.2 KB)
+0160.029 (0) Table wp_nextend2_smartslider3_sliders_xref: Total expected rows (approximate): 6
+0160.031 (0) Table wp_nextend2_smartslider3_sliders_xref: Rows added in this batch (next record: 1000): 6 (uncompressed bytes in this segment=758) in 0.00 seconds
+0160.038 (0) Table wp_nextend2_smartslider3_sliders_xref: finishing file(s) (2, 0.4 KB)
+0160.043 (0) Table wp_nextend2_smartslider3_slides: Total expected rows (approximate): 13
+0160.049 (0) Table wp_nextend2_smartslider3_slides: Rows added in this batch (next record: 11): 10 (uncompressed bytes in this segment=39245) in 0.00 seconds
+0160.057 (0) Table wp_nextend2_smartslider3_slides: finishing file(s) (2, 3.8 KB)
+0160.064 (0) Table wp_ngg_album: Total expected rows (approximate): 0
+0160.068 (0) Table wp_ngg_album: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=817) in 0.00 seconds
+0160.092 (0) Table wp_ngg_album: finishing file(s) (2, 0.4 KB)
+0160.099 (0) Table wp_ngg_gallery: Total expected rows (approximate): 1
+0160.103 (0) Table wp_ngg_gallery: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1123) in 0.00 seconds
+0160.112 (0) Table wp_ngg_gallery: finishing file(s) (2, 0.5 KB)
+0160.117 (0) Table wp_ngg_pictures: Total expected rows (approximate): 1
+0160.121 (0) Table wp_ngg_pictures: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1762) in 0.00 seconds
+0160.130 (0) Table wp_ngg_pictures: finishing file(s) (2, 0.9 KB)
+0160.137 (0) Table wp_revisr: Total expected rows (approximate): 28
+0160.141 (0) Table wp_revisr: Rows added in this batch (next record: 28): 28 (uncompressed bytes in this segment=3989) in 0.00 seconds
+0160.149 (0) Table wp_revisr: finishing file(s) (2, 0.9 KB)
+0160.155 (0) Table wp_wfBlockedIPLog: Total expected rows (approximate): 789
+0160.167 (0) Table wp_wfBlockedIPLog: Rows added in this batch (next record: 1000): 742 (uncompressed bytes in this segment=48126) in 0.01 seconds
+0160.174 (0) Table wp_wfBlockedIPLog: finishing file(s) (2, 6.1 KB)
+0160.178 (0) Table wp_wfBlocks7: Total expected rows (approximate): 3
+0160.181 (0) Table wp_wfBlocks7: Rows added in this batch (next record: 25281): 3 (uncompressed bytes in this segment=1353) in 0.00 seconds
+0160.187 (0) Table wp_wfBlocks7: finishing file(s) (2, 0.7 KB)
+0160.193 (0) Table wp_wfConfig: Total expected rows (approximate): 217
+0160.248 (0) Table wp_wfConfig: Rows added in this batch (next record: 1000): 282 (uncompressed bytes in this segment=834911) in 0.05 seconds
+0160.264 (0) Table wp_wfConfig: finishing file(s) (2, 411.1 KB)
+0160.293 (0) Table wp_wfCrawlers: Total expected rows (approximate): 35
+0160.296 (0) Table wp_wfCrawlers: Rows added in this batch (next record: 1000): 35 (uncompressed bytes in this segment=4987) in 0.00 seconds
+0160.303 (0) Table wp_wfCrawlers: finishing file(s) (2, 1 KB)
+0160.310 (0) Table wp_wfFileChanges: Total expected rows (approximate): 0
+0160.312 (0) Table wp_wfFileChanges: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=452) in 0.00 seconds
+0160.318 (0) Table wp_wfFileChanges: finishing file(s) (2, 0.3 KB)
+0160.361 (0) Table wp_wfFileMods: Total expected rows (approximate): 8934
+0160.511 (0) Table wp_wfFileMods: binary mysqldump finished (writes: 36) in 0.14 seconds
+0160.533 (0) Table wp_wfFileMods: finishing file(s) (1, 770.1 KB)
+0160.547 (0) Table wp_wfHits: Total expected rows (approximate): 2363
+0160.619 (0) Table wp_wfHits: Rows added in this batch (next record: 713269): 2328 (uncompressed bytes in this segment=731428) in 0.07 seconds
+0160.628 (0) Table wp_wfHits: finishing file(s) (2, 96.1 KB)
+0160.635 (0) Table wp_wfHoover: Total expected rows (approximate): 0
+0160.641 (0) Table wp_wfHoover: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=476) in 0.00 seconds
+0160.650 (0) Table wp_wfHoover: finishing file(s) (2, 0.3 KB)
+0160.661 (0) Table wp_wfIssues: Total expected rows (approximate): 25
+0160.669 (0) Table wp_wfIssues: Rows added in this batch (next record: 6640): 14 (uncompressed bytes in this segment=15529) in 0.01 seconds
+0160.676 (0) Table wp_wfIssues: finishing file(s) (2, 4.6 KB)
+0160.684 (0) Table wp_wfKnownFileList: Total expected rows (approximate): 8401
+0160.750 (0) Table wp_wfKnownFileList: binary mysqldump finished (writes: 28) in 0.07 seconds
+0160.757 (0) Table wp_wfKnownFileList: finishing file(s) (1, 88.4 KB)
+0160.762 (0) Table wp_wfLiveTrafficHuman: Total expected rows (approximate): 1
+0160.765 (0) Table wp_wfLiveTrafficHuman: Rows added in this batch (next record: 1000): 1 (uncompressed bytes in this segment=810) in 0.00 seconds
+0160.772 (0) Table wp_wfLiveTrafficHuman: finishing file(s) (2, 0.4 KB)
+0160.777 (0) Table wp_wfLocs: Total expected rows (approximate): 1
+0160.780 (0) Table wp_wfLocs: Rows added in this batch (next record: 1000): 1 (uncompressed bytes in this segment=828) in 0.00 seconds
+0160.787 (0) Table wp_wfLocs: finishing file(s) (2, 0.5 KB)
+0160.792 (0) Table wp_wfLogins: Total expected rows (approximate): 2017
+0160.845 (0) Table wp_wfLogins: Rows added in this batch (next record: 32463): 2043 (uncompressed bytes in this segment=425989) in 0.05 seconds
+0160.854 (0) Table wp_wfLogins: finishing file(s) (2, 45.2 KB)
+0160.860 (0) Table wp_wfNotifications: Total expected rows (approximate): 20
+0160.869 (0) Table wp_wfNotifications: Rows added in this batch (next record: 1000): 20 (uncompressed bytes in this segment=4190) in 0.01 seconds
+0160.881 (0) Table wp_wfNotifications: finishing file(s) (2, 0.9 KB)
+0160.895 (0) Table wp_wfPendingIssues: Total expected rows (approximate): 1
+0160.903 (0) Table wp_wfPendingIssues: Rows added in this batch (next record: 1): 1 (uncompressed bytes in this segment=1420) in 0.00 seconds
+0160.911 (0) Table wp_wfPendingIssues: finishing file(s) (2, 0.7 KB)
+0160.921 (0) Table wp_wfReverseCache: Total expected rows (approximate): 7
+0160.927 (0) Table wp_wfReverseCache: Rows added in this batch (next record: 1000): 7 (uncompressed bytes in this segment=1101) in 0.00 seconds
+0160.936 (0) Table wp_wfReverseCache: finishing file(s) (2, 0.5 KB)
+0160.941 (0) Table wp_wfSNIPCache: Total expected rows (approximate): 0
+0160.944 (0) Table wp_wfSNIPCache: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=701) in 0.00 seconds
+0160.952 (0) Table wp_wfSNIPCache: finishing file(s) (2, 0.4 KB)
+0160.962 (0) Table wp_wfStatus: Total expected rows (approximate): 799
+0160.979 (0) Table wp_wfStatus: Rows added in this batch (next record: 61782): 945 (uncompressed bytes in this segment=90321) in 0.02 seconds
+0160.987 (0) Table wp_wfStatus: finishing file(s) (2, 14.2 KB)
+0160.992 (0) Table wp_wfTrafficRates: Total expected rows (approximate): 0
+0160.995 (0) Table wp_wfTrafficRates: Rows added in this batch (next record: 0): 0 (uncompressed bytes in this segment=566) in 0.00 seconds
+0161.003 (0) Table wp_wfTrafficRates: finishing file(s) (2, 0.3 KB)
+0161.008 (0) Table wp_wfls_2fa_secrets: Total expected rows (approximate): 0
+0161.011 (0) Table wp_wfls_2fa_secrets: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=681) in 0.00 seconds
+0161.019 (0) Table wp_wfls_2fa_secrets: finishing file(s) (2, 0.4 KB)
+0161.025 (0) Table wp_wfls_settings: Total expected rows (approximate): 23
+0161.028 (0) Table wp_wfls_settings: Rows added in this batch (next record: 1000): 23 (uncompressed bytes in this segment=1757) in 0.00 seconds
+0161.035 (0) Table wp_wfls_settings: finishing file(s) (2, 0.8 KB)
+0161.042 (0) Table wp_wpfm_backup: Total expected rows (approximate): 0
+0161.045 (0) Table wp_wpfm_backup: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=502) in 0.00 seconds
+0161.052 (0) Table wp_wpfm_backup: finishing file(s) (2, 0.3 KB)
+0161.074 (0) Table wp_wpmm_subscribers: Total expected rows (approximate): 0
+0161.077 (0) Table wp_wpmm_subscribers: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=496) in 0.00 seconds
+0161.083 (0) Table wp_wpmm_subscribers: finishing file(s) (2, 0.3 KB)
+0161.090 (0) Table wp_yoast_indexable: Total expected rows (approximate): 118
+0161.101 (0) Table wp_yoast_indexable: Rows added in this batch (next record: 122): 110 (uncompressed bytes in this segment=73486) in 0.01 seconds
+0161.109 (0) Table wp_yoast_indexable: finishing file(s) (2, 7 KB)
+0161.115 (0) Table wp_yoast_indexable_hierarchy: Total expected rows (approximate): 48
+0161.118 (0) Table wp_yoast_indexable_hierarchy: Rows added in this batch (next record: 1000): 48 (uncompressed bytes in this segment=1603) in 0.00 seconds
+0161.124 (0) Table wp_yoast_indexable_hierarchy: finishing file(s) (2, 0.5 KB)
+0161.129 (0) Table wp_yoast_migrations: Total expected rows (approximate): 21
+0161.132 (0) Table wp_yoast_migrations: Rows added in this batch (next record: 21): 21 (uncompressed bytes in this segment=1145) in 0.00 seconds
+0161.139 (0) Table wp_yoast_migrations: finishing file(s) (2, 0.6 KB)
+0161.143 (0) Table wp_yoast_primary_term: Total expected rows (approximate): 0
+0161.146 (0) Table wp_yoast_primary_term: Rows added in this batch (next record: -1): 0 (uncompressed bytes in this segment=850) in 0.00 seconds
+0161.153 (0) Table wp_yoast_primary_term: finishing file(s) (2, 0.4 KB)
+0161.159 (0) Table wp_yoast_seo_links: Total expected rows (approximate): 10
+0161.162 (0) Table wp_yoast_seo_links: Rows added in this batch (next record: 16): 10 (uncompressed bytes in this segment=2716) in 0.00 seconds
+0161.169 (0) Table wp_yoast_seo_links: finishing file(s) (2, 0.9 KB)
+0161.174 (0) Table wp_yoast_seo_meta: Total expected rows (approximate): 185
+0161.179 (0) Table wp_yoast_seo_meta: Rows added in this batch (next record: 388): 185 (uncompressed bytes in this segment=3177) in 0.00 seconds
+0161.185 (0) Table wp_yoast_seo_meta: finishing file(s) (2, 0.8 KB)
+0161.187 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_options.table.tmpr214485.gz (1/51): adding to final database dump
+0161.245 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_options.table.gz (2/51): adding to final database dump
+0161.253 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_users.table.tmpr2.gz (3/51): adding to final database dump
+0161.273 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_users.table.gz (4/51): adding to final database dump
+0161.275 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_usermeta.table.tmpr104.gz (5/51): adding to final database dump
+0161.278 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_usermeta.table.gz (6/51): adding to final database dump
+0161.280 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_commentmeta.table.tmpr0.gz (7/51): adding to final database dump
+0161.283 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_commentmeta.table.gz (8/51): adding to final database dump
+0161.285 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_comments.table.tmpr0.gz (9/51): adding to final database dump
+0161.287 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_comments.table.gz (10/51): adding to final database dump
+0161.289 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_links.table.tmpr0.gz (11/51): adding to final database dump
+0161.291 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_links.table.gz (12/51): adding to final database dump
+0161.292 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_postmeta.table.tmpr2017.gz (13/51): adding to final database dump
+0161.299 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_postmeta.table.gz (14/51): adding to final database dump
+0161.301 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_posts.table.tmpr398.gz (15/51): adding to final database dump
+0161.306 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_posts.table.gz (16/51): adding to final database dump
+0161.308 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_term_relationships.table.tmpr100001.gz (17/51): adding to final database dump
+0161.310 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_term_relationships.table.gz (18/51): adding to final database dump
+0161.312 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_term_taxonomy.table.tmpr6.gz (19/51): adding to final database dump
+0161.314 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_term_taxonomy.table.gz (20/51): adding to final database dump
+0161.316 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_termmeta.table.tmpr0.gz (21/51): adding to final database dump
+0161.318 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_termmeta.table.gz (22/51): adding to final database dump
+0161.320 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_terms.table.tmpr6.gz (23/51): adding to final database dump
+0161.322 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_terms.table.gz (24/51): adding to final database dump
+0161.324 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_image_storage.table.tmpr19.gz (25/51): adding to final database dump
+0161.326 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_image_storage.table.gz (26/51): adding to final database dump
+0161.327 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_section_storage.table.tmpr13768.gz (27/51): adding to final database dump
+0161.329 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_section_storage.table.gz (28/51): adding to final database dump
+0161.331 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_generators.table.tmpr0.gz (29/51): adding to final database dump
+0161.333 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_generators.table.gz (30/51): adding to final database dump
+0161.334 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_sliders.table.tmpr9.gz (31/51): adding to final database dump
+0161.338 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_sliders.table.gz (32/51): adding to final database dump
+0161.340 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_sliders_xref.table.tmpr1001.gz (33/51): adding to final database dump
+0161.342 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_sliders_xref.table.gz (34/51): adding to final database dump
+0161.344 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_slides.table.tmpr12.gz (35/51): adding to final database dump
+0161.348 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_nextend2_smartslider3_slides.table.gz (36/51): adding to final database dump
+0161.350 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_album.table.tmpr0.gz (37/51): adding to final database dump
+0161.352 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_album.table.gz (38/51): adding to final database dump
+0161.354 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_gallery.table.tmpr2.gz (39/51): adding to final database dump
+0161.356 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_gallery.table.gz (40/51): adding to final database dump
+0161.358 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_pictures.table.tmpr2.gz (41/51): adding to final database dump
+0161.360 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_ngg_pictures.table.gz (42/51): adding to final database dump
+0161.362 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_revisr.table.tmpr29.gz (43/51): adding to final database dump
+0161.365 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_revisr.table.gz (44/51): adding to final database dump
+0161.366 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfBlockedIPLog.table.tmpr1001.gz (45/51): adding to final database dump
+0161.372 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfBlockedIPLog.table.gz (46/51): adding to final database dump
+0161.374 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfBlocks7.table.tmpr25282.gz (47/51): adding to final database dump
+0161.376 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfBlocks7.table.gz (48/51): adding to final database dump
+0161.378 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfConfig.table.tmpr1001.gz (49/51): adding to final database dump
+0161.433 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfConfig.table.gz (50/51): adding to final database dump
+0161.435 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfCrawlers.table.tmpr1001.gz (51/51): adding to final database dump
+0161.437 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfCrawlers.table.gz (52/51): adding to final database dump
+0161.439 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfFileChanges.table.tmpr1.gz (53/51): adding to final database dump
+0161.441 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfFileChanges.table.gz (54/51): adding to final database dump
+0161.443 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfFileMods.table.gz (55/51): adding to final database dump
+0161.520 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfHits.table.tmpr713270.gz (56/51): adding to final database dump
+0161.540 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfHits.table.gz (57/51): adding to final database dump
+0161.543 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfHoover.table.tmpr0.gz (58/51): adding to final database dump
+0161.545 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfHoover.table.gz (59/51): adding to final database dump
+0161.547 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfIssues.table.tmpr6641.gz (60/51): adding to final database dump
+0161.549 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfIssues.table.gz (61/51): adding to final database dump
+0161.551 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfKnownFileList.table.gz (62/51): adding to final database dump
+0161.573 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLiveTrafficHuman.table.tmpr1001.gz (63/51): adding to final database dump
+0161.576 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLiveTrafficHuman.table.gz (64/51): adding to final database dump
+0161.578 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLocs.table.tmpr1001.gz (65/51): adding to final database dump
+0161.580 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLocs.table.gz (66/51): adding to final database dump
+0161.581 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLogins.table.tmpr32464.gz (67/51): adding to final database dump
+0161.595 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfLogins.table.gz (68/51): adding to final database dump
+0161.598 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfNotifications.table.tmpr1001.gz (69/51): adding to final database dump
+0161.600 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfNotifications.table.gz (70/51): adding to final database dump
+0161.601 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfPendingIssues.table.tmpr2.gz (71/51): adding to final database dump
+0161.603 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfPendingIssues.table.gz (72/51): adding to final database dump
+0161.605 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfReverseCache.table.tmpr1001.gz (73/51): adding to final database dump
+0161.606 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfReverseCache.table.gz (74/51): adding to final database dump
+0161.608 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfSNIPCache.table.tmpr0.gz (75/51): adding to final database dump
+0161.610 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfSNIPCache.table.gz (76/51): adding to final database dump
+0161.611 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfStatus.table.tmpr61783.gz (77/51): adding to final database dump
+0161.617 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfStatus.table.gz (78/51): adding to final database dump
+0161.619 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfTrafficRates.table.tmpr1.gz (79/51): adding to final database dump
+0161.621 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfTrafficRates.table.gz (80/51): adding to final database dump
+0161.623 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfls_2fa_secrets.table.tmpr0.gz (81/51): adding to final database dump
+0161.625 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfls_2fa_secrets.table.gz (82/51): adding to final database dump
+0161.626 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfls_settings.table.tmpr1001.gz (83/51): adding to final database dump
+0161.628 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wfls_settings.table.gz (84/51): adding to final database dump
+0161.630 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wpfm_backup.table.tmpr0.gz (85/51): adding to final database dump
+0161.631 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wpfm_backup.table.gz (86/51): adding to final database dump
+0161.633 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wpmm_subscribers.table.tmpr0.gz (87/51): adding to final database dump
+0161.635 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_wpmm_subscribers.table.gz (88/51): adding to final database dump
+0161.637 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_indexable.table.tmpr123.gz (89/51): adding to final database dump
+0161.641 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_indexable.table.gz (90/51): adding to final database dump
+0161.643 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_indexable_hierarchy.table.tmpr1001.gz (91/51): adding to final database dump
+0161.646 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_indexable_hierarchy.table.gz (92/51): adding to final database dump
+0161.648 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_migrations.table.tmpr22.gz (93/51): adding to final database dump
+0161.650 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_migrations.table.gz (94/51): adding to final database dump
+0161.651 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_primary_term.table.tmpr0.gz (95/51): adding to final database dump
+0161.653 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_primary_term.table.gz (96/51): adding to final database dump
+0161.655 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_seo_links.table.tmpr17.gz (97/51): adding to final database dump
+0161.657 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_seo_links.table.gz (98/51): adding to final database dump
+0161.659 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_seo_meta.table.tmpr389.gz (99/51): adding to final database dump
+0161.663 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db-table-wp_yoast_seo_meta.table.gz (100/51): adding to final database dump
+0161.687 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz: finished writing out complete database file (1768 KB)
+0161.764 (0) Total database tables backed up: 51 (backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz, size: 1830041, sha1: e736f073e5247fe33f36f27227921f77c3fa0bd4, sha256: 391ef693e2559491c37e9122105528f493df58de74f669ec275ec6de2f4ce7ff)
+0161.777 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip: plugins: This file has not yet been successfully uploaded: will queue
+0161.779 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip: themes: This file has not yet been successfully uploaded: will queue
+0161.780 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip: uploads: This file has not yet been successfully uploaded: will queue
+0161.781 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip: others: This file has not yet been successfully uploaded: will queue
+0161.783 (0) backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz: db: This file has not yet been successfully uploaded: will queue
+0161.785 (0) Saving backup history. Total backup size: 71.9 MB
+0161.789 (0) Requesting upload of the files that have not yet been successfully uploaded (5)
+0161.794 (0) Cloud backup selection (1/1): googledrive with instance (1/1) (last)
+0161.796 (0) Beginning dispatch of backup to remote (googledrive) (instance identifier s-c44fffc0aba7a9640974e41552b76f6c)
+0164.743 (0) Google Drive: quota usage: used=964.5 MB, total=15360 MB, available=14395.5 MB
+0164.745 (0) Google Drive: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip: Attempting to upload to Google Drive (into folder id: 1EIygsBTv21goS8mZy7EEGVZbE0U8O90-)
+0165.272 (0) Googledrive chunked upload: 3.4 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 20.7 / 30)
+0165.571 (0) Googledrive chunked upload: 10.3 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 20.7 / 30)
+0165.983 (0) Googledrive chunked upload: 24 % uploaded (7340032 - increasing chunk size to 8192 KB - memory usage: 20.7 / 30)
+0166.299 (0) Googledrive chunked upload: 51.5 % uploaded (15728640 - increasing chunk size to 16384 KB - memory usage: 20.7 / 30)
+0167.587 (0) Googledrive chunked upload: 100 % uploaded (15728640)
+0167.592 (0) Google Drive: OK: Archive backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip uploaded in 2.85 seconds
+0167.593 (0) Recording as successfully uploaded: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip
+0167.607 (0) Deleting local file: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-plugins.zip: OK
+0167.939 (0) Google Drive: quota usage: used=993.6 MB, total=15360 MB, available=14366.4 MB
+0167.943 (0) Google Drive: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip: Attempting to upload to Google Drive (into folder id: 1EIygsBTv21goS8mZy7EEGVZbE0U8O90-)
+0168.389 (0) Googledrive chunked upload: 17.1 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 20.7 / 30)
+0168.625 (0) Googledrive chunked upload: 51.4 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 20.7 / 30)
+0169.590 (0) Googledrive chunked upload: 100 % uploaded (3145728)
+0169.602 (0) Google Drive: OK: Archive backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip uploaded in 1.66 seconds
+0169.606 (0) Recording as successfully uploaded: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip
+0169.613 (0) Deleting local file: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-themes.zip: OK
+0169.775 (0) Google Drive: quota usage: used=999.5 MB, total=15360 MB, available=14360.5 MB
+0169.776 (0) Google Drive: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip: Attempting to upload to Google Drive (into folder id: 1EIygsBTv21goS8mZy7EEGVZbE0U8O90-)
+0170.320 (0) Googledrive chunked upload: 3.1 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 20.7 / 30)
+0170.628 (0) Googledrive chunked upload: 9.2 % uploaded (3145728 - increasing chunk size to 4096 KB - memory usage: 20.7 / 30)
+0171.053 (0) Googledrive chunked upload: 21.5 % uploaded (7340032 - increasing chunk size to 8192 KB - memory usage: 20.7 / 30)
+0171.461 (0) Googledrive chunked upload: 46.1 % uploaded (15728640 - increasing chunk size to 16384 KB - memory usage: 20.7 / 30)
+0171.920 (0) Googledrive chunked upload: 95.2 % uploaded (32505856 - increasing chunk size to 32768 KB - memory usage: 20.7 / 30)
+0172.851 (0) Googledrive chunked upload: 100 % uploaded (32505856)
+0172.862 (0) Google Drive: OK: Archive backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip uploaded in 3.08 seconds
+0172.864 (0) Recording as successfully uploaded: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip
+0172.882 (0) Deleting local file: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-uploads.zip: OK
+0173.225 (0) Google Drive: quota usage: used=999.5 MB, total=15360 MB, available=14360.5 MB
+0173.227 (0) Google Drive: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip: Attempting to upload to Google Drive (into folder id: 1EIygsBTv21goS8mZy7EEGVZbE0U8O90-)
+0173.679 (0) Googledrive chunked upload: 37.7 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 20.7 / 30)
+0174.677 (0) Googledrive chunked upload: 100 % uploaded (1048576)
+0174.690 (0) Google Drive: OK: Archive backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip uploaded in 1.46 seconds
+0174.697 (0) Recording as successfully uploaded: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip
+0174.708 (0) Deleting local file: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-others.zip: OK
+0174.887 (0) Google Drive: quota usage: used=1034.7 MB, total=15360 MB, available=14325.3 MB
+0174.889 (0) Google Drive: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz: Attempting to upload to Google Drive (into folder id: 1EIygsBTv21goS8mZy7EEGVZbE0U8O90-)
+0175.347 (0) Googledrive chunked upload: 57.3 % uploaded (1048576 - increasing chunk size to 2048 KB - memory usage: 20.7 / 30)
+0176.517 (0) Googledrive chunked upload: 100 % uploaded (1048576)
+0176.522 (0) Google Drive: OK: Archive backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz uploaded in 1.63 seconds
+0176.524 (0) Recording as successfully uploaded: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz
+0176.528 (0) Deleting local file: backup_2021-08-17-1730_QCOM_Greenhouse_Controls_acca694b5ff9-db.gz: OK
+0176.534 (0) Retain: beginning examination of existing backup sets; user setting: retain_files=2, retain_db=2
+0176.536 (0) Number of backup sets in history: 3; groups (db): 1
+0176.537 (0) Examining (for databases) backup set with group_id=0, nonce=acca694b5ff9, datestamp=1629221403 (Aug 17 2021 17:30:03)
+0176.538 (0) This backup set is the backup set just made, so will not be deleted.
+0176.538 (0) Examining (for databases) backup set with group_id=0, nonce=df11396ef4b1, datestamp=1625693934 (Jul 07 2021 21:38:54)
+0176.538 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0176.540 (0) Examining (for databases) backup set with group_id=0, nonce=3c82c4d50394, datestamp=1622569518 (Jun 01 2021 17:45:18)
+0176.540 (0) 1622569518: db: this set includes a database (backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-db.gz); db count is now 2
+0176.540 (0) 1622569518: db: over retain limit (2); will delete this database
+0176.540 (0) Delete file: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-db.gz, service=googledrive
+0177.399 (0) Google Drive: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-db.gz: Deletion successful
+0177.404 (0) This backup set remains non-empty (f=1/d=0); will retain in history
+0177.413 (0) Number of backup sets in history: 3; groups (files): 1
+0177.432 (0) Examining (for files) backup set with nonce=acca694b5ff9, datestamp=1629221403 (Aug 17 2021 17:30:03)
+0177.432 (0) This backup set is the backup set just made, so will not be deleted.
+0177.440 (0) This backup set is the backup set just made, so will not be deleted.
+0177.440 (0) This backup set is the backup set just made, so will not be deleted.
+0177.440 (0) This backup set is the backup set just made, so will not be deleted.
+0177.441 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0177.442 (0) Examining (for files) backup set with nonce=df11396ef4b1, datestamp=1625693934 (Jul 07 2021 21:38:54)
+0177.442 (0) This backup set remains non-empty (f=1/d=1); will retain in history
+0177.443 (0) Examining (for files) backup set with nonce=3c82c4d50394, datestamp=1622569518 (Jun 01 2021 17:45:18)
+0177.443 (0) plugins: over retain limit (2); will delete this file entity
+0177.443 (0) themes: over retain limit (2); will delete this file entity
+0177.443 (0) uploads: over retain limit (2); will delete this file entity
+0177.443 (0) others: over retain limit (2); will delete this file entity
+0177.443 (0) Delete file: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-plugins.zip, service=googledrive
+0177.445 (0) Delete file: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-themes.zip, service=googledrive
+0177.447 (0) Delete file: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-uploads.zip, service=googledrive
+0177.450 (0) Delete file: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-others.zip, service=googledrive
+0178.238 (0) Google Drive: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-others.zip: Deletion successful
+0178.622 (0) Google Drive: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-uploads.zip: Deletion successful
+0179.153 (0) Google Drive: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-themes.zip: Deletion successful
+0179.609 (0) Google Drive: backup_2021-06-01-1745_QCOM_Greenhouse_Controls_3c82c4d50394-plugins.zip: Deletion successful
+0179.613 (0) This backup set is now empty; will remove from history
+0179.614 (0) Corresponding log file (log.3c82c4d50394.txt) not found - must have already been deleted
+0179.615 (0) Retain: saving new backup history (sets now: 2) and finishing retain operation
+0179.619 (0) Resume backup (acca694b5ff9, 0): finish run
+0179.622 (0) Decremented the semaphore (fd) by 1
+0179.624 (0) Semaphore (fd) unlocked
+0179.625 (0) There were no errors in the uploads, so the 'resume' event (1) is being unscheduled
+0179.629 (0) No email will/can be sent - the user has not configured an email address.
+0179.630 (0) The backup apparently succeeded and is now complete

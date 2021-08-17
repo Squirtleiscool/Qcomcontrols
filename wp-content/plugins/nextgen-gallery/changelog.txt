@@ -1,6 +1,10 @@
 NextGEN Gallery
 by Imagely
 
+= V3.12  - 07.13.2021
+* Fixed:   PHP warning generated for some Nimble Builder users
+* Changed: Added 'ngg_marketing_parameters' filter
+
 = V3.11  - 05.26.2021
 * Fixed:   Now compatible with NimbleBuilder
 * Fixed:   Importing images from the Media Library was broken due to a z-index issue

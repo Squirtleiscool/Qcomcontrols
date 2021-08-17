@@ -143,8 +143,14 @@ class M_Third_Party_Compat extends C_Base_Module
         return $placeholder;
     }
 
+    /**
+     * @param array $collection
+     */
     public function nimble_find_content($collection)
     {
+        if (!is_array($collection))
+            return;
+
         foreach ($collection as $item) {
             if (isset($item['value']) && !empty($item['value']['text_content']))
                 M_Gallery_Display::enqueue_frontent_resources_for_content($item['value']['text_content']);
